@@ -155,7 +155,7 @@
                                     <a class="wishlist" href="#">
                                         <i :class="logoHeart"></i>
                                     </a>
-                                     <router-link 
+                  <router-link 
                             :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
                             <img :src="items.photo" :alt="items.libelle">
                             </router-link>
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="bottom">
-                                    <a class="cart-text" href="#" >{{add}}</a>
+                                    <a class="cart-text" href="#" @click.prevent="getNotif" >{{add}}</a>
                                     <i :class="logoAdd"></i>
                                 </div>
                             </div>
@@ -472,6 +472,7 @@
 <script>
 import Header from "@/components/Header.vue"
 import axios from 'axios'
+import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
@@ -498,7 +499,23 @@ methods:{
                 console.log(resp.data.data)
                 this.products = resp.data.data
                 });
-   }
+   },
+   getNotif(){
+  let noty = new Notyf({
+      duration:4000,
+      position :{
+          x:'right',
+          y:'top',
+      }
+  })
+  noty.success('produit ajoutee')
+  setTimeout(()=>{
+      noty.dismissAll()
+  },1000)
+   },
+   onChangePage(pageOfItems) {
+            this.pageOfItems = pageOfItems;
+        }
 },
 mounted(){
      this.getCart()

@@ -1,6 +1,9 @@
 <template>
-    <Header />
-    <router-view>
+    <Header :reponse=reponse :cart=cart />
+    <router-view
+    :cart=cart
+    
+    >
     </router-view>
     <Footer />
 </template>
@@ -21,11 +24,11 @@ export default {
       //       this.cart = this.cart.push(items)
       //   },
     },
-    // data(){
-    //   return{
-    //     cart:[],
-    //     reponse:"adjobi dit oui",
-    //   }
-    // }
+    data(){
+      return{
+        cart:[],
+        reponse:"adjobi dit oui",
+      }
+    }
 }
 </script>

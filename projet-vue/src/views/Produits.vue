@@ -128,11 +128,18 @@
                                     </a>
                                    <router-link 
                             :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
-                            <img :src="items.photo" :alt="items.libelle"></router-link>
+
+                            <img :src="items.photo" :alt="items.libelle">
+
+                            </router-link>
                                     <div class="inner">
                                         <h3>
                                            <router-link 
-                            :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">{{items.libelle}}</router-link>
+                            :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
+                            
+                            {{items.libelle}}
+                            
+                            </router-link>
                                         </h3>
                                         <span> {{items.prix}} Fcfa</span>
                                     </div>

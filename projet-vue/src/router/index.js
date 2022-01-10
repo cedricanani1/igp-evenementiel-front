@@ -7,6 +7,9 @@ import SingleProduct from '../views/SingleProduct.vue'
 import Produits from "../views/Produits.vue"
 import Commnander from "../views/Commander.vue"
 import Contacts from "../views/Contacts.vue"
+import Login from "../views/Login.vue"
+import Inscription from "../views/Inscription.vue"
+import AproposDeNous from "../views/AproposDeNous.vue"
 
 const routes = [{
     path: '/',
@@ -14,8 +17,8 @@ const routes = [{
     component: Home,
   },
   {
-    path: '/single-product/:product/:id/:image/:prix',
-    alias: '/singleProduct/:product/:id/:image/:prix',
+    path: '/single-product/:id',
+    alias: '/singleProduct/:id',
     name: 'SingleProduct',
     component: SingleProduct,
   },
@@ -33,6 +36,20 @@ const routes = [{
     path: '/contacts',
     name: 'Contacts',
     component: Contacts
+  },{
+    path:'/login',
+    name:'Login',
+    component:Login
+  },
+  {
+    path:'/register',
+    name:'Inscription',
+    component:Inscription
+  },
+  {
+    path:'/about',
+    name:'AproposDeNous',
+    component:AproposDeNous
   }
 
 

@@ -81,7 +81,7 @@
                         <form>
                             <div class="form-group">
                                 <div class="inner">
-                                    <select style="display:none;">
+                                    <!-- <select style="display:none;">
                                         <option>Categories</option>
                                         <option>Chair</option>
                                         <option>Table</option>
@@ -93,7 +93,7 @@
                                         <option>Vegetable</option>
                                         <option>Fruits</option>
                                         <option>Chicken</option>
-                                    </select>
+                                    </select> -->
 <div class="nice-select open" tabindex="0"><span class="current">All Categories</span>
     <ul class="list">
         <li data-value="All Categories" class="option selected focus">All Categories</li>
@@ -124,7 +124,7 @@
                             <li>
                                 <div class="inner">
                                     <i class="flaticon-pin"></i>
-                                    <a href="#" @click.prevent="numberCart">Set Location</a>
+                                    <a href="#">Set Location</a>
                                 </div>
                             </li>
                             <li>
@@ -137,7 +137,7 @@
                                 <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                                     <i class='bx bxs-cart'></i>
-                                    <span>2</span>
+                                    <span v-if="cart.length < 0">{{cart.length}}</span>
                                 </button>
                             </li>
                             <li>
@@ -304,9 +304,8 @@
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <router-link to="/" class="nav-link dropdown-toggle active">Accueil<i
-                                        class='bx bx-chevron-down'></i></router-link>
-                                <ul class="dropdown-menu">
+                                <router-link to="/" class="nav-link dropdown-toggle active">Accueil</router-link>
+                                <!-- <ul class="dropdown-menu">
                                     <li class="nav-item">
                                         <router-link to="/page2" class="nav-link active">Home Demo One</router-link>
                                     </li>
@@ -319,43 +318,42 @@
                                     <li class="nav-item">
                                         <a href="index-4.html" class="nav-link">Home Demo Four (Revolution)</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Pages <i
+                                <a href="#" class="nav-link dropdown-toggle">Connexion<i
                                         class='bx bx-chevron-down'></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Users <i
-                                                class='bx bx-chevron-down'></i></a>
+                                        <a href="#" class="nav-link dropdown-toggle">Utilisateurs<span class="iconify" data-icon="bx:bx-chevron-down-circle" data-rotate="270deg"></span> </a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="login.html" class="nav-link">Login</a>
+                                                <router-link to="/login" class="nav-link">Se Connecter</router-link>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="register.html" class="nav-link">Register</a>
+                                    <router-link to="/register" class="nav-link">Inscription</router-link>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="faq.html" class="nav-link">FAQ</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a href="404.html" class="nav-link">404 Error Page</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a href="return-policy.html" class="nav-link">Return Policy</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="about.html" class="nav-link">About Us</a>
+                                <router-link to="/about" class="nav-link">A propos de nous</router-link>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Blog <i class='bx bx-chevron-down'></i></a>
