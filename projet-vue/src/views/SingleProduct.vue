@@ -347,9 +347,10 @@
 
     <div class="modal fade modal-right popup-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+        <!-- cart -->
+            <!-- <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Shopping Cart <span>02 Items</span></h2>
+                    <h2>Shopping Cart <span>{{items}}</span></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -419,11 +420,12 @@
                         </button>
                     </form>
                 </div>
-            </div>
+            </div> -->
+        <!-- cart -->
         </div>
     </div>
 
-
+<!-- 
     <div class="modal fade modal-right popup-modal wishlist-modal" id="exampleModalWishlist" tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -484,7 +486,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="go-top">

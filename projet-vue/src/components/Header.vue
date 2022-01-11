@@ -408,6 +408,89 @@
             </div>
         </div>
     </div>
+
+
+     <div class="modal fade modal-right popup-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+         <!-- cart -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Shopping Cart <span>{{ver}}</span></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cart-table">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <img src="/assets/images/cart/cart1.png" alt="Cart">
+                                    </th>
+                                    <td>
+                                        <h3>White Comfy Stool</h3>
+                                        <span class="rate">$200.00 x 1</span>
+                                    </td>
+                                    <td>
+                                        <ul class="number">
+                                            <li>
+                                                <span class="minus">-</span>
+                                                <input type="text" value="1" />
+                                                <span class="plus">+</span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <a class="close" href="#">
+                                            <i class='bx bx-x'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <img src="/assets/images/cart/cart2.png" alt="Cart">
+                                    </th>
+                                    <td>
+                                        <h3>Yellow Armchair</h3>
+                                        <span class="rate">$180.00 x 1</span>
+                                    </td>
+                                    <td>
+                                        <ul class="number">
+                                            <li>
+                                                <span class="minus">-</span>
+                                                <input type="text" value="1" />
+                                                <span class="plus">+</span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <a class="close" href="#">
+                                            <i class='bx bx-x'></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="total-amount">
+                            <h3>Total: <span>$380.00</span></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <form>
+                        <input type="text" class="form-control" placeholder="Enter Coupon Code">
+                        <button type="submit" class="btn common-btn">
+                            Proceed To Checkout
+                            <img src="/assets/images/shape1.png" alt="Shape">
+                            <img src="/assets/images/shape2.png" alt="Shape">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        <!-- cart -->
+        </div>
+    </div>
+
+
 </template>
 
 <script>
@@ -420,6 +503,7 @@ export default {
         return{
             show:false,
             barre:true,
+            ver:'PANIER'
         }
     },
     props:['cart','add','cartVue'],
