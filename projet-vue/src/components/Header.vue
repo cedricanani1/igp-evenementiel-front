@@ -20,7 +20,7 @@
                         <ul>
                             <li>
                                 <i class="flaticon-delivery-truck"></i>
-                                <span>{{reponse}}</span>
+                                <span>bienvenue</span>
                             </li>
                             <li>
                                 <i class="flaticon-quality"></i>
@@ -137,7 +137,7 @@
                                 <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                                     <i class='bx bxs-cart'></i>
-                                    <span v-if="cart.length < 0">{{cart.length}}</span>
+                                    <span v-if="cart.length  >=  1 ">{{cart.length}}</span>
                                 </button>
                             </li>
                             <li>
@@ -422,7 +422,7 @@ export default {
             barre:true,
         }
     },
-    props:['cart','reponse','event'],
+    props:['cart','add','cartVue'],
     methods:{
         showMenu(){
             this.show = !this.show;
