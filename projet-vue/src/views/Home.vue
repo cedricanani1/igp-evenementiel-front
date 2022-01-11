@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="bottom">
-                                    <a class="cart-text" href="#" @click.prevent="getNotif" >{{add}}</a>
+                                    <a class="cart-text" href="#" @click.prevent="$emit('event')" >{{add}}</a>
                                     <i :class="logoAdd"></i>
                                 </div>
                             </div>
@@ -479,10 +479,33 @@ export default{
   mounted(){
 
   },
-  props:[],
+  props:['reponse','cart','event'],
   data(){
       return{
-          products:[],
+          products:[
+              {
+                  id:1,
+                  libelle:"savon",
+                  photo:"/assets/images/blog/blog3.jpg",
+                  prix:1200
+              },
+                {
+                  id:2,
+                  libelle:"savon",
+                  photo:"/assets/images/blog/blog3.jpg",
+                  prix:1200
+              },  {
+                  id:3,
+                  libelle:"savon",
+                  photo:"/assets/images/blog/blog3.jpg",
+                  prix:1200
+              },  {
+                  id:4,
+                  libelle:"savon",
+                  photo:"/assets/images/blog/blog3.jpg",
+                  prix:1200
+              },
+          ],
           logoAdd:'bx bx-plus',
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',
@@ -493,13 +516,13 @@ export default{
       Header,
   },
 methods:{
-   getCart(){
-       axios.get('http://192.168.1.2:8000/api/produits')
-            .then(resp =>{
-                console.log(resp.data.data)
-                this.products = resp.data.data
-                });
-   },
+//    getCart(){
+//        axios.get('http://192.168.1.2:8000/api/produits')
+//             .then(resp =>{
+//                 console.log(resp.data.data)
+//                 this.products = resp.data.data
+//                 });
+//    },
    getNotif(){
   let noty = new Notyf({
       duration:4000,
@@ -518,7 +541,7 @@ methods:{
         }
 },
 mounted(){
-     this.getCart()
+    //  this.getCart()
   }
 }
 </script>

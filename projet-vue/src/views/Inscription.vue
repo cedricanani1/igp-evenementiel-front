@@ -18,10 +18,10 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="assets/images/page-title1.jpg" alt="About">
-            <img src="assets/images/shape16.png" alt="Shape">
-            <img src="assets/images/shape17.png" alt="Shape">
-            <img src="assets/images/shape18.png" alt="Shape">
+            <img src="/assets/images/page-title1.jpg" alt="About">
+            <img src="/assets/images/shape16.png" alt="Shape">
+            <img src="/assets/images/shape17.png" alt="Shape">
+            <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
 
@@ -59,8 +59,8 @@
                     </div>
                     <button type="submit" class="btn common-btn">
                         Inscription
-                        <img src="assets/images/shape1.png" alt="Shape">
-                        <img src="assets/images/shape2.png" alt="Shape">
+                        <img src="/assets/images/shape1.png" alt="Shape">
+                        <img src="/assets/images/shape2.png" alt="Shape">
                     </button>
                     <h4>Or</h4>
                     <ul>

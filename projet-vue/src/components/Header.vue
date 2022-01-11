@@ -20,7 +20,7 @@
                         <ul>
                             <li>
                                 <i class="flaticon-delivery-truck"></i>
-                                <span>Free Next Day Delivery*</span>
+                                <span>{{reponse}}</span>
                             </li>
                             <li>
                                 <i class="flaticon-quality"></i>
@@ -355,7 +355,7 @@
                             <li class="nav-item">
                                 <router-link to="/about" class="nav-link">A propos de nous</router-link>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Blog <i class='bx bx-chevron-down'></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
@@ -371,7 +371,7 @@
                                         <a href="blog-details.html" class="nav-link">Blog Details</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <router-link to="/produits" class="nav-link dropdown-toggle">Shop <i class='bx bx-chevron-down'></i></router-link>
                                 <ul class="dropdown-menu">
@@ -384,7 +384,7 @@
                                     <!-- <li class="nav-item">
                                         <router-link to="/single-product" class="nav-link">voir produit</router-link>
                                     </li> -->
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="products-on-sale.html" class="nav-link">Products On Sale</a>
                                     </li>
                                     <li class="nav-item">
@@ -392,7 +392,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="customer-service.html" class="nav-link">Customer Service</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -422,7 +422,7 @@ export default {
             barre:true,
         }
     },
-    props:['cart'],
+    props:['cart','reponse','event'],
     methods:{
         showMenu(){
             this.show = !this.show;

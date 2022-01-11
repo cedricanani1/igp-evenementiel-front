@@ -1,7 +1,9 @@
 <template>
-    <Header :reponse=reponse :cart=cart />
+    <Header :reponse=reponse :cart=cart @event=numberCart />
     <router-view
     :cart=cart
+    :reponse=reponse
+    @event=numberCart
     
     >
     </router-view>
@@ -20,9 +22,11 @@ export default {
     Header,Footer
     },
     methods:{
-      //  numberCart(items){
-      //       this.cart = this.cart.push(items)
-      //   },
+       numberCart(){
+         this.reponse = "bravo"
+          
+          //   this.cart = this.cart.push;
+        },
     },
     data(){
       return{
