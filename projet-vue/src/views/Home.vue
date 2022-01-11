@@ -144,6 +144,7 @@
                 </div>
      <!-- buttons pour filtrer les produits-->
      
+      
                 <div class="col-lg-9">
                     <div id="Container" class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4"
@@ -479,10 +480,29 @@ export default{
   mounted(){
 
   },
-  props:['cart','add'],
+  props:['cart','add','products'],
   data(){
       return{
-          products:[],
+        //   Myyproducts:[
+        //   {
+        //       id:1,
+        //       libelle:"vous",
+        //       prix:2000,
+        //   },{
+        //       id:2,
+        //       libelle:"vous",
+        //       prix:2000,
+        //   }, {
+        //       id:3,
+        //       libelle:"vous",
+        //       prix:2000,
+        //   }, {
+        //       id:4,
+        //       libelle:"vous",
+        //       prix:2000,
+        //   },
+        //   ],
+        //   products:[],
           logoAdd:'bx bx-plus',
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',

@@ -415,20 +415,22 @@
          <!-- cart -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Shopping Cart <span>{{ver}}</span></h2>
+                    <h2>Panier<span>{{cart.length}} items</span></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="cart-table">
                         <table class="table">
                             <tbody>
-                                <tr>
+                                <tr  
+                                v-for="(items,index) in cart"
+                                 :key="index">
                                     <th scope="row">
-                                        <img src="/assets/images/cart/cart1.png" alt="Cart">
+                                       <img :src="items.photo" :alt="items.libelle">
                                     </th>
                                     <td>
-                                        <h3>White Comfy Stool</h3>
-                                        <span class="rate">$200.00 x 1</span>
+                                        <h3>{{items.libelle}}</h3>
+                                        <span class="rate">$ {{items.prix}} x 1</span>
                                     </td>
                                     <td>
                                         <ul class="number">
@@ -445,7 +447,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <th scope="row">
                                         <img src="/assets/images/cart/cart2.png" alt="Cart">
                                     </th>
@@ -467,7 +469,7 @@
                                             <i class='bx bx-x'></i>
                                         </a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                         <div class="total-amount">
@@ -494,8 +496,7 @@
 </template>
 
 <script>
-
-
+import axios from 'axios'
 export default {
 
     name:"Header",
@@ -503,17 +504,24 @@ export default {
         return{
             show:false,
             barre:true,
-            ver:'PANIER'
         }
     },
-    props:['cart','add','cartVue'],
+    props:['cart','add','products'],
     methods:{
         showMenu(){
             this.show = !this.show;
             this.barre= !this.barre;
         },
-       
-    },
+    //     getCart(){
+    //    axios.get('http://192.168.1.2:8000/api/produits')
+    //         .then(resp =>{
+    //             console.log(resp.data.data)
+    //             this.products = resp.data.data
+    //             });}
+   },
+//     mounted(){
+//      this.getCart()
+//   },
 }
 </script>
 

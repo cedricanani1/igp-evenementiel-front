@@ -1,8 +1,9 @@
 <template>
-    <Header  :cart=cart @add=addCart  />
+    <Header  :cart=cart @add=addCart :products=products />
     <router-view
     :cart=cart
     @add=addCart
+    :products=products
     
     >
     </router-view>
@@ -14,6 +15,7 @@
 
 </style>
 <script>
+import axios from 'axios'
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
 export default {
@@ -24,13 +26,24 @@ export default {
       return{
         cart:[],
         cartVue:false,
+        products:[],
       }
     },
      methods:{
        addCart(product){
         this.cart.push(product);
-        this.cartVue === true;
         },
-    },
+         getCart(){
+       axios.get('http://192.168.1.2:8000/api/produits')
+            .then(resp =>{
+                console.log(resp.data.data)
+                this.products = resp.data.data
+                });
+   }
+    
+   },
+   mounted(){
+     this.getCart()
+   }
 }
 </script>
