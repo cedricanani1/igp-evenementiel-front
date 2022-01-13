@@ -30,13 +30,13 @@
     <div class="user-area ptb-100">
         <div class="container">
             <div class="user-item">
-                <form>
+                <form @submit.prevent="handleSubmit">
                     <h2>CONNEXION</h2>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required>
+                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required v-model="email">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mot de passe" required>
+                        <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
                     </div>
                     <button type="submit" class="btn common-btn">
                         Se connecter
@@ -66,7 +66,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
    name:'Login',
+   data(){
+       return{
+           email:'',
+           password:'',
+       }
+   },
+   methods:{
+      async handleSubmit(){
+          const reponse = await axios.post('api/auth/login',{
+              email:this.email,
+              password:this.password
+          });
+         console.log(reponse.data.access_token)
+        //  localStorage.setItem('user', JSON.stringify(reponse.data.user))
+          localStorage.setItem('token', reponse.data.access_token);
+          this.$router.push("/")
+       },
+   },
+  
 }
 </script>

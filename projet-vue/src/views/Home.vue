@@ -7,7 +7,8 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content">
-                                <h1>Find Out Your Best Furniture Here</h1>
+                                <h1 v-if="user">hi,{{user.nom}}</h1>
+                                <h1 v-if="!user">pas connecter</h1>
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
                                 <a class="common-btn" href="#">
@@ -487,6 +488,7 @@ export default{
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',
           showProducts:false,
+          user:null,
       }
   },
   components:{
@@ -517,8 +519,10 @@ methods:{
             this.pageOfItems = pageOfItems;
         }
 },
-// mounted(){
-//      this.getCart()
-//   }
+async created(){
+    const reponse = await axios.get('api/auth/login',user);
+    this.user = reponse.data.user;
+     console.log(reponse);
+  }
 }
 </script>

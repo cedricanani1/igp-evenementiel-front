@@ -28,7 +28,11 @@
 
     <div class="user-area ptb-100">
         <div class="container">
+        
             <div class="user-item">
+            <div class="alert alert-success" v-if="isSuccess">
+              inscrits
+             </div>
                 <form @submit.prevent.stop="createAccount">
                     <h2>Inscription</h2>
                     <div class="form-group">
@@ -77,7 +81,7 @@
 
 </template>
 <script>
-import axios from "axios"
+import Axios from "axios"
 export default {
     name:'Inscrisption',
     data(){
@@ -91,17 +95,24 @@ export default {
             email:"",
             password:"",
            password_confirmation:"",
+           isSuccess:false,
         }
     },
     methods:{
-       createAccount(){
-      axios.post('http://192.168.1.7:8004/api/auth/signup',{
+       async createAccount(){
+
+     await Axios.post('api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,
               phone:this.phone,
                password:this.password,
                password_confirmation:this.password_confirmation})
+         .then((reponse)=>{
+                this.isSuccess = true;
+                console.log(reponse);
+            })
+        this.$router.push('/');
     
        },
          
