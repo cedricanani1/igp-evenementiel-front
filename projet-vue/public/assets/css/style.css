@@ -1827,9 +1827,9 @@ button:focus {
     display: inline-block
 }
 
-.number li .minus {
+/* .number li .minus {
     border-right: 1px solid #fff
-}
+} */
 
 .number li .minus,
 .number li .plus {

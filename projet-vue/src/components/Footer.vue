@@ -393,6 +393,7 @@
         <i class='bx bxs-up-arrow-circle'></i>
         <i class='bx bxs-up-arrow-circle'></i>
     </div>
+    
 </template>
 
 

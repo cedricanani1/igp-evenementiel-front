@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                                 <div class="bottom">
-                                    <a class="cart-text" href="#" @click.prevent="$emit('add',items),getNotif()">{{add}}</a>
+                                    <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
                                     <i :class="logoAdd"></i>
                                 </div>
                             </div>
@@ -483,26 +483,6 @@ export default{
   props:['cart','add','products'],
   data(){
       return{
-        //   Myyproducts:[
-        //   {
-        //       id:1,
-        //       libelle:"vous",
-        //       prix:2000,
-        //   },{
-        //       id:2,
-        //       libelle:"vous",
-        //       prix:2000,
-        //   }, {
-        //       id:3,
-        //       libelle:"vous",
-        //       prix:2000,
-        //   }, {
-        //       id:4,
-        //       libelle:"vous",
-        //       prix:2000,
-        //   },
-        //   ],
-        //   products:[],
           logoAdd:'bx bx-plus',
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',
@@ -513,13 +493,13 @@ export default{
       Header,
   },
 methods:{
-   getCart(){
-       axios.get('http://192.168.1.2:8000/api/produits')
-            .then(resp =>{
-                console.log(resp.data.data)
-                this.products = resp.data.data
-                });
-   },
+//    getCart(){
+//        axios.get('http://192.168.1.2:8000/api/produits')
+//             .then(resp =>{
+//                 console.log(resp.data.data)
+//                 this.products = resp.data.data
+//                 });
+//    },
    getNotif(){
   let noty = new Notyf({
       duration:4000,
@@ -537,8 +517,8 @@ methods:{
             this.pageOfItems = pageOfItems;
         }
 },
-mounted(){
-     this.getCart()
-  }
+// mounted(){
+//      this.getCart()
+//   }
 }
 </script>

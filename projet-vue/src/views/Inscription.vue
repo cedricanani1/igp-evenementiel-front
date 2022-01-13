@@ -29,33 +29,25 @@
     <div class="user-area ptb-100">
         <div class="container">
             <div class="user-item">
-                <form @submit="verf">
+                <form @submit.prevent.stop="createAccount">
                     <h2>Inscription</h2>
                     <div class="form-group">
-                        <div v-if="error">
-                               <span>veuillez renseignez ce champ</span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Nom" required v-model="text">
+                        <input v-model="nom" type="text" class="form-control" placeholder="Nom" required >
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Pseudo" required>
+                        <input v-model="prenoms" type="text" class="form-control" placeholder="Prenom" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="votre meilleur addresse email" required>
+                        <input v-model="email" type="email" class="form-control" placeholder="votre meilleur addresse email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mot de passe" required>
+                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="phone" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Confirmation Mot de passe" required>
+                        <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" required>
                     </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" required>
-                            <label class="form-check-label" for="flexCheckDefault4">
-                                j accepte toutes les conditions <a href="terms-conditions.html">Terms & Conditions</a>
-                            </label>
-                        </div>
+                      <div class="form-group">
+                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" required>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Inscription
@@ -85,6 +77,7 @@
 
 </template>
 <script>
+import axios from "axios"
 export default {
     name:'Inscrisption',
     data(){
@@ -92,10 +85,25 @@ export default {
             text:"",
             error:false,
             show:"",
+            nom:"",
+            prenoms:"",
+            phone:"",
+            email:"",
+            password:"",
+           password_confirmation:"",
         }
     },
     methods:{
-       
+       createAccount(){
+      axios.post('http://192.168.1.7:8004/api/auth/signup',{
+                nom:this.nom,
+               prenoms:this.prenoms,
+               email:this.email,
+              phone:this.phone,
+               password:this.password,
+               password_confirmation:this.password_confirmation})
+    
+       },
          
      }
 }

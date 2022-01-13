@@ -423,57 +423,34 @@
                         <table class="table">
                             <tbody>
                                 <tr  
-                                v-for="(items,index) in cart"
-                                 :key="index">
+                                v-for="items in cart"
+                                 :key="items.index">
                                     <th scope="row">
                                        <img :src="items.photo" :alt="items.libelle">
                                     </th>
                                     <td>
                                         <h3>{{items.libelle}}</h3>
-                                        <span class="rate">$ {{items.prix}} x 1</span>
+                                        <span class="rate">{{items.prix}} Fcfa</span>
                                     </td>
                                     <td>
                                         <ul class="number">
                                             <li>
-                                                <span class="minus">-</span>
-                                                <input type="text" value="1" />
-                                                <span class="plus">+</span>
+                                                <span class="minus" @click="$emit('removeBySign',items)">-</span>
+                                                <span class="text-light fw-b">{{items.quantity}}</span>
+                                                <span class="plus" @click="$emit('increase',items)" >+</span>
                                             </li>
                                         </ul>
                                     </td>
                                     <td>
-                                        <a class="close" href="#">
+                                        <a class="close" href="#" @click.prevent="$emit('removeItem',items)">
                                             <i class='bx bx-x'></i>
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <th scope="row">
-                                        <img src="/assets/images/cart/cart2.png" alt="Cart">
-                                    </th>
-                                    <td>
-                                        <h3>Yellow Armchair</h3>
-                                        <span class="rate">$180.00 x 1</span>
-                                    </td>
-                                    <td>
-                                        <ul class="number">
-                                            <li>
-                                                <span class="minus">-</span>
-                                                <input type="text" value="1" />
-                                                <span class="plus">+</span>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <a class="close" href="#">
-                                            <i class='bx bx-x'></i>
-                                        </a>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                         <div class="total-amount">
-                            <h3>Total: <span>$380.00</span></h3>
+                            <h3>Total: <span>{{item_cost.toFixed()}}</span></h3>
                         </div>
                     </div>
                 </div>
@@ -506,12 +483,13 @@ export default {
             barre:true,
         }
     },
-    props:['cart','add','products'],
+    props:['cart','add','products','removeItem','removeBySign','increase'],
     methods:{
         showMenu(){
             this.show = !this.show;
             this.barre= !this.barre;
         },
+
     //     getCart(){
     //    axios.get('http://192.168.1.2:8000/api/produits')
     //         .then(resp =>{
@@ -519,9 +497,19 @@ export default {
     //             this.products = resp.data.data
     //             });}
    },
-//     mounted(){
-//      this.getCart()
-//   },
+ computed:{
+     // afficher le total des produits
+     item_cost(){
+         let count =0
+         this.cart.forEach( item =>{
+             count+= item.prix * item.quantity
+         })
+         return count;
+     },
+    
+
+   },
+ 
 }
 </script>
 
