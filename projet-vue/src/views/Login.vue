@@ -77,16 +77,22 @@ export default {
    },
    methods:{
       async handleSubmit(){
-          const reponse = await axios.post('api/auth/login',{
+          const reponse = await axios.post('http://192.168.1.11:8004/api/auth/login',{
               email:this.email,
-              password:this.password
+              password:this.password,
           });
-         console.log(reponse.data.access_token)
-        //  localStorage.setItem('user', JSON.stringify(reponse.data.user))
-          localStorage.setItem('token', reponse.data.access_token);
-          this.$router.push("/")
+         console.log(reponse.data)
+         localStorage.setItem('token',reponse.data.access_token);
+          localStorage.setItem('user', JSON.stringify(reponse.data.user))
+          //localStorage.setItem('user', reponse.data.user);
+          //this.$router.push("/")
+          window.location.href = '/'
        },
    },
+//    mounted(){
+//         localStorage.getItem('token',reponse.data.toke);
+//          console.log(reponse.data.token)
+//    }
   
 }
 </script>

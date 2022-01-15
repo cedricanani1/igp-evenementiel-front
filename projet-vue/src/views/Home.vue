@@ -7,8 +7,8 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content">
-                                <h1 v-if="user">hi,{{user.nom}}</h1>
-                                <h1 v-if="!user">pas connecter</h1>
+                                <h1>PRODUITS</h1>
+                               
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
                                 <a class="common-btn" href="#">
@@ -158,14 +158,13 @@
                                         <i :class="logoHeart"></i>
                                     </a>
                   <router-link 
-                            :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
+                            :to="{name:'SingleProduct', params:{id:items.id}}">
                             <img :src="items.photo" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
                             <router-link 
-                            :to="{name:'SingleProduct',
-                             params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">{{items.libelle}}</router-link>
+                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
                                         </h3>
                                         <span> {{items.prix}} Fcfa</span>
                                     </div>
@@ -478,9 +477,7 @@ import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
-  mounted(){
 
-  },
   props:['cart','add','products'],
   data(){
       return{
@@ -488,9 +485,8 @@ export default{
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',
           showProducts:false,
-          user:null,
       }
-  },
+  }, 
   components:{
       Header,
   },
@@ -519,10 +515,5 @@ methods:{
             this.pageOfItems = pageOfItems;
         }
 },
-async created(){
-    const reponse = await axios.get('api/auth/login',user);
-    this.user = reponse.data.user;
-     console.log(reponse);
-  }
 }
 </script>

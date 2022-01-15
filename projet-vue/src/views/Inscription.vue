@@ -81,7 +81,7 @@
 
 </template>
 <script>
-import Axios from "axios"
+import axios from "axios"
 export default {
     name:'Inscrisption',
     data(){
@@ -101,18 +101,20 @@ export default {
     methods:{
        async createAccount(){
 
-     await Axios.post('api/auth/signup',{
+    await axios.post('http://192.168.1.11:8004/api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,
               phone:this.phone,
                password:this.password,
-               password_confirmation:this.password_confirmation})
-         .then((reponse)=>{
-                this.isSuccess = true;
-                console.log(reponse);
-            })
-        this.$router.push('/');
+               password_confirmation:this.password_confirmation
+           });
+        //  .then(
+        //      reponse =>{
+        //         this.isSuccess = true;
+        //         console.log(reponse);
+        //     })
+        this.$router.push('/login');
     
        },
          

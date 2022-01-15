@@ -80,36 +80,6 @@
                     <div class="middle">
                         <form>
                             <div class="form-group">
-                                <div class="inner">
-                                    <!-- <select style="display:none;">
-                                        <option>Categories</option>
-                                        <option>Chair</option>
-                                        <option>Table</option>
-                                        <option>Bed</option>
-                                        <option>Sofa</option>
-                                        <option>Headphones</option>
-                                        <option>Keyboard</option>
-                                        <option>MacBook</option>
-                                        <option>Vegetable</option>
-                                        <option>Fruits</option>
-                                        <option>Chicken</option>
-                                    </select> -->
-<div class="nice-select open" tabindex="0"><span class="current">All Categories</span>
-    <ul class="list">
-        <li data-value="All Categories" class="option selected focus">All Categories</li>
-        <li data-value="Chair" class="option">Chair</li>
-        <li data-value="Table" class="option">Table</li>
-        <li data-value="Bed" class="option">Bed</li>
-        <li data-value="Sofa" class="option">Sofa</li>
-        <li data-value="Headphones" class="option">Headphones</li>
-        <li data-value="Keyboard" class="option">Keyboard</li>
-        <li data-value="MacBook" class="option">MacBook</li>
-        <li data-value="Vegetable" class="option">Vegetable</li>
-        <li data-value="Fruits" class="option">Fruits</li>
-        <li data-value="Chicken" class="option">Chicken</li>
-    </ul>
-</div>
-                                </div>
                                 <input type="text" class="form-control" placeholder="Search Your Keywords">
                                 <button type="submit" class="btn">
                                     <i class='bx bx-search'></i>
@@ -148,10 +118,16 @@
                                 </button>
                             </li>
                             <li>
-                                <a class="join" href="/">
+                                <!-- <router-link class="join" to="/login" v-if="!user">
                                     <i class="flaticon-round-account-button-with-user-inside"></i>
-                                    Join
+                                    Se connecter
+                                </router-link> -->
+                                <a class="join" href="#" @click.prevent="deconnexion" v-if="user">
+                                    <i class="flaticon-round-account-button-with-user-inside"></i>
+                                    Se deconecter
                                 </a>
+                                <span v-if="user">{{user.nom}} {{user.prenoms}}</span>
+                                <span v-if="!user">pas connecter</span>
                             </li>
                         </ul>
                     </div>
@@ -473,6 +449,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import axios from 'axios'
 export default {
 
@@ -481,6 +458,8 @@ export default {
         return{
             show:false,
             barre:true,
+            user:null,
+            token:"",
         }
     },
     props:['cart','add','products','removeItem','removeBySign','increase'],
@@ -488,6 +467,19 @@ export default {
         showMenu(){
             this.show = !this.show;
             this.barre= !this.barre;
+        },
+        deconnexion(){
+        axios.get('http://192.168.1.11:8004/api/auth/logout',
+            { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
+            .then( function(reponse){
+                localStorage.removeItem('token');
+                localStorage.removeItem('user')
+                console.log(reponse);
+            });
+            this.$router.push("/")
+            //  window.location.href = '/'
+            //  this.user= null;
+           
         },
 
     //     getCart(){
@@ -506,9 +498,19 @@ export default {
          })
          return count;
      },
+     ...mapGetters(['user'])
     
 
    },
+   created(){
+   this.user =JSON.parse(localStorage.getItem('user')) ;
+//    this.token = localStorage.getItem('token') ;
+   console.log(this.user)
+
+  },
+//   mounted(){
+//     localStorage.setItem('token',reponse.data.access_token);
+//   }
  
 }
 </script>

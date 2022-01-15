@@ -12,7 +12,7 @@
                                 <router-link to="/">Home</router-link>
                             </li>
                             <li>
-                                <span>{{$route.params.id}}</span>
+                                <span>{{items.id}}</span>
                             </li>
                         </ul>
                     </div>
@@ -39,17 +39,17 @@
                                     <div class="owl-thumbs" data-slider-id="1">
                                         <div class="item owl-thumb-item">
                                             <div class="top-img">
-                                                <img :src="$route.params.image"  alt="Product">
+                                                <img :src="items.photo"  alt="Product">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
                                             <div class="top-img">
-                                                <img :src="$route.params.image"  alt="Product">
+                                                <img :src="items.photo"  alt="Product">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
                                             <div class="top-img">
-                                                <img :src="$route.params.image"  alt="Product">
+                                                <img :src="items.photo"  alt="Product">
                                             </div>
                                         </div>
                                     </div>
@@ -58,14 +58,14 @@
                                     <div class="image-slides owl-carousel owl-theme" data-slider-id="1">
                                         <div class="item">
                                             <div class="top-img">
-                                                <img :src="$route.params.image"  alt="Product">
+                                                <img :src="items.photo"  alt="Product">
                                             </div>
                                         </div>
                                         <div class="top-img">
-                                            <img :src="$route.params.image" alt="Product">
+                                            <img :src="items.photo" alt="Product">
                                         </div>
                                         <div class="top-img">
-                                            <img :src="$route.params.image" alt="Product">
+                                            <img :src="items.photo" alt="Product">
                                         </div>
                                     </div>
                                 </div>
@@ -74,12 +74,12 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="top-content">
-                            <h2>{{$route.params.product}}</h2>
+                            <h2>{{items.libelle}}</h2>
                             <ul class="reviews">
                                 <li>
                                     <i class="bx bxs-star" :class="checked" @click="giveStars" ></i>
                                 </li>
-                                <!-- <li>
+                                <li>
                                     <i class="bx bxs-star"></i>
                                 </li>
                                 <li>
@@ -90,33 +90,30 @@
                                 </li>
                                 <li>
                                     <i class="bx bxs-star"></i>
-                                </li> -->
-                                <li>
-                                    <span>(2 Reviews)</span>
                                 </li>
                                 <li>
-                                    <h3>{{$route.params.prix}} Fcfa</h3>
+                                    <h3>{{items.prix}} Fcfa</h3>
                                 </li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy </p>
+                            <p>{{items.desc}}</p>
                             <ul class="tag">
-                                <li>SKU: <span>042</span></li>
-                                <li>Category: <span>Sofa</span></li>
-                                <li>Tag: <span>Furniture</span></li>
-                                <li>Status: <span>In Stock</span></li>
+                                <li>Numero du produit: <span>{{items.id}}</span></li>
+                                <li>Categorie: <span>Sofa</span></li>
+                                <li>libelle: <span>Furniture</span></li>
+                                <li>Status: <span>En Stock</span></li>
                             </ul>
                             <ul class="cart">
-                                <li>
+                                <!-- <li>
                                     <ul class="number">
                                         <li>
-                                            <span class="minus">-</span>
-                                            <input type="text" value="1" />
-                                            <span class="plus">+</span>
+                                         <span class="minus">-</span>
+                                                <span class="text-light fw-b">1</span>
+                                                <span class="plus">+</span>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a class="common-btn" href="#">
+                                    <a class="common-btn" href="#" @click.prevent="$emit('add',items) , getNotif()">
                                         Add To Cart
                                         <img src="/assets/images/shape1.png" alt="Shape">
                                         <img src="/assets/images/shape2.png" alt="Shape">
@@ -425,68 +422,6 @@
         </div>
     </div>
 
-<!-- 
-    <div class="modal fade modal-right popup-modal wishlist-modal" id="exampleModalWishlist" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Wishlist <span>02 Items</span></h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="cart-table">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <img src="/assets/images/cart/cart1.png" alt="Cart">
-                                    </th>
-                                    <td>
-                                        <h3>White Comfy Stool</h3>
-                                        <span class="rate">$200.00 x 1</span>
-                                    </td>
-                                    <td>
-                                        <a class="common-btn" href="shop.html">
-                                            Add To Cart
-                                            <img src="/assets/images/shape1.png" alt="Shape">
-                                            <img src="/assets/images/shape2.png" alt="Shape">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="close" href="#">
-                                            <i class='bx bx-x'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <img src="/assets/images/cart/cart2.png" alt="Cart">
-                                    </th>
-                                    <td>
-                                        <h3>Yellow Armchair</h3>
-                                        <span class="rate">$180.00 x 1</span>
-                                    </td>
-                                    <td>
-                                        <a class="common-btn" href="shop.html">
-                                            Add To Cart
-                                            <img src="/assets/images/shape1.png" alt="Shape">
-                                            <img src="/assets/images/shape2.png" alt="Shape">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="close" href="#">
-                                            <i class='bx bx-x'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
 
     <div class="go-top">
@@ -498,6 +433,8 @@
 </template>
 
 <script>
+import Header from "@/components/Header.vue"
+import { Notyf } from 'notyf';
 export default {
    name:"SingleProduct",
    data(){
@@ -505,6 +442,15 @@ export default {
            checked:"",
        }
    },
+   compoments:{
+    Header
+   },
+   computed:{
+     items(){
+         return this.$store.getters.items(parseInt(this.$route.params.id));
+     },
+   },
+    props:['cart','add','products','removeItem','removeBySign','increase'],
    methods:{
        giveStars(){
         let verf=this.checked;
@@ -514,7 +460,21 @@ export default {
             this.checked=""
         }
           
-       }
+       },  
+       
+    getNotif(){
+  let noty = new Notyf({
+      duration:4000,
+      position :{
+          x:'right',
+          y:'top',
+      }
+  })
+  noty.success('produit ajoutee')
+  setTimeout(()=>{
+      noty.dismissAll()
+  },1000)
+   }
    }
   
 }

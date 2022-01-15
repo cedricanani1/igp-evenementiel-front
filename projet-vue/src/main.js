@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import VuePaginate from "vue-paginate"
 import jQuery from 'jquery'
-import '../src/components/axios.js'
+// import "../src/components/axios.js"
 
 import "bootstrap"
 

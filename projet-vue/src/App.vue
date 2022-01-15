@@ -13,7 +13,11 @@
     :cart=cart
     @add=addCart
     :products=products
-    
+    @removeItem=removeItemsCart
+     @removeBySign=removeFromCart
+     @increase=increaseFromCart
+     :itemCost=item_cost
+
     >
     </router-view>
     <Footer />
