@@ -89,6 +89,7 @@ export default {
           if(item){
             if(item.quantity > 1) {
               item.quantity--;
+              localStorage.setItem('mycart',JSON.stringify(this.cart))
             }else{
               this.cart = this.cart.filter(value=>value.id !== product.id)
             }
@@ -99,6 +100,7 @@ export default {
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
             item.quantity++;
+            localStorage.setItem('mycart',JSON.stringify(this.cart))
           }
         },
 

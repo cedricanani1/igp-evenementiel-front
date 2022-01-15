@@ -537,8 +537,8 @@
         </div>
     </div>
 
-    <div class="modal fade modal-right popup-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- <div class="modal fade modal-right popup-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog"> -->
             <!-- cart -->
             <!-- <div class="modal-content">
                 <div class="modal-header">
@@ -614,8 +614,8 @@
                 </div>
             </div> -->
             <!-- cart -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
 <!-- 
     <div class="modal fade modal-right popup-modal wishlist-modal" id="exampleModalWishlist" tabindex="-1"

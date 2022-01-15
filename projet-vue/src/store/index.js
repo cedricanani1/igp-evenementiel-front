@@ -35,6 +35,7 @@ export default createStore({
 
       },
     ],
+    cart:[],
   },
   getters: {
     products: state =>{
@@ -43,6 +44,13 @@ export default createStore({
     items: state => id => {
       return state.products.find(item => item.id === id);
     }, 
+    cart : state  => {
+      return state.cart
+    },
+    itemsCart: state => id => {
+      return state.cart.find(item => item.id === id);
+    }, 
+
   },
   mutations: {
     

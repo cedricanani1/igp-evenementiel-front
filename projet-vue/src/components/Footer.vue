@@ -331,7 +331,7 @@
     </div> -->
 
 
-    <div class="modal fade" id="modal-subscribe" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="modal-subscribe" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="subscribe-shape">
@@ -386,7 +386,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <div class="go-top">

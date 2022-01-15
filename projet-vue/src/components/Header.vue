@@ -18,39 +18,39 @@
                 <div class="col-sm-6 col-lg-7">
                     <div class="left">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <i class="flaticon-delivery-truck"></i>
                                 <span>bienvenue</span>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <i class="flaticon-quality"></i>
                                 <span>Best Price Guarantee</span>
-                            </li>
+                            </li> -->
                             <li>
                                 <i class="flaticon-call-center"></i>
-                                <span>24/7 Customer Support</span>
+                                <span>Disponible 24/7</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-5">
                     <div class="right">
-                        <div class="inner">
+                        <!-- <div class="inner">
                             <select>
                                 <option>$ USD</option>
                                 <option>EUR</option>
                                 <option>GBP</option>
                                 <option>CAD</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="inner">
                             <form>
                                 <select>
                                     <option>English</option>
-                                    <option>العربيّة</option>
+                                    <!-- <option>العربيّة</option>
                                     <option>Deutsch</option>
                                     <option>Português</option>
-                                    <option>简体中文</option>
+                                    <option>简体中文</option> -->
                                 </select>
                             </form>
                         </div>
@@ -72,7 +72,10 @@
                 <div class="col-lg-2">
                     <div class="left">
                         <a href="index.html">
-                            <img src="/assets/images/logo.png" alt="Logo">
+                            <!-- <img src="/assets/images/logo.png" alt="Logo"> -->
+                            <router-link to="/">
+                              <h1>IGP </h1>
+                              </router-link>  
                         </a>
                     </div>
                 </div>
@@ -91,18 +94,18 @@
                 <div class="col-lg-5">
                     <div class="right">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <div class="inner">
                                     <i class="flaticon-pin"></i>
                                     <a href="#">Set Location</a>
                                 </div>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <div class="inner">
                                     <i class="flaticon-question"></i>
                                     <a href="#">Need Help?</a>
                                 </div>
-                            </li>
+                            </li> -->
                             <li>
                                 <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">
@@ -173,8 +176,8 @@
                                 </ul> -->
                             <router-link class="mean-expand" to="/" style="font-size: 18px">+</router-link></li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Pages <i class="bx bx-chevron-down"></i></a>
-                                <ul class="dropdown-menu" style="display: none;">
+                                <!-- <a href="#" class="nav-link dropdown-toggle">Pages <i class="bx bx-chevron-down"></i></a> -->
+                                <!-- <ul class="dropdown-menu" style="display: none;">
                                     <li class="nav-item">
                                         <a href="#" class="nav-link dropdown-toggle">Users <i class="bx bx-chevron-down"></i></a>
                                         <ul class="dropdown-menu" style="display: none;">
@@ -201,12 +204,12 @@
                                     <li class="nav-item">
                                         <a href="terms-conditions.html" class="nav-link">Terms &amp; Conditions</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
                             <li class="nav-item">
-                                <a href="about.html" class="nav-link">About Us</a>
+                                <a href="about.html" class="nav-link">A propos de Nous</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Blog <i class="bx bx-chevron-down"></i></a>
                                 <ul class="dropdown-menu" style="display: none;">
                                     <li class="nav-item">
@@ -222,10 +225,10 @@
                                         <a href="blog-details.html" class="nav-link">Blog Details</a>
                                     </li>
                                 </ul>
-                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li> -->
                             <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bx-chevron-down"></i></a>
-                                <ul class="dropdown-menu" style="display: none;">
+                                <!-- <ul class="dropdown-menu" style="display: none;">
                                     <li class="nav-item">
                                         <a href="shop.html" class="nav-link">Shop</a>
                                     </li>
@@ -244,16 +247,16 @@
                                     <li class="nav-item">
                                         <a href="customer-service.html" class="nav-link">Customer Service</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                             <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
                             <li class="nav-item mean-last">
                                 <a href="contact.html" class="nav-link">Contact</a>
                             </li>
                         </ul>
-                        <div class="side-nav">
+                        <!-- <div class="side-nav">
                             <h4>Get <span>50%</span> Discount On Black Friday Offer <a href="products-on-sale.html">View
                                     Products On Sale</a></h4>
-                        </div>
+                        </div> -->
                     </nav>
                     </div>
         </div>
@@ -375,10 +378,10 @@
                                 <router-link to="/contacts" class="nav-link">Contact</router-link>
                             </li>
                         </ul>
-                        <div class="side-nav">
+                        <!-- <div class="side-nav">
                             <h4>Get <span>50%</span> Discount On Black Friday Offer <a href="products-on-sale.html">View
                                     Products On Sale</a></h4>
-                        </div>
+                        </div> -->
                     </div>
                 </nav>
             </div>
@@ -391,7 +394,7 @@
          <!-- cart -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Panier<span>{{cart.length}} items</span></h2>
+                    <h2>Panier<span>{{cart.length}} Article<b v-if="cart.length > 1 ">s</b> </span> </h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -428,17 +431,15 @@
                         <div class="total-amount">
                             <h3>Total: <span>{{item_cost.toFixed()}}</span></h3>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <form>
-                        <input type="text" class="form-control" placeholder="Enter Coupon Code">
-                        <button type="submit" class="btn common-btn">
-                            Proceed To Checkout
+                <button class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand" >
+                            FINALISER LA COMMANDE
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
-                        </button>
-                    </form>
+                </button>
                 </div>
             </div>
         <!-- cart -->
@@ -481,6 +482,13 @@ export default {
             //  this.user= null;
            
         },
+    passedCommand(){
+         localStorage.setItem('mycart',JSON.stringify(this.cart))
+         console.log(localStorage.getItem('total'))
+        //  this.$router.push('/commander')
+         localStorage.getItem('total')
+        window.location.href = '/commander'
+    }
 
     //     getCart(){
     //    axios.get('http://192.168.1.2:8000/api/produits')
@@ -496,21 +504,24 @@ export default {
          this.cart.forEach( item =>{
              count+= item.prix * item.quantity
          })
+       
          return count;
+          
      },
-     ...mapGetters(['user'])
+     
+    //  ...mapGetters(['user'])
     
 
    },
    created(){
    this.user =JSON.parse(localStorage.getItem('user')) ;
 //    this.token = localStorage.getItem('token') ;
-   console.log(this.user)
+//    console.log(this.user)
 
   },
-//   mounted(){
-//     localStorage.setItem('token',reponse.data.access_token);
-//   }
+  mounted(){
+    localStorage.setItem('total',this.item_cost);
+  }
  
 }
 </script>

@@ -4,13 +4,13 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>Checkout</h2>
+                        <h2>Commandes</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <route-link to="/">Home</route-link>
                             </li>
                             <li>
-                                <span>Checkout</span>
+                                <span>Commandes</span>
                             </li>
                         </ul>
                     </div>
@@ -29,23 +29,23 @@
     <div class="checkout-area pt-100 pb-70">
         <div class="container">
             <div class="section-title">
-                <h2>Billing Details</h2>
+                <h2>Détails</h2>
             </div>
             <form>
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="checkout-billing">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Name:">
+                                <input type="text" class="form-control" placeholder="Nom:">
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control" placeholder="Email:">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone No:">
+                                <input type="text" class="form-control" placeholder="Telephone:">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Street*">
+                                <input type="text" class="form-control" placeholder="Ville">
                             </div>
                             <div class="form-group">
                                 <select>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn common-btn">
-                                    Place Order
+                                    Commander
                                     <img src="assets/images/shape1.png" alt="Shape">
                                     <img src="assets/images/shape2.png" alt="Shape">
                                 </button>
@@ -94,19 +94,21 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="checkout-order">
-                            <h3>Your Order:</h3>
-                            <ul class="align-items-center">
+                            <h3>Votre Commande:</h3>
+                <ul class="align-items-center"  v-for="(item,index) in items" 
+                      :key="index">
                                 <li>
-                                    <img src="assets/images/checkout/checkout1.png" alt="Checkout">
+                                    <img :src="item.photo" :alt="item.libelle">
                                 </li>
                                 <li>
-                                    <h4>White Comfy Stool</h4>
+                                    <h4>{{item.libelle}}</h4>
                                 </li>
-                                <li>
-                                    <span>$200.00</span>
+                                <li >
+                                    <span>{{item.prix}} * {{item.quantity}} </span>
+                                    
                                 </li>
                             </ul>
-                            <ul class="align-items-center">
+                            <!-- <ul class="align-items-center">
                                 <li>
                                     <img src="assets/images/checkout/checkout2.png" alt="Checkout">
                                 </li>
@@ -116,10 +118,10 @@
                                 <li>
                                     <span>$180.00</span>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <div class="inner">
-                                <h3>Shipping: <span>$15.00</span></h3>
-                                <h4>Total: <span>$395.00</span></h4>
+                                <!-- <h3>Shipping: <span>$15.00</span></h3> -->
+                                <h4>Total: <span>{{itemTotal}} Fcfa</span></h4>
                             </div>
                         </div>
                         <div class="checkout-method">
@@ -162,8 +164,66 @@
     </div>
 
 </template>
+
+<style scoped>
+
+.checkout-order ul li span{
+
+margin-left:-1em;
+
+}
+@media screen and (max-width:1114px){
+.checkout-order ul li span{
+
+margin-left:-1.5em;
+
+}
+}
+@media screen and (max-width:991px){
+.checkout-order ul li span{
+
+margin-left:2.656em;
+
+}
+}
+@media screen and (max-width:768px){
+.checkout-order ul li span{
+
+margin-left:0;
+
+}
+}
+
+
+</style>
 <script>
 export default {
   name:'Commander',
+  data(){
+       return{
+           items:null,
+           itemTotal:"",
+       }
+  },
+   created(){
+     this.items = JSON.parse(localStorage.getItem('mycart'));
+
+   },
+    props:['cart','add','products','removeItem','removeBySign','increase'],
+//    mounted(){
+//        console.log(localStorage.getItem('total'));
+//    },
+   computed:{
+   itemTotal(){
+         let count = localStorage.getItem('total')
+         console.log(count);
+         return count;
+
+     },
+   },
+   mounted(){
+       localStorage.getItem('total')
+    //    console.log(localStorage.getItem('total'));
+   }
 }
 </script>
