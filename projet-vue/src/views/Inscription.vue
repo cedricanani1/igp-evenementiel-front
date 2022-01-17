@@ -30,28 +30,28 @@
         <div class="container">
         
             <div class="user-item">
-            <div class="alert alert-success" v-if="isSuccess">
-              inscrits
+            <div class="alert alert-danger" v-if="isSuccess">
+              Mot de passe incorrect
              </div>
                 <form @submit.prevent.stop="createAccount">
                     <h2>Inscription</h2>
                     <div class="form-group">
-                        <input v-model="nom" type="text" class="form-control" placeholder="Nom" required >
+                        <input v-model="nom" type="text" class="form-control" placeholder="Nom"  >
                     </div>
                     <div class="form-group">
-                        <input v-model="prenoms" type="text" class="form-control" placeholder="Prenom" required>
+                        <input v-model="prenoms" type="text" class="form-control" placeholder="Prenom" >
                     </div>
                     <div class="form-group">
-                        <input v-model="email" type="email" class="form-control" placeholder="votre meilleur addresse email" required>
+                        <input v-model="email" type="email" class="form-control" placeholder="votre meilleur addresse email" >
                     </div>
                     <div class="form-group">
-                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="phone" required>
+                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="phone" >
                     </div>
                     <div class="form-group">
-                        <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" required>
+                        <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" >
                     </div>
                       <div class="form-group">
-                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" required>
+                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" >
                     </div>
                     <button type="submit" class="btn common-btn">
                         Inscription
@@ -80,7 +80,9 @@
     </div>
 
 </template>
+
 <script>
+import VueSweetalert2 from 'vue-sweetalert2'
 import axios from "axios"
 export default {
     name:'Inscrisption',
@@ -99,22 +101,48 @@ export default {
         }
     },
     methods:{
-       async createAccount(){
+        createAccount(){
+if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" && this.prenoms !=="" && this.nom !=="" && this.phone !==""){
+     this.isSuccess = false
 
-    await axios.post('http://192.168.1.11:8004/api/auth/signup',{
+    if(this.password !==  this.password_confirmation){
+      this.isSuccess = true
+    } else{
+      axios.post('http://192.168.1.11:8004/api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,
               phone:this.phone,
                password:this.password,
                password_confirmation:this.password_confirmation
-           });
-        //  .then(
-        //      reponse =>{
-        //         this.isSuccess = true;
-        //         console.log(reponse);
-        //     })
-        this.$router.push('/login');
+           })
+            .then(
+             reponse =>{
+                 Swal.fire({
+            position: 'center',
+               icon: 'success',
+               title: 'votre inscription a été validée',
+              showConfirmButton: false,
+              timer: 2000,
+                  })
+                console.log(reponse)
+             this.$router.push('/login');
+            })
+    }
+
+  
+
+} else{
+    Swal.fire({
+
+              position: 'center',
+               icon: 'error',
+               title: 'Remplissez tous les champs du formulaire',
+              showConfirmButton: false,
+              timer: 1500,
+     })
+}
+       
     
        },
          

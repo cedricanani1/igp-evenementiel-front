@@ -117,6 +117,30 @@ export default {
             prix:2000,
             photo:'img.jpg'
           },
+           {
+            id:13,
+            libelle:'truelle',
+            prix:2000,
+            photo:'img.jpg'
+          },
+           {
+            id:14,
+            libelle:'truelle',
+            prix:2000,
+            photo:'img.jpg'
+          },
+            {
+            id:15,
+            libelle:'truelle',
+            prix:2000,
+            photo:'img.jpg'
+          },
+            {
+            id:16,
+            libelle:'truelle',
+            prix:2000,
+            photo:'img.jpg'
+          },
         ],
         currentPage:1,
         // maxVisibleButtons:3

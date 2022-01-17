@@ -501,7 +501,6 @@
 
 <script>
 // import {mapGetters} from 'vuex'
-import Pagination from "@/views/Pagination.vue";
 import Header from "@/components/Header.vue"
 import axios from 'axios'
 import { Notyf } from 'notyf';
@@ -518,7 +517,7 @@ export default{
       }
   }, 
   components:{
-      Header,Pagination
+      Header,
   },
 methods:{
 //    getCart(){

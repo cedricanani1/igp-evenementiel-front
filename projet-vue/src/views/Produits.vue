@@ -126,26 +126,20 @@
                                     <a class="wishlist" href="#">
                                         <i :class="logoHeart"></i>
                                     </a>
-                                   <router-link 
-                            :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
-
-                            <img :src="items.photo" :alt="items.libelle">
-
+                           <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}">
+                            <img :src="'http://192.168.1.3:8000/api/produits/'+items.photo" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
-                                           <router-link 
-                            :to="{name:'SingleProduct', params:{product:items.libelle,id:items.id,image:items.photo,prix:items.prix,}}">
-                            
-                            {{items.libelle}}
-                            
-                            </router-link>
+                                                    <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
                                         </h3>
                                         <span> {{items.prix}} Fcfa</span>
                                     </div>
                                 </div>
-                                <div class="bottom">
-                                    <a class="cart-text" href="#">{{add}}</a>
+                               <div class="bottom">
+                                    <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
                                     <i :class="logoAdd"></i>
                                 </div>
                             </div>
@@ -688,8 +682,10 @@
 <script>
 import Home from "./Home.vue"
 import axios from "axios"
+import { Notyf } from 'notyf';
 export default {
     name:"Produits",
+    props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
     data(){
         return{
             products:[],
@@ -703,12 +699,25 @@ export default {
     },
     methods:{
    getCart(){
-       axios.get('http://192.168.1.2:8000/api/produits')
+       axios.get('http://192.168.1.3:8000/api/produits')
             .then(resp =>{
                 console.log(resp.data.data)
                 this.products = resp.data.data
                 });
-   }
+   },
+    getNotif(){
+  let noty = new Notyf({
+      duration:4000,
+      position :{
+          x:'right',
+          y:'top',
+      }
+  })
+  noty.success('produit ajoutee')
+  setTimeout(()=>{
+      noty.dismissAll()
+  },1000)
+   },
 },
 mounted(){
      this.getCart()

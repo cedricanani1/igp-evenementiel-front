@@ -107,30 +107,38 @@
                                 </div>
                             </li> -->
                             <li>
-                                <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                                    <i class='bx bxs-cart'></i>
-                                    <span v-if="cart.length  >=  1 ">{{cart.length}}</span>
-                                </button>
+                             <span v-if="user">{{user.nom}} {{user.prenoms}}</span>
+                    <router-link to="/register" class="text-decoration-none register">
+                                  Se Connecter
+                                  <i class="bi bi-person-circle"></i>
+                                  </router-link>
+                                  
+                                 <a class="join" href="#" @click.prevent="deconnexion" v-if="user">
+                                    <i class="bi bi-person-circle"></i>
+                                    Se deconnecter
+                                </a>
+                               
                             </li>
-                            <li>
+                            <li v-if="user">
                                 <button type="button" class="btn wishlist" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalWishlist" data-bs-whatever="@mdo">
                                     <i class='bx bx-heart'></i>
                                     <span>2</span>
                                 </button>
                             </li>
-                            <li>
+                            <li v-if="user">
                                 <!-- <router-link class="join" to="/login" v-if="!user">
                                     <i class="flaticon-round-account-button-with-user-inside"></i>
                                     Se connecter
                                 </router-link> -->
-                                <a class="join" href="#" @click.prevent="deconnexion" v-if="user">
-                                    <i class="flaticon-round-account-button-with-user-inside"></i>
-                                    Se deconecter
-                                </a>
-                                <span v-if="user">{{user.nom}} {{user.prenoms}}</span>
-                                <span v-if="!user">pas connecter</span>
+                               
+                                 <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                                    <i class='bx bxs-cart'></i>
+                                    <span v-if="cart.length  >=  1 ">{{cart.length}}</span>
+                                </button>
+                               
+                                <!-- <span v-if="!user">pas connecter</span> -->
                             </li>
                         </ul>
                     </div>
@@ -530,6 +538,10 @@ export default {
 .selected-categorie{
     background: #434e6e;
     color: white;
+}
+.register{
+    color:#434e6e;
+    font-size:1.2em;
 }
 
 @media only screen and (max-width: 991px){
