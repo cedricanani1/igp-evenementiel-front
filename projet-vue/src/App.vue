@@ -18,6 +18,13 @@
      @increase=increaseFromCart
      :itemCost=item_cost
 
+    :listData=products
+    :perPage="5"
+    :total=products.length
+    :totalPages="Math.ceil(products.length/4)"
+    @pageChanged=onPageChange
+    :currentPage=currentPage
+    :maxVisibleButtons="3"
     >
     </router-view>
     <Footer />
@@ -31,9 +38,10 @@
 import axios from 'axios'
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
+
 export default {
   components:{
-    Header,Footer
+    Header,Footer,
     },
    data(){
       return{
@@ -64,7 +72,54 @@ export default {
             prix:2000,
             photo:'img.jpg'
           },
+           {
+            id:5,
+            libelle:'livre',
+            prix:2000,
+            photo:'img.jpg'
+          },
+           {
+            id:6,
+            libelle:'gateau',
+            prix:2000,
+            photo:'img.jpg'
+          }, {
+            id:7,
+            libelle:'meuble',
+            prix:2000,
+            photo:'img.jpg'
+          },
+           {
+            id:8,
+            libelle:'troue',
+            prix:2000,
+            photo:'img.jpg'
+          },
+           {
+            id:9,
+            libelle:'champion',
+            prix:2000,
+            photo:'img.jpg'
+          }, {
+            id:10,
+            libelle:'beignet',
+            prix:2000,
+            photo:'img.jpg'
+          },
+           {
+            id:11,
+            libelle:'troue',
+            prix:2000,
+            photo:'img.jpg'
+          }, {
+            id:12,
+            libelle:'truelle',
+            prix:2000,
+            photo:'img.jpg'
+          },
         ],
+        currentPage:1,
+        // maxVisibleButtons:3
       }
     },
      methods:{
@@ -103,6 +158,10 @@ export default {
             localStorage.setItem('mycart',JSON.stringify(this.cart))
           }
         },
+        onPageChange(page){
+       return this.currentPage = page ;
+        }
+       
 
       //methode pour que sauvegarder lorsque la page se recharge
 
@@ -118,6 +177,13 @@ export default {
    },
     created(){
      this.cart = JSON.parse(localStorage.getItem('mycart') || '[]');
+   },
+   computed:{
+        pageCount(){
+            let ligne=this.listData.length,
+                size = this.perPage;
+            return Math.ceil(ligne/size);
+        },
    }
  
  

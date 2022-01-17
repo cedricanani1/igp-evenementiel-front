@@ -149,7 +149,7 @@
                 <div class="col-lg-9">
                     <div id="Container" class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in products" 
+                      v-for="(items,index) in paginatedData" 
                       :key="index"
                       >
                             <div class="products-item">
@@ -175,7 +175,32 @@
                                 </div>
                             </div>
                         </div>
+                       
                     </div>
+             <div>
+                    <ul class="pagination" v-if="listData.length > 5 || currentPage > 1">
+                       <li>
+                      <button @click="onClickFirstPage" :disabled="isInFirstPage" >
+                      prev 
+                    </button>
+                    </li>
+         
+
+                    <li>
+                <button v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
+                :class="{active:isPageActive(page.number)}"
+                > {{page.number}}  
+                </button>
+                 </li>
+                
+
+                 <li>
+                 <button @click="onClickNextPage" :disabled="isInLastPage" >
+                  next 
+                 </button>
+                 </li>
+                 </ul>
+            </div>
                     <div class="text-center">
                         <router-link class="common-btn" to="/produits">
                             Voir Plus de produits
@@ -187,6 +212,9 @@
             </div>
         </div>
     </div>
+    
+     
+
    
     
     <div class="buy-area">
@@ -220,6 +248,7 @@
             </div>
         </div>
     </div>
+   
 
 
     <div class="products-area pb-70">
@@ -471,14 +500,15 @@
 </template>
 
 <script>
+// import {mapGetters} from 'vuex'
+import Pagination from "@/views/Pagination.vue";
 import Header from "@/components/Header.vue"
 import axios from 'axios'
 import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
-
-  props:['cart','add','products'],
+  props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
   data(){
       return{
           logoAdd:'bx bx-plus',
@@ -488,7 +518,7 @@ export default{
       }
   }, 
   components:{
-      Header,
+      Header,Pagination
   },
 methods:{
 //    getCart(){
@@ -498,7 +528,36 @@ methods:{
 //                 this.products = resp.data.data
 //                 });
 //    },
-   getNotif(){
+// getProducts(){
+//     axios.get('https://jsonplaceholder.typicode.com/photos')
+//        .then(rep =>{
+//            console.log(rep)
+//        } )
+
+// },
+       onClickFirstPage(){
+           this.$emit('pageChanged',1)
+        },
+         onClickPreviousPage(){
+           this.$emit('pageChanged', this.currentPage-1)
+        },
+         onClickPage(page){
+           this.$emit('pageChanged',page)
+        },
+         onClickNextPage(){
+           this.$emit('pageChanged', this.currentPage + 1)
+        },
+         onClickLastPage(){
+           this.$emit('pageChanged', this.totalPages)
+        },
+         isPageActive(page){
+           return this.currentPage === page
+        },
+     onPageChange(page){
+          this.currentPage = page;
+        },
+
+ getNotif(){
   let noty = new Notyf({
       duration:4000,
       position :{
@@ -511,9 +570,61 @@ methods:{
       noty.dismissAll()
   },1000)
    },
-   onChangePage(pageOfItems) {
-            this.pageOfItems = pageOfItems;
-        }
+  onPageChange(page){
+           this.currentPage = page;
+        },
 },
+mounted(){
+    
+},
+computed:{
+    // pageCount(){
+    //         let ligne=this.listData.length,
+    //             size = this.size;
+    //         return Math.ceil(ligne/size);
+    //     },
+        paginatedData(){
+            let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.listData.slice(start,end);
+        },
+        startPage(){
+            if(this.currentPage === 1) return 1
+            if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
+             return  this.currentPage - 1;
+        },
+        endPage(){
+            return Math.min(this.startPage + this.maxVisibleButtons-1 , this.totalPages)
+        },
+        pages(){
+            let range =[]
+            for (let i = this.startPage; i <= this.endPage ; i++) {
+                range.push({ number:i, isDisabled: i === this.currentPage
+                });
+            }
+            return range;
+        },
+        isInFirstPage(){
+            return this.currentPage === 1
+        },
+        isInLastPage(){
+            return this.currentPage === this.totalPages
+        },
+   
+}
 }
 </script>
+
+<style scoped>
+
+.pagination{
+    margin-left:-50%;
+    transform:translateX(50%)
+}
+.pagination li{
+    display: inline-block;
+    margin:0 .5em;
+  
+}
+
+</style>
