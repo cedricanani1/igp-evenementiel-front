@@ -106,21 +106,27 @@
                                     <a href="#">Need Help?</a>
                                 </div>
                             </li> -->
-                            <li>
-                             <span v-if="user">{{user.nom}} {{user.prenoms}}</span>
-                    <router-link to="/register" class="text-decoration-none register">
-                                  Se Connecter
-                                  <i class="bi bi-person-circle"></i>
-                                  </router-link>
-                                  
-                                 <a class="join" href="#" @click.prevent="deconnexion" v-if="user">
-                                    <i class="bi bi-person-circle"></i>
+                            <li v-if="user">
+                             <a class="user" href="#" @click.prevent="showCompte"> <i class="bi bi-person-circle mx-2"></i> {{user.nom}} {{user.prenoms}} <i class="bi bi-caret-down-fill mx-1" v-if="!compte"></i> <i class="bi bi-caret-up-fill" v-if="compte"></i></a>
+                                 
+                                <div class="compte" v-if="compte">  
+                                  <router-link to="/modify"> Votre compte</router-link>
+                                  <a href="#" @click.prevent="deconnexion">
                                     Se deconnecter
                                 </a>
-                               
+                                </div>
                             </li>
-                            <li v-if="user">
-                                <button type="button" class="btn wishlist" data-bs-toggle="modal"
+                             <li v-if="!user"> 
+                              <router-link to="/login" class="text-decoration-none register mx-2">
+                                  Se Connecter
+                                  </router-link>
+                                <router-link to="/register" class="text-decoration-none register" >
+                                    Inscription
+                                  </router-link>
+                             
+                             </li>
+                            <li v-if="user" >
+                                <button type="button" class="btn wishlist user" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalWishlist" data-bs-whatever="@mdo">
                                     <i class='bx bx-heart'></i>
                                     <span>2</span>
@@ -132,7 +138,7 @@
                                     Se connecter
                                 </router-link> -->
                                
-                                 <button type="button" class="btn wishlist cart-popup-btn" data-bs-toggle="modal"
+                                 <button type="button" class="btn wishlist cart-popup-btn user" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                                     <i class='bx bxs-cart'></i>
                                     <span v-if="cart.length  >=  1 ">{{cart.length}}</span>
@@ -286,7 +292,7 @@
                             <option>Fruits</option>
                             <option>Chicken</option>
                         </select>
-                        <div class="nice-select" tabindex="0"><span class="current">All Categories</span><ul class="list"><li data-value="All Categories" class="option selected focus">All Categories</li><li data-value="Chair" class="option">Chair</li><li data-value="Table" class="option">Table</li><li data-value="Bed" class="option">Bed</li><li data-value="Sofa" class="option">Sofa</li><li data-value="Headphones" class="option">Headphones</li><li data-value="Keyboard" class="option">Keyboard</li><li data-value="MacBook" class="option">MacBook</li><li data-value="Vegetable" class="option">Vegetable</li><li data-value="Fruits" class="option">Fruits</li><li data-value="Chicken" class="option">Chicken</li></ul></div>
+                        <div class="nice-select" tabindex="0"><span class="current">Categories</span><ul class="list"><li data-value="All Categories" class="option selected focus">All Categories</li><li data-value="Chair" class="option">Chair</li><li data-value="Table" class="option">Table</li><li data-value="Bed" class="option">Bed</li><li data-value="Sofa" class="option">Sofa</li><li data-value="Headphones" class="option">Headphones</li><li data-value="Keyboard" class="option">Keyboard</li><li data-value="MacBook" class="option">MacBook</li><li data-value="Vegetable" class="option">Vegetable</li><li data-value="Fruits" class="option">Fruits</li><li data-value="Chicken" class="option">Chicken</li></ul></div>
                     </div>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav">
@@ -307,7 +313,7 @@
                                     </li>
                                 </ul> -->
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Connexion<i
                                         class='bx bx-chevron-down'></i></a>
                                 <ul class="dropdown-menu">
@@ -321,7 +327,7 @@
                                     <router-link to="/register" class="nav-link">Inscription</router-link>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <!-- <li class="nav-item">
                                         <a href="faq.html" class="nav-link">FAQ</a>
                                     </li> -->
@@ -337,8 +343,8 @@
                                     <li class="nav-item">
                                         <a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
                                     </li> -->
-                                </ul>
-                            </li>
+                                <!-- </ul>
+                            </li> -->
                             <li class="nav-item">
                                 <router-link to="/about" class="nav-link">A propos de nous</router-link>
                             </li>
@@ -469,6 +475,7 @@ export default {
             barre:true,
             user:null,
             token:"",
+            compte:false,
         }
     },
     props:['cart','add','products','removeItem','removeBySign','increase'],
@@ -487,7 +494,7 @@ export default {
             });
             this.$router.push("/")
             //  window.location.href = '/'
-            //  this.user= null;
+             this.user= null;
            
         },
     passedCommand(){
@@ -496,7 +503,10 @@ export default {
         //  this.$router.push('/commander')
          localStorage.getItem('total')
         window.location.href = '/commander'
-    }
+    },
+    showCompte(){
+        this.compte = !this.compte
+    },
 
     //     getCart(){
     //    axios.get('http://192.168.1.2:8000/api/produits')
@@ -542,6 +552,24 @@ export default {
 .register{
     color:#434e6e;
     font-size:1.2em;
+}
+.user{
+    font-size:1.3em;
+    margin:0.5em;
+    color:black;
+}
+.compte{
+    width:200px;
+    background-color:rgb(248, 248, 248);
+    text-align:center;
+    position:absolute;
+    box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.678);
+}
+.compte a{
+    display:block;
+    margin:1em 0;
+    color:rgb(255, 166, 0);
+    font-size:1.1em
 }
 
 @media only screen and (max-width: 991px){

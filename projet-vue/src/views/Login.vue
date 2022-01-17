@@ -58,7 +58,9 @@
                             </a>
                         </li>
                     </ul>
-                    <h5>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></h5>
+                    <a>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></a>
+                      <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link>
+                    
                 </form>
             </div>
         </div>
@@ -80,12 +82,12 @@ export default {
           const reponse = await axios.post('http://192.168.1.11:8004/api/auth/login',{
               email:this.email,
               password:this.password,
-          });
+          })
          console.log(reponse.data)
          localStorage.setItem('token',reponse.data.access_token);
           localStorage.setItem('user', JSON.stringify(reponse.data.user))
           //localStorage.setItem('user', reponse.data.user);
-          //this.$router.push("/")
+        //   this.$router.push("/")
           window.location.href = '/'
        },
    },

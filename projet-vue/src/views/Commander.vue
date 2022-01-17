@@ -31,53 +31,53 @@
             <div class="section-title">
                 <h2>Détails</h2>
             </div>
-            <form>
+            <form @submit.prevent="sendCommande">
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="checkout-billing">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nom:">
+                                <input type="text" v-model="nom" class="form-control" placeholder="Nom:">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email:">
+                                <input type="email" v-model="email" class="form-control" placeholder="Email:">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Telephone:">
+                                <input type="text" v-model="phone" class="form-control" placeholder="Telephone:">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Ville">
+                                <input type="text" v-model="ville" class="form-control" placeholder="Ville">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <select>
                                     <option>Town*</option>
                                     <option>Some Option</option>
                                     <option>Another Option</option>
                                     <option>Potato</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <select>
                                     <option>State*</option>
                                     <option>Some Option</option>
                                     <option>Another Option</option>
                                     <option>Potato</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <select>
                                     <option>Country*</option>
                                     <option>Some Option</option>
                                     <option>Another Option</option>
                                     <option>Potato</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
+                            </div> -->
+                            <!-- <div class="form-group">
                                 <textarea id="your-notes" rows="4" class="form-control"
                                     placeholder="Other Notes (Optional)"></textarea>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox"  id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Ship To A Different Address
                                     </label>
@@ -125,9 +125,9 @@
                             </div>
                         </div>
                         <div class="checkout-method">
-                            <h3>Payment Method:</h3>
+                            <h3>Mode Paiement:</h3>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                <input class="form-check-input" v-model="option1" type="radio" name="exampleRadios" id="exampleRadios1"
                                     value="option1" checked>
                                 <label class="form-check-label" for="exampleRadios1">
                                     Direct Bank Transfer
@@ -137,21 +137,21 @@
                                     your account.</p>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                <input class="form-check-input" v-model="option2" type="radio" name="exampleRadios" id="exampleRadios2"
                                     value="option2">
                                 <label class="form-check-label" for="exampleRadios2">
                                     Cash On Delivery
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                <input class="form-check-input" v-model="option3" type="radio" name="exampleRadios" id="exampleRadios3"
                                     value="option3">
                                 <label class="form-check-label" for="exampleRadios3">
                                     Paypal
                                 </label>
                             </div>
                             <div class="form-check two">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault2">
                                 <label class="form-check-label" for="flexCheckDefault2">
                                     I've read and accept <a href="terms-conditions.html">terms & conditions*</a>
                                 </label>
@@ -203,6 +203,14 @@ export default {
        return{
            items:null,
            itemTotal:"",
+           commandes:[],
+           nom:"",
+           email:"",
+           phone:"",
+           ville:"",
+           option1:"",
+           option2:"",
+           option3:"",
        }
   },
    created(){
@@ -223,7 +231,30 @@ export default {
    },
    mounted(){
        localStorage.getItem('total')
-    //    console.log(localStorage.getItem('total'));
+       console.log(localStorage.getItem('commandes'));
+   },
+   methods:{
+
+       sendCommande(){
+
+           let commande = {
+            nom:this.nom,
+           email:this.email,
+           phone:this.phone,
+           ville:this.ville,
+           option1:this.option1,
+           option2:this.option2,
+           option3:this.option3,
+
+           };
+           console.log(commande);
+           this.commandes.push(commande);
+           localStorage.setItem("commandes",JSON.stringify(this.commandes))
+
+
+       }
+
    }
+
 }
 </script>
