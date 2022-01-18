@@ -197,6 +197,7 @@ margin-left:0;
 
 </style>
 <script>
+import store from 'store'
 export default {
   name:'Commander',
   data(){
@@ -211,6 +212,7 @@ export default {
            option1:"",
            option2:"",
            option3:"",
+           mydate:"",
        }
   },
    created(){
@@ -228,15 +230,34 @@ export default {
          return count;
 
      },
+     getCurrentDate(){
+         const browserLocale = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.languages;
+         const initDateTime = new Intl.DateTimeFormat(browserLocale,{
+             year:'numeric',
+             month:'numeric',
+             day: 'numeric',
+             hour:'numeric',
+             minute:'numeric'
+         });
+         return initDateTime.format(new Date());
+     },
    },
    mounted(){
-       localStorage.getItem('total')
-       console.log(localStorage.getItem('commandes'));
+    //    localStorage.getItem('total')
+    //    localStorage.setItem('date', this.getCurrentDate)
+    //    console.log(localStorage.getItem('commandes'));
+    //    console.log(localStorage.getItem('date'))
+    // localStorage.getItem('date')   
    },
    methods:{
 
-       sendCommande(){
-
+       sendCommande(){ 
+        localStorage.setItem('date', this.getCurrentDate)
+         
+           if(localStorage.commandes){
+               let lesCommandes = localStorage.commandes;
+               this.commandes = JSON.parse(lesCommandes);   
+           }
            let commande = {
             nom:this.nom,
            email:this.email,
@@ -247,10 +268,19 @@ export default {
            option3:this.option3,
 
            };
+               Swal.fire({
+            position: 'center',
+               icon: 'success',
+               title: 'votre commande à été prise en compte',
+              showConfirmButton: false,
+              timer: 2000,
+                  });
            console.log(commande);
            this.commandes.push(commande);
-           localStorage.setItem("commandes",JSON.stringify(this.commandes))
-
+           localStorage.setItem('commandes',JSON.stringify(this.commandes))
+           //localStorage.getItem('date')
+           this.$router.push('/commande')
+        //    window.location.href='/commande'
 
        }
 

@@ -5,7 +5,7 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>Se Connecter</h2>
+                        <h2>Liste des commandes</h2>
                         <ul>
                             <li>
                                 <router-link to="/">Accueil</router-link>
@@ -26,38 +26,60 @@
         </div>
     </div>
 
-
-    <div class="user-area ptb-100">
-        <div class="container">
-            <div class="user-item">
-                <form @submit.prevent="handleSubmit">
-                    <h2>Mot de passe oublié</h2>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" v-model="email">
-                    </div>
-                    <button type="submit" class="btn common-btn">
-                        Modifier
-                        <img src="assets/images/shape1.png" alt="Shape">
-                        <img src="assets/images/shape2.png" alt="Shape">
-                    </button>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
+     <div class="box" v-for="items in listCommandes" :key="items.id">
+      <h5> nom :{{items.nom}}</h5>       
+      <h5> email : {{items.email}}</h5>
+      <h5> telephone:{{items.phone}}</h5>
+      <h5> ville:{{items.ville}}</h5>
+     <h6> effectuer le : {{date}}</h6>
+      <router-link to="/" class="btn btn-lg bg-primary" @click.prevent="getDetailsCommandes">details commande</router-link>
+      
+     </div>
+     
+    
 </template>
 
 <script>
 import axios from 'axios'
+// import store from 'store'
 export default {
    name:'ListCommandes',
    data(){
        return{
-           
+           listCommandes:[],
+           date:"",
        }
    },
    methods:{
+       getDetailsCommandes(){
+         localStorage.getItem('mycart') 
+        if(localStorage.mycart){
+               let lesCommandes = localStorage.mycart;
+               this.listCommandes = JSON.parse(lesCommandes);
+           }
+        // localStorage.getItem('mycart')  
+        this.$router.push('/detailcommande')
+       }
  
    },
+   mounted(){
+       localStorage.getItem('commandes')
+       this.listCommandes = JSON.parse(localStorage.getItem('commandes'))
+        this.date = store.state.date     
+   }
 }
 </script>
+
+<style scoped>
+.box{
+    width:300px;
+    height:auto;
+    margin:1em auto;
+    background-color:rgb(235, 233, 233);
+    text-align:center;
+    padding:1em;
+}
+
+
+
+</style>

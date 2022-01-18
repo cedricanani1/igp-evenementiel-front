@@ -35,6 +35,7 @@ export default createStore({
 
       },
     ],
+    // token:localStorage.getItem('token'),
   },
   getters: {
     products: state =>{

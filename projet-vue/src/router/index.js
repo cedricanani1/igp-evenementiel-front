@@ -10,8 +10,9 @@ import Contacts from "../views/Contacts.vue"
 import Login from "../views/Login.vue"
 import Inscription from "../views/Inscription.vue"
 import AproposDeNous from "../views/AproposDeNous.vue"
-// import Reset from "../views/Reset.vue"
+import ListCommandes from "../views/ListCommandes.vue"
 import Modify from "../views/Modify.vue"
+import DetailCommandes from "../views/DetailCommandes.vue"
 
 
 const routes = [{
@@ -54,16 +55,27 @@ const routes = [{
     name:'AproposDeNous',
     component:AproposDeNous
   },
-  // {
-  //   path:'/reset',
-  //   name:'Reset',
-  //   component:Reset
-  // },
+  {
+    path:'/commande',
+    name:'commande',
+    component:ListCommandes
+  },
+  {
+    path:'/detailcommande',
+    name:'detailcommande',
+    component:DetailCommandes
+  },
   {
     path:'/modify',
     name:'modify',
     component:Modify
-  }
+  },
+  // {
+  //   path:'/listcommnade',
+  //   name:'listcommande',
+  //   component:ListCommandes
+  // }
+
 
 
 ]

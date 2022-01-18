@@ -33,7 +33,7 @@
             <div class="alert alert-danger" v-if="isSuccess">
               Mot de passe incorrect
              </div>
-                <form @submit.prevent.stop="createAccount">
+                <form @submit.prevent.stop="modifierData">
                     <h2></h2>
                     <div class="form-group">
                         <input v-model="userCompte.nom" type="text" class="form-control" placeholder="Nom"  >
@@ -48,10 +48,13 @@
                         <input v-model="userCompte.phone" type="tel" id="phone"  class="form-control" placeholder="phone" >
                     </div>
                     <div class="form-group">
-                        <input v-model="userCompte.password" type="password" class="form-control" placeholder="Mot de passe" >
+                        <input v-model="userCompte.password" type="password" class="form-control" placeholder="Mot de passe" required >
                     </div>
                       <div class="form-group">
-                        <input v-model="userCompte.password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" >
+                        <input v-model="userCompte.password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" required>
+                    </div>
+                     <div class="form-group">
+                        <input v-model="userCompte.newPassword" type="password" class="form-control" placeholder="nouveau mot de passe" required>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Modifier votre compte
@@ -81,8 +84,10 @@ export default {
              email:"",
              password:"",
              password_confirmation:"",
+             newPassword:"",
             },
           user:JSON.parse(localStorage.getItem("user")),
+          token:localStorage.getItem("token"),
           
         //    isSuccess:false,
         }
@@ -91,36 +96,42 @@ export default {
         
   
         modifierData(){
+            
             if(this.userCompte.password === this.userCompte.password_confirmation){
-                    this.userCompte.nom = this.user.nom
-                   this.userCompte.prenoms = this.user.prenoms
-                   this.userCompte.phone = this.user.phone
-                this.userCompte.email = this.user.email
-                 this.userCompte.password = this.user.password
-                 this.password_confirmation=this.user.password_confirmation
+                const config = {
+                    headers:{
+                        Authorization:'Bearer'+ localStorage.getItem('token')
+                    },
+                };
+                 this.user.nom = this.userCompte.nom 
+                    this.user.prenoms = this.userCompte.prenoms
+                    this.user.phone =  this.userCompte.phone
+                 this.user.email = this.userCompte.email 
+                 this.user.password = this.userCompte.password
+                 this.user.password_confirmation = this.userCompte.password_confirmation
                  localStorage.setItem('user',JSON.stringify(this.user))
-                   axios.post('http://192.168.1.11:8004/api/auth/modify-account', this.userCompte)
+       
+                   axios.post('http://192.168.1.4:8004/api/auth/modify-account',this.userCompte,config)
                          .then( rep  => {
-                                Swal.fire({
-                          position: 'center',
-                          icon: 'success',
-                           title: 'Modification réussie',
-                          showConfirmButton: false,
-                          timer: 2000,
-                       })
+                         
                              console.log(rep)
-                             window.location.href='/'
-                          } )
-                          .catch(err => {
-                                    Swal.fire({
+                          } );
+                     Swal.fire({
+                             position: 'center',
+                             icon: 'success',
+                             title: 'Modification réussie',
+                             showConfirmButton: false,
+                             timer: 2000,})
+                window.location.reload(true);
+                
+            } else {
+                   Swal.fire({
                            position: 'center',
                               icon: 'error',
                               title: 'Echec de modification. Veuillez ressayer',
                          showConfirmButton: false,
-                             timer: 1500,
+                             timer: 1500
                        })
-                          })
-
             }
 
           
@@ -136,6 +147,11 @@ export default {
         this.userCompte.email = this.user.email
         this.userCompte.password = this.user.password
         this.password_confirmation=this.user.password_confirmation
+        // localStorage.getItem('token')
+        // console.log(localStorage.getItem('token'))
+        console.log(this.user);
+        //   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+      
     }
 }
 </script>

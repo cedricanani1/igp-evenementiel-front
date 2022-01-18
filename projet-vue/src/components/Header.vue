@@ -374,9 +374,9 @@
                                     <li class="nav-item">
                                         <router-link to="/commander" class="nav-link">Commander</router-link>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <router-link to="/single-product" class="nav-link">voir produit</router-link>
-                                    </li> -->
+                                    <li class="nav-item">
+                                        <router-link to="/commande" class="nav-link">listes des commandes</router-link>
+                                    </li>
                                     <!-- <li class="nav-item">
                                         <a href="products-on-sale.html" class="nav-link">Products On Sale</a>
                                     </li>
@@ -485,7 +485,7 @@ export default {
             this.barre= !this.barre;
         },
         deconnexion(){
-        axios.get('http://192.168.1.11:8004/api/auth/logout',
+        axios.get('http://192.168.1.4:8004/api/auth/logout',
             { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
             .then( function(reponse){
                 localStorage.removeItem('token');

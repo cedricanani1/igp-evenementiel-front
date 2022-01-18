@@ -108,7 +108,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
     if(this.password !==  this.password_confirmation){
       this.isSuccess = true
     } else{
-      axios.post('http://192.168.1.11:8004/api/auth/signup',{
+      axios.post('http://192.168.1.4:8004/api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,
