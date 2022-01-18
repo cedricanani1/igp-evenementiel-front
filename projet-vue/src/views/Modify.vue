@@ -70,6 +70,7 @@
 
 <script>
 import axios from "axios"
+import store from "../store";
 export default {
     name:'Modify',
     data(){
@@ -86,7 +87,7 @@ export default {
              password_confirmation:"",
              newPassword:"",
             },
-          user:JSON.parse(localStorage.getItem("user")),
+          user:store.state.user,
           token:localStorage.getItem("token"),
           
         //    isSuccess:false,
@@ -100,42 +101,48 @@ export default {
             if(this.userCompte.password === this.userCompte.password_confirmation){
                 const config = {
                     headers:{
-                        Authorization:'Bearer'+ localStorage.getItem('token')
+                        'Authorization':'Bearer '+ localStorage.getItem('token'),
                     },
                 };
                  this.user.nom = this.userCompte.nom 
                     this.user.prenoms = this.userCompte.prenoms
                     this.user.phone =  this.userCompte.phone
                  this.user.email = this.userCompte.email 
-                 this.user.password = this.userCompte.password
-                 this.user.password_confirmation = this.userCompte.password_confirmation
-                 localStorage.setItem('user',JSON.stringify(this.user))
-       
+                 localStorage.setItem("user",JSON.stringify(this.user))
                    axios.post('http://192.168.1.4:8004/api/auth/modify-account',this.userCompte,config)
                          .then( rep  => {
-                         
                              console.log(rep)
+                             if(rep.data.status){
+                                  Swal.fire({
+                                        position: 'center',
+                                            icon: 'success',
+                                            title: 'modification effectuée',
+                                        showConfirmButton: false,
+                                            timer: 1500
+                                    })
+                                window.location.reload(true)
+
+                             }else{
+                                 Swal.fire({
+                                        position: 'center',
+                                            icon: 'error',
+                                            title: 'Modification Echouée',
+                                        showConfirmButton: false,
+                                            timer: 1500
+                                    })
+                             }
                           } );
-                     Swal.fire({
-                             position: 'center',
-                             icon: 'success',
-                             title: 'Modification réussie',
-                             showConfirmButton: false,
-                             timer: 2000,})
-                window.location.reload(true);
+
                 
             } else {
                    Swal.fire({
                            position: 'center',
                               icon: 'error',
-                              title: 'Echec de modification. Veuillez ressayer',
+                              title: 'Mot de passe incorrect',
                          showConfirmButton: false,
                              timer: 1500
                        })
-            }
-
-          
-               
+            }    
          },
 
          
@@ -145,8 +152,6 @@ export default {
         this.userCompte.prenoms = this.user.prenoms
         this.userCompte.phone = this.user.phone
         this.userCompte.email = this.user.email
-        this.userCompte.password = this.user.password
-        this.password_confirmation=this.user.password_confirmation
         // localStorage.getItem('token')
         // console.log(localStorage.getItem('token'))
         console.log(this.user);

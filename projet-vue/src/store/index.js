@@ -35,7 +35,8 @@ export default createStore({
 
       },
     ],
-    // token:localStorage.getItem('token'),
+    token:localStorage.getItem('token'),
+    user:JSON.parse(localStorage.getItem("user")),
   },
   getters: {
     products: state =>{
