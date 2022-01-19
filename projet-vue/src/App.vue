@@ -94,7 +94,7 @@ export default {
        return this.currentPage = page ;
         },
         
-         getCart(){
+         getProducts(){
        axios.get('https://igp-event-backend.lce-ci.com/api/products')
             .then(resp =>{
                 console.log(resp.data.data)
@@ -120,7 +120,7 @@ export default {
    },
 
    mounted(){
-     this.getCart();
+     this.getProducts();
    }
  
  

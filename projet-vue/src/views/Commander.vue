@@ -35,54 +35,48 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="checkout-billing">
+
                             <div class="form-group">
-                                <input type="text" v-model="nom" class="form-control" placeholder="Nom:">
+                             <label for="date-debut">date de debut</label>
+                                <input type="date" name="date" v-model="to" class="form-control" placeholder="date début">
+                            </div>
+
+                            <div class="form-group">
+                             <label for="date-fin">date de fin</label>
+                                <input type="date" v-model="from" class="form-control" name="date" placeholder="date fin">
+                            </div>
+
+                            <div class="form-group">
+                             <label for="phone">Télephone</label> <br>
+                                <input  type="tel" id="phone" name="phone" v-model="phone" pattern="[+]{1}[0-9]{11,14}" placeholder="ex : 0765909878" required>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="objet">objet</label>
+                                <input type="text" v-model="objet" class="form-control" name="objet" placeholder="Objet">
+                            </div>
+
+                            <div class="form-group">
+                             <label for="location">Location</label>
+                                <input type="text" v-model="location" class="form-control" name="location" placeholder="location">
+                            </div>
+
+                            <div class="form-group">
+                            <label for="participants">Participants</label>
+                                <input type="number" v-model="participants" class="form-control" placeholder="ex:90">
                             </div>
                             <div class="form-group">
-                                <input type="email" v-model="email" class="form-control" placeholder="Email:">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="phone" class="form-control" placeholder="Telephone:">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" v-model="ville" class="form-control" placeholder="Ville">
+                            <label for="participants">Détails</label>
+                                <input type="text" v-model="details" class="form-control" placeholder="Details">
                             </div>
                             <!-- <div class="form-group">
-                                <select>
-                                    <option>Town*</option>
-                                    <option>Some Option</option>
-                                    <option>Another Option</option>
-                                    <option>Potato</option>
-                                </select>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <select>
-                                    <option>State*</option>
-                                    <option>Some Option</option>
-                                    <option>Another Option</option>
-                                    <option>Potato</option>
-                                </select>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <select>
-                                    <option>Country*</option>
-                                    <option>Some Option</option>
-                                    <option>Another Option</option>
-                                    <option>Potato</option>
-                                </select>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <textarea id="your-notes" rows="4" class="form-control"
-                                    placeholder="Other Notes (Optional)"></textarea>
-                            </div> -->
-                            <div class="form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox"  id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Ship To A Different Address
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="text-center">
                                 <button type="submit" class="btn common-btn">
                                     Commander
@@ -97,63 +91,49 @@
                             <h3>Votre Commande:</h3>
                 <ul class="align-items-center"  v-for="(item,index) in items" 
                       :key="index">
-                                <li>
-                                    <img :src="item.photo" :alt="item.libelle">
+                                <li v-if="item.photo.length > 0">
+                                 <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.photo[0].path" :alt="item.libelle">
                                 </li>
                                 <li>
                                     <h4>{{item.libelle}}</h4>
                                 </li>
                                 <li >
-                                    <span>{{item.prix}} * {{item.quantity}} </span>
+                                    <span>{{item.price}} * {{item.quantity}} </span>
                                     
                                 </li>
                             </ul>
-                            <!-- <ul class="align-items-center">
-                                <li>
-                                    <img src="assets/images/checkout/checkout2.png" alt="Checkout">
-                                </li>
-                                <li>
-                                    <h4>Yellow Armchair</h4>
-                                </li>
-                                <li>
-                                    <span>$180.00</span>
-                                </li>
-                            </ul> -->
                             <div class="inner">
-                                <!-- <h3>Shipping: <span>$15.00</span></h3> -->
                                 <h4>Total: <span>{{itemTotal}} Fcfa</span></h4>
                             </div>
                         </div>
                         <div class="checkout-method">
                             <h3>Mode Paiement:</h3>
                             <div class="form-check">
-                                <input class="form-check-input" v-model="option1" type="radio" name="exampleRadios" id="exampleRadios1"
-                                    value="option1" checked>
+                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios1"
+                                    value="bancaire" checked>
                                 <label class="form-check-label" for="exampleRadios1">
-                                    Direct Bank Transfer
+                                    Virement bancaire direct
                                 </label>
-                                <p>Make your payment directly into our bank account. Please use your Order ID as the
-                                    payment reference. Your order will not be shipped until the funds have cleared in
-                                    your account.</p>
+                                <p>Effectuez votre paiement directement sur notre compte bancaire. Veuillez utiliser votre numéro de commande comme référence de paiement. Votre commande ne sera pas expédiée tant que les fonds n'auront pas été compensés sur votre compte.</p>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" v-model="option2" type="radio" name="exampleRadios" id="exampleRadios2"
-                                    value="option2">
+                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios2"
+                                    value="livraison">
                                 <label class="form-check-label" for="exampleRadios2">
-                                    Cash On Delivery
+                                    Paiement à la livraison
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" v-model="option3" type="radio" name="exampleRadios" id="exampleRadios3"
-                                    value="option3">
+                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios3"
+                                    value="orange">
                                 <label class="form-check-label" for="exampleRadios3">
-                                    Paypal
+                                    Orange
                                 </label>
                             </div>
                             <div class="form-check two">
                                 <input class="form-check-input" type="checkbox" id="flexCheckDefault2">
                                 <label class="form-check-label" for="flexCheckDefault2">
-                                    I've read and accept <a href="terms-conditions.html">terms & conditions*</a>
+                                    J'ai lu et j'accepte<router-link to="/"> les termes et conditions *</router-link>
                                 </label>
                             </div>
                         </div>
@@ -171,6 +151,10 @@
 
 margin-left:-1em;
 
+}
+#phone{
+width:100%;
+border:none;
 }
 @media screen and (max-width:1114px){
 .checkout-order ul li span{
@@ -205,14 +189,15 @@ export default {
            items:null,
            itemTotal:"",
            commandes:[],
-           nom:"",
-           email:"",
+           to:"",
+           from:"",
+           location:"",
+           objet:"",
+           participants:"",
+           details:"",
            phone:"",
-           ville:"",
-           option1:"",
-           option2:"",
-           option3:"",
            mydate:"",
+           days:"",
        }
   },
    created(){
@@ -254,27 +239,27 @@ export default {
        sendCommande(){ 
         localStorage.setItem('date', this.getCurrentDate)
          
-           if(localStorage.commandes){
+           if(localStorage.commandes) {
                let lesCommandes = localStorage.commandes;
                this.commandes = JSON.parse(lesCommandes);   
            }
            let commande = {
-            nom:this.nom,
-           email:this.email,
            phone:this.phone,
-           ville:this.ville,
-           option1:this.option1,
-           option2:this.option2,
-           option3:this.option3,
-
+           option:this.option,
+           to:this.to,
+           from:this.from,
+           participants:this.participants,
+           details:this.details,
+           objet:this.objet,
+           location:this.location,
            };
-               Swal.fire({
-            position: 'center',
-               icon: 'success',
-               title: 'votre commande à été prise en compte',
-              showConfirmButton: false,
-              timer: 2000,
-                  });
+            //    Swal.fire({
+            // position: 'center',
+            //    icon: 'success',
+            //    title: 'votre commande à été prise en compte',
+            //   showConfirmButton: false,
+            //   timer: 2000,
+            //       });
            console.log(commande);
            this.commandes.push(commande);
            localStorage.setItem('commandes',JSON.stringify(this.commandes))

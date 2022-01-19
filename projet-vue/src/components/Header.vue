@@ -188,12 +188,12 @@
                                 <tr  
                                 v-for="items in cart"
                                  :key="items.index">
-                                    <th scope="row">
-                                       <img :src="items.photo" :alt="items.libelle">
+                                    <th scope="row" v-if="items.photo.length >0">
+                                       <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                     </th>
                                     <td>
                                         <h3>{{items.libelle}}</h3>
-                                        <span class="rate">{{items.prix}} Fcfa</span>
+                                        <span class="rate">{{items.price}} Fcfa</span>
                                     </td>
                                     <td>
                                         <ul class="number">
@@ -301,7 +301,7 @@ export default {
      item_cost(){
          let count =0
          this.cart.forEach( item =>{
-             count+= item.prix * item.quantity
+             count+= item.price * item.quantity
          })
        
          return count;

@@ -27,11 +27,11 @@
     </div>
 
      <div class="box" v-for="items in listCommandes" :key="items.id">
-      <h5> nom :{{items.nom}}</h5>       
-      <h5> email : {{items.email}}</h5>
-      <h5> telephone:{{items.phone}}</h5>
-      <h5> ville:{{items.ville}}</h5>
-     <h6> effectuer le : {{date}}</h6>
+      <h5> {{items.nom}}</h5>       
+      <h5>  {{items.email}}</h5>
+      <h5> {{items.phone}}</h5>
+      <h5> {{items.ville}}</h5>
+     <h6>  {{date}}</h6>
       <router-link to="/" class="btn btn-lg bg-primary" @click.prevent="getDetailsCommandes">details commande</router-link>
       
      </div>
@@ -65,7 +65,7 @@ export default {
    mounted(){
        localStorage.getItem('commandes')
        this.listCommandes = JSON.parse(localStorage.getItem('commandes'))
-        this.date = store.state.date     
+        // this.date = store.state.date     
    }
 }
 </script>

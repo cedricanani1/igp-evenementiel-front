@@ -38,18 +38,18 @@
                                 <div class="col-sm-3 col-lg-3">
                                     <div class="owl-thumbs" data-slider-id="1">
                                         <div class="item owl-thumb-item">
-                                            <div class="top-img">
-                                                <img :src="items.photo"  alt="Product">
+                                            <div class="top-img" v-if="items.photo.length >0">
+                                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
-                                            <div class="top-img">
-                                                <img :src="items.photo"  alt="Product">
+                                           <div class="top-img" v-if="items.photo.length >0">
+                                               <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
-                                            <div class="top-img">
-                                                <img :src="items.photo"  alt="Product">
+                                          <div class="top-img" v-if="items.photo.length >0">
+                                               <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
                                     </div>
@@ -57,15 +57,15 @@
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="image-slides owl-carousel owl-theme" data-slider-id="1">
                                         <div class="item">
-                                            <div class="top-img">
-                                                <img :src="items.photo"  alt="Product">
+                                            <div class="top-img" v-if="items.photo.length >0">
+                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
-                                        <div class="top-img">
-                                            <img :src="items.photo" alt="Product">
+                                        <div class="top-img" v-if="items.photo.length >0">
+                                           <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                         </div>
-                                        <div class="top-img">
-                                            <img :src="items.photo" alt="Product">
+                                        <div class="top-img" v-if="items.photo.length >0">
+                                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                         </div>
                                     </div>
                                 </div>
@@ -103,15 +103,6 @@
                                 <li>Status: <span>En Stock</span></li>
                             </ul>
                             <ul class="cart">
-                                <!-- <li>
-                                    <ul class="number">
-                                        <li>
-                                         <span class="minus">-</span>
-                                                <span class="text-light fw-b">1</span>
-                                                <span class="plus">+</span>
-                                        </li>
-                                    </ul>
-                                </li> -->
                                 <li>
                                     <a class="common-btn" href="#" @click.prevent="$emit('add',items) , getNotif()">
                                         Add To Cart
@@ -144,15 +135,8 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
                         <div class="bottom-description">
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                                sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna</p>
-                            <p>It is a long established fact that a reader will be distracted by the readable content of
-                                a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                                more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                                here', making it look like readable English</p>
+                            <p>{{items.description}}</p>
+                            <p>{{items.slug}}</p>
                             <ul>
                                 <li><span></span> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
                                     nonumy</li>
@@ -339,91 +323,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <!-- <div class="modal fade modal-right popup-modal" id="exampleModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog"> -->
-        <!-- cart -->
-            <!-- <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Shopping Cart <span>{{items}}</span></h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="cart-table">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <img src="/assets/images/cart/cart1.png" alt="Cart">
-                                    </th>
-                                    <td>
-                                        <h3>White Comfy Stool</h3>
-                                        <span class="rate">$200.00 x 1</span>
-                                    </td>
-                                    <td>
-                                        <ul class="number">
-                                            <li>
-                                                <span class="minus">-</span>
-                                                <input type="text" value="1" />
-                                                <span class="plus">+</span>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <a class="close" href="#">
-                                            <i class='bx bx-x'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <img src="/assets/images/cart/cart2.png" alt="Cart">
-                                    </th>
-                                    <td>
-                                        <h3>Yellow Armchair</h3>
-                                        <span class="rate">$180.00 x 1</span>
-                                    </td>
-                                    <td>
-                                        <ul class="number">
-                                            <li>
-                                                <span class="minus">-</span>
-                                                <input type="text" value="1" />
-                                                <span class="plus">+</span>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <a class="close" href="#">
-                                            <i class='bx bx-x'></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="total-amount">
-                            <h3>Total: <span>$380.00</span></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <form>
-                        <input type="text" class="form-control" placeholder="Enter Coupon Code">
-                        <button type="submit" class="btn common-btn">
-                            Proceed To Checkout
-                            <img src="/assets/images/shape1.png" alt="Shape">
-                            <img src="/assets/images/shape2.png" alt="Shape">
-                        </button>
-                    </form>
-                </div>
-            </div> -->
-        <!-- cart -->
-        <!-- </div>
-    </div> -->
-
-
-
     <div class="go-top">
         <i class='bx bxs-up-arrow-circle'></i>
         <i class='bx bxs-up-arrow-circle'></i>
@@ -433,6 +332,7 @@
 </template>
 
 <script>
+import mapGetters from 'vuex'
 import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
 export default {
@@ -449,11 +349,9 @@ export default {
      items(){
          return this.$store.getters.items(parseInt(this.$route.params.id));
      },
-    // items(){
-    //     return products.find(item => item.id = id)
-    // }
+
    },
-    props:['cart','add','products','removeItem','removeBySign','increase'],
+    props:['cart','add','removeItem','removeBySign','increase','products'],
    methods:{
        giveStars(){
         let verf=this.checked;
@@ -478,7 +376,11 @@ export default {
       noty.dismissAll()
   },1000)
    }
-   }
+   },
+   mounted() {
+       this.$store.dispatch("obtenirProduits")
+    //    console.log(this.products)
+   },
   
 }
 </script>

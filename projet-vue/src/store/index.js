@@ -12,24 +12,28 @@ export default createStore({
     products: state =>{
       return state.products;
     }, 
-    items: state => id => {
+    // items: state => id => {
+    //   return state.products.find(item => item.id === id);
+    // },
+       items: state => id => {
       return state.products.find(item => item.id === id);
     },
     
-
   },
   mutations: {
-   
-    
+
+    SET_PRODUCT(state, products) {
+      state.products = products;
+    }
   },
   actions: {
    
-    // getProducts({commit}){
-    //   axios.get('http://192.168.1.4:8006/api/products')
-    //       .then(reponse => {
-    //         commit('SET_PRODUCT',reponse.data)
-    //       })
-    // }
+    obtenirProduits({commit}){
+      axios.get('https://igp-event-backend.lce-ci.com/api/products')
+          .then(reponse => {
+            commit('SET_PRODUCT',reponse.data.data)
+          })
+    }, 
    
 
   },

@@ -154,20 +154,23 @@
                       >
                             <div class="products-item">
                                 <div class="top">
-                                    <a class="wishlist" href="#">
+                                    <!-- <a class="wishlist" href="#">
                                         <i :class="logoHeart"></i>
-                                    </a>
+                                    </a> -->
                   <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}">
-                            <img :src="items.photo" :alt="items.libelle">
+                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
                             <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
                                         </h3>
-                                        <span> {{items.title}} Fcfa</span>
+                                        <span> {{items.price}} Fcfa</span>
                                     </div>
+                            <div>
+                            <!-- <span>{{items.stock}}</span> -->
+                            </div>
                                 </div>
                                 <div class="bottom">
                                     <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
@@ -385,7 +388,7 @@ import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
-  props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
+  props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
   data(){
       return{
           logoAdd:'bx bx-plus',
@@ -398,20 +401,6 @@ export default{
       Header,
   },
 methods:{
-//    getCart(){
-//        axios.get('http://192.168.1.2:8000/api/produits')
-//             .then(resp =>{
-//                 console.log(resp.data.data)
-//                 this.products = resp.data.data
-//                 });
-//    },
-// getProducts(){
-//     axios.get('https://jsonplaceholder.typicode.com/photos')
-//        .then(rep =>{
-//            console.log(rep)
-//        } )
-
-// },
        onClickFirstPage(){
            this.$emit('pageChanged',1)
         },
@@ -452,11 +441,10 @@ methods:{
         },
 },
 mounted(){
-    
 },
 computed:{
     products(){
-            return this.$store.state.products
+            return this.$store.getters.products
         },
         // paginatedData(){
         //     let start = (this.currentPage * this.perPage) - this.perPage;
@@ -488,7 +476,7 @@ computed:{
    
   },
   mounted(){
-    //   this.$store.dispatch("getProducts")
+      this.$store.dispatch("obtenirProduits")
   }
 }
 </script>
