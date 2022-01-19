@@ -4,13 +4,13 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>About Us</h2>
+                        <h2>A propos de Nous</h2>
                         <ul>
                             <li>
                                 <a href="index.html">Home</a>
                             </li>
                             <li>
-                                <span>About Us</span>
+                                <span>A propos Nous</span>
                             </li>
                         </ul>
                     </div>
@@ -32,16 +32,9 @@
                 <div class="col-lg-6">
                     <div class="about-content">
                         <div class="top">
-                            <h2>About Our Store</h2>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirm od tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum</p>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirm od tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                                sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-                                sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat</p>
+                            <h2>A propos de Nous</h2>
+                            <p>IVOIRE GOODIES PERFORMANCES</p>
+                            <p>Ivoire Goodies Performances (IGP) est une entreprise spécialisée dans le Marketing Opérationnel, la Régie Publicitaire, Affichage Publicitaire Indoor & Outdoor, le Placement de Personnel Temporaire, la Confection de Gadgets d’entreprise et l’Evénementiel. IGP, c’est plus de 100 projets réalisés sur tout le territoire. Notre groupe est en pleine expansion avec à ce jour, 4 agences sur le territoire ivoirien. En effet, dans l’optique de se rapprocher de nos partenaires… Nous sommes présents à ABIDJAN, BOUAKE, KORHOGO & DIVO.</p>
                         </div>
                         <div class="middle">
                             <ul>
@@ -62,11 +55,9 @@
                                     <h3>Best Quality Brand</h3>
                                 </li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirm od tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum</p>
+                            <p>CHEZ IVOIRE GOODIES PERFORMANCES, VOUS ETES PLUS QU’UN CLIENT… UN VERITABLE PARTENAIRE</p>
                             <a class="common-btn" href="shop.html">
-                                Shop Now
+                                Commander Maintenant
                                 <img src="/assets/images/shape1.png" alt="Shape">
                                 <img src="/assets/images/shape2.png" alt="Shape">
                             </a>
@@ -98,16 +89,16 @@
                 </div>
                 <div class="col-lg-6 p-0">
                     <div class="buy-content ptb-100">
-                        <h2>Buy Best Furniture At A Cheaper Rate</h2>
-                        <p>Soft Comfy Ash Dual Sofa</p>
+                        <h2>Achetez les meilleurs meubles à un prix moins cher</h2>
+                        <p>Canapé double en frêne confortable et doux</p>
                         <ul>
-                            <li>$160.00</li>
+                            <li>16000 Fcfa</li>
                             <li>
-                                <del>$200.00</del>
+                                <del>20000 Fcfa</del>
                             </li>
                         </ul>
                         <a class="common-btn" href="shop.html">
-                            Shop Now
+                            Commander Maintenant
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
                         </a>
@@ -116,75 +107,13 @@
             </div>
         </div>
     </div>
-
-
-    <section class="brand-area pt-100 pb-70">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Trusted Brand</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand1.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand2.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand3.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand4.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand5.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand6.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-lg-3">
-                    <div class="brand-item">
-                        <a href="#">
-                            <img src="/assets/images/brand/brand7.png" alt="Brand">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <div class="support-area pt-100 pb-70">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-free-delivery"></i>
-                        <h3>Free Next Day Delivery</h3>
+                        <h3>Livraison gratuite le lendemain</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
@@ -192,7 +121,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-call-center"></i>
-                        <h3>24/7 Online Support</h3>
+                        <h3>Assistance en ligne 24h/24 et 7j/7</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
@@ -200,53 +129,10 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-giftbox"></i>
-                        <h3>Weekly Gift Voucher</h3>
+                        <h3>Chèque-cadeau hebdomadaire</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="testimonials-area ptb-100">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Client Testimonials</h2>
-            </div>
-            <div class="testimonials-slider owl-theme owl-carousel">
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam volu ptua</p>
-                    <h3>Adam Smith</h3>
-                    <span>Co-Founder Of Company</span>
-                    <img src="/assets/images/testimonial1.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page
-                        when looking at its layout. The point of using Lorem Ipsum</p>
-                    <h3>Jonathon Ronan</h3>
-                    <span>Director Of Company</span>
-                    <img src="/assets/images/testimonial2.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, making it over 2000 years old</p>
-                    <h3>Sarp Cesmeli</h3>
-                    <span>Engineer Of Company</span>
-                    <img src="/assets/images/testimonial3.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration in some form, by injected humour, or randomised words </p>
-                    <h3>Tom Henry</h3>
-                    <span>Staff Of Company</span>
-                    <img src="/assets/images/testimonial4.jpg" alt="Testimonial">
                 </div>
             </div>
         </div>

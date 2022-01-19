@@ -92,10 +92,10 @@
                                     <i class="bx bxs-star"></i>
                                 </li>
                                 <li>
-                                    <h3>{{items.prix}} Fcfa</h3>
+                                    <h3>{{items.price}} Fcfa</h3>
                                 </li>
                             </ul>
-                            <p>{{items.desc}}</p>
+                            <p>{{items.slug}}</p>
                             <ul class="tag">
                                 <li>Numero du produit: <span>{{items.id}}</span></li>
                                 <li>Categorie: <span>Sofa</span></li>
@@ -449,6 +449,9 @@ export default {
      items(){
          return this.$store.getters.items(parseInt(this.$route.params.id));
      },
+    // items(){
+    //     return products.find(item => item.id = id)
+    // }
    },
     props:['cart','add','products','removeItem','removeBySign','increase'],
    methods:{

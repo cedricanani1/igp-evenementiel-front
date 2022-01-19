@@ -109,7 +109,7 @@ export default {
                     this.user.phone =  this.userCompte.phone
                  this.user.email = this.userCompte.email 
                  localStorage.setItem("user",JSON.stringify(this.user))
-                   axios.post('http://192.168.1.4:8004/api/auth/modify-account',this.userCompte,config)
+                   axios.post('https://igp-auth.lce-ci.com/api/auth/modify-account',this.userCompte,config)
                          .then( rep  => {
                              console.log(rep)
                              if(rep.data.status){

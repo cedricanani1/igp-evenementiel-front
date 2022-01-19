@@ -79,7 +79,7 @@ export default {
    },
    methods:{
       async handleSubmit(){
-          const reponse = await axios.post('http://192.168.1.4:8004/api/auth/login',{
+          const reponse = await axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
               email:this.email,
               password:this.password,
           })

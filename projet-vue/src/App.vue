@@ -25,6 +25,7 @@
     @pageChanged=onPageChange
     :currentPage=currentPage
     :maxVisibleButtons="3"
+    :paginatedData=paginateData
     >
     </router-view>
     <Footer />
@@ -47,106 +48,13 @@ export default {
       return{
         cart:[],
         cartVue:false,
-        products:[
-          {
-            id:1,
-            libelle:'annanas',
-            prix:2000,
-            photo:'img.jpg'
-          },
-            {
-            id:2,
-            libelle:'BANANE',
-            prix:2000,
-            photo:'img.jpg'
-          },
-            {
-            id:3,
-            libelle:'poids',
-            prix:2000,
-            photo:'img.jpg'
-          },
-            {
-            id:4,
-            libelle:'mais',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:5,
-            libelle:'livre',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:6,
-            libelle:'gateau',
-            prix:2000,
-            photo:'img.jpg'
-          }, {
-            id:7,
-            libelle:'meuble',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:8,
-            libelle:'troue',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:9,
-            libelle:'champion',
-            prix:2000,
-            photo:'img.jpg'
-          }, {
-            id:10,
-            libelle:'beignet',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:11,
-            libelle:'troue',
-            prix:2000,
-            photo:'img.jpg'
-          }, {
-            id:12,
-            libelle:'truelle',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:13,
-            libelle:'truelle',
-            prix:2000,
-            photo:'img.jpg'
-          },
-           {
-            id:14,
-            libelle:'truelle',
-            prix:2000,
-            photo:'img.jpg'
-          },
-            {
-            id:15,
-            libelle:'truelle',
-            prix:2000,
-            photo:'img.jpg'
-          },
-            {
-            id:16,
-            libelle:'truelle',
-            prix:2000,
-            photo:'img.jpg'
-          },
-        ],
+        products:[],
         currentPage:1,
         // maxVisibleButtons:3
       }
     },
      methods:{
+
        addCart(product){
          
          let item = this.cart.find(value =>value.id === product.id);
@@ -184,19 +92,15 @@ export default {
         },
         onPageChange(page){
        return this.currentPage = page ;
-        }
-       
-
-      //methode pour que sauvegarder lorsque la page se recharge
-
-       
-  //        getCart(){
-  //      axios.get('http://192.168.1.2:8000/api/produits')
-  //           .then(resp =>{
-  //               console.log(resp.data.data)
-  //               this.products = resp.data.data
-  //               });
-  //  }
+        },
+        
+         getCart(){
+       axios.get('https://igp-event-backend.lce-ci.com/api/products')
+            .then(resp =>{
+                console.log(resp.data.data)
+                this.products = resp.data.data
+                });
+   }
     
    },
     created(){
@@ -208,6 +112,15 @@ export default {
                 size = this.perPage;
             return Math.ceil(ligne/size);
         },
+         paginatedData(){
+            let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.listData.slice(start,end);
+        }
+   },
+
+   mounted(){
+     this.getCart();
    }
  
  

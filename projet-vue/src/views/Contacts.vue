@@ -30,7 +30,7 @@
     <div class="contact-area pt-100 pb-70">
         <div class="container">
             <div class="section-title">
-                <h2>Get In Touch</h2>
+                <h2>Restons en contact</h2>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-8">
@@ -153,15 +153,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-    <div class="map-area pb-100">
-        <div class="container">
-            <iframe id="map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59843174.53779285!2d62.17507173408571!3d23.728204508550363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3663f18a24cbe857%3A0xa9416bfcd3a0f459!2sAsia!5e0!3m2!1sen!2sbd!4v1608484692696!5m2!1sen!2sbd"
-                allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
     </div>
 </template>

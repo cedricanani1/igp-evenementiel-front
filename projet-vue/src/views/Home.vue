@@ -7,12 +7,12 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content">
-                                <h1>PRODUITS</h1>
+                                <h1>obtenez tous les meubles à la mode dans un seul magasin</h1>
                                
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
                                 <a class="common-btn" href="#">
-                                    Shop Now
+                                    Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
                                     <img src="/assets/images/shape2.png" alt="Shape">
                                 </a>
@@ -30,11 +30,11 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content">
-                                <h1>Get All Trendy Furniture In One Store</h1>
+                                <h1>obtenez tous les meubles à la mode dans un seul magasin</h1>
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
                                 <a class="common-btn" href="/">
-                                    Shop Now
+                                   Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
                                     <img src="/assets/images/shape2.png" alt="Shape">
                                 </a>
@@ -149,7 +149,7 @@
                 <div class="col-lg-9">
                     <div id="Container" class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in paginatedData" 
+                      v-for="(items,index) in products" 
                       :key="index"
                       >
                             <div class="products-item">
@@ -166,7 +166,7 @@
                             <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
                                         </h3>
-                                        <span> {{items.prix}} Fcfa</span>
+                                        <span> {{items.title}} Fcfa</span>
                                     </div>
                                 </div>
                                 <div class="bottom">
@@ -230,16 +230,16 @@
                 </div>
                 <div class="col-lg-6 p-0">
                     <div class="buy-content ptb-100">
-                        <h2>Buy Best Furniture At A Cheaper Rate</h2>
-                        <p>Soft Comfy Ash Dual Sofa</p>
+                        <h2>Achetez les meilleurs meubles à un prix moins cher</h2>
+                        <p>Canapé double en frêne confortable et doux</p>
                         <ul>
-                            <li>$160.00</li>
+                            <li>16000 Fcfa</li>
                             <li>
-                                <del>$200.00</del>
+                                <del>20000 Fcfa</del>
                             </li>
                         </ul>
                         <a class="common-btn" href="shop.html">
-                            Shop Now
+                            Commander Maintenant
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
                         </a>
@@ -249,12 +249,10 @@
         </div>
     </div>
    
-
-
     <div class="products-area pb-70">
         <div class="container">
             <div class="section-title">
-                <h2>Best Selling Products</h2>
+                <h2 class="my-5">les Produits les mieux notés</h2>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
@@ -341,58 +339,13 @@
         </div>
     </div>
 
-
-
-     <div class="testimonials-area pb-100">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Client Testimonials</h2>
-            </div>
-            <div class="testimonials-slider owl-theme owl-carousel">
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut labore et dolore magna aliquyam erat, sed diam volu ptua</p>
-                    <h3>Adam Smith</h3>
-                    <span>Co-Founder Of Company</span>
-                    <img src="/assets/images/testimonial1.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page
-                        when looking at its layout. The point of using Lorem Ipsum</p>
-                    <h3>Jonathon Ronan</h3>
-                    <span>Director Of Company</span>
-                    <img src="/assets/images/testimonial2.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, making it over 2000 years old</p>
-                    <h3>Sarp Cesmeli</h3>
-                    <span>Engineer Of Company</span>
-                    <img src="/assets/images/testimonial3.jpg" alt="Testimonial">
-                </div>
-                <div class="testimonials-item">
-                    <i class="flaticon-quote"></i>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                        alteration in some form, by injected humour, or randomised words </p>
-                    <h3>Tom Henry</h3>
-                    <span>Staff Of Company</span>
-                    <img src="/assets/images/testimonial4.jpg" alt="Testimonial">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="support-area pt-100 pb-70">
+<div class="support-area pt-100 pb-70">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-free-delivery"></i>
-                        <h3>Free Next Day Delivery</h3>
+                        <h3>Livraison gratuite le lendemain</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
@@ -400,7 +353,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-call-center"></i>
-                        <h3>24/7 Online Support</h3>
+                        <h3>Assistance en ligne 24h/24 et 7j/7</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
@@ -408,7 +361,7 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
                         <i class="flaticon-giftbox"></i>
-                        <h3>Weekly Gift Voucher</h3>
+                        <h3>Chèque-cadeau hebdomadaire</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
@@ -416,81 +369,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <section class="blog-area pt-100 pb-70">
-        <div class="container">
-            <div class="section-title">
-                <h2>Read Latest Our News</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-sm-6 col-lg-4">
-                    <div class="blog-item">
-                        <div class="top">
-                            <a href="blog-details.html">
-                                <img src="/assets/images/blog/blog1.jpg" alt="Blog">
-                            </a>
-                            <span>26 Nov</span>
-                        </div>
-                        <div class="bottom">
-                            <h3>
-                                <a href="blog-details.html">How To Decorate Your Living Room With Minimal Furniture</a>
-                            </h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae praesentium
-                                dolor atque debitis aspernatur quaerat</p>
-                            <a class="blog-btn" href="blog-details.html">
-                                Read More
-                                <i class='bx bx-plus'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="blog-item">
-                        <div class="top">
-                            <a href="blog-details.html">
-                                <img src="/assets/images/blog/blog2.jpg" alt="Blog">
-                            </a>
-                            <span>27 Nov</span>
-                        </div>
-                        <div class="bottom">
-                            <h3>
-                                <a href="blog-details.html">Luxurious Furniture Aren't Expensive All The Time</a>
-                            </h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae praesentium
-                                dolor atque debitis aspernatur quaerat</p>
-                            <a class="blog-btn" href="blog-details.html">
-                                Read More
-                                <i class='bx bx-plus'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="blog-item">
-                        <div class="top">
-                            <a href="blog-details.html">
-                                <img src="/assets/images/blog/blog3.jpg" alt="Blog">
-                            </a>
-                            <span>28 Nov</span>
-                        </div>
-                        <div class="bottom">
-                            <h3>
-                                <a href="blog-details.html">How Can I Choose A Comfortable Bed For My Bedroom</a>
-                            </h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia recusandae praesentium
-                                dolor atque debitis aspernatur quaerat</p>
-                            <a class="blog-btn" href="blog-details.html">
-                                Read More
-                                <i class='bx bx-plus'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
      <div class="go-top " id="lift">
         <i class='bx bxs-up-arrow-circle'></i>
@@ -507,7 +385,7 @@ import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
-  props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
+  props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
   data(){
       return{
           logoAdd:'bx bx-plus',
@@ -577,16 +455,14 @@ mounted(){
     
 },
 computed:{
-    // pageCount(){
-    //         let ligne=this.listData.length,
-    //             size = this.size;
-    //         return Math.ceil(ligne/size);
-    //     },
-        paginatedData(){
-            let start = (this.currentPage * this.perPage) - this.perPage;
-            let end = start + this.perPage;
-         return this.listData.slice(start,end);
+    products(){
+            return this.$store.state.products
         },
+        // paginatedData(){
+        //     let start = (this.currentPage * this.perPage) - this.perPage;
+        //     let end = start + this.perPage;
+        //  return this.listData.slice(start,end);
+        // },
         startPage(){
             if(this.currentPage === 1) return 1
             if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
@@ -610,7 +486,10 @@ computed:{
             return this.currentPage === this.totalPages
         },
    
-}
+  },
+  mounted(){
+    //   this.$store.dispatch("getProducts")
+  }
 }
 </script>
 

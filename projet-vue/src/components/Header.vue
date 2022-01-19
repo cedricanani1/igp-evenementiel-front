@@ -1,63 +1,26 @@
 <template>
-
-    <!-- <div class="loader">
-        <div class="d-table">
-            <div class="d-table-cell">
-                <div class="pre-load">
-                    <div class="inner one"></div>
-                    <div class="inner two"></div>
-                    <div class="inner three"></div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
   <div class="header-area">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-sm-6 col-lg-7">
                     <div class="left">
                         <ul>
-                            <!-- <li>
-                                <i class="flaticon-delivery-truck"></i>
-                                <span>bienvenue</span>
-                            </li> -->
-                            <!-- <li>
-                                <i class="flaticon-quality"></i>
-                                <span>Best Price Guarantee</span>
-                            </li> -->
                             <li>
                                 <i class="flaticon-call-center"></i>
                                 <span>Disponible 24/7</span>
+                                 <span class="d-block my-1">Riviera BONOUMIN  <br> LAURIER 6 VILLA N 151-Cocody </span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-5">
                     <div class="right">
-                        <!-- <div class="inner">
-                            <select>
-                                <option>$ USD</option>
-                                <option>EUR</option>
-                                <option>GBP</option>
-                                <option>CAD</option>
-                            </select>
-                        </div> -->
-                        <div class="inner">
-                            <form>
-                                <select>
-                                    <option>English</option>
-                                    <!-- <option>العربيّة</option>
-                                    <option>Deutsch</option>
-                                    <option>Português</option>
-                                    <option>简体中文</option> -->
-                                </select>
-                            </form>
-                        </div>
                         <div class="inner">
                             <div class="call">
                                 <i class="flaticon-phone-call"></i>
-                                <a href="tel:9905324980">990-532-4980</a>
+                                <a href="tel:2722499504">Tel : (+225) 27 22 49 95 04</a>
+                                <a class="d-block text-light"  href="mailto:info@igp.ci">mail : info@igp.ci</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -72,7 +35,7 @@
                 <div class="col-lg-2">
                     <div class="left">
                         <a href="index.html">
-                            <!-- <img src="/assets/images/logo.png" alt="Logo"> -->
+
                             <router-link to="/">
                               <h1>IGP </h1>
                               </router-link>  
@@ -83,7 +46,7 @@
                     <div class="middle">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search Your Keywords">
+                                <input type="text" class="form-control" placeholder="faire une recherche">
                                 <button type="submit" class="btn">
                                     <i class='bx bx-search'></i>
                                 </button>
@@ -94,18 +57,6 @@
                 <div class="col-lg-5">
                     <div class="right">
                         <ul>
-                            <!-- <li>
-                                <div class="inner">
-                                    <i class="flaticon-pin"></i>
-                                    <a href="#">Set Location</a>
-                                </div>
-                            </li> -->
-                            <!-- <li>
-                                <div class="inner">
-                                    <i class="flaticon-question"></i>
-                                    <a href="#">Need Help?</a>
-                                </div>
-                            </li> -->
                             <li v-if="user">
                              <a class="user" href="#" @click.prevent="showCompte"> <i class="bi bi-person-circle mx-2"></i> {{user.nom}} {{user.prenoms}} <i class="bi bi-caret-down-fill mx-1" v-if="!compte"></i> <i class="bi bi-caret-up-fill" v-if="compte"></i></a>
                                  
@@ -114,6 +65,7 @@
                                   <a href="#" @click.prevent="deconnexion">
                                     Se deconnecter
                                 </a>
+                                <router-link to="/commande" class="nav-link">listes des commandes</router-link>
                                 </div>
                             </li>
                              <li v-if="!user"> 
@@ -125,26 +77,14 @@
                                   </router-link>
                              
                              </li>
-                            <li v-if="user" >
-                                <button type="button" class="btn wishlist user" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalWishlist" data-bs-whatever="@mdo">
-                                    <i class='bx bx-heart'></i>
-                                    <span>2</span>
-                                </button>
-                            </li>
-                            <li v-if="user">
-                                <!-- <router-link class="join" to="/login" v-if="!user">
-                                    <i class="flaticon-round-account-button-with-user-inside"></i>
-                                    Se connecter
-                                </router-link> -->
+ 
+                            <li v-if="user || !user">
                                
                                  <button type="button" class="btn wishlist cart-popup-btn user" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                                     <i class='bx bxs-cart'></i>
                                     <span v-if="cart.length  >=  1 ">{{cart.length}}</span>
                                 </button>
-                               
-                                <!-- <span v-if="!user">pas connecter</span> -->
                             </li>
                         </ul>
                     </div>
@@ -174,103 +114,20 @@
                         <ul class="navbar-nav" v-if="show">
                             <li class="nav-item">
                                 <router-link to="/" class="nav-link dropdown-toggle active">Home <i class="bx bx-chevron-down"></i></router-link>
-                                <!-- <ul class="dropdown-menu" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="index.html" class="nav-link active">Home Demo One</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-2.html" class="nav-link">Home Demo Two</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-3.html" class="nav-link">Home Demo Three</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-4.html" class="nav-link">Home Demo Four (Revolution)</a>
-                                    </li>
-                                </ul> -->
                             <router-link class="mean-expand" to="/" style="font-size: 18px">+</router-link></li>
                             <li class="nav-item">
-                                <!-- <a href="#" class="nav-link dropdown-toggle">Pages <i class="bx bx-chevron-down"></i></a> -->
-                                <!-- <ul class="dropdown-menu" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Users <i class="bx bx-chevron-down"></i></a>
-                                        <ul class="dropdown-menu" style="display: none;">
-                                            <li class="nav-item">
-                                                <a href="login.html" class="nav-link">Login</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="register.html" class="nav-link">Register</a>
-                                            </li>
-                                        </ul>
-                                    <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
-                                    <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">FAQ</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="404.html" class="nav-link">404 Error Page</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="return-policy.html" class="nav-link">Return Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="terms-conditions.html" class="nav-link">Terms &amp; Conditions</a>
-                                    </li>
-                                </ul> -->
                             <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
                             <li class="nav-item">
                                 <a href="about.html" class="nav-link">A propos de Nous</a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Blog <i class="bx bx-chevron-down"></i></a>
-                                <ul class="dropdown-menu" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="blog.html" class="nav-link">Blog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-right-sidebar.html" class="nav-link">Blog Right Sidebar</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-left-sidebar.html" class="nav-link">Blog Left Sidebar</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-details.html" class="nav-link">Blog Details</a>
-                                    </li>
-                                </ul>
-                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li> -->
                             <li class="nav-item">
                                 <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bx-chevron-down"></i></a>
-                                <!-- <ul class="dropdown-menu" style="display: none;">
-                                    <li class="nav-item">
-                                        <a href="shop.html" class="nav-link">Shop</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="checkout.html" class="nav-link">Checkout</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="single-product.html" class="nav-link">Single Product</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="products-on-sale.html" class="nav-link">Products On Sale</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="order-tracking.html" class="nav-link">Order Tracking</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="customer-service.html" class="nav-link">Customer Service</a>
-                                    </li>
-                                </ul> -->
+    
                             <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
                             <li class="nav-item mean-last">
                                 <a href="contact.html" class="nav-link">Contact</a>
                             </li>
                         </ul>
-                        <!-- <div class="side-nav">
-                            <h4>Get <span>50%</span> Discount On Black Friday Offer <a href="products-on-sale.html">View
-                                    Products On Sale</a></h4>
-                        </div> -->
                     </nav>
                     </div>
         </div>
@@ -298,104 +155,17 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <router-link to="/" class="nav-link dropdown-toggle active">Accueil</router-link>
-                                <!-- <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <router-link to="/page2" class="nav-link active">Home Demo One</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="/" class="nav-link">Home Demo Two</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-3.html" class="nav-link">Home Demo Three</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-4.html" class="nav-link">Home Demo Four (Revolution)</a>
-                                    </li>
-                                </ul> -->
                             </li>
-                            <!-- <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Connexion<i
-                                        class='bx bx-chevron-down'></i></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link dropdown-toggle">Utilisateurs<span class="iconify" data-icon="bx:bx-chevron-down-circle" data-rotate="270deg"></span> </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <router-link to="/login" class="nav-link">Se Connecter</router-link>
-                                            </li>
-                                            <li class="nav-item">
-                                    <router-link to="/register" class="nav-link">Inscription</router-link>
-                                            </li>
-                                        </ul>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a href="faq.html" class="nav-link">FAQ</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a href="404.html" class="nav-link">404 Error Page</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a href="return-policy.html" class="nav-link">Return Policy</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a href="privacy-policy.html" class="nav-link">Privacy Policy</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="terms-conditions.html" class="nav-link">Terms & Conditions</a>
-                                    </li> -->
-                                <!-- </ul>
-                            </li> -->
                             <li class="nav-item">
                                 <router-link to="/about" class="nav-link">A propos de nous</router-link>
                             </li>
-                            <!-- <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Blog <i class='bx bx-chevron-down'></i></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="blog.html" class="nav-link">Blog</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-right-sidebar.html" class="nav-link">Blog Right Sidebar</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-left-sidebar.html" class="nav-link">Blog Left Sidebar</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="blog-details.html" class="nav-link">Blog Details</a>
-                                    </li>
-                                </ul>
-                            </li> -->
                             <li class="nav-item">
-                                <router-link to="/produits" class="nav-link dropdown-toggle">Shop <i class='bx bx-chevron-down'></i></router-link>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <router-link to="/produits" class="nav-link">Shop</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="/commander" class="nav-link">Commander</router-link>
-                                    </li>
-                                    <li class="nav-item">
-                                        <router-link to="/commande" class="nav-link">listes des commandes</router-link>
-                                    </li>
-                                    <!-- <li class="nav-item">
-                                        <a href="products-on-sale.html" class="nav-link">Products On Sale</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="order-tracking.html" class="nav-link">Order Tracking</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="customer-service.html" class="nav-link">Customer Service</a>
-                                    </li> -->
-                                </ul>
+                                <router-link to="/produits" class="nav-link">Produits</router-link>
                             </li>
                             <li class="nav-item">
                                 <router-link to="/contacts" class="nav-link">Contact</router-link>
                             </li>
                         </ul>
-                        <!-- <div class="side-nav">
-                            <h4>Get <span>50%</span> Discount On Black Friday Offer <a href="products-on-sale.html">View
-                                    Products On Sale</a></h4>
-                        </div> -->
                     </div>
                 </nav>
             </div>
@@ -449,7 +219,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand" >
+                <button class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand"  >
                             FINALISER LA COMMANDE
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
@@ -485,10 +255,10 @@ export default {
             this.barre= !this.barre;
         },
         deconnexion(){
-        axios.get('http://192.168.1.4:8004/api/auth/logout',
+        axios.get('https://igp-auth.lce-ci.com/api/auth/logout',
             { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
             .then( function(reponse){
-                localStorage.removeItem('token');
+                localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 console.log(reponse);
             });
@@ -498,11 +268,22 @@ export default {
            
         },
     passedCommand(){
+        if( localStorage.token){
          localStorage.setItem('mycart',JSON.stringify(this.cart))
          console.log(localStorage.getItem('total'))
         //  this.$router.push('/commander')
          localStorage.getItem('total')
         window.location.href = '/commander'
+        }else{
+            Swal.fire({
+                    position: 'center',
+                    //  icon: 'success',
+                     title: 'Veuillez vous-connectez merci',
+                    showConfirmButton: false,
+                    timer: 1500
+             })
+             this.$router.push('/login')
+        }
     },
     showCompte(){
         this.compte = !this.compte
@@ -539,6 +320,9 @@ export default {
   },
   mounted(){
     localStorage.setItem('total',this.item_cost);
+    //  localStorage.removeItem('token')
+    //    localStorage.removeItem('user')
+    // localStorage.clear()
   }
  
 }
