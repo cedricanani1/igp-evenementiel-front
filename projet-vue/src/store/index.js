@@ -7,6 +7,9 @@ export default createStore({
     products:[],
     // token:localStorage.getItem('token'),
     user:JSON.parse(localStorage.getItem("user")),
+    cart:[],
+    infoCommande:JSON.parse(localStorage.getItem("info")),
+    // cartItemCount:0,
   },
   getters: {
     products: state =>{
@@ -24,6 +27,18 @@ export default createStore({
 
     SET_PRODUCT(state, products) {
       state.products = products;
+    }, 
+    // SET_ID(state,id){
+    //   let itemsTrouver={};
+    //   state.products.forEach((items)=>{
+    //     if(id == items.id){
+    //       itemsTrouver = items;
+    //     }
+    //   })
+    //   state.products=itemsTrouver;
+    // },
+    ADD_TO_CART(state,{items,quantity}) {
+      state.cart.push({items,quantity})
     }
   },
   actions: {
@@ -34,6 +49,12 @@ export default createStore({
             commit('SET_PRODUCT',reponse.data.data)
           })
     }, 
+    addProductToCart({commit},{items,quantity}){
+      commit('ADD_TO_CART',{items,quantity});
+    },
+    
+  
+    
    
 
   },

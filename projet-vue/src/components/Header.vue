@@ -260,6 +260,7 @@ export default {
             .then( function(reponse){
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
+                localStorage.removeItem('info')
                 console.log(reponse);
             });
             this.$router.push("/")

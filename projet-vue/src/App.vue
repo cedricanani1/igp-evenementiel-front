@@ -17,6 +17,15 @@
      @removeBySign=removeFromCart
      @increase=increaseFromCart
      :itemCost=item_cost
+     :informationProduct=informationProduct
+     :to=to
+     :from=from
+     :location=location
+     :objet=objet
+     :participants=participants
+     :details=details
+     :phone=phone
+
 
     :listData=products
     :perPage="5"
@@ -50,6 +59,14 @@ export default {
         cartVue:false,
         products:[],
         currentPage:1,
+        informationProduct:[],
+          //  to:"",
+          //  from:"",
+          //  location:"",
+          //  objet:"",
+          //  participants:"",
+          //  details:"",
+          //  phone:"",
         // maxVisibleButtons:3
       }
     },
@@ -64,7 +81,6 @@ export default {
           this.cart.push({...product,quantity:1});
           localStorage.setItem('mycart',JSON.stringify(this.cart))
          }
-        
         },
         removeItemsCart(product){
        this.cart.splice(product,1);
@@ -94,13 +110,13 @@ export default {
        return this.currentPage = page ;
         },
         
-         getProducts(){
-       axios.get('https://igp-event-backend.lce-ci.com/api/products')
-            .then(resp =>{
-                console.log(resp.data.data)
-                this.products = resp.data.data
-                });
-   }
+  //        getProducts(){
+  //      axios.get('https://igp-event-backend.lce-ci.com/api/products')
+  //           .then(resp =>{
+  //               console.log(resp.data.data)
+  //               this.products = resp.data.data
+  //               });
+  //  }
     
    },
     created(){
@@ -116,11 +132,14 @@ export default {
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
          return this.listData.slice(start,end);
+        },
+         products(){
+            return this.$store.getters.products
         }
    },
 
    mounted(){
-     this.getProducts();
+    //  this.getProducts();
    }
  
  

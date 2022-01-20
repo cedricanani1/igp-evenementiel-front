@@ -89,6 +89,7 @@ export default {
           //localStorage.setItem('user', reponse.data.user);
         //   this.$router.push("/")
           window.location.href = '/'
+          this.$store.state.infoCommande
        },
    },
    mounted(){

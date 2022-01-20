@@ -27,11 +27,14 @@
     </div>
 
      <div class="box" v-for="items in listCommandes" :key="items.id">
-      <h5> {{items.nom}}</h5>       
-      <h5>  {{items.email}}</h5>
-      <h5> {{items.phone}}</h5>
-      <h5> {{items.ville}}</h5>
-     <h6>  {{date}}</h6>
+      <h5> {{items.to}}</h5>       
+      <h5>  {{items.from}}</h5>
+      <h5> {{items.participants}}</h5>
+      <h5> {{items.details}}</h5>
+    <h5> {{items.objet}}</h5>
+    <h5> {{items.location}}</h5>
+    <h5> {{items.option}}</h5>
+     <!-- <h6>  {{date}}</h6> -->
       <router-link to="/" class="btn btn-lg bg-primary" @click.prevent="getDetailsCommandes">details commande</router-link>
       
      </div>

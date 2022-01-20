@@ -36,38 +36,29 @@
                     <div class="col-lg-8">
                         <div class="checkout-billing">
 
-                            <div class="form-group">
-                             <label for="date-debut">date de debut</label>
-                                <input type="date" name="date" v-model="to" class="form-control" placeholder="date début">
-                            </div>
-
-                            <div class="form-group">
-                             <label for="date-fin">date de fin</label>
-                                <input type="date" v-model="from" class="form-control" name="date" placeholder="date fin">
-                            </div>
-
-                            <div class="form-group">
-                             <label for="phone">Télephone</label> <br>
-                                <input  type="tel" id="phone" name="phone" v-model="phone" pattern="[+]{1}[0-9]{11,14}" placeholder="ex : 0765909878" required>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="objet">objet</label>
-                                <input type="text" v-model="objet" class="form-control" name="objet" placeholder="Objet">
-                            </div>
-
-                            <div class="form-group">
-                             <label for="location">Location</label>
-                                <input type="text" v-model="location" class="form-control" name="location" placeholder="location">
-                            </div>
-
-                            <div class="form-group">
-                            <label for="participants">Participants</label>
-                                <input type="number" v-model="participants" class="form-control" placeholder="ex:90">
+                             <div class="form-group">
+                             <label for="date-debut">nom</label>
+                                <input type="text" name="date" v-model="nom" class="form-control">
                             </div>
                             <div class="form-group">
-                            <label for="participants">Détails</label>
-                                <input type="text" v-model="details" class="form-control" placeholder="Details">
+                             <label for="prenoms">prenoms</label>
+                                <input type="text" name="date" v-model="prenoms" class="form-control" >
+                            </div>
+                           <div class="form-group">
+                             <label for="email">email</label>
+                                <input type="text" name="email" v-model="email" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                             <label for="raison">raison social</label>
+                                <input type="text" name="raison" v-model="raison" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                             <label for="date-debut">phone</label>
+                                <input type="text" name="phone" v-model="phone" class="form-control" >
+                            </div>
+                            <div class="form-group">
+                             <label for="shipping">expedition</label>
+                                <input type="text" name="shipping" v-model="expedition" class="form-control">
                             </div>
                             <!-- <div class="form-group">
                                 <div class="form-check">
@@ -104,37 +95,6 @@
                             </ul>
                             <div class="inner">
                                 <h4>Total: <span>{{itemTotal}} Fcfa</span></h4>
-                            </div>
-                        </div>
-                        <div class="checkout-method">
-                            <h3>Mode Paiement:</h3>
-                            <div class="form-check">
-                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios1"
-                                    value="bancaire" checked>
-                                <label class="form-check-label" for="exampleRadios1">
-                                    Virement bancaire direct
-                                </label>
-                                <p>Effectuez votre paiement directement sur notre compte bancaire. Veuillez utiliser votre numéro de commande comme référence de paiement. Votre commande ne sera pas expédiée tant que les fonds n'auront pas été compensés sur votre compte.</p>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios2"
-                                    value="livraison">
-                                <label class="form-check-label" for="exampleRadios2">
-                                    Paiement à la livraison
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" v-model="option" type="radio" name="exampleRadios" id="exampleRadios3"
-                                    value="orange">
-                                <label class="form-check-label" for="exampleRadios3">
-                                    Orange
-                                </label>
-                            </div>
-                            <div class="form-check two">
-                                <input class="form-check-input" type="checkbox" id="flexCheckDefault2">
-                                <label class="form-check-label" for="flexCheckDefault2">
-                                    J'ai lu et j'accepte<router-link to="/"> les termes et conditions *</router-link>
-                                </label>
                             </div>
                         </div>
                     </div>
@@ -181,7 +141,7 @@ margin-left:0;
 
 </style>
 <script>
-import store from 'store'
+import axios from 'axios'
 export default {
   name:'Commander',
   data(){
@@ -189,15 +149,6 @@ export default {
            items:null,
            itemTotal:"",
            commandes:[],
-           to:"",
-           from:"",
-           location:"",
-           objet:"",
-           participants:"",
-           details:"",
-           phone:"",
-           mydate:"",
-           days:"",
        }
   },
    created(){
@@ -215,17 +166,28 @@ export default {
          return count;
 
      },
-     getCurrentDate(){
-         const browserLocale = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.languages;
-         const initDateTime = new Intl.DateTimeFormat(browserLocale,{
-             year:'numeric',
-             month:'numeric',
-             day: 'numeric',
-             hour:'numeric',
-             minute:'numeric'
-         });
-         return initDateTime.format(new Date());
+     days(){
+
+         let date1 = new Date("20/01/2022");
+         let date2 = new Date("28/01/2022")
+
+         let time =date2.getTime() - date1.getTime();
+
+         let diff = time / (1000*60*60*24);
+         return diff.toFixed(0);
+
      },
+    //  getCurrentDate(){
+    //      const browserLocale = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.languages;
+    //      const initDateTime = new Intl.DateTimeFormat(browserLocale,{
+    //          year:'numeric',
+    //          month:'numeric',
+    //          day: 'numeric',
+    //          hour:'numeric',
+    //          minute:'numeric'
+    //      });
+    //      return initDateTime.format(new Date());
+    //  },
    },
    mounted(){
     //    localStorage.getItem('total')
@@ -233,26 +195,32 @@ export default {
     //    console.log(localStorage.getItem('commandes'));
     //    console.log(localStorage.getItem('date'))
     // localStorage.getItem('date')   
+
+    // console.log(this.days);
    },
    methods:{
 
        sendCommande(){ 
-        localStorage.setItem('date', this.getCurrentDate)
-         
-           if(localStorage.commandes) {
-               let lesCommandes = localStorage.commandes;
-               this.commandes = JSON.parse(lesCommandes);   
-           }
-           let commande = {
-           phone:this.phone,
-           option:this.option,
-           to:this.to,
-           from:this.from,
-           participants:this.participants,
-           details:this.details,
-           objet:this.objet,
-           location:this.location,
+            let commande = {
+           nom:this.nom,
+           prenoms:this.prenoms,
+           email:this.email,
+           raisons:this.raisons,
+           expedition:this.expedition
            };
+        //    let lesCommandes = localStorage.commandes;
+            this.commandes = commande;
+           axios.post('https://igp-order.lce-ci.com/api/order',this.commandes)
+                .then(reponse => {
+                    console.log(reponse);
+                })
+        // localStorage.setItem('date', this.getCurrentDate)
+         
+        //    if(localStorage.commandes) {
+        //        let lesCommandes = localStorage.commandes;
+        //        this.commandes = JSON.parse(lesCommandes);   
+        //    }
+          
             //    Swal.fire({
             // position: 'center',
             //    icon: 'success',
@@ -260,11 +228,11 @@ export default {
             //   showConfirmButton: false,
             //   timer: 2000,
             //       });
-           console.log(commande);
-           this.commandes.push(commande);
-           localStorage.setItem('commandes',JSON.stringify(this.commandes))
+           console.log(this.commandes);
+        //    this.commandes.push(commande);
+        //    localStorage.setItem('commandes',JSON.stringify(this.commandes))
            //localStorage.getItem('date')
-           this.$router.push('/commande')
+        //    this.$router.push('/commande')
         //    window.location.href='/commande'
 
        }

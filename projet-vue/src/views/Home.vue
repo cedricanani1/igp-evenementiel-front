@@ -172,10 +172,10 @@
                             <!-- <span>{{items.stock}}</span> -->
                             </div>
                                 </div>
-                                <div class="bottom">
+                                <!-- <div class="bottom">
                                     <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
                                     <i :class="logoAdd"></i>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                        
@@ -446,11 +446,11 @@ computed:{
     products(){
             return this.$store.getters.products
         },
-        // paginatedData(){
-        //     let start = (this.currentPage * this.perPage) - this.perPage;
-        //     let end = start + this.perPage;
-        //  return this.listData.slice(start,end);
-        // },
+        paginatedData(){
+            let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.listData.slice(start,end);
+        },
         startPage(){
             if(this.currentPage === 1) return 1
             if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)

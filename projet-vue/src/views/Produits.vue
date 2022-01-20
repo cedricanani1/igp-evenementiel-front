@@ -126,16 +126,16 @@
                                     <a class="wishlist" href="#">
                                         <i :class="logoHeart"></i>
                                     </a>
-                           <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}">
-                            <img :src="'http://192.168.1.3:8000/api/produits/'+items.photo" :alt="items.libelle">
+                          <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
                                                     <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
                                         </h3>
-                                        <span> {{items.prix}} Fcfa</span>
+                                        <span> {{items.price}} Fcfa</span>
                                     </div>
                                 </div>
                                <div class="bottom">
@@ -164,7 +164,7 @@ import axios from "axios"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
-    props:['cart','add','products','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
+    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
     data(){
         return{
             products:[],
@@ -177,13 +177,7 @@ export default {
         Home,
     },
     methods:{
-   getCart(){
-       axios.get('http://192.168.1.3:8000/api/produits')
-            .then(resp =>{
-                console.log(resp.data.data)
-                this.products = resp.data.data
-                });
-   },
+
     getNotif(){
   let noty = new Notyf({
       duration:4000,
@@ -198,8 +192,13 @@ export default {
   },1000)
    },
 },
+computed:{
+  products(){
+            return this.$store.getters.products
+        },
+},
 mounted(){
-     this.getCart()
+      this.$store.dispatch("obtenirProduits")
   }
 }
 </script>
