@@ -60,82 +60,82 @@
      <!-- buttons pour filtrer les produits-->
                     <div class="sorting-menu">
                         <ul class="justify-content-center">
-                            <li class="filter active" data-filter="all">
+                            <li class="filter" @click="$emit('filtrerProducts', All)">
                                 <div class="products-thumb">
                                     <img src="/assets/images/products/shape1.png" alt="Shape">
                                     <img src="/assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span>All</span>
+                                    <span>ALL</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".armchair">
+                             <li class="filter" @click="$emit('filtrerProducts', assiette)">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-armchair"></i>
-                                    <span>Armchair</span>
+                                    <span>assiette</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".sofa">
+                            <li class="filter" @click="$emit('filtrerProducts', logistiques)">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-sofa"></i>
-                                    <span>Sofa</span>
+                                    <span>logistiques</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".computer">
+                            <li class="filter">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-table"></i>
                                     <span>Computer Desk</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".desk">
+                            <li class="filter" >
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-desk-chair"></i>
                                     <span>Desk Chair</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".center">
+                            <li class="filter" >
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-table-1"></i>
                                     <span>Center Table</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".book">
+                            <li class="filter">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-shelf"></i>
                                     <span>Book Shelf</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".cabinet">
+                            <li class="filter" >
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-cabinet"></i>
                                     <span>Cabinet</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".bed">
+                            <li class="filter">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-bed"></i>
                                     <span>Bed</span>
                                 </div>
                             </li>
-                            <li class="filter" data-filter=".center-table">
+                            <li class="filter">
                                 <div class="products-thumb">
-                                    <img src="/assets/images/products/shape1.png" alt="Shape">
-                                    <img src="/assets/images/products/shape2.png" alt="Shape">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-dresser"></i>
                                     <span>Dressing Table</span>
                                 </div>
@@ -154,9 +154,6 @@
                       >
                             <div class="products-item">
                                 <div class="top">
-                                    <!-- <a class="wishlist" href="#">
-                                        <i :class="logoHeart"></i>
-                                    </a> -->
                   <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
@@ -261,9 +258,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="products-item">
                         <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
+                           
                             <img src="/assets/images/products/products10.png" alt="Products">
                             <div class="inner">
                                 <h3>
@@ -272,18 +267,12 @@
                                 <span>$200.00</span>
                             </div>
                         </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
-                        </div>
+                      
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="products-item">
                         <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
                             <img src="/assets/images/products/products11.png" alt="Products">
                             <div class="inner">
                                 <h3>
@@ -294,16 +283,12 @@
                         </div>
                         <div class="bottom">
                             <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="products-item">
                         <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
                             <img src="/assets/images/products/products12.png" alt="Products">
                             <div class="inner">
                                 <h3>
@@ -314,16 +299,12 @@
                         </div>
                         <div class="bottom">
                             <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-3">
                     <div class="products-item">
                         <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
                             <img src="/assets/images/products/products13.png" alt="Products">
                             <div class="inner">
                                 <h3>
@@ -331,10 +312,6 @@
                                 </h3>
                                 <span>$190.00</span>
                             </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
                         </div>
                     </div>
                 </div>
@@ -373,22 +350,21 @@
         </div>
     </div>
 
-     <div class="go-top " id="lift">
-        <i class='bx bxs-up-arrow-circle'></i>
-    </div>
+  
 
    
 </template>
 
 <script>
-// import {mapGetters} from 'vuex'
 import Header from "@/components/Header.vue"
 import axios from 'axios'
 import { Notyf } from 'notyf';
 export default{
 
   name:'Home',
-  props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
+  props:['products','cart','add','listData','maxVisibleButtons','totalPages',
+  'total','perPage','currentPage','pageChanged',
+  'paginatedData','filtrerProducts'],
   data(){
       return{
           logoAdd:'bx bx-plus',
@@ -443,9 +419,6 @@ methods:{
 mounted(){
 },
 computed:{
-    products(){
-            return this.$store.getters.products
-        },
         paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -476,7 +449,7 @@ computed:{
    
   },
   mounted(){
-      this.$store.dispatch("obtenirProduits")
+    //   this.$store.dispatch("obtenirProduits")
   }
 }
 </script>

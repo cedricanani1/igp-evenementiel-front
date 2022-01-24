@@ -4,13 +4,13 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>Shop</h2>
+                        <h2>Produits</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <router-link to="/">Accueil</router-link>
                             </li>
                             <li>
-                                <span>Shop</span>
+                                <span>produits</span>
                             </li>
                         </ul>
                     </div>
@@ -18,10 +18,10 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="assets/images/page-title1.jpg" alt="About">
-            <img src="assets/images/shape16.png" alt="Shape">
-            <img src="assets/images/shape17.png" alt="Shape">
-            <img src="assets/images/shape18.png" alt="Shape">
+            <img src="/assets/images/page-title1.jpg" alt="About">
+            <img src="/assets/images/shape16.png" alt="Shape">
+            <img src="/assets/images/shape17.png" alt="Shape">
+            <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
 
@@ -115,17 +115,15 @@
                         </ul>
                     </div>
                 </div>
+                
                 <div class="col-lg-9">
                     <div id="Container" class="row">
                        <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in products" 
+                      v-for="(items,index) in listData" 
                       :key="index"
                       >
                             <div class="products-item">
                                 <div class="top">
-                                    <a class="wishlist" href="#">
-                                        <i :class="logoHeart"></i>
-                                    </a>
                           <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
@@ -138,18 +136,14 @@
                                         <span> {{items.price}} Fcfa</span>
                                     </div>
                                 </div>
-                               <div class="bottom">
-                                    <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
-                                    <i :class="logoAdd"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <a class="common-btn" href="shop.html">
+                        <a class="common-btn" href="#">
                             Afficher plusieurs produits
-                            <img src="assets/images/shape1.png" alt="Shape">
-                            <img src="assets/images/shape2.png" alt="Shape">
+                            <img src="/assets/images/shape1.png" alt="Shape">
+                            <img src="/assets/images/shape2.png" alt="Shape">
                         </a>
                     </div>
                 </div>
@@ -160,14 +154,14 @@
 </template>
 <script>
 import Home from "./Home.vue"
-import axios from "axios"
+// import axios from "axios"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
     props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
     data(){
         return{
-            products:[],
+            // products:[],
               logoAdd:'bx bx-plus',
               logoHeart:'bx bx-heart',
               add:'Ajouter au panier',
@@ -193,12 +187,9 @@ export default {
    },
 },
 computed:{
-  products(){
-            return this.$store.getters.products
-        },
 },
 mounted(){
-      this.$store.dispatch("obtenirProduits")
+
   }
 }
 </script>

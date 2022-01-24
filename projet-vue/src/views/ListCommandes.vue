@@ -25,50 +25,43 @@
             <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
-
-     <div class="box" v-for="items in listCommandes" :key="items.id">
-      <h5> {{items.to}}</h5>       
-      <h5>  {{items.from}}</h5>
-      <h5> {{items.participants}}</h5>
-      <h5> {{items.details}}</h5>
-    <h5> {{items.objet}}</h5>
-    <h5> {{items.location}}</h5>
-    <h5> {{items.option}}</h5>
-     <!-- <h6>  {{date}}</h6> -->
-      <router-link to="/" class="btn btn-lg bg-primary" @click.prevent="getDetailsCommandes">details commande</router-link>
-      
-     </div>
+<div class="card w-50 mx-auto mt-3" v-for="(command,index) in listCommandes" :key="index">
+  <div class="card-body">
+    <span class="card-title d-block">commande n<sup>o</sup><b>{{command.order_number}}</b> </span>
+    <span class="card-text d-block">Article <i>{{command.id}}</i></span>
+      <span class="card-text d-block">Status : <b>{{command.payment_status}}</b></span>
+    <!-- <span class="d-block">commander le : <b>{{(command.created_at.substring(0, 10))}}</b> </span> -->
+    <router-link :to="{name:'detailcommande', params:{id:command.id}}" class="btn btn-primary float-end">DETAILS</router-link>
+    
+  </div>
+</div>
      
     
 </template>
 
 <script>
 import axios from 'axios'
+import '../components/axios.js'
 // import store from 'store'
 export default {
    name:'ListCommandes',
    data(){
        return{
            listCommandes:[],
-           date:"",
        }
    },
    methods:{
-       getDetailsCommandes(){
-         localStorage.getItem('mycart') 
-        if(localStorage.mycart){
-               let lesCommandes = localStorage.mycart;
-               this.listCommandes = JSON.parse(lesCommandes);
-           }
-        // localStorage.getItem('mycart')  
-        this.$router.push('/detailcommande')
-       }
- 
+       getDetailsCommandes(){ 
+        axios.get("api/orders-client")
+             .then(rep=>{
+                 console.log("ListCommand:",JSON.stringify(rep.data))
+                 this.listCommandes = rep.data
+             })
+       },
    },
    mounted(){
-       localStorage.getItem('commandes')
-       this.listCommandes = JSON.parse(localStorage.getItem('commandes'))
-        // this.date = store.state.date     
+       this.getDetailsCommandes()
+   
    }
 }
 </script>

@@ -38,17 +38,17 @@
                                 <div class="col-sm-3 col-lg-3">
                                     <div class="owl-thumbs" data-slider-id="1">
                                         <div class="item owl-thumb-item">
-                                            <div class="top-img" v-if="items.photo.length >0">
+                                            <div class="top-img">
                                              <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
-                                           <div class="top-img" v-if="items.photo.length >0">
+                                           <div class="top-img">
                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
                                         <div class="item owl-thumb-item">
-                                          <div class="top-img" v-if="items.photo.length >0">
+                                          <div class="top-img">
                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
@@ -57,14 +57,14 @@
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="image-slides owl-carousel owl-theme" data-slider-id="1">
                                         <div class="item">
-                                            <div class="top-img" v-if="items.photo.length >0">
+                                            <div class="top-img">
                                                 <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
                                         </div>
-                                        <div class="top-img" v-if="items.photo.length >0">
+                                        <div class="top-img">
                                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                         </div>
-                                        <div class="top-img" v-if="items.photo.length >0">
+                                        <div class="top-img">
                                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                         </div>
                                     </div>
@@ -110,40 +110,32 @@
 
                             <div class="form-group">
                              <label for="date-debut">date de debut</label>
-                                <input type="date" name="date" v-model="to" class="form-control" placeholder="date début">
+                                <input type="date" name="date" v-model="items.from" class="form-control" placeholder="date début">
                             </div>
 
                             <div class="form-group">
                              <label for="date-fin">date de fin</label>
-                                <input type="date" v-model="from" class="form-control" name="date" placeholder="date fin">
+                                <input type="date" v-model="items.to" class="form-control" name="date" placeholder="date fin">
                             </div>
-
-                            <div class="form-group">
-                             <label for="phone">Télephone</label> <br>
-                                <input  type="tel" id="phone" name="phone" v-model="phone" placeholder="ex : 0765909878" required>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="objet">objet</label>
-                                <input type="text" v-model="objet" class="form-control" name="objet" placeholder="Objet">
-                            </div>
-
-                            <div class="form-group">
-                             <label for="location">Location</label>
-                                <input type="text" v-model="location" class="form-control" name="location" placeholder="location">
-                            </div>
-
-                            <div class="form-group">
-                            <label for="participants">Participants</label>
-                                <input type="number" v-model="participants" class="form-control" placeholder="ex:90">
+                             <div class="form-group">
+                             <label for="location">location</label>
+                                <input type="text" v-model="items.location" class="form-control" name="location" placeholder="location">
                             </div>
                             <div class="form-group">
-                            <label for="participants">Détails</label>
-                                <input type="text" v-model="details" class="form-control" placeholder="Details">
+                              <label for="objet">objets</label>
+                                <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objet">
+                            </div>
+                             <div class="form-group">
+                            <label for="participants">Participant</label>
+                                <input type="number" v-model="items.participant" class="form-control" placeholder="ex:90">
+                            </div>
+                            <div class="form-group">
+                             <label for="location">details</label>
+                                <input type="text" v-model="items.details" class="form-control" name="location" placeholder="location">
                             </div>
                             <ul class="cart float-end">
                                 <li>
-                                    <a class="common-btn" href="#" @click.prevent="$emit('add',items) , getNotif(), getInfo()">
+                                    <a class="common-btn" href="#" @click.prevent="$emit('add',items) , getNotif()">
                                         Add To Cart
                                         <img src="/assets/images/shape1.png" alt="Shape">
                                         <img src="/assets/images/shape2.png" alt="Shape">
@@ -244,43 +236,45 @@
             </div>
         </div>
     </div>
-    <div class="go-top">
-        <i class='bx bxs-up-arrow-circle'></i>
-        <i class='bx bxs-up-arrow-circle'></i>
-    </div>
 
   </div>
 </template>
 
 <script>
-import mapGetters from 'vuex'
+import axios from 'axios'
 import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
 export default {
    name:"SingleProduct",
-   data(){
-       return{
-           checked:"",
-            to:"",
-           from:"",
-           location:"",
-           objet:"",
-           participants:"",
-           details:"",
-           phone:"",
-           id:"",
-       }
-   },
+
+   props:['products','cart','add','removeItem','removeBySign','increase'],
+
    compoments:{
     Header
    },
-   computed:{
-     items(){
-         return this.$store.getters.items(parseInt(this.$route.params.id));
-     },
 
+   data(){
+       return{
+            checked:"",
+            
+            id:this.$route.params.id,
+            items:{
+                to:"",
+                from:"",
+                location:"",
+                object:"",
+                participants:"",
+                details:"",
+            },
+       }
    },
-    props:['cart','add','removeItem','removeBySign','increase','products'],
+   computed:{
+       days(){
+            
+             return jours
+       },
+   },
+    
    methods:{
        giveStars(){
         let verf=this.checked;
@@ -305,26 +299,36 @@ export default {
       noty.dismissAll()
   },1000)
    },
-   getInfo(){
-     let commande = {
-           id:this.$route.params.id,
-           phone:this.phone,
-           option:this.option,
-           to:this.to,
-           from:this.from,
-           participants:this.participants,
-           details:this.details,
-           objet:this.objet,
-           location:this.location,
-           };  
-    console.log(commande)  
-      return commande;
-      
+//    getInfo(){
+//         let commande = {
+//            product_id:this.$route.params.id,
+//            to:this.to,
+//            from:this.from,
+//            participants:this.participants,
+//            details:this.details,
+//            object:this.object,
+//            location:this.location,
+//            }; 
+//            console.log('commande',commande)
+//         localStorage.setItem('info',JSON.stringify(commande))
+//       return commande;
+//    },
+    
    },
+
+   created(){   
+  axios.get('https://igp-event-backend.lce-ci.com/api/products/'+ this.id)
+                  .then(resp =>{
+                this.items = resp.data.data
+                // console.log('item',this.items)
+                })
+
+
    },
+   
    mounted() {
-       this.$store.dispatch("obtenirProduits")
-    //    console.log(this.products)
+//   console.log(this.items);
+    //  console.log(localStorage.getItem('mycart'));
    },
   
 }

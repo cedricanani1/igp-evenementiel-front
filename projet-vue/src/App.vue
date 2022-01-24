@@ -1,4 +1,5 @@
 <template>
+  <!-- <PageLoader /> -->
     <Header
     :cart=cart
      @add=addCart 
@@ -18,13 +19,9 @@
      @increase=increaseFromCart
      :itemCost=item_cost
      :informationProduct=informationProduct
-     :to=to
-     :from=from
-     :location=location
-     :objet=objet
-     :participants=participants
-     :details=details
-     :phone=phone
+     @filtrerProducts=filtrerProducts
+     :search="search"
+     
 
 
     :listData=products
@@ -48,10 +45,11 @@
 import axios from 'axios'
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
+import PageLoader from '@/components/PageLoader.vue';
 
 export default {
   components:{
-    Header,Footer,
+    Header,Footer,PageLoader,
     },
    data(){
       return{
@@ -59,31 +57,40 @@ export default {
         cartVue:false,
         products:[],
         currentPage:1,
-        informationProduct:[],
-          //  to:"",
-          //  from:"",
-          //  location:"",
-          //  objet:"",
-          //  participants:"",
-          //  details:"",
-          //  phone:"",
-        // maxVisibleButtons:3
       }
     },
      methods:{
 
        addCart(product){
-         
-         let item = this.cart.find(value =>value.id === product.id);
+         let item = this.cart.find( value =>value.id === product.id);
          if(item) {
-           item.quantity++;
+           return item.quantity++;
          } else {
-          this.cart.push({...product,quantity:1});
-          localStorage.setItem('mycart',JSON.stringify(this.cart))
+          //  console.log(product)
+          this.cart.push({
+            product_id:product.id,
+            to: product.to,
+            from: product.from,
+            details:product.details,
+            participant: product.participant,
+            objects: product.objects,
+            location:product.location,
+            quantity:1,
+            photo:'https://igp-event-backend.lce-ci.com/public/'+ product.photo[0].path,
+            libelle:product.libelle,
+            price:product.price,
+            days:((((Date.parse(product.to)-Date.parse(product.from))/1000)/60)/60)/24,
+          });
          }
+         localStorage.setItem('mycart',JSON.stringify(this.cart))
+         console.log("cart",localStorage.getItem('mycart'));
+          // let diffDate=Date.parse(product.to) - Date.parse(product.from);
+          // let jours = (((diffDate/1000)/60)/60)/24;
+          // console.log("J",jours);
+
         },
         removeItemsCart(product){
-       this.cart.splice(product,1);
+          this.cart.splice(product,1)
         localStorage.setItem('mycart',JSON.stringify(this.cart))
         },
 
@@ -98,8 +105,7 @@ export default {
             }
           }
         },
-
-        increaseFromCart(product){
+          increaseFromCart(product){
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
             item.quantity++;
@@ -109,14 +115,44 @@ export default {
         onPageChange(page){
        return this.currentPage = page ;
         },
-        
-  //        getProducts(){
-  //      axios.get('https://igp-event-backend.lce-ci.com/api/products')
-  //           .then(resp =>{
-  //               console.log(resp.data.data)
-  //               this.products = resp.data.data
-  //               });
-  //  }
+        getProducts(){
+             axios.get('https://igp-event-backend.lce-ci.com/api/products')
+                  .then(resp =>{
+                console.log(resp.data.data)
+                this.products = resp.data.data
+                })
+            return this.products;
+          },
+
+      // function pour filtrer dans le tableau products
+      filtrerProducts(catName){
+        this.products = this.getProducts()
+      if(catName !== 'All'){
+        this.products = this.products.filter((item)=>{
+          return item.type.libelle === catName;
+        })
+      }
+
+      },
+       // function pour filtrer dans le tableau products
+
+  // function pour recherche par libelle un produit dans le tableau products
+
+    search(libelle){
+      //  this.mesProducts()
+      this.products = this.products.filter((product)=>{
+        return product.libelle.toLowerCase().includes(libelle.toLowerCase())
+      })
+    },
+
+    // function pour recherche par libelle un produit dans le tableau products
+
+    // mesProducts(){
+    //   this.products=this.getProducts()
+    // },
+
+
+
     
    },
     created(){
@@ -133,13 +169,12 @@ export default {
             let end = start + this.perPage;
          return this.listData.slice(start,end);
         },
-         products(){
-            return this.$store.getters.products
-        }
    },
 
    mounted(){
-    //  this.getProducts();
+     this.getProducts();
+    //  localStorage.removeItem('mycart');
+    //  console.log("cart",localStorage.getItem('mycart'));
    }
  
  

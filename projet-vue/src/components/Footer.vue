@@ -1,5 +1,7 @@
 <template>
+
       <footer class="footer-area pt-100 pb-70">
+      <hr>
         <div class="footer-shape">
             <img src="/assets/images/footer-right-shape.png" alt="Shape">
             <img src="/assets/images/shape5.png" alt="Shape">
@@ -157,10 +159,12 @@
             </div>
         </div>
     </div>
-    <div class="go-top">
+     <a href="#">
+     <div class="go-top">
         <i class='bx bxs-up-arrow-circle'></i>
         <i class='bx bxs-up-arrow-circle'></i>
     </div>
+    </a>
     
 </template>
 

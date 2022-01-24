@@ -1,4 +1,11 @@
 <template>
+ <!-- <PageLoader /> -->
+ <div class="page-loader" v-if="!isLoaded">
+<div class="cube"></div>
+<div class="cube"></div>
+<div class="cube"></div>
+<div class="cube"></div>
+</div>
      <div class="page-title-area">
         <div class="d-table">
             <div class="d-table-cell">
@@ -7,7 +14,7 @@
                         <h2>A propos de Nous</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <router-link to="/">Accueil</router-link>
                             </li>
                             <li>
                                 <span>A propos Nous</span>
@@ -139,7 +146,74 @@
     </div>
 </template>
 <script>
+import PageLoader from '@/components/PageLoader.vue';
 export default {
     name:'AproposDeNous',
+    components:{
+        PageLoader,
+    },
+    data(){
+       return{
+           isLoaded:true
+
+       }
+   },
+   mounted(){
+      window.onload = () =>{
+         this.isLoaded = true;
+       }
+   }
 }
 </script>
+<style scoped>
+
+.page-loader{
+display: flex;
+justify-content: center;
+align-items: center;
+position: fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background-color:rgba(0, 0, 0, 0.582); 
+z-index:999;
+    
+ }
+ .cube{
+ width:40px;
+ height:40px;
+ margin-right:10px;
+ background-color:rgb(46, 46, 141);
+
+    
+ }
+ .cube:first-child{
+       animation:left 1s infinite;
+     }
+.cube:last-child{
+       animation:right 1s infinite .5s;
+     }
+ @keyframes left {
+     40%{
+     transform:translateX(-60px);
+    }
+      50%{
+      transform:translateX(0);
+     }
+     
+ }
+
+  @keyframes right {
+     40%{
+         transform:translateX(60px);
+         }
+     50%{
+    transform:translateX(0);
+    }
+     
+ }
+
+
+
+</style>

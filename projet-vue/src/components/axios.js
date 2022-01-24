@@ -1,4 +1,4 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://192.168.1.11:8004/';
+axios.defaults.baseURL = 'https://igp-event-backend.lce-ci.com/';
 axios.defaults.headers.common['Authorization'] ='Bearer ' + localStorage.getItem('token');

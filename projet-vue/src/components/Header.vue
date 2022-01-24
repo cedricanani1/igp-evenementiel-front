@@ -46,7 +46,7 @@
                     <div class="middle">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="faire une recherche">
+                                <input type="text" v-model="libelle" @keypress.enter="search(libelle)" class="form-control" placeholder="faire une recherche">
                                 <button type="submit" class="btn">
                                     <i class='bx bx-search'></i>
                                 </button>
@@ -62,10 +62,11 @@
                                  
                                 <div class="compte" v-if="compte">  
                                   <router-link to="/modify"> Votre compte</router-link>
+                                   <router-link to="/commande" class="nav-link">listes des commandes</router-link>
                                   <a href="#" @click.prevent="deconnexion">
                                     Se deconnecter
                                 </a>
-                                <router-link to="/commande" class="nav-link">listes des commandes</router-link>
+                               
                                 </div>
                             </li>
                              <li v-if="!user"> 
@@ -113,19 +114,17 @@
                 <nav class="mean-nav">
                         <ul class="navbar-nav" v-if="show">
                             <li class="nav-item">
-                                <router-link to="/" class="nav-link dropdown-toggle active">Home <i class="bx bx-chevron-down"></i></router-link>
-                            <router-link class="mean-expand" to="/" style="font-size: 18px">+</router-link></li>
-                            <li class="nav-item">
-                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
-                            <li class="nav-item">
-                                <a href="about.html" class="nav-link">A propos de Nous</a>
+                                <router-link to="/"  class="nav-link dropdown-toggle active" @click.prevent="showMenu">Home <i class="bx bx-chevron-down"></i></router-link>
+                    
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link dropdown-toggle">Shop <i class="bx bx-chevron-down"></i></a>
-    
-                            <a class="mean-expand" href="#" style="font-size: 18px">+</a></li>
+                                <router-link to="/about" @click.prevent="showMenu" class="nav-link">A propos de Nous</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/produits" @click.prevent="showMenu"  class="nav-link dropdown-toggle">Produits</router-link>
+                            </li>
                             <li class="nav-item mean-last">
-                                <a href="contact.html" class="nav-link">Contact</a>
+                                <router-link to="/contacts" class="nav-link">Contact</router-link>
                             </li>
                         </ul>
                     </nav>
@@ -186,10 +185,10 @@
                         <table class="table">
                             <tbody>
                                 <tr  
-                                v-for="items in cart"
-                                 :key="items.index">
-                                    <th scope="row" v-if="items.photo.length >0">
-                                       <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                                v-for="(items,index) in cart"
+                                 :key="index">
+                                    <th scope="row">
+                                       <img :src="items.photo" :alt="items.libelle">
                                     </th>
                                     <td>
                                         <h3>{{items.libelle}}</h3>
@@ -205,7 +204,7 @@
                                         </ul>
                                     </td>
                                     <td>
-                                        <a class="close" href="#" @click.prevent="$emit('removeItem',items)">
+                                        <a class="close" href="#" @click.prevent="$emit('removeItem',index)">
                                             <i class='bx bx-x'></i>
                                         </a>
                                     </td>
@@ -234,11 +233,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import axios from 'axios'
 export default {
 
     name:"Header",
+    props:['cart','add','products','removeItem','removeBySign','increase','search'],
     data(){
         return{
             show:false,
@@ -246,9 +245,10 @@ export default {
             user:null,
             token:"",
             compte:false,
+            libelle:"",
         }
     },
-    props:['cart','add','products','removeItem','removeBySign','increase'],
+
     methods:{
         showMenu(){
             this.show = !this.show;
@@ -278,7 +278,6 @@ export default {
         }else{
             Swal.fire({
                     position: 'center',
-                    //  icon: 'success',
                      title: 'Veuillez vous-connectez merci',
                     showConfirmButton: false,
                     timer: 1500
@@ -289,13 +288,6 @@ export default {
     showCompte(){
         this.compte = !this.compte
     },
-
-    //     getCart(){
-    //    axios.get('http://192.168.1.2:8000/api/produits')
-    //         .then(resp =>{
-    //             console.log(resp.data.data)
-    //             this.products = resp.data.data
-    //             });}
    },
  computed:{
      // afficher le total des produits
@@ -308,22 +300,15 @@ export default {
          return count;
           
      },
-     
-    //  ...mapGetters(['user'])
     
 
    },
    created(){
    this.user =JSON.parse(localStorage.getItem('user')) ;
-//    this.token = localStorage.getItem('token') ;
-//    console.log(this.user)
 
   },
   mounted(){
     localStorage.setItem('total',this.item_cost);
-    //  localStorage.removeItem('token')
-    //    localStorage.removeItem('user')
-    // localStorage.clear()
   }
  
 }

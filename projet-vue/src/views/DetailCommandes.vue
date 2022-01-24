@@ -23,51 +23,51 @@
         </div>
     </div>
 
-     <div>
-
-     <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">libelle</th>  
-      <th scope="col">prix</th> 
-      <th scope="col">quantite</th> 
-    </tr>
-  </thead>
-  <tbody>
- <tr v-for="items in detailsCommandes" :key="items.id">
-      <td>{{items.libelle}}</td>
-     <td>{{items.prix}}</td>
-      <td>{{items.quantity}}</td>
-    </tr>
-    <th colspan="3">total :{{total}} Fcfa</th>
-  </tbody>
-</table>
-
-      
-     </div>
+     <div class="card mb-3" style="max-width: 540px;">
+    <span class="float-end">n <sup>o</sup>{{detailsCommandes.order_number}}</span>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src={{detailsCommandes.cart[0].product.photo[0].path}} class="img-fluid rounded-start" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+       <!-- <span>{{detailsCommandes.cart[0].product.photo[0].path}}</span> -->
+        <span class="card-title"> status:{{detailsCommandes.status}}</span>
+        <p>Total prix :{{detailsCommandes.total_amount}}</p>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">status de paiement:  <b> {{detailsCommandes.payment_status}}</b> </small></p>
+      </div>
+    </div>
+  </div>
+</div>
      
     
 </template>
 
 
 <script>
+import '../components/axios.js'
 import axios from 'axios'
 export default {
    name:'DetailsCommandes',
    data(){
        return{
            detailsCommandes:[],
-           total:"",
        }
    },
    methods:{
+        getDetails(){ 
+        axios.get("api/orders/"+this.$route.params.id)
+             .then(rep=>{
+                 this.detailsCommandes =rep.data
+                 console.log("detail",this.detailsCommandes)
+             })
+       }
  
    },
    mounted(){
-     
-    //    localStorage.getItem('commandes')
-       this.detailsCommandes = JSON.parse(localStorage.getItem('mycart'))
-       this.total = localStorage.getItem('total');
+       this.getDetails()
+        
    }
 }
 </script>

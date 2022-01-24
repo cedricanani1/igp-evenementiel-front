@@ -328,10 +328,6 @@ single product
             </div>
         </div>
     </div>
-    <div class="go-top">
-        <i class='bx bxs-up-arrow-circle'></i>
-        <i class='bx bxs-up-arrow-circle'></i>
-    </div>
 
   </div>
 </template>
@@ -439,3 +435,13 @@ export default {
   
 }
 </script>
+
+
+
+
+
+  axios.get(`https://igp-event-backend.lce-ci.com/api/products/`+this.id)
+                  .then(resp =>{
+                console.log(resp.data.data)
+                this.items = resp.data.data[this.id]
+                })

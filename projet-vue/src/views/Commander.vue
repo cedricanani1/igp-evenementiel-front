@@ -44,21 +44,22 @@
                              <label for="prenoms">prenoms</label>
                                 <input type="text" name="date" v-model="prenoms" class="form-control" >
                             </div>
+                             <div class="form-group">
+                             <label for="raison">raison social</label>
+                                <input type="text" name="raison" v-model="raison_social" class="form-control" >
+                            </div>
                            <div class="form-group">
                              <label for="email">email</label>
                                 <input type="text" name="email" v-model="email" class="form-control" >
                             </div>
+                           
                             <div class="form-group">
-                             <label for="raison">raison social</label>
-                                <input type="text" name="raison" v-model="raison" class="form-control" >
-                            </div>
-                            <div class="form-group">
-                             <label for="date-debut">phone</label>
-                                <input type="text" name="phone" v-model="phone" class="form-control" >
+                             <label for="phone">phone</label>
+                                <input type="tel" name="phone" v-model="phone" class="form-control" >
                             </div>
                             <div class="form-group">
                              <label for="shipping">expedition</label>
-                                <input type="text" name="shipping" v-model="expedition" class="form-control">
+                                <input type="text" name="shipping" v-model="shipping" class="form-control">
                             </div>
                             <!-- <div class="form-group">
                                 <div class="form-check">
@@ -141,24 +142,30 @@ margin-left:0;
 
 </style>
 <script>
+import '../components/axios.js'
 import axios from 'axios'
 export default {
   name:'Commander',
+  props:['cart','add','products','removeItem','removeBySign','increase'],
   data(){
        return{
            items:null,
            itemTotal:"",
            commandes:[],
+        //    infoCommandes:[],
+           cart:localStorage.getItem('mycart'),
+           nom:"",
+           prenoms:"",
+           email:"",
+          raison_social:"",
+           shipping:"",
+           phone:"",
        }
   },
    created(){
      this.items = JSON.parse(localStorage.getItem('mycart'));
-
    },
-    props:['cart','add','products','removeItem','removeBySign','increase'],
-//    mounted(){
-//        console.log(localStorage.getItem('total'));
-//    },
+
    computed:{
    itemTotal(){
          let count = localStorage.getItem('total')
@@ -166,17 +173,17 @@ export default {
          return count;
 
      },
-     days(){
+    //  days(){
 
-         let date1 = new Date("20/01/2022");
-         let date2 = new Date("28/01/2022")
+    //      let date1 = new Date("20/01/2022");
+    //      let date2 = new Date("28/01/2022")
 
-         let time =date2.getTime() - date1.getTime();
+    //      let time =date2.getTime() - date1.getTime();
 
-         let diff = time / (1000*60*60*24);
-         return diff.toFixed(0);
+    //      let diff = time / (1000*60*60*24);
+    //      return diff.toFixed(0);
 
-     },
+    //  },
     //  getCurrentDate(){
     //      const browserLocale = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.languages;
     //      const initDateTime = new Intl.DateTimeFormat(browserLocale,{
@@ -189,32 +196,23 @@ export default {
     //      return initDateTime.format(new Date());
     //  },
    },
-   mounted(){
-    //    localStorage.getItem('total')
-    //    localStorage.setItem('date', this.getCurrentDate)
-    //    console.log(localStorage.getItem('commandes'));
-    //    console.log(localStorage.getItem('date'))
-    // localStorage.getItem('date')   
-
-    // console.log(this.days);
-   },
    methods:{
 
        sendCommande(){ 
             let commande = {
-           nom:this.nom,
-           prenoms:this.prenoms,
-           email:this.email,
-           raisons:this.raisons,
-           expedition:this.expedition
+                nom:this.nom,
+                prenoms:this.prenoms,
+                email:this.email,
+                raison_social:this.raison_social,
+                shipping:this.shipping,
+                phone:parseInt(this.phone),
+                cart:JSON.parse(this.cart),
            };
-        //    let lesCommandes = localStorage.commandes;
             this.commandes = commande;
-           axios.post('https://igp-order.lce-ci.com/api/order',this.commandes)
+           axios.post('api/orders',this.commandes)
                 .then(reponse => {
                     console.log(reponse);
                 })
-        // localStorage.setItem('date', this.getCurrentDate)
          
         //    if(localStorage.commandes) {
         //        let lesCommandes = localStorage.commandes;
@@ -228,7 +226,7 @@ export default {
             //   showConfirmButton: false,
             //   timer: 2000,
             //       });
-           console.log(this.commandes);
+        //    console.log(this.commandes);
         //    this.commandes.push(commande);
         //    localStorage.setItem('commandes',JSON.stringify(this.commandes))
            //localStorage.getItem('date')
@@ -237,6 +235,11 @@ export default {
 
        }
 
+   },
+   mounted(){
+    //    console.log('test', JSON.parse(localStorage.getItem('info')))
+    //    console.log('car', JSON.parse(localStorage.getItem('mycart')))
+    console.log("cart",this.cart);
    }
 
 }

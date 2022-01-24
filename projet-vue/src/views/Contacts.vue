@@ -8,7 +8,7 @@
                         <h2>Contact</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                              <router-link to="/">Accueil</router-link>
                             </li>
                             <li>
                                 <span>Contact</span>
@@ -19,10 +19,10 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="assets/images/page-title5.jpg" alt="About">
-            <img src="assets/images/shape16.png" alt="Shape">
-            <img src="assets/images/shape17.png" alt="Shape">
-            <img src="assets/images/shape18.png" alt="Shape">
+            <img src="/assets/images/page-title5.jpg" alt="About">
+            <img src="/assets/images/shape16.png" alt="Shape">
+            <img src="/assets/images/shape17.png" alt="Shape">
+            <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
 
@@ -85,8 +85,8 @@
                                 <div class="text-center">
                                     <button type="submit" class="btn common-btn">
                                         Send Message
-                                        <img src="assets/images/shape1.png" alt="Shape">
-                                        <img src="assets/images/shape2.png" alt="Shape">
+                                        <img src="/assets/images/shape1.png" alt="Shape">
+                                        <img src="/assets/images/shape2.png" alt="Shape">
                                     </button>
                                     <div id="msgSubmit" class="h3 text-center hidden"></div>
                                     <div class="clearfix"></div>
