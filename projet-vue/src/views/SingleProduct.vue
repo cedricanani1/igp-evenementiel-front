@@ -110,32 +110,32 @@
 
                             <div class="form-group">
                              <label for="date-debut">date de debut</label>
-                                <input type="date" name="date" v-model="items.from" class="form-control" placeholder="date début">
+                                <input type="date" name="date" v-model="items.from" class="form-control" placeholder="date début" required>
                             </div>
 
                             <div class="form-group">
                              <label for="date-fin">date de fin</label>
-                                <input type="date" v-model="items.to" class="form-control" name="date" placeholder="date fin">
+                                <input type="date" v-model="items.to" class="form-control" name="date" placeholder="date fin" required>
                             </div>
                              <div class="form-group">
                              <label for="location">location</label>
-                                <input type="text" v-model="items.location" class="form-control" name="location" placeholder="location">
+                                <input type="text" v-model="items.location" class="form-control" name="location" placeholder="location" required>
                             </div>
                             <div class="form-group">
                               <label for="objet">objets</label>
-                                <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objet">
+                                <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objet" required>
                             </div>
                              <div class="form-group">
                             <label for="participants">Participant</label>
-                                <input type="number" v-model="items.participant" class="form-control" placeholder="ex:90">
+                                <input type="number" v-model="items.participant" class="form-control" placeholder="ex:90" required>
                             </div>
                             <div class="form-group">
                              <label for="location">details</label>
-                                <input type="text" v-model="items.details" class="form-control" name="location" placeholder="location">
+                                <input type="text" v-model="items.details" class="form-control" name="location" placeholder="location" required>
                             </div>
                             <ul class="cart float-end">
                                 <li>
-                                    <a class="common-btn" href="#" @click.prevent="$emit('add',items) , getNotif()">
+                                    <a class="common-btn" href="#" @click.prevent="$emit('add',items)">
                                         Add To Cart
                                         <img src="/assets/images/shape1.png" alt="Shape">
                                         <img src="/assets/images/shape2.png" alt="Shape">
@@ -276,15 +276,15 @@ export default {
    },
     
    methods:{
-       giveStars(){
-        let verf=this.checked;
-        if(verf === ""){
-           this.checked ="checked"
-        }else{
-            this.checked=""
-        }
+    //    giveStars(){
+    //     let verf=this.checked;
+    //     if(verf === ""){
+    //        this.checked ="checked"
+    //     }else{
+    //         this.checked=""
+    //     }
           
-       },  
+    //    },  
        
     getNotif(){
   let noty = new Notyf({
@@ -299,20 +299,6 @@ export default {
       noty.dismissAll()
   },1000)
    },
-//    getInfo(){
-//         let commande = {
-//            product_id:this.$route.params.id,
-//            to:this.to,
-//            from:this.from,
-//            participants:this.participants,
-//            details:this.details,
-//            object:this.object,
-//            location:this.location,
-//            }; 
-//            console.log('commande',commande)
-//         localStorage.setItem('info',JSON.stringify(commande))
-//       return commande;
-//    },
     
    },
 
@@ -320,15 +306,13 @@ export default {
   axios.get('https://igp-event-backend.lce-ci.com/api/products/'+ this.id)
                   .then(resp =>{
                 this.items = resp.data.data
-                // console.log('item',this.items)
                 })
 
 
    },
    
    mounted() {
-//   console.log(this.items);
-    //  console.log(localStorage.getItem('mycart'));
+
    },
   
 }

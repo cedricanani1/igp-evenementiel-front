@@ -37,7 +37,7 @@
                         <a href="index.html">
 
                             <router-link to="/">
-                              <h1>IGP </h1>
+                              <img src="/assets/images/LOGO IGP.jpeg" alt="Logo">
                               </router-link>  
                         </a>
                     </div>

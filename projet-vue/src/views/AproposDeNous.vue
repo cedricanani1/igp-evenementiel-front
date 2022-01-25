@@ -47,7 +47,7 @@
                             <ul>
                                 <li>
                                     <img src="/assets/images/about-icon1.png" alt="Icon">
-                                    <h3>25+ Years Experience</h3>
+                                    <h3>25 ans d experience</h3>
                                 </li>
                                 <li>
                                     <img src="/assets/images/about-icon2.png" alt="Icon">
@@ -154,12 +154,12 @@ export default {
     },
     data(){
        return{
-           isLoaded:true
+           isLoaded:false,
 
        }
    },
    mounted(){
-      window.onload = () =>{
+      document.onload = () =>{
          this.isLoaded = true;
        }
    }

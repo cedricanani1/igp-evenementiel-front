@@ -60,7 +60,7 @@
      <!-- buttons pour filtrer les produits-->
                     <div class="sorting-menu">
                         <ul class="justify-content-center">
-                            <li class="filter" @click="$emit('filtrerProducts', All)">
+                            <li class="filter" @click="filtrerProducts(All)">
                                 <div class="products-thumb">
                                     <img src="/assets/images/products/shape1.png" alt="Shape">
                                     <img src="/assets/images/products/shape2.png" alt="Shape">
@@ -68,7 +68,7 @@
                                     <span>ALL</span>
                                 </div>
                             </li>
-                             <li class="filter" @click="$emit('filtrerProducts', assiette)">
+                             <li class="filter" @click="filtrerProducts(assiette)">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
@@ -76,7 +76,7 @@
                                     <span>assiette</span>
                                 </div>
                             </li>
-                            <li class="filter" @click="$emit('filtrerProducts', logistiques)">
+                            <li class="filter" @click="filtrerProducts(Logistiques)">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
@@ -415,8 +415,18 @@ methods:{
   onPageChange(page){
            this.currentPage = page;
         },
+
+ filtrerProducts(catName){
+      if(catName !== 'All'){
+        this.products = this.products.filter((item)=>{
+          return item.libelle === catName;
+        })
+      }
+
+      },
 },
 mounted(){
+    // console.log(this.products);
 },
 computed:{
         paginatedData(){

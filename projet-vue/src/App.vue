@@ -65,9 +65,8 @@ export default {
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
            return item.quantity++;
-         } else {
-          //  console.log(product)
-          this.cart.push({
+         } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined) {
+              this.cart.push({
             product_id:product.id,
             to: product.to,
             from: product.from,
@@ -81,12 +80,25 @@ export default {
             price:product.price,
             days:((((Date.parse(product.to)-Date.parse(product.from))/1000)/60)/60)/24,
           });
-         }
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+             text: 'Produit ajouté au panier!',
+             showConfirmButton: false,
+             timer: 1000
+          } )
+         } else {
+            Swal.fire({
+                    position: 'center',
+                      icon: 'error',
+                      text: 'Veuillez renseigner tous les champs!',
+                    showConfirmButton: false,
+                    timer: 1500
+             })
+           
+         } 
          localStorage.setItem('mycart',JSON.stringify(this.cart))
          console.log("cart",localStorage.getItem('mycart'));
-          // let diffDate=Date.parse(product.to) - Date.parse(product.from);
-          // let jours = (((diffDate/1000)/60)/60)/24;
-          // console.log("J",jours);
 
         },
         removeItemsCart(product){
@@ -125,15 +137,15 @@ export default {
           },
 
       // function pour filtrer dans le tableau products
-      filtrerProducts(catName){
-        this.products = this.getProducts()
-      if(catName !== 'All'){
-        this.products = this.products.filter((item)=>{
-          return item.type.libelle === catName;
-        })
-      }
+      // filtrerProducts(catName){
+      //   this.products = this.getProducts()
+      // if(catName !== 'All'){
+      //   this.products = this.products.filter((item)=>{
+      //     return item.type.libelle === catName;
+      //   })
+      // }
 
-      },
+      // },
        // function pour filtrer dans le tableau products
 
   // function pour recherche par libelle un produit dans le tableau products

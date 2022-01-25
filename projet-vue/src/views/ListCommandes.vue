@@ -30,7 +30,7 @@
     <span class="card-title d-block">commande n<sup>o</sup><b>{{command.order_number}}</b> </span>
     <span class="card-text d-block">Article <i>{{command.id}}</i></span>
       <span class="card-text d-block">Status : <b>{{command.payment_status}}</b></span>
-    <!-- <span class="d-block">commander le : <b>{{(command.created_at.substring(0, 10))}}</b> </span> -->
+    <span class="d-block">commander le : <b>{{new Date(command.created_at).toISOString().slice(0,10).split('-').reverse().join('/')}}</b> </span>
     <router-link :to="{name:'detailcommande', params:{id:command.id}}" class="btn btn-primary float-end">DETAILS</router-link>
     
   </div>

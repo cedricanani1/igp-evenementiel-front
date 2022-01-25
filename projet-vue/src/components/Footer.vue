@@ -11,9 +11,9 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="footer-item">
                         <div class="footer-logo">
-                            <a class="logo" href="index.html">
-                             <h1>IGP</h1>
-                            </a>
+                            <router-link to="/">
+                              <img class="img-fluid w-25 ms-5" src="/assets/images/IGP LOGO.jpeg" alt="Logo">
+                              </router-link>  
                             <ul>
                                 <li>
                                     <i class="flaticon-pin"></i>

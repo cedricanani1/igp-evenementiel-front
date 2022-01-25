@@ -23,19 +23,25 @@
         </div>
     </div>
 
-     <div class="card mb-3" style="max-width: 540px;">
-    <span class="float-end">n <sup>o</sup>{{detailsCommandes.order_number}}</span>
+     <div class="card mx-auto px-3 pb-1" style="max-width: 540px;">
+     
+    <h3 class="text-center"> <b>Commande</b>  n <sup>o</sup>{{detailsCommandes.order_number}}</h3>
+    <hr>
   <div class="row g-0">
-    <div class="col-md-4">
-      <img src={{detailsCommandes.cart[0].product.photo[0].path}} class="img-fluid rounded-start" alt="">
+    <div class="col-md-12" v-for="item in detailsCommandes.cart" :key="item.id">
+    <h5 class="mb-2">{{item.product.libelle}}</h5>
+    
+      <img  :src="'https://igp-event-backend.lce-ci.com/public/'+ item.product.photo[0].path" class="img-fluid rounded-start " alt="">
+      <p class="mt-2">Quantite : {{item.quantity}}</p>
+      <p>Pour le : {{(item.from).slice(0,10).split('-').reverse().join('/')}} au :  {{(item.to).slice(0,10).split('-').reverse().join('/')}}</p>
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-       <!-- <span>{{detailsCommandes.cart[0].product.photo[0].path}}</span> -->
-        <span class="card-title"> status:{{detailsCommandes.status}}</span>
-        <p>Total prix :{{detailsCommandes.total_amount}}</p>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">status de paiement:  <b> {{detailsCommandes.payment_status}}</b> </small></p>
+    <div class="col-md-12">
+      <div class="card-body p-0">
+       
+        <p class="card-title"> status:{{detailsCommandes.status}}</p>
+        <p><b>{{detailsCommandes.total_amount}} Fcfa</b></p>  
+        <p class="card-text">status de paiement: <b> {{detailsCommandes.payment_status}}</b></p>
+         <router-link to='/commande' class="btn btn-primary float-end  w-25">Retour</router-link>
       </div>
     </div>
   </div>
@@ -52,7 +58,7 @@ export default {
    name:'DetailsCommandes',
    data(){
        return{
-           detailsCommandes:[],
+           detailsCommandes:{},
        }
    },
    methods:{
@@ -67,6 +73,8 @@ export default {
    },
    mounted(){
        this.getDetails()
+    //    console.log("img",this.detailsCommandes.order_number)
+    //    console.log("photo",detailsCommandes.cart[0].product.photo[0].path)
         
    }
 }
