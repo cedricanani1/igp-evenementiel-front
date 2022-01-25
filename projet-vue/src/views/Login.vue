@@ -43,23 +43,9 @@
                         <img src="assets/images/shape1.png" alt="Shape">
                         <img src="assets/images/shape2.png" alt="Shape">
                     </button>
-                    <h4>Or</h4>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class='bx bxl-facebook'></i>
-                                se connecter avec Facebook
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class='bx bxl-google'></i>
-                               se connecter avec Google
-                            </a>
-                        </li>
-                    </ul>
+
                     <a>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></a>
-                      <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link>
+                      <!-- <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link> -->
                     
                 </form>
             </div>
@@ -78,22 +64,34 @@ export default {
        }
    },
    methods:{
-      async handleSubmit(){
-          const reponse = await axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
+       handleSubmit(){
+          
+        axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
               email:this.email,
               password:this.password,
           })
-         console.log(reponse.data.access_token)
-         localStorage.setItem('token',reponse.data.access_token);
-          localStorage.setItem('user', JSON.stringify(reponse.data.user))
-          //localStorage.setItem('user', reponse.data.user);
-        //   this.$router.push("/")
-          window.location.href = '/'
+          .then(reponse => {
+            //   if(reponse.status === 200){
+                   console.log(reponse.data.access_token)
+                 console.log(reponse.status)
+                    localStorage.setItem('token',reponse.data.access_token);
+                       localStorage.setItem('user', JSON.stringify(reponse.data.user))
+                    window.location.href = '/'
           this.$store.state.infoCommande
+          })
+          .catch(error => {
+              if(error){
+                        Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                     title: 'l\'adresse email ou mot de passe est incorrecte!',
+                    showConfirmButton: false,
+                    timer: 1500})
+                                         }
+          })
        },
    },
    mounted(){
-        // localStorage.getItem('token',reponse.data.toke);
          console.log(localStorage.getItem('token'))
    }
   

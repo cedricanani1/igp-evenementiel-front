@@ -58,21 +58,6 @@
                         <img src="/assets/images/shape1.png" alt="Shape">
                         <img src="/assets/images/shape2.png" alt="Shape">
                     </button>
-                    <h4>Or</h4>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class='bx bxl-facebook'></i>
-                                se connecter avec Facebook
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class='bx bxl-google'></i>
-                                se connecter avec Google
-                            </a>
-                        </li>
-                    </ul>
                     <h5>Déja un Compte? <router-link to="/login">Se connecter</router-link></h5>
                 </form>
             </div>

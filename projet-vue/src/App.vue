@@ -62,11 +62,22 @@ export default {
      methods:{
 
        addCart(product){
+  if( localStorage.token){
+    
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
            return item.quantity++;
-         } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined) {
-              this.cart.push({
+         } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined) {
+                  
+                  if(product.to < product.from){
+                     Swal.fire({
+                    position: 'center',
+                      icon: 'error',
+                      text: 'La date donnée est incorrecte',
+                    showConfirmButton: false,
+                    timer: 1500
+             })} else{
+                    this.cart.push({
             product_id:product.id,
             to: product.to,
             from: product.from,
@@ -87,6 +98,10 @@ export default {
              showConfirmButton: false,
              timer: 1000
           } )
+          this.$router.push('/commander')
+
+                  }
+              
          } else {
             Swal.fire({
                     position: 'center',
@@ -100,10 +115,20 @@ export default {
          localStorage.setItem('mycart',JSON.stringify(this.cart))
          console.log("cart",localStorage.getItem('mycart'));
 
+  }else{
+     Swal.fire({
+                    position: 'center',
+                     title: 'Veuillez vous-connectez merci',
+                    showConfirmButton: false,
+                    timer: 1500
+             })
+             this.$router.push('/login')
+  }
         },
         removeItemsCart(product){
           this.cart.splice(product,1)
         localStorage.setItem('mycart',JSON.stringify(this.cart))
+        // window.location.reload(true)
         },
 
         removeFromCart(product){
