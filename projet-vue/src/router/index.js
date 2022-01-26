@@ -13,6 +13,7 @@ import AproposDeNous from "../views/AproposDeNous.vue"
 import ListCommandes from "../views/ListCommandes.vue"
 import Modify from "../views/Modify.vue"
 import DetailCommandes from "../views/DetailCommandes.vue"
+import store from '@/store'
 
 
 const routes = [{
@@ -25,6 +26,10 @@ const routes = [{
     alias: '/singleProduct/:id',
     name: 'SingleProduct',
     component: SingleProduct,
+    beforeEnter: (to, from, next) => {
+      if(store.state.token === null) next({name:'Login'})
+      else next()
+    }
   },
   {
     path: '/produits',
@@ -58,17 +63,29 @@ const routes = [{
   {
     path:'/commande',
     name:'commande',
-    component:ListCommandes
+    component:ListCommandes,
+    beforeEnter: (to, from, next) => {
+      if(store.state.token === null) next({name:'Login'})
+      else next()
+    }
   },
   {
     path:'/detailcommande',
     name:'detailcommande',
-    component:DetailCommandes
+    component:DetailCommandes,
+    beforeEnter: (to, from, next) => {
+      if(store.state.token === null) next({name:'Login'})
+      else next()
+    }
   },
   {
     path:'/modify',
     name:'modify',
-    component:Modify
+    component:Modify,
+    beforeEnter: (to, from, next) => {
+      if(store.state.token === null) next({name:'Login'})
+      else next()
+    }
   },
   // {
   //   path:'/listcommnade',

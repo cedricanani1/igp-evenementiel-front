@@ -1,11 +1,11 @@
 <template>
  <!-- <PageLoader /> -->
- <div class="page-loader" v-if="!isLoaded">
+ <!-- <div class="page-loader" v-if="!isLoaded">
 <div class="cube"></div>
 <div class="cube"></div>
 <div class="cube"></div>
 <div class="cube"></div>
-</div>
+</div> -->
      <div class="page-title-area">
         <div class="d-table">
             <div class="d-table-cell">
@@ -51,23 +51,19 @@
                                 </li>
                                 <li>
                                     <img src="/assets/images/about-icon2.png" alt="Icon">
-                                    <h3>Trusted Brand In City</h3>
-                                </li>
-                                <li>
-                                    <img src="/assets/images/about-icon3.png" alt="Icon">
-                                    <h3>32+ Award Winner</h3>
+                                    <h3>Marque de confiance dans la ville</h3>
                                 </li>
                                 <li>
                                     <img src="/assets/images/about-icon4.png" alt="Icon">
-                                    <h3>Best Quality Brand</h3>
+                                    <h3>Meilleur qualité</h3>
                                 </li>
                             </ul>
                             <p>CHEZ IVOIRE GOODIES PERFORMANCES, VOUS ETES PLUS QU’UN CLIENT… UN VERITABLE PARTENAIRE</p>
-                            <a class="common-btn" href="shop.html">
+                            <!-- <a class="common-btn" href="shop.html">
                                 Commander Maintenant
                                 <img src="/assets/images/shape1.png" alt="Shape">
                                 <img src="/assets/images/shape2.png" alt="Shape">
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
@@ -104,11 +100,11 @@
                                 <del>20000 Fcfa</del>
                             </li>
                         </ul>
-                        <a class="common-btn" href="shop.html">
-                            Commander Maintenant
-                            <img src="/assets/images/shape1.png" alt="Shape">
-                            <img src="/assets/images/shape2.png" alt="Shape">
-                        </a>
+                       <router-link class="common-btn" to="/produits">
+                                    Commander Maintenant
+                                    <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape">
+                                </router-link>
                     </div>
                 </div>
             </div>
@@ -146,22 +142,17 @@
     </div>
 </template>
 <script>
-import PageLoader from '@/components/PageLoader.vue';
+
 export default {
     name:'AproposDeNous',
-    components:{
-        PageLoader,
-    },
     data(){
        return{
-           isLoaded:false,
+           
 
        }
    },
    mounted(){
-      document.onload = () =>{
-         this.isLoaded = true;
-       }
+   
    }
 }
 </script>

@@ -1,5 +1,4 @@
 <template>
-  <!-- <PageLoader /> -->
     <Header
     :cart=cart
      @add=addCart 
@@ -10,6 +9,11 @@
      @localstorage=cartFromLocalStorage
      :itemCost=item_cost
       />
+      <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
     <router-view
     :cart=cart
     @add=addCart
@@ -21,11 +25,12 @@
      :informationProduct=informationProduct
      @filtrerProducts=filtrerProducts
      :search="search"
+     :categories=categories
      
 
 
     :listData=products
-    :perPage="5"
+    :perPage="6"
     :total=products.length
     :totalPages="Math.ceil(products.length/4)"
     @pageChanged=onPageChange
@@ -45,11 +50,12 @@
 import axios from 'axios'
 import Footer from "@/components/Footer.vue";
 import Header from "@/components/Header.vue";
-import PageLoader from '@/components/PageLoader.vue';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
   components:{
-    Header,Footer,PageLoader,
+    Header,Footer,Loading,
     },
    data(){
       return{
@@ -57,6 +63,9 @@ export default {
         cartVue:false,
         products:[],
         currentPage:1,
+         isLoading: false,
+         fullPage: true,
+         categories:[],
       }
     },
      methods:{
@@ -153,13 +162,27 @@ export default {
        return this.currentPage = page ;
         },
         getProducts(){
+          this.isLoading = true;
              axios.get('https://igp-event-backend.lce-ci.com/api/products')
                   .then(resp =>{
-                console.log(resp.data.data)
                 this.products = resp.data.data
+                this.categories= resp.data.data
+                console.log("libelle",resp.data.data)
+                this.isLoading =false;
                 })
             return this.products;
           },
+          getCategories(){
+            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+                 .then(resp =>{
+                this.categories = resp.data
+                // this.categories= resp.data.data
+                // console.log("categorie",resp.data)
+          
+                })
+
+               
+          }
 
       // function pour filtrer dans le tableau products
       // filtrerProducts(catName){
@@ -171,26 +194,7 @@ export default {
       // }
 
       // },
-       // function pour filtrer dans le tableau products
-
-  // function pour recherche par libelle un produit dans le tableau products
-
-    search(libelle){
-      //  this.mesProducts()
-      this.products = this.products.filter((product)=>{
-        return product.libelle.toLowerCase().includes(libelle.toLowerCase())
-      })
-    },
-
-    // function pour recherche par libelle un produit dans le tableau products
-
-    // mesProducts(){
-    //   this.products=this.getProducts()
-    // },
-
-
-
-    
+       // function pour filtrer dans le tableau products    
    },
     created(){
      this.cart = JSON.parse(localStorage.getItem('mycart') || '[]');
@@ -212,6 +216,7 @@ export default {
      this.getProducts();
     //  localStorage.removeItem('mycart');
     //  console.log("cart",localStorage.getItem('mycart'));
+    this. getCategories();
    }
  
  

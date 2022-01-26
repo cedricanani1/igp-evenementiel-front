@@ -9,7 +9,7 @@ export default createStore({
     user:JSON.parse(localStorage.getItem("user")),
     cart:[],
     // infoCommande:JSON.parse(localStorage.getItem("info")),
-    // token:localStorage.getItem("token"),
+    token:localStorage.getItem("token"),
     // cartItemCount:0,
   },
   getters: {

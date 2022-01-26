@@ -6,9 +6,9 @@
                     <div class="left">
                         <ul>
                             <li>
-                                <i class="flaticon-call-center"></i>
-                                <span>Disponible 24/7</span>
-                                 <span class="d-block my-1">Riviera BONOUMIN  <br> LAURIER 6 VILLA N 151-Cocody </span>
+                                <i class="bi bi-geo-alt"></i>
+                                <!-- <span>Disponible 24/7</span> -->
+                                 <span class="my-1">Riviera BONOUMIN LAURIER 6 VILLA N 151-Cocody </span>
                             </li>
                         </ul>
                     </div>
@@ -17,9 +17,9 @@
                     <div class="right">
                         <div class="inner">
                             <div class="call">
-                                <i class="flaticon-phone-call"></i>
-                                <a href="tel:2722499504">Tel : (+225) 27 22 49 95 04</a>
-                                <a class="d-block text-light"  href="mailto:info@igp.ci">mail : info@igp.ci</a>
+                               
+                                <a href="tel:2722499504"> <i class="bi bi-telephone"></i> <b>Tel : (+225) 27 22 49 95 04</b> </a>
+                                <a class="d-block text-light"  href="mailto:info@igp.ci"> <i class="bi bi-mailbox"></i>Email : info@igp.ci</a>
                                 
                             </div>
                         </div>
@@ -34,24 +34,15 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="left">
-                        <a href="index.html">
-
+                       
                             <router-link to="/">
                               <img src="/assets/images/LOGO IGP.jpeg" alt="Logo">
                               </router-link>  
-                        </a>
+                      
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="middle">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" v-model="libelle" @keypress.enter="search(libelle)" class="form-control" placeholder="faire une recherche">
-                                <button type="submit" class="btn">
-                                    <i class='bx bx-search'></i>
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -135,32 +126,19 @@
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md navbar-light">
                     <div class="left">
-                        <select style="display:none;">
-                            <option >Categories</option>
-                            <option>Chair</option>
-                            <option>Table</option>
-                            <option>Bed</option>
-                            <option>Sofa</option>
-                            <option>Headphones</option>
-                            <option>Keyboard</option>
-                            <option>MacBook</option>
-                            <option>Vegetable</option>
-                            <option>Fruits</option>
-                            <option>Chicken</option>
-                        </select>
-                        <div class="nice-select" tabindex="0"><span class="current">Categories</span><ul class="list"><li data-value="All Categories" class="option selected focus">All Categories</li><li data-value="Chair" class="option">Chair</li><li data-value="Table" class="option">Table</li><li data-value="Bed" class="option">Bed</li><li data-value="Sofa" class="option">Sofa</li><li data-value="Headphones" class="option">Headphones</li><li data-value="Keyboard" class="option">Keyboard</li><li data-value="MacBook" class="option">MacBook</li><li data-value="Vegetable" class="option">Vegetable</li><li data-value="Fruits" class="option">Fruits</li><li data-value="Chicken" class="option">Chicken</li></ul></div>
                     </div>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <router-link to="/" class="nav-link dropdown-toggle active">Accueil</router-link>
                             </li>
+                             <li class="nav-item">
+                                <router-link to="/produits" class="nav-link">Produits</router-link>
+                            </li>
                             <li class="nav-item">
                                 <router-link to="/about" class="nav-link">A propos de nous</router-link>
                             </li>
-                            <li class="nav-item">
-                                <router-link to="/produits" class="nav-link">Produits</router-link>
-                            </li>
+                           
                             <li class="nav-item">
                                 <router-link to="/contacts" class="nav-link">Contact</router-link>
                             </li>
@@ -261,6 +239,7 @@ export default {
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 localStorage.removeItem('info')
+                localStorage.removeItem('mycart')
                 console.log(reponse);
             });
             this.$router.push("/")
@@ -340,6 +319,10 @@ export default {
     margin:1em 0;
     color:rgb(255, 166, 0);
     font-size:1.1em
+}
+.all a:hover{
+  text-decoration: none !important;
+  border:none;
 }
 
 @media only screen and (max-width: 991px){

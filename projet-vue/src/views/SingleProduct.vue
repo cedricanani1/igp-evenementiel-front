@@ -238,25 +238,33 @@
     </div>
 
   </div>
+   <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
    name:"SingleProduct",
 
    props:['products','cart','add','removeItem','removeBySign','increase'],
 
    compoments:{
-    Header
+    Header,Loading,
    },
 
    data(){
        return{
             checked:"",
-            
+             isLoading: false,
+            fullPage: true,
             id:this.$route.params.id,
             items:{
                 to:"",
@@ -266,6 +274,7 @@ export default {
                 participants:"",
                 details:"",
             },
+            // min:new Date(),
        }
    },
    computed:{
@@ -303,15 +312,19 @@ export default {
    },
 
    created(){   
+        this.isLoading = true;
+        // location.reload(true)
   axios.get('https://igp-event-backend.lce-ci.com/api/products/'+ this.id)
                   .then(resp =>{
                 this.items = resp.data.data
+                  this.isLoading =false;
                 })
 
 
    },
    
    mounted() {
+    //    console.log("MIN",this.min);
 
    },
   

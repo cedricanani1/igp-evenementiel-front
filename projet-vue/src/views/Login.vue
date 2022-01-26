@@ -37,6 +37,7 @@
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
+                        <!-- <i class="bi bi-eye"></i> -->
                     </div>
                     <button type="submit" class="btn common-btn">
                         Se connecter
@@ -90,6 +91,10 @@ export default {
                                          }
           })
        },
+    //    seePassword(){
+    //           let password = this.password;
+
+    //    },
    },
    mounted(){
          console.log(localStorage.getItem('token'))

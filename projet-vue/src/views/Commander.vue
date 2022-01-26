@@ -38,37 +38,29 @@
 
                              <div class="form-group">
                              <label for="date-debut">nom</label>
-                                <input type="text" name="date" v-model="nom" class="form-control">
+                                <input type="text" name="date" v-model="nom" class="form-control" required>
                             </div>
                             <div class="form-group">
                              <label for="prenoms">prenoms</label>
-                                <input type="text" name="date" v-model="prenoms" class="form-control" >
+                                <input type="text" name="date" v-model="prenoms" class="form-control" required>
                             </div>
                              <div class="form-group">
                              <label for="raison">raison social</label>
-                                <input type="text" name="raison" v-model="raison_social" class="form-control" >
+                                <input type="text" name="raison" v-model="raison_social" class="form-control" required>
                             </div>
                            <div class="form-group">
                              <label for="email">email</label>
-                                <input type="text" name="email" v-model="email" class="form-control" >
+                                <input type="text" name="email" v-model="email" class="form-control" required>
                             </div>
                            
                             <div class="form-group">
                              <label for="phone">phone</label>
-                                <input type="tel" name="phone" v-model="phone" class="form-control" >
+                                <input type="tel" name="phone" v-model="phone" class="form-control" required>
                             </div>
                             <div class="form-group">
                              <label for="shipping">expedition</label>
-                                <input type="text" name="shipping" v-model="shipping" class="form-control">
+                                <input type="text" name="shipping" v-model="shipping" class="form-control" required>
                             </div>
-                            <!-- <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox"  id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Ship To A Different Address
-                                    </label>
-                                </div>
-                            </div> -->
                             <div class="text-center">
                                 <button type="submit" class="btn common-btn">
                                     Commander
@@ -84,7 +76,7 @@
                 <ul class="align-items-center"  v-for="(item,index) in items" 
                       :key="index">
                                 <li v-if="item.photo.length > 0">
-                                 <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.photo[0].path" :alt="item.libelle">
+                                 <img :src="item.photo" :alt="item.libelle">
                                 </li>
                                 <li>
                                     <h4>{{item.libelle}}</h4>
@@ -149,7 +141,7 @@ export default {
   props:['cart','add','products','removeItem','removeBySign','increase'],
   data(){
        return{
-           items:null,
+           items:[],
            itemTotal:"",
            commandes:[],
         //    infoCommandes:[],
@@ -168,9 +160,18 @@ export default {
 
    computed:{
    itemTotal(){
-         let count = localStorage.getItem('total')
-         console.log(count);
+        //  let count = localStorage.getItem('total')
+        //  console.log(count);
+        //  return count;
+        //  item_cost(){
+         let count =0
+         this.items.forEach( item =>{
+             count+= item.price * item.quantity
+         })
+       
          return count;
+          
+    //  }
 
      },
     //  days(){
@@ -212,6 +213,27 @@ export default {
            axios.post('api/orders',this.commandes)
                 .then(reponse => {
                     console.log(reponse);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Commande effectuée', 
+                        showConfirmButton: false,
+                         timer: 1500
+                    })
+                    this.$router.push('/')
+                    localStorage.removeItem('mycart')
+                })
+                .catch(error =>{
+                    if(error){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                     title: 'Désole votre commande n\'a pas été validée',
+                    showConfirmButton: false,
+                    timer: 1500})
+                    }
+                    
+
                 })
          
         //    if(localStorage.commandes) {
@@ -240,6 +262,7 @@ export default {
     //    console.log('test', JSON.parse(localStorage.getItem('info')))
     //    console.log('car', JSON.parse(localStorage.getItem('mycart')))
     console.log("cart",this.cart);
+    console.log("items",this.items);
    }
 
 }

@@ -1,4 +1,5 @@
 <template>
+       
 <!-- voici tous ce quui s' affiche lorsque tu viens sur le site -->
     <div class="banner-area-two">
         <div class="banner-slider owl-theme owl-carousel">
@@ -11,17 +12,17 @@
                                
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
-                                <a class="common-btn" href="#">
+                                <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
                                     <img src="/assets/images/shape2.png" alt="Shape">
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="banner-img">
-                    <img src="/assets/images/banner/banner1.png" alt="Banner">
+                    <img class="img-fluid" src="/assets/images/4023_1.jpg" alt="ceremonie">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
                 </div>
             </div>
@@ -33,17 +34,17 @@
                                 <h1>obtenez tous les meubles à la mode dans un seul magasin</h1>
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                                     tempor invidunt ut labore et dolore magna aliquyam erat</p>
-                                <a class="common-btn" href="/">
-                                   Commander Maintenant
+                                <router-link class="common-btn" to="/produits">
+                                    Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
                                     <img src="/assets/images/shape2.png" alt="Shape">
-                                </a>
+                                </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="banner-img">
-                    <img src="/assets/images/banner/banner2.png" alt="Banner">
+                    <img src="/assets/images/evenement-d-entreprise.jpg" alt="Banner">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
                 </div>
             </div>
@@ -54,99 +55,35 @@
   
      <div class="products-area ptb-100">
 
-        <div class="container">
+        <div class="container-fluid pe-5">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
      <!-- buttons pour filtrer les produits-->
                     <div class="sorting-menu">
                         <ul class="justify-content-center">
-                            <li class="filter" @click="filtrerProducts(All)">
-                                <div class="products-thumb">
+                            <li class="filter" v-for="categorie in categories" :key="categorie.id" >
+                                <div class="products-thumb" >
                                     <img src="/assets/images/products/shape1.png" alt="Shape">
                                     <img src="/assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span>ALL</span>
+                                    <span>{{categorie.libelle}}</span>
                                 </div>
                             </li>
-                             <li class="filter" @click="filtrerProducts(assiette)">
+                             <!-- <li class="filter" @click="userFilterKey = 'sono'">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-armchair"></i>
-                                    <span>assiette</span>
+                                    <span>sono</span>
                                 </div>
-                            </li>
-                            <li class="filter" @click="filtrerProducts(Logistiques)">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-sofa"></i>
-                                    <span>logistiques</span>
-                                </div>
-                            </li>
-                            <li class="filter">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-table"></i>
-                                    <span>Computer Desk</span>
-                                </div>
-                            </li>
-                            <li class="filter" >
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-desk-chair"></i>
-                                    <span>Desk Chair</span>
-                                </div>
-                            </li>
-                            <li class="filter" >
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-table-1"></i>
-                                    <span>Center Table</span>
-                                </div>
-                            </li>
-                            <li class="filter">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-shelf"></i>
-                                    <span>Book Shelf</span>
-                                </div>
-                            </li>
-                            <li class="filter" >
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-cabinet"></i>
-                                    <span>Cabinet</span>
-                                </div>
-                            </li>
-                            <li class="filter">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-bed"></i>
-                                    <span>Bed</span>
-                                </div>
-                            </li>
-                            <li class="filter">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-dresser"></i>
-                                    <span>Dressing Table</span>
-                                </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
      <!-- buttons pour filtrer les produits-->
      
       
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div id="Container" class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4"
                       v-for="(items,index) in products" 
@@ -177,7 +114,7 @@
                         </div>
                        
                     </div>
-             <div>
+             <!-- <div>
                     <ul class="pagination" v-if="listData.length > 5 || currentPage > 1">
                        <li>
                       <button @click="onClickFirstPage" :disabled="isInFirstPage" >
@@ -200,7 +137,7 @@
                  </button>
                  </li>
                  </ul>
-            </div>
+            </div> -->
                     <div class="text-center">
                         <router-link class="common-btn" to="/produits">
                             Voir Plus de produits
@@ -225,7 +162,7 @@
             <div class="row m-0 align-items-center">
                 <div class="col-lg-6 p-0">
                     <div class="buy-img">
-                        <img src="/assets/images/buy-main1.png" alt="Buy">
+                        <img src="/assets/images/acceuil5-01.png" alt="Buy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
@@ -238,11 +175,11 @@
                                 <del>20000 Fcfa</del>
                             </li>
                         </ul>
-                        <a class="common-btn" href="shop.html">
-                            Commander Maintenant
-                            <img src="/assets/images/shape1.png" alt="Shape">
-                            <img src="/assets/images/shape2.png" alt="Shape">
-                        </a>
+                        <router-link class="common-btn" to="/produits">
+                                    Commander Maintenant
+                                    <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape">
+                                </router-link>
                     </div>
                 </div>
             </div>
@@ -349,86 +286,60 @@
             </div>
         </div>
     </div>
-
-  
-
-   
 </template>
 
 <script>
 import Header from "@/components/Header.vue"
 import axios from 'axios'
 import { Notyf } from 'notyf';
+
 export default{
 
   name:'Home',
   props:['products','cart','add','listData','maxVisibleButtons','totalPages',
   'total','perPage','currentPage','pageChanged',
-  'paginatedData','filtrerProducts'],
+  'paginatedData','filtrerProducts','categories'],
   data(){
       return{
           logoAdd:'bx bx-plus',
           logoHeart:'bx bx-heart',
           add:'Ajouter au panier',
           showProducts:false,
+          userFilterkey:"all",
+         
       }
   }, 
   components:{
       Header,
   },
 methods:{
-       onClickFirstPage(){
-           this.$emit('pageChanged',1)
-        },
-         onClickPreviousPage(){
-           this.$emit('pageChanged', this.currentPage-1)
-        },
-         onClickPage(page){
-           this.$emit('pageChanged',page)
-        },
-         onClickNextPage(){
-           this.$emit('pageChanged', this.currentPage + 1)
-        },
-         onClickLastPage(){
-           this.$emit('pageChanged', this.totalPages)
-        },
-         isPageActive(page){
-           return this.currentPage === page
-        },
-     onPageChange(page){
-          this.currentPage = page;
-        },
-
- getNotif(){
-  let noty = new Notyf({
-      duration:4000,
-      position :{
-          x:'right',
-          y:'top',
-      }
-  })
-  noty.success('produit ajoutee')
-  setTimeout(()=>{
-      noty.dismissAll()
-  },1000)
-   },
-  onPageChange(page){
-           this.currentPage = page;
-        },
-
- filtrerProducts(catName){
-      if(catName !== 'All'){
-        this.products = this.products.filter((item)=>{
-          return item.libelle === catName;
-        })
-      }
-
-      },
-},
-mounted(){
-    // console.log(this.products);
+//        onClickFirstPage(){
+//            this.$emit('pageChanged',1)
+//         },
+//          onClickPreviousPage(){
+//            this.$emit('pageChanged', this.currentPage-1)
+//         },
+//          onClickPage(page){
+//            this.$emit('pageChanged',page)
+//         },
+//          onClickNextPage(){
+//            this.$emit('pageChanged', this.currentPage + 1)
+//         },
+//          onClickLastPage(){
+//            this.$emit('pageChanged', this.totalPages)
+//         },
+//          isPageActive(page){
+//            return this.currentPage === page
+//         },
+//      onPageChange(page){
+//           this.currentPage = page;
+//         },
+//   onPageChange(page){
+//            this.currentPage = page;
+//         },
 },
 computed:{
+
         paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -456,11 +367,29 @@ computed:{
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
+        all(){
+            return this.listData
+        },
+        userFilter(){
+            return this[this.userFilterkey]
+        },
+        sono(){
+            return this.listData.filter((item)=>{item.type.libelle})
+        },
+        // chargement(){
+        //     if(document.DOMContentLoaded){
+        //         this.isLoading = false;
+        //     }else{
+        //         this.isLoading = true;
+        //     }
+        // }
    
   },
   mounted(){
-    //   this.$store.dispatch("obtenirProduits")
-  }
+    //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
+    // this.chargement
+    
+  },
 }
 </script>
 

@@ -787,8 +787,7 @@ button:focus {
 }
 
 .products-thumb {
-    padding: 30px 5px;
-    border-radius: 10px;
+    padding:5px 10px;
     background-color: #fff;
     -webkit-box-shadow: 0 0 20px 0 #dddddd59;
     box-shadow: 0 0 20px 0 #dddddd59;
@@ -1268,7 +1267,7 @@ button:focus {
 .support-item {
     margin-bottom: 30px;
     position: relative;
-    background-color: #434e6e;
+    background-color: rgba(67,93,150);
     border-radius: 10px;
     padding: 30px 15px 30px 60px;
     margin-left: 45px;
@@ -1276,8 +1275,8 @@ button:focus {
 }
 
 .support-item:hover i {
-    border: 10px solid #434e6e;
-    color: #434e6e;
+    border: 10px solid rgba(67,93,150);
+    color: rgba(67,93,150);
     background-color: #fff
 }
 
@@ -1289,7 +1288,7 @@ button:focus {
     line-height: 70px;
     font-size: 30px;
     color: #fff;
-    background-color: #434e6e;
+    background-color: rgba(67,93,150);
     border: 10px solid #fff;
     border-radius: 50%;
     position: absolute;

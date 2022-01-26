@@ -27,89 +27,17 @@
 
 
     <div class="products-area ptb-100">
-        <div class="container">
+        <div class="container-fluid pe-5">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="sorting-menu">
                         <ul>
-                            <li class="filter active" data-filter="all">
+                            <li class="filter" v-for="categorie in categories" :key="categorie.id">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span>All</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".armchair">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-armchair"></i>
-                                    <span>Armchair</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".sofa">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-sofa"></i>
-                                    <span>Sofa</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".computer">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-table"></i>
-                                    <span>Computer Desk</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".desk">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-desk-chair"></i>
-                                    <span>Desk Chair</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".center">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-table-1"></i>
-                                    <span>Center Table</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".book">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-shelf"></i>
-                                    <span>Book Shelf</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".cabinet">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-cabinet"></i>
-                                    <span>Cabinet</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".bed">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-bed"></i>
-                                    <span>Bed</span>
-                                </div>
-                            </li>
-                            <li class="filter" data-filter=".center-table">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-dresser"></i>
-                                    <span>Dressing Table</span>
+                                    <span>{{categorie.libelle}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -117,9 +45,13 @@
                 </div>
                 
                 <div class="col-lg-9">
+          <div>
+                
+                <i class="bi bi-search" @click="searchSetter()" ></i><input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="term">
+          </div>
                     <div id="Container" class="row">
                        <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in listData" 
+                      v-for="(items,index) in filteredData" 
                       :key="index"
                       >
                             <div class="products-item">
@@ -139,6 +71,30 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                <ul class="pagination" v-if="listData.length > 5 || currentPage > 1">
+                       <li>
+                      <button @click="onClickFirstPage" :disabled="isInFirstPage" >
+                      prev 
+                    </button>
+                    </li>
+         
+
+                    <li>
+                <button v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
+                :class="{active:isPageActive(page.number)}"
+                > {{page.number}}  
+                </button>
+                 </li>
+                
+
+                 <li>
+                 <button @click="onClickNextPage" :disabled="isInLastPage" >
+                  next 
+                 </button>
+                 </li>
+                 </ul>
+            </div>
                     <div class="text-center">
                         <a class="common-btn" href="#">
                             Afficher plusieurs produits
@@ -158,13 +114,14 @@ import Home from "./Home.vue"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
-    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged'],
+    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','categories','paginatedData'],
     data(){
         return{
             // products:[],
               logoAdd:'bx bx-plus',
               logoHeart:'bx bx-heart',
               add:'Ajouter au panier',
+              term:"",
         }
     },
     components:{
@@ -185,10 +142,83 @@ export default {
       noty.dismissAll()
   },1000)
    },
+
+        onClickFirstPage(){
+           this.$emit('pageChanged',1)
+        },
+         onClickPreviousPage(){
+           this.$emit('pageChanged', this.currentPage-1)
+        },
+         onClickPage(page){
+           this.$emit('pageChanged',page)
+        },
+         onClickNextPage(){
+           this.$emit('pageChanged', this.currentPage + 1)
+        },
+         onClickLastPage(){
+           this.$emit('pageChanged', this.totalPages)
+        },
+         isPageActive(page){
+           return this.currentPage === page
+        },
+     onPageChange(page){
+          this.currentPage = page;
+        },
+  onPageChange(page){
+           this.currentPage = page;
+        },
+        searchSetter(){
+            return this.listData
+        }
 },
 computed:{
+    filteredData:{
+        get(){
+              let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.listData.slice(start,end);
+        },
+        set(term){
+         this.listData.filter(item=>{
+             return item.libelle.toLowerCase().includes(term.toLowerCase())})
+     
+
+        }
+        //  this.listData.filter(item=>item.libelle.toLowerCase().includes(this.search.toLowerCase()))
+        
+                  
+        //             let start = (this.currentPage * this.perPage) - this.perPage;
+        //     let end = start + this.perPage;
+        //  return this.listData.slice(start,end);
+    },
+  paginatedData(){
+           
+        },
+        startPage(){
+            if(this.currentPage === 1) return 1
+            if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
+             return  this.currentPage - 1;
+        },
+        endPage(){
+            return Math.min(this.startPage + this.maxVisibleButtons-1 , this.totalPages)
+        },
+        pages(){
+            let range =[]
+            for (let i = this.startPage; i <= this.endPage ; i++) {
+                range.push({ number:i, isDisabled: i === this.currentPage
+                });
+            }
+            return range;
+        },
+        isInFirstPage(){
+            return this.currentPage === 1
+        },
+        isInLastPage(){
+            return this.currentPage === this.totalPages
+        },
 },
 mounted(){
+
 
   }
 }

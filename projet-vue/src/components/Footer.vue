@@ -1,7 +1,6 @@
 <template>
-
       <footer class="footer-area pt-100 pb-70">
-      <hr>
+  
         <div class="footer-shape">
             <img src="/assets/images/footer-right-shape.png" alt="Shape">
             <img src="/assets/images/shape5.png" alt="Shape">
@@ -53,18 +52,15 @@
                                             <router-link to="/about">A propos de Nous</router-link>
                                         </li>
                                         <li>
-                                            <router-link to="/">Commander</router-link>
+                                            <router-link to="/produits">Produits</router-link>
                                         </li>
                                         <li>
-                                            <router-link to="/">Produits</router-link>
-                                        </li>
-                                        <li>
-                                            <router-link to="/">Se Connecter</router-link>
+                                            <router-link to="/login">Se Connecter</router-link>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-6 col-sm-4 col-lg-4">
-                                    <ul>
+                                <!-- <div class="col-6 col-sm-4 col-lg-4"> -->
+                                    <!-- <ul>
                                         <li>
                                             <router-link to="/produits">Cameras</router-link>
                                         </li>
@@ -83,69 +79,10 @@
                                         <li>
                                            <router-link to="/produits">Computers</router-link>
                                         </li>
-                                    </ul>
-                                </div>
+                                    </ul> -->
+                                <!-- </div> -->
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-sm-6 col-lg-6">
-                    <div class="payment-cards">
-                        <ul>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <img src="/assets/images/payment1.png" alt="Payment">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <img src="/assets/images/payment2.png" alt="Payment">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <img src="/assets/images/payment3.png" alt="Payment">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <img src="/assets/images/payment4.png" alt="Payment">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-6">
-                    <div class="social-links">
-                        <ul>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class='bx bxl-facebook'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class='bx bxl-twitter'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class='bx bxl-linkedin'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class='bx bxl-skype'></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank">
-                                    <i class='bx bxl-youtube'></i>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
