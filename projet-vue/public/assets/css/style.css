@@ -3187,7 +3187,8 @@ button:focus {
 .banner-area-two .banner-item {
     height: 600px;
     position: relative;
-    background-color: #fff;
+    /* background-color: #fff; */
+  
     border-radius: 30px
 }
 

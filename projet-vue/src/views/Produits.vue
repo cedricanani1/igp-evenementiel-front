@@ -110,11 +110,11 @@
 </template>
 <script>
 import Home from "./Home.vue"
-// import axios from "axios"
+import axios from "axios"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
-    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','categories','paginatedData'],
+    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
     data(){
         return{
             // products:[],
@@ -122,27 +122,13 @@ export default {
               logoHeart:'bx bx-heart',
               add:'Ajouter au panier',
               term:"",
+              categories:[],
         }
     },
     components:{
         Home,
     },
     methods:{
-
-    getNotif(){
-  let noty = new Notyf({
-      duration:4000,
-      position :{
-          x:'right',
-          y:'top',
-      }
-  })
-  noty.success('produit ajoutee')
-  setTimeout(()=>{
-      noty.dismissAll()
-  },1000)
-   },
-
         onClickFirstPage(){
            this.$emit('pageChanged',1)
         },
@@ -161,15 +147,12 @@ export default {
          isPageActive(page){
            return this.currentPage === page
         },
-     onPageChange(page){
-          this.currentPage = page;
-        },
-  onPageChange(page){
-           this.currentPage = page;
-        },
-        searchSetter(){
-            return this.listData
-        }
+    //  onPageChange(page){
+    //       this.currentPage = page;
+    //     },
+//   onPageChange(page){
+//            this.currentPage = page;
+//         },
 },
 computed:{
     filteredData:{
@@ -191,9 +174,11 @@ computed:{
         //     let end = start + this.perPage;
         //  return this.listData.slice(start,end);
     },
-  paginatedData(){
-           
-        },
+//   paginatedData(){
+        //     let start = (this.currentPage * this.perPage) - this.perPage;
+        //     let end = start + this.perPage;
+        //  return this.listData.slice(start,end);
+//         },
         startPage(){
             if(this.currentPage === 1) return 1
             if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
@@ -216,9 +201,15 @@ computed:{
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
+        getCategories(){
+            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+                 .then(resp =>{
+                this.categories = resp.data
+                })   
+          }
 },
 mounted(){
-
+ this.getCategories
 
   }
 }

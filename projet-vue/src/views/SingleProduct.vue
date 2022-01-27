@@ -37,36 +37,37 @@
                             <div class="row">
                                 <div class="col-sm-3 col-lg-3">
                                     <div class="owl-thumbs" data-slider-id="1">
-                                        <div class="item owl-thumb-item">
+                                        <div class="item owl-thumb-item" v-for="(item,index) in items.photo" :key="index" v-if="items.photo.length > 0">
                                             <div class="top-img">
-                                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
                                             </div>
                                         </div>
-                                        <div class="item owl-thumb-item">
+                                        <!-- <div class="item owl-thumb-item">
                                            <div class="top-img">
                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
-                                        </div>
-                                        <div class="item owl-thumb-item">
+                                        </div> -->
+                                        <!-- <div class="item owl-thumb-item">
                                           <div class="top-img">
                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="col-sm-9 col-lg-9">
-                                    <div class="image-slides owl-carousel owl-theme" data-slider-id="1">
-                                        <div class="item">
+                                    <div class="image-slides owl-carousel" >
+                                        <div class="item" v-for="(item,index) in items.photo" :key="index" v-if="items.photo.length > 0"  >
                                             <div class="top-img">
-                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                                                <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
+                                             
                                             </div>
                                         </div>
-                                        <div class="top-img">
-                                           <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                                        <!-- <div class="top-img" v-if="item[index] === 1">
+                                           <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
                                         </div>
-                                        <div class="top-img">
-                                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
-                                        </div>
+                                        <div class="top-img" v-if="item[index] === 3">
+                                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -118,25 +119,33 @@
                                 <input type="date" v-model="items.to" class="form-control" name="date" placeholder="date fin" required>
                             </div>
                              <div class="form-group">
-                             <label for="location">location</label>
-                                <input type="text" v-model="items.location" class="form-control" name="location" placeholder="location" required>
+                             <label for="location">Destination</label>
+                                <input type="text" v-model="items.location" class="form-control" name="location" placeholder="Destination" required>
                             </div>
                             <div class="form-group">
-                              <label for="objet">objets</label>
-                                <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objet" required>
+                              <label for="objet">Objectifs</label>
+                                <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objectifs" required>
                             </div>
+
+                            <div class="form-group">
+                              <label for="objet">Quantité</label>
+                                <input type="number" v-model="items.quantity" class="form-control" name="objet" placeholder="ex:200" required>
+                            </div>
+
                              <div class="form-group">
-                            <label for="participants">Participant</label>
+                            <label for="participants">Participants</label>
                                 <input type="number" v-model="items.participant" class="form-control" placeholder="ex:90" required>
                             </div>
+                            
                             <div class="form-group">
-                             <label for="location">details</label>
-                                <input type="text" v-model="items.details" class="form-control" name="location" placeholder="location" required>
+                             <label for="details">Détails</label> <br>
+                             <textarea placeholder="Détails" v-model="items.details"  cols="50" rows="10" required></textarea>
+                                <!-- <input type="text"  class="form-control" name="location" placeholder="details" > -->
                             </div>
-                            <ul class="cart float-end">
+                            <ul class="cart">
                                 <li>
                                     <a class="common-btn" href="#" @click.prevent="$emit('add',items)">
-                                        Add To Cart
+                                        Ajouter au panier
                                         <img src="/assets/images/shape1.png" alt="Shape">
                                         <img src="/assets/images/shape2.png" alt="Shape">
                                     </a>
@@ -150,86 +159,19 @@
     <div class="products-area pb-70">
         <div class="container">
             <div class="section-title">
-                <h2>Related Products</h2>
+                <h2>Les Produits les plus achetés</h2>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-3">
                     <div class="products-item">
                         <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
                             <img src="/assets/images/products/products10.png" alt="Products">
                             <div class="inner">
                                 <h3>
-                                    <a href="single-product.html">White Luxury Wardrobe</a>
+                                    <router-link to="/produits">White Luxury Wardrobe</router-link>
                                 </h3>
-                                <span>$200.00</span>
+                                <span>20000 Fcfa</span>
                             </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
-                            <img src="/assets/images/products/products11.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Wooden Wardrobe</a>
-                                </h3>
-                                <span>$180.00</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
-                            <img src="/assets/images/products/products12.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Three Door Wardrobe</a>
-                                </h3>
-                                <span>$170.00</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <a class="wishlist" href="#">
-                                <i class='bx bx-heart'></i>
-                            </a>
-                            <img src="/assets/images/products/products13.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Classic Wooden Table</a>
-                                </h3>
-                                <span>$190.00</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                            <i class='bx bx-plus'></i>
                         </div>
                     </div>
                 </div>
@@ -273,6 +215,7 @@ export default {
                 object:"",
                 participants:"",
                 details:"",
+                quantity:"",
             },
             // min:new Date(),
        }
@@ -295,19 +238,19 @@ export default {
           
     //    },  
        
-    getNotif(){
-  let noty = new Notyf({
-      duration:4000,
-      position :{
-          x:'right',
-          y:'top',
-      }
-  })
-  noty.success('produit ajoutee')
-  setTimeout(()=>{
-      noty.dismissAll()
-  },1000)
-   },
+//     getNotif(){
+//   let noty = new Notyf({
+//       duration:4000,
+//       position :{
+//           x:'right',
+//           y:'top',
+//       }
+//   })
+//   noty.success('produit ajoutee')
+//   setTimeout(()=>{
+//       noty.dismissAll()
+//   },1000)
+//    },
     
    },
 
@@ -319,13 +262,19 @@ export default {
                 this.items = resp.data.data
                   this.isLoading =false;
                 })
+    
 
 
    },
    
    mounted() {
-    //    console.log("MIN",this.min);
-
+//     //    console.log("MIN",this.min);
+//    $(".owl-carouselle").owlCarousel({
+//     loop: true,
+//     margin: 10,
+//     nav: true,
+//     items: 1
+//         });
    },
   
 }

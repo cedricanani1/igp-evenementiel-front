@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="/assets/images/page-title1.jpg" alt="About">
+            <img  src="/assets/images/HTB19FgtbEKF3KVjSZFE760ExFXaW.png_350x350.jpg" alt="About">
             <img src="/assets/images/shape16.png" alt="Shape">
             <img src="/assets/images/shape17.png" alt="Shape">
             <img src="/assets/images/shape18.png" alt="Shape">
@@ -69,9 +69,9 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-img">
-                        <img src="/assets/images/about-main1.jpg" alt="About">
-                        <img src="/assets/images/about-main2.jpg" alt="About">
-                        <img src="/assets/images/about-main3.jpg" alt="About">
+                        <img src="/assets/images/1191980.jpg" alt="About">
+                        <img src="/assets/images/88553620-table-setting-with-plates-knife-fork-and-spoon-restaurant-interior.webp" alt="About">
+                        <img src="/assets/images/photoIcone-1.jpg" alt="About">
                     </div>
                 </div>
             </div>
@@ -87,17 +87,17 @@
             <div class="row m-0 align-items-center">
                 <div class="col-lg-6 p-0">
                     <div class="buy-img">
-                        <img src="/assets/images/buy-main1.png" alt="Buy">
+                        <img src="/assets/images/auna-pw-2222-pack-d-enceintes-sono-passives-mkii.jpg" alt="Buy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
                     <div class="buy-content ptb-100">
-                        <h2>Achetez les meilleurs meubles à un prix moins cher</h2>
-                        <p>Canapé double en frêne confortable et doux</p>
+                        <h2>Reserver chez nous</h2>
+                        <!-- <p>Canapé double en frêne confortable et doux</p> -->
                         <ul>
-                            <li>16000 Fcfa</li>
+                            <li>160000 Fcfa</li>
                             <li>
-                                <del>20000 Fcfa</del>
+                                <del>200000 Fcfa</del>
                             </li>
                         </ul>
                        <router-link class="common-btn" to="/produits">

@@ -3,50 +3,46 @@
 <!-- voici tous ce quui s' affiche lorsque tu viens sur le site -->
     <div class="banner-area-two">
         <div class="banner-slider owl-theme owl-carousel">
-            <div class="banner-item">
+            <div class="banner-item one">
                 <div class="d-table">
                     <div class="d-table-cell">
                         <div class="container">
-                            <div class="banner-content">
-                                <h1>obtenez tous les meubles à la mode dans un seul magasin</h1>
-                               
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                    tempor invidunt ut labore et dolore magna aliquyam erat</p>
+                            <div class="banner-content text-light">
+                                <h1 class="text-light">obtenez tous les meubles à la mode dans un seul magasin</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
-                                    <img src="/assets/images/shape1.png" alt="Shape">
-                                    <img src="/assets/images/shape2.png" alt="Shape">
+                                    <!-- <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape"> -->
                                 </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="banner-img">
+                <!-- <div class="banner-img">
                     <img class="img-fluid" src="/assets/images/4023_1.jpg" alt="ceremonie">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div>
+                </div> -->
             </div>
-            <div class="banner-item">
+            <div class="banner-item two">
                 <div class="d-table">
                     <div class="d-table-cell">
                         <div class="container">
-                            <div class="banner-content">
-                                <h1>obtenez tous les meubles à la mode dans un seul magasin</h1>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                    tempor invidunt ut labore et dolore magna aliquyam erat</p>
+                            <div class="banner-content text-light">
+                                <!-- <h1 class="text-light">plat</h1> -->
+                                <h1 class="text-light">Nous rendons vos ceremonie magnifique</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
-                                    <img src="/assets/images/shape1.png" alt="Shape">
-                                    <img src="/assets/images/shape2.png" alt="Shape">
+                                    <!-- <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape"> -->
                                 </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="banner-img">
+                <!-- <div class="banner-img">
                     <img src="/assets/images/evenement-d-entreprise.jpg" alt="Banner">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -162,7 +158,7 @@
             <div class="row m-0 align-items-center">
                 <div class="col-lg-6 p-0">
                     <div class="buy-img">
-                        <img src="/assets/images/acceuil5-01.png" alt="Buy">
+                        <img src="/assets/images/julian-wallner-KHgSurk57V4-unsplash.jpg" alt="Buy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
@@ -298,7 +294,7 @@ export default{
   name:'Home',
   props:['products','cart','add','listData','maxVisibleButtons','totalPages',
   'total','perPage','currentPage','pageChanged',
-  'paginatedData','filtrerProducts','categories'],
+  'paginatedData','filtrerProducts'],
   data(){
       return{
           logoAdd:'bx bx-plus',
@@ -306,6 +302,7 @@ export default{
           add:'Ajouter au panier',
           showProducts:false,
           userFilterkey:"all",
+        categories:[],
          
       }
   }, 
@@ -313,30 +310,7 @@ export default{
       Header,
   },
 methods:{
-//        onClickFirstPage(){
-//            this.$emit('pageChanged',1)
-//         },
-//          onClickPreviousPage(){
-//            this.$emit('pageChanged', this.currentPage-1)
-//         },
-//          onClickPage(page){
-//            this.$emit('pageChanged',page)
-//         },
-//          onClickNextPage(){
-//            this.$emit('pageChanged', this.currentPage + 1)
-//         },
-//          onClickLastPage(){
-//            this.$emit('pageChanged', this.totalPages)
-//         },
-//          isPageActive(page){
-//            return this.currentPage === page
-//         },
-//      onPageChange(page){
-//           this.currentPage = page;
-//         },
-//   onPageChange(page){
-//            this.currentPage = page;
-//         },
+
 },
 computed:{
 
@@ -367,15 +341,13 @@ computed:{
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
-        all(){
-            return this.listData
-        },
-        userFilter(){
-            return this[this.userFilterkey]
-        },
-        sono(){
-            return this.listData.filter((item)=>{item.type.libelle})
-        },
+         getCategories(){
+            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+                 .then(resp =>{
+                this.categories = resp.data
+                })   
+          }
+
         // chargement(){
         //     if(document.DOMContentLoaded){
         //         this.isLoading = false;
@@ -388,6 +360,7 @@ computed:{
   mounted(){
     //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
     // this.chargement
+    this.getCategories
     
   },
 }
@@ -404,5 +377,17 @@ computed:{
     margin:0 .5em;
   
 }
+/*.one{
+   background-image:url("/assets/images/ibrahim-boran-m8YjB0noWiY-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.two{
+        background-image:url("/assets/images/andra-c-taylor-jr-Zts17DjhMjk-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}*/
 
 </style>

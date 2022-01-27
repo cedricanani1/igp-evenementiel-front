@@ -8,6 +8,7 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import "bootstrap"
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import VueAgile from 'vue-agile'
 
-createApp(App).use(store).use(router).use(jQuery).use(VueSweetalert2).use(VueLoading).mount('#app') 
+createApp(App).use(store).use(router).use(jQuery).use(VueSweetalert2).use(VueLoading).use(VueAgile).mount('#app') 
 

@@ -25,14 +25,13 @@
      :informationProduct=informationProduct
      @filtrerProducts=filtrerProducts
      :search="search"
-     :categories=categories
      
 
 
     :listData=products
     :perPage="6"
     :total=products.length
-    :totalPages="Math.ceil(products.length/4)"
+    :totalPages="Math.ceil(products.length/5)"
     @pageChanged=onPageChange
     :currentPage=currentPage
     :maxVisibleButtons="3"
@@ -76,7 +75,7 @@ export default {
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
            return item.quantity++;
-         } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined) {
+         } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined && product.quantity !== undefined) {
                   
                   if(product.to < product.from){
                      Swal.fire({
@@ -94,7 +93,7 @@ export default {
             participant: product.participant,
             objects: product.objects,
             location:product.location,
-            quantity:1,
+            quantity:product.quantity,
             photo:'https://igp-event-backend.lce-ci.com/public/'+ product.photo[0].path,
             libelle:product.libelle,
             price:product.price,
@@ -172,17 +171,7 @@ export default {
                 })
             return this.products;
           },
-          getCategories(){
-            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
-                 .then(resp =>{
-                this.categories = resp.data
-                // this.categories= resp.data.data
-                // console.log("categorie",resp.data)
-          
-                })
-
-               
-          }
+         
 
       // function pour filtrer dans le tableau products
       // filtrerProducts(catName){
@@ -210,13 +199,20 @@ export default {
             let end = start + this.perPage;
          return this.listData.slice(start,end);
         },
+         getCategories(){
+            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+                 .then(resp =>{
+                this.categories = resp.data
+                })   
+                return this.categories;
+          }
    },
 
    mounted(){
      this.getProducts();
     //  localStorage.removeItem('mycart');
     //  console.log("cart",localStorage.getItem('mycart'));
-    this. getCategories();
+    this.getCategories;
    }
  
  
