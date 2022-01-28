@@ -11,17 +11,17 @@
                                 <h1 class="text-light">obtenez tous les meubles à la mode dans un seul magasin</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
-                                    <!-- <img src="/assets/images/shape1.png" alt="Shape">
-                                    <img src="/assets/images/shape2.png" alt="Shape"> -->
+                                    <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape">
                                 </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="banner-img">
+                <div class="banner-img">
                     <img class="img-fluid" src="/assets/images/4023_1.jpg" alt="ceremonie">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div> -->
+                </div>
             </div>
             <div class="banner-item two">
                 <div class="d-table">
@@ -32,17 +32,17 @@
                                 <h1 class="text-light">Nous rendons vos ceremonie magnifique</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
-                                    <!-- <img src="/assets/images/shape1.png" alt="Shape">
-                                    <img src="/assets/images/shape2.png" alt="Shape"> -->
+                                    <img src="/assets/images/shape1.png" alt="Shape">
+                                    <img src="/assets/images/shape2.png" alt="Shape">
                                 </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="banner-img">
+                <div class="banner-img">
                     <img src="/assets/images/evenement-d-entreprise.jpg" alt="Banner">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -65,14 +65,6 @@
                                     <span>{{categorie.libelle}}</span>
                                 </div>
                             </li>
-                             <!-- <li class="filter" @click="userFilterKey = 'sono'">
-                                <div class="products-thumb">
-                                    <img src="assets/images/products/shape1.png" alt="Shape">
-                                    <img src="assets/images/products/shape2.png" alt="Shape">
-                                    <i class="flaticon-armchair"></i>
-                                    <span>sono</span>
-                                </div>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -99,41 +91,12 @@
                                         <span> {{items.price}} Fcfa</span>
                                     </div>
                             <div>
-                            <!-- <span>{{items.stock}}</span> -->
                             </div>
                                 </div>
-                                <!-- <div class="bottom">
-                                    <a class="cart-text" href="#" @click.prevent="$emit('add',items) , getNotif()">{{add}}</a>
-                                    <i :class="logoAdd"></i>
-                                </div> -->
                             </div>
                         </div>
                        
                     </div>
-             <!-- <div>
-                    <ul class="pagination" v-if="listData.length > 5 || currentPage > 1">
-                       <li>
-                      <button @click="onClickFirstPage" :disabled="isInFirstPage" >
-                      prev 
-                    </button>
-                    </li>
-         
-
-                    <li>
-                <button v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
-                :class="{active:isPageActive(page.number)}"
-                > {{page.number}}  
-                </button>
-                 </li>
-                
-
-                 <li>
-                 <button @click="onClickNextPage" :disabled="isInLastPage" >
-                  next 
-                 </button>
-                 </li>
-                 </ul>
-            </div> -->
                     <div class="text-center">
                         <router-link class="common-btn" to="/produits">
                             Voir Plus de produits
@@ -185,69 +148,32 @@
     <div class="products-area pb-70">
         <div class="container">
             <div class="section-title">
-                <h2 class="my-5">les Produits les mieux notés</h2>
+                <h2 class="my-5">les Produits les plus achetés</h2>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                           
-                            <img src="/assets/images/products/products10.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">White Luxury Wardrobe</a>
-                                </h3>
-                                <span>$200.00</span>
+            <div class="col-sm-6 col-lg-4"
+                      v-for="(items,index) in plusAcheters" 
+                      :key="index"
+                      >
+                            <div class="products-item">
+                                <div class="top">
+                  <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            </router-link>
+                                    <div class="inner">
+                                        <h3>
+                            <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
+                                        </h3>
+                                        <span> {{items.price}} Fcfa</span>
+                                    </div>
+                            <div>
+                            </div>
+                                </div>
+                             
                             </div>
                         </div>
-                      
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <img src="/assets/images/products/products11.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Wooden Wardrobe</a>
-                                </h3>
-                                <span>$180.00</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <img src="/assets/images/products/products12.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Three Door Wardrobe</a>
-                                </h3>
-                                <span>$170.00</span>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            <a class="cart-text" href="#">Add To Cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <img src="/assets/images/products/products13.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <a href="single-product.html">Classic Wooden Table</a>
-                                </h3>
-                                <span>$190.00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -303,6 +229,7 @@ export default{
           showProducts:false,
           userFilterkey:"all",
         categories:[],
+        bestSeller:[],
          
       }
   }, 
@@ -310,10 +237,29 @@ export default{
       Header,
   },
 methods:{
+     getBestSeller(){
+           axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
+           .then(resp =>{
+                this.bestSeller = resp.data
+                console.log("bestSeller",resp.data);
+                }) 
+        },
+        getCategories(){
+            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+                 .then(resp =>{
+                this.categories = resp.data
+                
+                })   
+          }
 
 },
 computed:{
-
+     
+       plusAcheters(){
+           let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.bestSeller.slice(start,end);
+       },
         paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -341,26 +287,13 @@ computed:{
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
-         getCategories(){
-            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
-                 .then(resp =>{
-                this.categories = resp.data
-                })   
-          }
-
-        // chargement(){
-        //     if(document.DOMContentLoaded){
-        //         this.isLoading = false;
-        //     }else{
-        //         this.isLoading = true;
-        //     }
-        // }
-   
+                
   },
   mounted(){
     //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
     // this.chargement
-    this.getCategories
+    this.getCategories();
+    this.getBestSeller();
     
   },
 }

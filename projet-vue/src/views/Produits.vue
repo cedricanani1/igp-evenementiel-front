@@ -47,7 +47,7 @@
                 <div class="col-lg-9">
           <div>
                 
-                <i class="bi bi-search" @click="searchSetter()" ></i><input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="term">
+                <input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="term">
           </div>
                     <div id="Container" class="row">
                        <div class="col-sm-6 col-lg-4"
@@ -72,9 +72,9 @@
                         </div>
                     </div>
                     <div>
-                <ul class="pagination" v-if="listData.length > 5 || currentPage > 1">
+                <ul class="pagination float-end" v-if="listData.length > 5 || currentPage > 1">
                        <li>
-                      <button @click="onClickFirstPage" :disabled="isInFirstPage" >
+                      <button @click="onClickFirstPage" :disabled="isInFirstPage"  >
                       prev 
                     </button>
                     </li>
@@ -95,13 +95,6 @@
                  </li>
                  </ul>
             </div>
-                    <div class="text-center">
-                        <a class="common-btn" href="#">
-                            Afficher plusieurs produits
-                            <img src="/assets/images/shape1.png" alt="Shape">
-                            <img src="/assets/images/shape2.png" alt="Shape">
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -114,7 +107,7 @@ import axios from "axios"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
-    props:['cart','add','listData','maxVisibleButtons','totalPages','total','perPage','currentPage','pageChanged','paginatedData'],
+    props:['cart','add','listData','maxVisibleButtons','totalPages','total','currentPage','pageChanged','paginatedData'],
     data(){
         return{
             // products:[],
@@ -123,6 +116,7 @@ export default {
               add:'Ajouter au panier',
               term:"",
               categories:[],
+              perPage:6,
         }
     },
     components:{

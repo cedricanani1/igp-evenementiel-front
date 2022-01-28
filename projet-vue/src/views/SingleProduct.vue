@@ -76,32 +76,28 @@
                     <div class="col-lg-4">
                         <div class="top-content">
                             <h2>{{items.libelle}}</h2>
-                            <ul class="reviews">
-                                <li>
-                                    <i class="bx bxs-star" :class="checked" @click="giveStars" ></i>
-                                </li>
-                                <li>
-                                    <i class="bx bxs-star"></i>
-                                </li>
-                                <li>
-                                    <i class="bx bxs-star "></i>
-                                </li>
-                                <li>
-                                    <i class="bx bxs-star "></i>
-                                </li>
-                                <li>
-                                    <i class="bx bxs-star"></i>
-                                </li>
-                                <li>
-                                    <h3>{{items.price}} Fcfa</h3>
-                                </li>
-                            </ul>
+                           
+                             <h3>{{items.price}} Fcfa</h3>
+                            
                             <p>{{items.slug}}</p>
                             <ul class="tag">
                                 <li>Numero du produit: <span>{{items.id}}</span></li>
                                 <li>Categorie: <span>Sofa</span></li>
                                 <li>libelle: <span>Furniture</span></li>
                                 <li>Status: <span>En Stock</span></li>
+                            </ul>
+                             <ul class="reviews" id="stars">
+    
+                              <i class="bi bi-star-fill start fs-3" title="mauvais" :id="1" @click="rated(1,1)"></i>
+    
+                              <i class="bi bi-star-fill fs-3" title="assez" :id="2" @click="rated(2,2)"></i>
+    
+                              <i class="bi bi-star-fill fs-3" title="Good" :id="3" @click="rated(3,3)"></i>
+    
+
+                              <i class="bi bi-star-fill fs-3" title="Excellent" :id="4" @click="rated(4,4)"></i>
+                              <i class="bi bi-star-fill fs-3" title="super" :id="5" @click="rated(5,5)"></i>
+                               <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
                             </ul>
                         </div>
                     </div>
@@ -142,8 +138,8 @@
                              <textarea placeholder="Détails" v-model="items.details"  cols="50" rows="10" required></textarea>
                                 <!-- <input type="text"  class="form-control" name="location" placeholder="details" > -->
                             </div>
-                            <ul class="cart">
-                                <li>
+                            <ul class="cart list-unstyled">
+                                <li >
                                     <a class="common-btn" href="#" @click.prevent="$emit('add',items)">
                                         Ajouter au panier
                                         <img src="/assets/images/shape1.png" alt="Shape">
@@ -162,19 +158,27 @@
                 <h2>Les Produits les plus achetés</h2>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="products-item">
-                        <div class="top">
-                            <img src="/assets/images/products/products10.png" alt="Products">
-                            <div class="inner">
-                                <h3>
-                                    <router-link to="/produits">White Luxury Wardrobe</router-link>
-                                </h3>
-                                <span>20000 Fcfa</span>
+                <div class="col-sm-6 col-lg-4"
+                      v-for="(items,index) in plusAcheters" 
+                      :key="index"
+                      >
+                            <div class="products-item">
+                                <div class="top">
+                  <router-link to="/produits" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            </router-link>
+                                    <div class="inner">
+                                        <h3>
+                            <router-link to="/produits">{{items.libelle}}</router-link>
+                                        </h3>
+                                        <span> {{items.price}} Fcfa</span>
+                                    </div>
+                            <div>
+                            </div>
+                                </div>
+                             
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -193,13 +197,14 @@ import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+// import Rating from './Rating.vue'
 export default {
    name:"SingleProduct",
 
    props:['products','cart','add','removeItem','removeBySign','increase'],
 
    compoments:{
-    Header,Loading,
+    Header,Loading
    },
 
    data(){
@@ -217,7 +222,12 @@ export default {
                 details:"",
                 quantity:"",
             },
-            // min:new Date(),
+           rating:{
+              rate:0,
+           },
+            bestSeller:[],
+            currentPage:1,
+            perPage:3,
        }
    },
    computed:{
@@ -225,32 +235,35 @@ export default {
             
              return jours
        },
+        plusAcheters(){
+           let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.bestSeller.slice(start,end);
+       }
    },
     
    methods:{
-    //    giveStars(){
-    //     let verf=this.checked;
-    //     if(verf === ""){
-    //        this.checked ="checked"
-    //     }else{
-    //         this.checked=""
-    //     }
-          
-    //    },  
-       
-//     getNotif(){
-//   let noty = new Notyf({
-//       duration:4000,
-//       position :{
-//           x:'right',
-//           y:'top',
-//       }
-//   })
-//   noty.success('produit ajoutee')
-//   setTimeout(()=>{
-//       noty.dismissAll()
-//   },1000)
-//    },
+       rated(evaluation,star){
+           let i 
+           if(document.getElementById(star).style.color != 'orange'){
+               for(i=0 ; i<star ; i++){
+                   document.getElementById(i+1).style.color = 'orange'
+               }
+           }else{
+               for(i=5 ; i> star ; i--){
+                   document.getElementById(i).style.color = 'gray'
+               }
+           }
+           this.rating.rate = evaluation
+       },  
+         getBestSeller(){
+           axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
+           .then(resp =>{
+                this.bestSeller = resp.data
+                console.log("bestSeller",resp.data);
+                }) 
+        }
+
     
    },
 
@@ -268,14 +281,17 @@ export default {
    },
    
    mounted() {
-//     //    console.log("MIN",this.min);
-//    $(".owl-carouselle").owlCarousel({
-//     loop: true,
-//     margin: 10,
-//     nav: true,
-//     items: 1
-//         });
+  this.getBestSeller();
    },
   
 }
 </script>
+
+<style scoped>
+
+.reviews li{
+ display:inline-block!important;
+ margin-right:.5em;
+}
+
+</style>

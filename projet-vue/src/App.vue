@@ -29,7 +29,7 @@
 
 
     :listData=products
-    :perPage="6"
+    :perPage="3"
     :total=products.length
     :totalPages="Math.ceil(products.length/5)"
     @pageChanged=onPageChange

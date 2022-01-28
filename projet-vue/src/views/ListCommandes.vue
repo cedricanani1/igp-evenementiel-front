@@ -36,7 +36,7 @@
   </div>
 </div>
       <div>
-                <ul class="pagination" v-if="listCommandes.length > 5 || currentPage > 1">
+                <ul class="pagination" v-if="this.listCommandes.length > 5 || currentPage > 1">
                        <li>
                       <button @click="onClickFirstPage" :disabled="isInFirstPage" >
                       prev 
@@ -100,8 +100,8 @@ export default {
         //    this.$emit('pageChanged', this.currentPage-1)
         },
          onClickPage(page){
-             this.currentPage = page;
-            return this.currentPage;
+            return this.currentPage = page;
+            // return this.currentPage;
         //    this.$emit('pageChanged',page)
         },
          onClickNextPage(){
@@ -120,23 +120,25 @@ export default {
    },
    computed: {
         startPage(){
-            if(this.currentPage === 1) return 1
-            if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
+            if(this.currentPage === 1)return 1
+            if(this.currentPage === this.totalPages) return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
              return  this.currentPage - 1;
         },
         endPage(){
             return Math.min(this.startPage + this.maxVisibleButtons-1 , this.totalPages)
         },
         pages(){
-            let range =[]
-            for (let i = this.startPage; i <= this.endPage ; i+= 1) {
-                range.push({ number:i, isDisabled: i === this.currentPage
+            let range =[];
+            for (let i = this.startPage; i <= this.endPage ; i++) {
+                range.push({ 
+                  number:i, 
+                  isDisabled: i === this.currentPage
                 });
             }
             return range;
         },
         isInFirstPage(){
-            return this.currentPage === 1
+            return this.currentPage == 1;
         },
         isInLastPage(){
             return this.currentPage === this.totalPages
