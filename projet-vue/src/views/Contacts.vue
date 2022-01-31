@@ -19,10 +19,10 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="/assets/images/page-title5.jpg" alt="About">
-            <img src="/assets/images/shape16.png" alt="Shape">
+            <!-- <img src="/assets/images/order-main1.png" alt="About"> -->
+            <!-- <img src="/assets/images/shape16.png" alt="Shape">
             <img src="/assets/images/shape17.png" alt="Shape">
-            <img src="/assets/images/shape18.png" alt="Shape">
+            <img src="/assets/images/shape18.png" alt="Shape"> -->
         </div>
     </div>
 

@@ -86,19 +86,7 @@
                                 <li>libelle: <span>Furniture</span></li>
                                 <li>Status: <span>En Stock</span></li>
                             </ul>
-                             <ul class="reviews" id="stars">
-    
-                              <i class="bi bi-star-fill start fs-3" title="mauvais" :id="1" @click="rated(1,1)"></i>
-    
-                              <i class="bi bi-star-fill fs-3" title="assez" :id="2" @click="rated(2,2)"></i>
-    
-                              <i class="bi bi-star-fill fs-3" title="Good" :id="3" @click="rated(3,3)"></i>
-    
-
-                              <i class="bi bi-star-fill fs-3" title="Excellent" :id="4" @click="rated(4,4)"></i>
-                              <i class="bi bi-star-fill fs-3" title="super" :id="5" @click="rated(5,5)"></i>
-                               <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
-                            </ul>
+                           
                         </div>
                     </div>
                 </div>
@@ -150,8 +138,27 @@
                         </div>
         </div>
     </div>
-
-
+    <div class="container rating">
+    <ul class="reviews" id="stars">
+    
+        <i class="bi bi-star-fill start fs-3" title="mauvais" :id="1" @click="rated(1,1)"></i>
+       <i class="bi bi-star-fill fs-3" title="assez" :id="2" @click="rated(2,2)"></i>
+    
+        <i class="bi bi-star-fill fs-3" title="Good" :id="3" @click="rated(3,3)"></i>
+        <i class="bi bi-star-fill fs-3" title="Excellent" :id="4" @click="rated(4,4)"></i>
+        <i class="bi bi-star-fill fs-3" title="super" :id="5" @click="rated(5,5)"></i>
+        <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
+     </ul>
+     <form @submit.prevent.stop="postRating">
+       <!-- <input class="my-2" v-model="rating.rate" type="text" name="rate" placeholder="Rating" > <br>  -->
+       <input class="my-1" v-model="rating.object"  type="text" name="objet" placeholder="Objet" > <br>
+       <textarea v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message"></textarea> <br>
+       <button class="my-2" type="submit">Envoyer</button>
+     </form>
+    
+    
+    </div>
+      
     <div class="products-area pb-70">
         <div class="container">
             <div class="section-title">
@@ -223,7 +230,10 @@ export default {
                 quantity:"",
             },
            rating:{
-              rate:0,
+              rate:"",
+              object:"",
+              message:"",
+              product_id:this.$route.params.id,
            },
             bestSeller:[],
             currentPage:1,
@@ -254,7 +264,7 @@ export default {
                    document.getElementById(i).style.color = 'gray'
                }
            }
-           this.rating.rate = evaluation
+         return this.rating.rate = evaluation
        },  
          getBestSeller(){
            axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
@@ -262,6 +272,23 @@ export default {
                 this.bestSeller = resp.data
                 console.log("bestSeller",resp.data);
                 }) 
+        },
+        postRating(){
+            axios.post('https://igp-event-backend.lce-ci.com/api/rating',this.rating)
+             .then(
+             reponse =>{
+            //      Swal.fire({
+            // position: 'center',
+            //    icon: 'success',
+            // //    title: 'votre inscription a été validée',
+            //   showConfirmButton: false,
+            //   timer: 2000,
+            //       })
+            
+                console.log(reponse)
+            //  this.$router.push('/login');
+            })
+            console.log("rating",this.rating)
         }
 
     
@@ -293,5 +320,9 @@ export default {
  display:inline-block!important;
  margin-right:.5em;
 }
+.rating{
+text-align:center
+}
+
 
 </style>

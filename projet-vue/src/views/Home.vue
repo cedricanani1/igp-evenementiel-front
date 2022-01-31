@@ -8,7 +8,7 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content text-light">
-                                <h1 class="text-light">obtenez tous les meubles à la mode dans un seul magasin</h1>
+                                <h1 class="text-light">Reserver vos <br> chapiteau</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
@@ -18,10 +18,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="banner-img">
+                <!-- <div class="banner-img">
                     <img class="img-fluid" src="/assets/images/4023_1.jpg" alt="ceremonie">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div>
+                </div> -->
             </div>
             <div class="banner-item two">
                 <div class="d-table">
@@ -39,10 +39,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="banner-img">
+                <!-- <div class="banner-img">
                     <img src="/assets/images/evenement-d-entreprise.jpg" alt="Banner">
                     <img src="/assets/images/banner/banner-shape1.png" alt="Shape">
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -51,10 +51,11 @@
   
      <div class="products-area ptb-100">
 
-        <div class="container-fluid pe-5">
+        <div class="container-fluid px-5">
             <div class="row">
-                <div class="col-lg-2">
-     <!-- buttons pour filtrer les produits-->
+         <!-- buttons pour filtrer les produits-->
+                <!-- <div class="col-lg-2">
+    
                     <div class="sorting-menu">
                         <ul class="justify-content-center">
                             <li class="filter" v-for="categorie in categories" :key="categorie.id" >
@@ -62,19 +63,19 @@
                                     <img src="/assets/images/products/shape1.png" alt="Shape">
                                     <img src="/assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span>{{categorie.libelle}}</span>
+                                    <span @click="filterByCategories(e)">{{categorie.libelle}}</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
      <!-- buttons pour filtrer les produits-->
      
       
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                     <div id="Container" class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in products" 
+                      v-for="(items,index) in paginatedData" 
                       :key="index"
                       >
                             <div class="products-item">
@@ -121,13 +122,12 @@
             <div class="row m-0 align-items-center">
                 <div class="col-lg-6 p-0">
                     <div class="buy-img">
-                        <img src="/assets/images/julian-wallner-KHgSurk57V4-unsplash.jpg" alt="Buy">
+                        <img src="/assets/images/tente-095715-650-400.jpg" alt="Buy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
                     <div class="buy-content ptb-100">
-                        <h2>Achetez les meilleurs meubles à un prix moins cher</h2>
-                        <p>Canapé double en frêne confortable et doux</p>
+                        <h2>Des chaises <br> super cool</h2>
                         <ul>
                             <li>16000 Fcfa</li>
                             <li>
@@ -219,7 +219,7 @@ export default{
 
   name:'Home',
   props:['products','cart','add','listData','maxVisibleButtons','totalPages',
-  'total','perPage','currentPage','pageChanged',
+  'total','currentPage','pageChanged',
   'paginatedData','filtrerProducts'],
   data(){
       return{
@@ -244,25 +244,35 @@ methods:{
                 console.log("bestSeller",resp.data);
                 }) 
         },
-        getCategories(){
-            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
-                 .then(resp =>{
-                this.categories = resp.data
+        // getCategories(){
+        //     axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+        //          .then(resp =>{
+        //         this.categories = resp.data
                 
-                })   
-          }
+        //         })   
+        //   },
+          filterByCategories(catName){
+              let produits = [...this.products]
+              if(catName !== "all"){
+                  produits.filter((value)=>{
+                      return value.type.libelle === catName;
+                  })
+              }
+              return produits
+                    
+        }
 
 },
 computed:{
      
        plusAcheters(){
-           let start = (this.currentPage * this.perPage) - this.perPage;
-            let end = start + this.perPage;
+           let start = (this.currentPage * 3) - 3;
+            let end = start + 3;
          return this.bestSeller.slice(start,end);
        },
         paginatedData(){
-            let start = (this.currentPage * this.perPage) - this.perPage;
-            let end = start + this.perPage;
+            let start = (this.currentPage * 6) - 6;
+            let end = start + 6;
          return this.listData.slice(start,end);
         },
         startPage(){
@@ -292,7 +302,7 @@ computed:{
   mounted(){
     //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
     // this.chargement
-    this.getCategories();
+    // this.getCategories();
     this.getBestSeller();
     
   },
@@ -310,8 +320,8 @@ computed:{
     margin:0 .5em;
   
 }
-/*.one{
-   background-image:url("/assets/images/ibrahim-boran-m8YjB0noWiY-unsplash.jpg");
+.one{
+   background-image:url("/assets/images/4023_1.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -321,6 +331,6 @@ computed:{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-}*/
+}
 
 </style>

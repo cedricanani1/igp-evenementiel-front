@@ -53,7 +53,7 @@
                 
 
                  <li>
-                 <button @click="onClickNextPage" :disabled="isInLastPage" >
+                 <button @click="onClickNextPage" :disabled="isInLastPage">
                   next 
                  </button>
                  </li>
@@ -76,6 +76,7 @@ export default {
         //    totalPages:"",
            maxVisibleButtons:3,
            currentPage:1,
+        //    totalPages:"Math.ceil(this.total/1)",
        }
    },
    methods:{
@@ -85,34 +86,29 @@ export default {
                  console.log("ListCommand:",rep.data)
                  this.listCommandes = rep.data
                  this.total = rep.data.length
+                //  this.totalPages="Math.ceil(rep.data.length/5)"
                 //  this.totalPages = Math.ceil(this.total/this.perPage)
                  console.log("TOTAL",this.total);
+                //  console.log("SUM",this.totalPages);
              })
        },
+       onPageChange(page){
+           return this.currentPage = page;
+       },
        onClickFirstPage(){
-         this.currentPage = 1;
-         return this.currentPage;
-        //    this.$emit('pageChanged',1)
+           this.onPageChange(1)
         },
          onClickPreviousPage(){
-             this.currentPage = this.currentPage-1;
-             return this.currentPage;
-        //    this.$emit('pageChanged', this.currentPage-1)
+             this.onPageChange(this.currentPage-1)
         },
          onClickPage(page){
-            return this.currentPage = page;
-            // return this.currentPage;
-        //    this.$emit('pageChanged',page)
+               this.onPageChange(page)
         },
          onClickNextPage(){
-             this.currentPage = this.currentPage+1;
-             return this.currentPage;
-        //    this.$emit('pageChanged', this.currentPage + 1)
+             this.onPageChange(this.currentPage+1)
         },
          onClickLastPage(){
-            this.currentPage = this.totalPages
-             return this.currentPage;
-        //    this.$emit('pageChanged', this.totalPages)
+              this.onPageChange(this.totalPages)
         },
          isPageActive(page){
            return this.currentPage = page;
@@ -143,18 +139,22 @@ export default {
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
-        totalPages(){
-            return Math.ceil(this.total/this.perPage);
-        }, 
+        // totalPages(){
+        //     let totalPages = Math.ceil(this.);
+        //     return totalPages;
+        // }, 
         paginatedData(){
-            let start = (this.currentPage - 1) * this.perPage;
+            let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
          return this.listCommandes.slice(start,end);
         }
    },
+//    created(){
+//        this.totalPages;
+       
+//    },
    mounted(){
        this.getDetailsCommandes()
-       console.log("TOTAPAGES", this.totalPages);
    }
 }
 </script>
@@ -167,6 +167,11 @@ export default {
     background-color:rgb(235, 233, 233);
     text-align:center;
     padding:1em;
+}
+.pagination{
+ transform: translateX(-50%);
+ margin-left:65%;
+ margin-top:2em;
 }
 
 

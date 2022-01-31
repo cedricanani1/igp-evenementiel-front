@@ -161,7 +161,7 @@ export default {
        return this.currentPage = page ;
         },
         getProducts(){
-          this.isLoading = true;
+          this.isLoading =false;
              axios.get('https://igp-event-backend.lce-ci.com/api/products')
                   .then(resp =>{
                 this.products = resp.data.data
@@ -189,11 +189,11 @@ export default {
      this.cart = JSON.parse(localStorage.getItem('mycart') || '[]');
    },
    computed:{
-        pageCount(){
-            let ligne=this.listData.length,
-                size = this.perPage;
-            return Math.ceil(ligne/size);
-        },
+        // pageCount(){
+        //     let ligne=this.listData.length,
+        //         size = this.perPage;
+        //     return Math.ceil(ligne/size);
+        // },
          paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;

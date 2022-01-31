@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="title-img">
-            <img src="/assets/images/page-title1.jpg" alt="About">
+            <img src="/assets/images/.jpg" alt="About">
             <img src="/assets/images/shape16.png" alt="Shape">
             <img src="/assets/images/shape17.png" alt="Shape">
             <img src="/assets/images/shape18.png" alt="Shape">
@@ -32,12 +32,12 @@
                 <div class="col-lg-2">
                     <div class="sorting-menu">
                         <ul>
-                            <li class="filter" v-for="categorie in categories" :key="categorie.id">
+                            <li class="filter" v-for="(categorie,index) in categories" :key="index">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span>{{categorie.libelle}}</span>
+                                    <span @click="buttonFilter">{{categorie.libelle}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -47,11 +47,11 @@
                 <div class="col-lg-9">
           <div>
                 
-                <input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="term">
+                <input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="searchString">
           </div>
                     <div id="Container" class="row">
                        <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in filteredData" 
+                      v-for="(items,index) in paginatedData" 
                       :key="index"
                       >
                             <div class="products-item">
@@ -94,6 +94,27 @@
                  </button>
                  </li>
                  </ul>
+                 <!-- <div class="col-sm-6 col-lg-4"
+                      v-for="(items,index) in filterList" 
+                      :key="index"
+                      >
+                      <div class="products-item">
+                                <div class="top">
+                          <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            </router-link>
+                                    <div class="inner">
+                                        <h3>
+                                                    <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
+                                        </h3>
+                                        <span> {{items.price}} Fcfa</span>
+                                    </div>
+                                </div>
+                            </div>
+                 </div> -->
+                 <!-- {{filterList}} -->
             </div>
                 </div>
             </div>
@@ -117,6 +138,7 @@ export default {
               term:"",
               categories:[],
               perPage:6,
+              searchString:"",
         }
     },
     components:{
@@ -144,35 +166,51 @@ export default {
     //  onPageChange(page){
     //       this.currentPage = page;
     //     },
-//   onPageChange(page){
-//            this.currentPage = page;
-//         },
+  buttonFilter(e){
+        let cible = e.currentTarget.innerText;
+        console.log("ELE",cible);
+        return this.paginatedData.filter(item=>{
+            return item.type.libelle === cible
+        })
+
+        },
 },
 computed:{
-    filteredData:{
-        get(){
-              let start = (this.currentPage * this.perPage) - this.perPage;
-            let end = start + this.perPage;
-         return this.listData.slice(start,end);
-        },
-        set(term){
-         this.listData.filter(item=>{
-             return item.libelle.toLowerCase().includes(term.toLowerCase())})
+    // filteredData:{
+    //     get(){
+    //           let start = (this.currentPage * this.perPage) - this.perPage;
+    //         let end = start + this.perPage;
+    //      return this.listData.slice(start,end);
+    //     },
+    //     set(term){
+    //      this.listData.filter(item=>{
+    //          return item.libelle.toLowerCase().includes(term.toLowerCase())})
      
 
-        }
-        //  this.listData.filter(item=>item.libelle.toLowerCase().includes(this.search.toLowerCase()))
+    //     }
+    //     //  this.listData.filter(item=>item.libelle.toLowerCase().includes(this.search.toLowerCase()))
         
                   
-        //             let start = (this.currentPage * this.perPage) - this.perPage;
-        //     let end = start + this.perPage;
-        //  return this.listData.slice(start,end);
-    },
-//   paginatedData(){
-        //     let start = (this.currentPage * this.perPage) - this.perPage;
-        //     let end = start + this.perPage;
-        //  return this.listData.slice(start,end);
-//         },
+    //     //             let start = (this.currentPage * this.perPage) - this.perPage;
+    //     //     let end = start + this.perPage;
+    //     //  return this.listData.slice(start,end);
+    // },
+  paginatedData(){
+      if(this.searchString !== ""){
+        return this.listData.filter(item =>{
+                  return item.libelle.toLowerCase().includes(this.searchString.toLowerCase())
+              })
+      }
+    //   else if(this.listData){
+    //       this.buttonFilter()
+    //   }
+      else{
+         let start = (this.currentPage * this.perPage) - this.perPage;
+            let end = start + this.perPage;
+         return this.listData.slice(start,end);
+      }
+            
+        },
         startPage(){
             if(this.currentPage === 1) return 1
             if(this.currentPage === this.totalPages)return this.totalPages - this.maxVisibleButtons + (this.maxVisibleButtons-1)
@@ -200,7 +238,25 @@ computed:{
                  .then(resp =>{
                 this.categories = resp.data
                 })   
-          }
+          },
+        //   filterList(){
+        //     return this.listData.filter(item =>{
+        //           return item.libelle.toLowerCase().includes(this.searchString.toLowerCase())
+        //       })
+        //   },
+},
+watch:{
+searchString(value){
+    console.log(value);
+  console.log(this.filterList);
+},
+
+
+
+},
+created(){
+    
+
 },
 mounted(){
  this.getCategories
