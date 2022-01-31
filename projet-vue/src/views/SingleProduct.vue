@@ -28,7 +28,7 @@
     </div>
 
 
-    <div class="product-details-area ptb-100">
+    <div class="product-details-area pt-100 pb-3">
         <div class="container">
             <div class="top">
                 <div class="row align-items-center">
@@ -80,6 +80,15 @@
                              <h3>{{items.price}} Fcfa</h3>
                             
                             <p>{{items.slug}}</p>
+                            <ul class="reviews badge bg-secondary p-3 ">
+                            <span class="d-block mb-2 fs-4">{{items.start}}/5</span>
+                          <i class="bi bi-star-fill start fs-5" title="mauvais"></i>
+                         <i class="bi bi-star-fill fs-5" title="assez" ></i>
+                         <i class="bi bi-star-fill fs-5" title="Good" ></i>
+                        <i class="bi bi-star-fill fs-5" title="Excellent" ></i>
+                        <i class="bi bi-star-fill fs-5" title="super"></i>
+                         
+                         </ul>
                             <ul class="tag">
                                 <li>Numero du produit: <span>{{items.id}}</span></li>
                                 <li>Categorie: <span>Sofa</span></li>
@@ -138,8 +147,10 @@
                         </div>
         </div>
     </div>
-    <div class="container rating">
-    <ul class="reviews" id="stars">
+    <div class="container-fluid rating mx-auto  py-4">
+    
+     <form @submit.prevent.stop="postRating">
+     <ul class="reviews" id="stars">
     
         <i class="bi bi-star-fill start fs-3" title="mauvais" :id="1" @click="rated(1,1)"></i>
        <i class="bi bi-star-fill fs-3" title="assez" :id="2" @click="rated(2,2)"></i>
@@ -149,11 +160,10 @@
         <i class="bi bi-star-fill fs-3" title="super" :id="5" @click="rated(5,5)"></i>
         <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
      </ul>
-     <form @submit.prevent.stop="postRating">
        <!-- <input class="my-2" v-model="rating.rate" type="text" name="rate" placeholder="Rating" > <br>  -->
-       <input class="my-1" v-model="rating.object"  type="text" name="objet" placeholder="Objet" > <br>
-       <textarea v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message"></textarea> <br>
-       <button class="my-2" type="submit">Envoyer</button>
+       <input  class="my-1 w-25" v-model="rating.object"  type="text" name="objet" placeholder="Objet" > <br>
+       <textarea class="w-25" v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message"></textarea> <br>
+       <button class="my-2 w-25 rounded" type="submit">Envoyer</button>
      </form>
     
     
@@ -162,7 +172,7 @@
     <div class="products-area pb-70">
         <div class="container">
             <div class="section-title">
-                <h2>Les Produits les plus achetés</h2>
+                <h2 class="mt-3">Les Produits les plus achetés</h2>
             </div>
             <div class="row">
                 <div class="col-sm-6 col-lg-4"
@@ -230,7 +240,7 @@ export default {
                 quantity:"",
             },
            rating:{
-              rate:"",
+              rate:0,
               object:"",
               message:"",
               product_id:this.$route.params.id,
@@ -266,6 +276,19 @@ export default {
            }
          return this.rating.rate = evaluation
        },  
+    //    getAvgRate(evaluation,star){
+    //           let i 
+    //        if(document.getElementById(star).style.color != 'orange'){
+    //            for(i=0 ; i<star ; i++){
+    //                document.getElementById(i+1).style.color = 'orange'
+    //            }
+    //        }else{
+    //            for(i=5 ; i> star ; i--){
+    //                document.getElementById(i).style.color = 'gray'
+    //            }
+    //        }
+
+    //    },
          getBestSeller(){
            axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
            .then(resp =>{
@@ -319,9 +342,21 @@ export default {
 .reviews li{
  display:inline-block!important;
  margin-right:.5em;
+
 }
 .rating{
-text-align:center
+text-align:center;
+background-color:#f5f5f5;
+
+}
+.rating button{
+background: #eb6435;
+border: none;
+color:white;
+padding: .5em;
+}
+.rating form{
+background-color:rgba(0, 0, 0, 0.829);
 }
 
 
