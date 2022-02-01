@@ -69,6 +69,11 @@
                                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
                                         </div> -->
                                     </div>
+                                    <!-- <div class="owl-nav">
+                                    <button type="button" role="presentation" class="owl-prev">
+                                    <span aria-label="Previous">‹</span></button>
+                                    <button type="button" role="presentation" class="owl-next">
+                                    <span aria-label="Next">›</span></button></div> -->
                                 </div>
                             </div>
                         </div>
@@ -82,19 +87,56 @@
                             <p>{{items.slug}}</p>
                             <ul class="reviews badge bg-secondary p-3 ">
                             <span class="d-block mb-2 fs-4">{{items.start}}/5</span>
-                          <i class="bi bi-star-fill start fs-5" title="mauvais"></i>
+                            <div v-if=" items.start == 5">
+                            <i class="bi bi-star-fill start fs-5 " :class="color" title="mauvais"></i>
+                            <i class="bi bi-star-fill fs-5" :class="color" title="assez" ></i>
+                            <i class="bi bi-star-fill fs-5" :class="color" title="Good" ></i>
+                            <i class="bi bi-star-fill fs-5" :class="color" title="Excellent" ></i>
+                            <i class="bi bi-star-fill fs-5" :class="color" title="super"></i>
+                            </div>
+                            <div v-if=" items.start == 4" >
+                            <i class="bi bi-star-fill start fs-5" :class="color" title="mauvais"></i>
+                           <i class="bi bi-star-fill fs-5" :class="color"  title="assez" ></i>
+                           <i class="bi bi-star-fill fs-5" :class="color" title="Good" ></i>
+                          <i class="bi bi-star-fill fs-5" :class="color" title="Excellent" ></i>
+                           <i class="bi bi-star-fill fs-5" title="super"></i>
+                            </div>
+                        <div v-if=" items.start == 3">
+                        <i class="bi bi-star-fill start fs-5" :class="color" title="mauvais"></i>
+                         <i class="bi bi-star-fill fs-5" :class="color" title="assez" ></i>
+                         <i class="bi bi-star-fill fs-5" :class="color" title="Good" ></i>
+                        <i class="bi bi-star-fill fs-5" title="Excellent" ></i>
+                        <i class="bi bi-star-fill fs-5" title="super"></i>
+                        </div>
+                         <div v-if=" items.start == 2">
+                        <i class="bi bi-star-fill start fs-5" :class="color" title="mauvais"></i>
+                         <i class="bi bi-star-fill fs-5" :class="color" title="assez" ></i>
+                         <i class="bi bi-star-fill fs-5" title="Good" ></i>
+                        <i class="bi bi-star-fill fs-5" title="Excellent" ></i>
+                        <i class="bi bi-star-fill fs-5" title="super"></i>
+                        </div>
+                         <div v-if=" items.start == 1">
+                        <i class="bi bi-star-fill start fs-5" :class="color" title="mauvais"></i>
                          <i class="bi bi-star-fill fs-5" title="assez" ></i>
                          <i class="bi bi-star-fill fs-5" title="Good" ></i>
                         <i class="bi bi-star-fill fs-5" title="Excellent" ></i>
                         <i class="bi bi-star-fill fs-5" title="super"></i>
+                        </div>
+                         <div v-if=" items.start == 0">
+                        <i class="bi bi-star-fill start fs-5" title="mauvais"></i>
+                         <i class="bi bi-star-fill fs-5" title="assez" ></i>
+                         <i class="bi bi-star-fill fs-5" title="Good" ></i>
+                        <i class="bi bi-star-fill fs-5" title="Excellent" ></i>
+                        <i class="bi bi-star-fill fs-5" title="super"></i>
+                        </div>
                          
                          </ul>
-                            <ul class="tag">
+                            <!-- <ul class="tag">
                                 <li>Numero du produit: <span>{{items.id}}</span></li>
                                 <li>Categorie: <span>Sofa</span></li>
                                 <li>libelle: <span>Furniture</span></li>
                                 <li>Status: <span>En Stock</span></li>
-                            </ul>
+                            </ul> -->
                            
                         </div>
                     </div>
@@ -161,8 +203,8 @@
         <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
      </ul>
        <!-- <input class="my-2" v-model="rating.rate" type="text" name="rate" placeholder="Rating" > <br>  -->
-       <input  class="my-1 w-25" v-model="rating.object"  type="text" name="objet" placeholder="Objet" > <br>
-       <textarea class="w-25" v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message"></textarea> <br>
+       <input  class="my-1 w-25" v-model="rating.object"  type="text" name="objet" placeholder="Objet" required> <br>
+       <textarea class="w-25" v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message" required></textarea> <br>
        <button class="my-2 w-25 rounded" type="submit">Envoyer</button>
      </form>
     
@@ -180,6 +222,9 @@
                       :key="index"
                       >
                             <div class="products-item">
+                             <span class="float-end me-2 mt-1">{{items.start}}/5</span>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
                                 <div class="top">
                   <router-link to="/produits" v-if="items.photo.length >0">
                             <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
@@ -248,6 +293,7 @@ export default {
             bestSeller:[],
             currentPage:1,
             perPage:3,
+            color:"orange",
        }
    },
    computed:{
@@ -300,18 +346,19 @@ export default {
             axios.post('https://igp-event-backend.lce-ci.com/api/rating',this.rating)
              .then(
              reponse =>{
-            //      Swal.fire({
-            // position: 'center',
-            //    icon: 'success',
-            // //    title: 'votre inscription a été validée',
-            //   showConfirmButton: false,
-            //   timer: 2000,
-            //       })
-            
+                 Swal.fire({
+            position: 'center',
+               icon: 'success',
+            //    title: 'votre inscription a été validée',
+              showConfirmButton: false,
+              timer: 2000,
+                  })
                 console.log(reponse)
-            //  this.$router.push('/login');
+                 window.location.href="/";
+                localStorage.setItem('rate',JSON.stringify(this.rating.rate))
             })
             console.log("rating",this.rating)
+           
         }
 
     
@@ -324,7 +371,8 @@ export default {
                   .then(resp =>{
                 this.items = resp.data.data
                   this.isLoading =false;
-                })
+                });
+     
     
 
 
@@ -332,6 +380,7 @@ export default {
    
    mounted() {
   this.getBestSeller();
+  
    },
   
 }
@@ -357,6 +406,9 @@ padding: .5em;
 }
 .rating form{
 background-color:rgba(0, 0, 0, 0.829);
+}
+.orange{
+color:orange;
 }
 
 

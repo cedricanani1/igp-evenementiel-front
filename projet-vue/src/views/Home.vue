@@ -79,6 +79,9 @@
                       :key="index"
                       >
                             <div class="products-item">
+                             <span class="float-end me-2 mt-1">{{items.start}}/5</span>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start > 0"></i>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
                                 <div class="top">
                   <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
@@ -156,6 +159,9 @@
                       :key="index"
                       >
                             <div class="products-item">
+                              <span class="float-end me-2 mt-1">{{items.start}}/5</span>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
                                 <div class="top">
                   <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
@@ -230,6 +236,7 @@ export default{
           userFilterkey:"all",
         categories:[],
         bestSeller:[],
+        color:"orange",
          
       }
   }, 
@@ -244,24 +251,6 @@ methods:{
                 console.log("bestSeller",resp.data);
                 }) 
         },
-        // getCategories(){
-        //     axios.get('https://igp-event-backend.lce-ci.com/api/categories')
-        //          .then(resp =>{
-        //         this.categories = resp.data
-                
-        //         })   
-        //   },
-          filterByCategories(catName){
-              let produits = [...this.products]
-              if(catName !== "all"){
-                  produits.filter((value)=>{
-                      return value.type.libelle === catName;
-                  })
-              }
-              return produits
-                    
-        }
-
 },
 computed:{
      
@@ -331,6 +320,9 @@ computed:{
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+}
+.orange{
+color: orange;
 }
 
 </style>

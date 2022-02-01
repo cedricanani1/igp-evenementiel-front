@@ -171,29 +171,11 @@ export default {
                 })
             return this.products;
           },
-         
-
-      // function pour filtrer dans le tableau products
-      // filtrerProducts(catName){
-      //   this.products = this.getProducts()
-      // if(catName !== 'All'){
-      //   this.products = this.products.filter((item)=>{
-      //     return item.type.libelle === catName;
-      //   })
-      // }
-
-      // },
-       // function pour filtrer dans le tableau products    
    },
     created(){
      this.cart = JSON.parse(localStorage.getItem('mycart') || '[]');
    },
    computed:{
-        // pageCount(){
-        //     let ligne=this.listData.length,
-        //         size = this.perPage;
-        //     return Math.ceil(ligne/size);
-        // },
          paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -213,6 +195,7 @@ export default {
     //  localStorage.removeItem('mycart');
     //  console.log("cart",localStorage.getItem('mycart'));
     this.getCategories;
+    localStorage.getItem('rate')
    }
  
  

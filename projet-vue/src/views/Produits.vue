@@ -24,7 +24,34 @@
             <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
-
+    <!-- <div class="filter-by-categorie" v-if="filter.length > 0">
+    <div id="Container" class="row justify-content-center" v-if="filter.length > 0">
+                       <div
+                      v-for="(items,index) in filter" 
+                      :key="index"
+                      >
+                            <div class="products-item">
+                            <span class="float-end me-2 mt-1">{{items.start}}/5</span>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
+                            
+                                <div class="top">
+                          <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
+                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            </router-link>
+                                    <div class="inner">
+                                        <h3>
+                                                    <router-link 
+                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
+                                        </h3>
+                                        <span> {{items.price}} Fcfa</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+   </div>
+    </div> -->
 
     <div class="products-area ptb-100">
         <div class="container-fluid pe-5">
@@ -37,7 +64,7 @@
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <span @click="buttonFilter">{{categorie.libelle}}</span>
+                                    <h5 @click="buttonFilter" class="p-3 filter" :data-filter="categorie.libelle">{{categorie.libelle}}</h5>
                                 </div>
                             </li>
                         </ul>
@@ -49,12 +76,16 @@
                 
                 <input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="searchString">
           </div>
-                    <div id="Container" class="row">
-                       <div class="col-sm-6 col-lg-4"
+                    <div id="Container" class="row justify-content-center">
+                       <div class="col-sm-6 col-lg-4" 
                       v-for="(items,index) in paginatedData" 
                       :key="index"
                       >
-                            <div class="products-item">
+                            <div class="products-item" :class="items.type.libelle" data-bound>
+                            <span class="float-end me-2 mt-1">{{items.start}}/5</span>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
+                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
+                            
                                 <div class="top">
                           <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
@@ -86,35 +117,12 @@
                 > {{page.number}}  
                 </button>
                  </li>
-                
-
                  <li>
                  <button @click="onClickNextPage" :disabled="isInLastPage" >
                   next 
                  </button>
                  </li>
                  </ul>
-                 <!-- <div class="col-sm-6 col-lg-4"
-                      v-for="(items,index) in filterList" 
-                      :key="index"
-                      >
-                      <div class="products-item">
-                                <div class="top">
-                          <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
-                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
-                            </router-link>
-                                    <div class="inner">
-                                        <h3>
-                                                    <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
-                                        </h3>
-                                        <span> {{items.price}} Fcfa</span>
-                                    </div>
-                                </div>
-                            </div>
-                 </div> -->
-                 <!-- {{filterList}} -->
             </div>
                 </div>
             </div>
@@ -128,7 +136,7 @@ import axios from "axios"
 import { Notyf } from 'notyf';
 export default {
     name:"Produits",
-    props:['cart','add','listData','maxVisibleButtons','totalPages','total','currentPage','pageChanged','paginatedData'],
+    props:['cart','add','maxVisibleButtons','totalPages','total','currentPage','pageChanged','paginatedData'],
     data(){
         return{
             // products:[],
@@ -139,6 +147,10 @@ export default {
               categories:[],
               perPage:6,
               searchString:"",
+              color:"orange",
+              filter:[],
+              listData:[],
+
         }
     },
     components:{
@@ -167,42 +179,29 @@ export default {
     //       this.currentPage = page;
     //     },
   buttonFilter(e){
-        let cible = e.currentTarget.innerText;
-        console.log("ELE",cible);
-        return this.paginatedData.filter(item=>{
-            return item.type.libelle === cible
+        return this.listData.filter(item=>{
+            return item.type.libelle === e.target.textContent
         })
-
         },
+       
 },
 computed:{
-    // filteredData:{
-    //     get(){
-    //           let start = (this.currentPage * this.perPage) - this.perPage;
-    //         let end = start + this.perPage;
-    //      return this.listData.slice(start,end);
-    //     },
-    //     set(term){
-    //      this.listData.filter(item=>{
-    //          return item.libelle.toLowerCase().includes(term.toLowerCase())})
-     
-
-    //     }
-    //     //  this.listData.filter(item=>item.libelle.toLowerCase().includes(this.search.toLowerCase()))
-        
-                  
-    //     //             let start = (this.currentPage * this.perPage) - this.perPage;
-    //     //     let end = start + this.perPage;
-    //     //  return this.listData.slice(start,end);
-    // },
+     getProducts(){
+             axios.get('https://igp-event-backend.lce-ci.com/api/products')
+                  .then(resp =>{
+                this.listData = resp.data.data
+                console.log("DATA1",this.listData)
+                })
+           
+          },
   paginatedData(){
       if(this.searchString !== ""){
         return this.listData.filter(item =>{
                   return item.libelle.toLowerCase().includes(this.searchString.toLowerCase())
               })
       }
-    //   else if(this.listData){
-    //       this.buttonFilter()
+    //   else if(this.categories){
+    //       return this.buttonFilter(e)
     //   }
       else{
          let start = (this.currentPage * this.perPage) - this.perPage;
@@ -239,11 +238,6 @@ computed:{
                 this.categories = resp.data
                 })   
           },
-        //   filterList(){
-        //     return this.listData.filter(item =>{
-        //           return item.libelle.toLowerCase().includes(this.searchString.toLowerCase())
-        //       })
-        //   },
 },
 watch:{
 searchString(value){
@@ -255,12 +249,24 @@ searchString(value){
 
 },
 created(){
-    
-
+   
 },
 mounted(){
  this.getCategories
+//  console.log("DATA",this.listData);
+ this.getProducts;
+ 
+
 
   }
 }
 </script>
+
+<style scoped>
+
+.orange{
+color: orange;
+}
+
+
+</style>
