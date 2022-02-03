@@ -24,47 +24,35 @@
             <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
-    <!-- <div class="filter-by-categorie" v-if="filter.length > 0">
-    <div id="Container" class="row justify-content-center" v-if="filter.length > 0">
-                       <div
-                      v-for="(items,index) in filter" 
-                      :key="index"
-                      >
-                            <div class="products-item">
-                            <span class="float-end me-2 mt-1">{{items.start}}/5</span>
-                            <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
-                            <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
-                            
-                                <div class="top">
-                          <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
-                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
-                            </router-link>
-                                    <div class="inner">
-                                        <h3>
-                                                    <router-link 
-                            :to="{name:'SingleProduct', params:{id:items.id}}">{{items.libelle}}</router-link>
-                                        </h3>
-                                        <span> {{items.price}} Fcfa</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-   </div>
-    </div> -->
 
     <div class="products-area ptb-100">
         <div class="container-fluid pe-5">
-            <div class="row">
+        <div class="text-center">
+                <input type="text" id="search" class="w-50 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT(ex:Sono)" v-model="searchString">
+          </div>
+          <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
+            <div class="row justify-content-center">
                 <div class="col-lg-2">
                     <div class="sorting-menu">
-                        <ul>
-                            <li class="filter" v-for="(categorie,index) in categories" :key="index">
+                        <ul class="listes mt-5">
+                        <li class="liste-categorie">
+                         <div class="products-thumb">
+                                    <img src="assets/images/products/shape1.png" alt="Shape">
+                                    <img src="assets/images/products/shape2.png" alt="Shape">
+                                    <i class="flaticon-square"></i>
+                               <span class="bouton-categorie" @click="full()">Tous</span>
+                         </div>
+                        </li>
+                            <li class="liste-categorie" v-for="(categorie,index) in categories" :key="index">
                                 <div class="products-thumb">
                                     <img src="assets/images/products/shape1.png" alt="Shape">
                                     <img src="assets/images/products/shape2.png" alt="Shape">
                                     <i class="flaticon-square"></i>
-                                    <h5 @click="buttonFilter" class="p-3 filter" :data-filter="categorie.libelle">{{categorie.libelle}}</h5>
+                                    <span class="bouton-categorie " @click="buttonFilter(categorie.id)">{{categorie.libelle}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -72,16 +60,13 @@
                 </div>
                 
                 <div class="col-lg-9">
-          <div>
-                
-                <input type="text" id="search" class="w-100 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT" v-model="searchString">
-          </div>
+          
                     <div id="Container" class="row justify-content-center">
-                       <div class="col-sm-6 col-lg-4" 
+                       <div class="col-sm-6 col-lg-4"
                       v-for="(items,index) in paginatedData" 
                       :key="index"
                       >
-                            <div class="products-item" :class="items.type.libelle" data-bound>
+                            <div class="products-item" >
                             <span class="float-end me-2 mt-1">{{items.start}}/5</span>
                             <i class="bi bi-star-fill start float-end me-2 mt-1" :class="color" v-if=" items.start !== 0"></i>
                             <i class="bi bi-star-fill start float-end me-2 mt-1" v-else></i>
@@ -102,27 +87,36 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <div v-if="listData.length == []">
+                    <h3>désolé </h3>
+                    <p>Aucun résultat trouvé</p>
+                    </div> -->
                     <div>
-                <ul class="pagination float-end" v-if="listData.length > 5 || currentPage > 1">
-                       <li>
+                    <nav aria-label="Page navigation example">
+
+                     <ul class="pagination justify-content-center" v-if="listData.length > 5 || currentPage > 1">
+                        <li class="fs-5 border-1">
                       <button @click="onClickFirstPage" :disabled="isInFirstPage"  >
-                      prev 
+                      &laquo;
                     </button>
                     </li>
          
 
-                    <li>
-                <button v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
+                   <li class="fs-5 mx-2">
+         <button class="border-0"  v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
                 :class="{active:isPageActive(page.number)}"
                 > {{page.number}}  
                 </button>
                  </li>
-                 <li>
-                 <button @click="onClickNextPage" :disabled="isInLastPage" >
-                  next 
+                 <li class="fs-5 border-1">
+                 <button  @click="onClickNextPage" :disabled="isInLastPage" >
+                  &raquo;
                  </button>
                  </li>
                  </ul>
+                    
+                    </nav>
+               
             </div>
                 </div>
             </div>
@@ -134,6 +128,8 @@
 import Home from "./Home.vue"
 import axios from "axios"
 import { Notyf } from 'notyf';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
     name:"Produits",
     props:['cart','add','maxVisibleButtons','totalPages','total','currentPage','pageChanged','paginatedData'],
@@ -150,15 +146,17 @@ export default {
               color:"orange",
               filter:[],
               listData:[],
+              isLoading: false,
+             fullPage: true,
 
         }
     },
     components:{
-        Home,
+        Home,Loading,
     },
     methods:{
         onClickFirstPage(){
-           this.$emit('pageChanged',1)
+           this.$emit('pageChanged',this.currentPage-1)
         },
          onClickPreviousPage(){
            this.$emit('pageChanged', this.currentPage-1)
@@ -178,36 +176,46 @@ export default {
     //  onPageChange(page){
     //       this.currentPage = page;
     //     },
-  buttonFilter(e){
-        return this.listData.filter(item=>{
-            return item.type.libelle === e.target.textContent
+     buttonFilter(typeId){
+        //  this.getProducts()
+             let tab=[]
+         this.filter.forEach(element => {
+             if (element.categorie_id == typeId) {
+                 tab.push(element)
+             }
+         });
+         this.listData = tab
+        
+         
+    },
+    full(){
+       this.getProducts()
+    }, 
+    getProducts(){
+        this.isLoading =true;
+        axios.get('https://igp-event-backend.lce-ci.com/api/products')
+            .then(resp =>{
+        this.listData = resp.data.data
+        this.filter = resp.data.data
+         this.isLoading =false;
+        console.log("DATA1",this.listData)
         })
-        },
-       
+    },
 },
 computed:{
-     getProducts(){
-             axios.get('https://igp-event-backend.lce-ci.com/api/products')
-                  .then(resp =>{
-                this.listData = resp.data.data
-                console.log("DATA1",this.listData)
-                })
-           
-          },
+            
   paginatedData(){
       if(this.searchString !== ""){
         return this.listData.filter(item =>{
                   return item.libelle.toLowerCase().includes(this.searchString.toLowerCase())
               })
       }
-    //   else if(this.categories){
-    //       return this.buttonFilter(e)
-    //   }
       else{
          let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
          return this.listData.slice(start,end);
       }
+
             
         },
         startPage(){
@@ -254,7 +262,7 @@ created(){
 mounted(){
  this.getCategories
 //  console.log("DATA",this.listData);
- this.getProducts;
+ this.getProducts();
  
 
 
@@ -266,6 +274,33 @@ mounted(){
 
 .orange{
 color: orange;
+}
+
+.liste-categorie{
+position: relative;
+
+}
+.bouton-categorie{
+ position: relative;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ padding:1em;
+}
+.products-thumb{
+padding:0 !important;
+}
+#Container{
+padding:5em;
+}
+#search{
+border: 0;
+outline: none;
+box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.37);
+}
+.active{
+background: rgb(250, 162, 0) !important;
 }
 
 

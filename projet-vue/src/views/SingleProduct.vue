@@ -11,9 +11,6 @@
                             <li>
                                 <router-link to="/">Home</router-link>
                             </li>
-                            <li>
-                                <span>{{items.id}}</span>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -29,6 +26,7 @@
 
 
     <div class="product-details-area pt-100 pb-3">
+    
         <div class="container">
             <div class="top">
                 <div class="row align-items-center">
@@ -42,38 +40,17 @@
                                              <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
                                             </div>
                                         </div>
-                                        <!-- <div class="item owl-thumb-item">
-                                           <div class="top-img">
-                                               <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
-                                            </div>
-                                        </div> -->
-                                        <!-- <div class="item owl-thumb-item">
-                                          <div class="top-img">
-                                               <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="col-sm-9 col-lg-9">
-                                    <div class="image-slides owl-carousel" >
+                                    <div class="image-slides owl-theme owl-carousel owl-loaded owl-drag " >
                                         <div class="item" v-for="(item,index) in items.photo" :key="index" v-if="items.photo.length > 0"  >
                                             <div class="top-img">
                                                 <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
                                              
                                             </div>
                                         </div>
-                                        <!-- <div class="top-img" v-if="item[index] === 1">
-                                           <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
-                                        </div>
-                                        <div class="top-img" v-if="item[index] === 3">
-                                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ item.path" :alt="items.libelle">
-                                        </div> -->
                                     </div>
-                                    <!-- <div class="owl-nav">
-                                    <button type="button" role="presentation" class="owl-prev">
-                                    <span aria-label="Previous">‹</span></button>
-                                    <button type="button" role="presentation" class="owl-next">
-                                    <span aria-label="Next">›</span></button></div> -->
                                 </div>
                             </div>
                         </div>
@@ -142,43 +119,43 @@
                     </div>
                 </div>
             </div>
-        <div class="checkout-billing">
+        <div class="checkout-billing w-75 mx-auto">
 
                             <div class="form-group">
-                             <label for="date-debut">date de debut</label>
-                                <input type="date" name="date" v-model="items.from" class="form-control" placeholder="date début" required>
+                             <label class="mb-1" for="date-debut">date de debut</label>
+                                <input type="date" name="date"  v-model="items.from" :min="this.items.from" class="form-control" placeholder="date début" required>
                             </div>
 
-                            <div class="form-group">
-                             <label for="date-fin">date de fin</label>
-                                <input type="date" v-model="items.to" class="form-control" name="date" placeholder="date fin" required>
+                            <div class="form-group mt-3">
+                             <label class="mb-1" for="date-fin">date de fin</label>
+                                <input type="date" v-model="items.to" :min="this.items.from"   class="form-control" name="date" placeholder="date fin" required>
                             </div>
-                             <div class="form-group">
-                             <label for="location">Destination</label>
+                             <div class="form-group mt-3">
+                             <label class="mb-1" for="location">Destination</label>
                                 <input type="text" v-model="items.location" class="form-control" name="location" placeholder="Destination" required>
                             </div>
-                            <div class="form-group">
-                              <label for="objet">Objectifs</label>
+                            <div class="form-group mt-3">
+                              <label class="mb-1" for="objet">Objectifs</label>
                                 <input type="text" v-model="items.objects" class="form-control" name="objet" placeholder="Objectifs" required>
                             </div>
 
-                            <div class="form-group">
-                              <label for="objet">Quantité</label>
+                            <div class="form-group mt-3">
+                              <label class="mb-1" for="objet">Quantité</label>
                                 <input type="number" v-model="items.quantity" class="form-control" name="objet" placeholder="ex:200" required>
                             </div>
 
-                             <div class="form-group">
-                            <label for="participants">Participants</label>
+                             <div class="form-group mt-3">
+                            <label class="mb-1" for="participants">Participants</label>
                                 <input type="number" v-model="items.participant" class="form-control" placeholder="ex:90" required>
                             </div>
                             
-                            <div class="form-group">
-                             <label for="details">Détails</label> <br>
-                             <textarea placeholder="Détails" v-model="items.details"  cols="50" rows="10" required></textarea>
+                            <div class="form-group mt-3">
+                             <label class="mb-1" for="details">Détails</label> <br>
+                             <textarea class="w-100 rounded" placeholder="Détails" v-model="items.details"  cols="50" rows="10" required></textarea>
                                 <!-- <input type="text"  class="form-control" name="location" placeholder="details" > -->
                             </div>
-                            <ul class="cart list-unstyled">
-                                <li >
+                            <ul class="cart list-unstyled w-100">
+                                <li>
                                     <a class="common-btn" href="#" @click.prevent="$emit('add',items)">
                                         Ajouter au panier
                                         <img src="/assets/images/shape1.png" alt="Shape">
@@ -190,21 +167,23 @@
         </div>
     </div>
     <div class="container-fluid rating mx-auto  py-4">
+     
     
-     <form @submit.prevent.stop="postRating">
-     <ul class="reviews" id="stars">
+     <form @submit.prevent.stop="postRating" class="bg-dark rounded form mx-auto px-4 py-3">
+     <h1 class="text-light">Noter le produit</h1>
+     <ul class="reviews w-100" id="stars">
     
-        <i class="bi bi-star-fill start fs-3" title="mauvais" :id="1" @click="rated(1,1)"></i>
-       <i class="bi bi-star-fill fs-3" title="assez" :id="2" @click="rated(2,2)"></i>
+        <i class="bi bi-star-fill start fs-2" title="mauvais" :id="1" @click="rated(1,1)"></i>
+       <i class="bi bi-star-fill fs-2" title="assez" :id="2" @click="rated(2,2)"></i>
     
-        <i class="bi bi-star-fill fs-3" title="Good" :id="3" @click="rated(3,3)"></i>
-        <i class="bi bi-star-fill fs-3" title="Excellent" :id="4" @click="rated(4,4)"></i>
-        <i class="bi bi-star-fill fs-3" title="super" :id="5" @click="rated(5,5)"></i>
+        <i class="bi bi-star-fill fs-2" title="Good" :id="3" @click="rated(3,3)"></i>
+        <i class="bi bi-star-fill fs-2" title="Excellent" :id="4" @click="rated(4,4)"></i>
+        <i class="bi bi-star-fill fs-2" title="super" :id="5" @click="rated(5,5)"></i>
         <span class="badge bg-secondary ms-1 p-2">{{this.rating.rate}} /5</span>
      </ul>
        <!-- <input class="my-2" v-model="rating.rate" type="text" name="rate" placeholder="Rating" > <br>  -->
-       <input  class="my-1 w-25" v-model="rating.object"  type="text" name="objet" placeholder="Objet" required> <br>
-       <textarea class="w-25" v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message" required></textarea> <br>
+       <input  class="mb-2 w-100 border-0 rounded" v-model="rating.object"  type="text" name="objet" placeholder="Objet" required autocomplete="off"> <br>
+       <textarea class="w-100 border-0 rounded " v-model="rating.message"  name="message" id="" cols="20" rows="5" placeholder="Message" required></textarea> <br>
        <button class="my-2 w-25 rounded" type="submit">Envoyer</button>
      </form>
     
@@ -246,11 +225,12 @@
     </div>
 
   </div>
-   <div class="vld-parent">
+  <div class="vld-parent">
                         <loading :active.sync="isLoading" 
                         :can-cancel="true" 
                         :is-full-page="FullPage" ></loading>
         </div>
+   
 </template>
 
 <script>
@@ -259,23 +239,22 @@ import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-// import Rating from './Rating.vue'
 export default {
    name:"SingleProduct",
 
    props:['products','cart','add','removeItem','removeBySign','increase'],
 
    compoments:{
-    Header,Loading
+    Header,Loading,
    },
 
    data(){
        return{
-            checked:"",
+             checked:"",
              isLoading: false,
-            fullPage: true,
-            id:this.$route.params.id,
-            items:{
+             fullPage: true,
+             id:this.$route.params.id,
+             items:{
                 to:"",
                 from:"",
                 location:"",
@@ -322,24 +301,13 @@ export default {
            }
          return this.rating.rate = evaluation
        },  
-    //    getAvgRate(evaluation,star){
-    //           let i 
-    //        if(document.getElementById(star).style.color != 'orange'){
-    //            for(i=0 ; i<star ; i++){
-    //                document.getElementById(i+1).style.color = 'orange'
-    //            }
-    //        }else{
-    //            for(i=5 ; i> star ; i--){
-    //                document.getElementById(i).style.color = 'gray'
-    //            }
-    //        }
-
-    //    },
          getBestSeller(){
+             this.isLoading =true;
            axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
            .then(resp =>{
                 this.bestSeller = resp.data
                 console.log("bestSeller",resp.data);
+                this.isLoading =false;
                 }) 
         },
         postRating(){
@@ -365,12 +333,12 @@ export default {
    },
 
    created(){   
-        this.isLoading = true;
+        // this.isLoading = true;
         // location.reload(true)
-  axios.get('https://igp-event-backend.lce-ci.com/api/products/'+ this.id)
+       axios.get('https://igp-event-backend.lce-ci.com/api/products/'+ this.id)
                   .then(resp =>{
                 this.items = resp.data.data
-                  this.isLoading =false;
+                  this.isLoading =true;
                 });
      
     
@@ -387,6 +355,9 @@ export default {
 </script>
 
 <style scoped>
+.owl-prev span{
+padding:1em;
+}
 
 .reviews li{
  display:inline-block!important;
@@ -404,11 +375,21 @@ border: none;
 color:white;
 padding: .5em;
 }
-.rating form{
-background-color:rgba(0, 0, 0, 0.829);
-}
 .orange{
 color:orange;
+}
+input,textarea {
+padding-left:1.5em;
+}
+.form{
+    max-width:50% !important;
+    }
+
+
+@media screen and (max-width:621px) {
+    .form{
+    max-width:100% !important;
+    }
 }
 
 

@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="title-img">
-            <!-- <img src="assets/images/page-title1.jpg" alt="About"> -->
+            <img src="assets/images/page-title1.jpg" alt="About">
             <img src="assets/images/shape16.png" alt="Shape">
             <img src="assets/images/shape17.png" alt="Shape">
             <img src="assets/images/shape18.png" alt="Shape">
@@ -38,7 +38,7 @@
 
                              <div class="form-group">
                              <label for="date-debut">nom</label>
-                                <input type="text" name="date" v-model="nom" class="form-control" required>
+                                <input type="text" name="date" v-model="nom" class="form-control"  required>
                             </div>
                             <div class="form-group">
                              <label for="prenoms">prenoms</label>

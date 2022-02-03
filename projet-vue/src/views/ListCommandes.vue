@@ -36,10 +36,10 @@
   </div>
 </div>
       <div>
-                <ul class="pagination" v-if="this.listCommandes.length > 5 || currentPage > 1">
+                <ul class="pagination justify-content-center mt-3" v-if="this.listCommandes.length > 5 || currentPage > 1">
                        <li>
-                      <button @click="onClickFirstPage" :disabled="isInFirstPage" >
-                      prev 
+                      <button class="border-1" @click="onClickFirstPage" :disabled="isInFirstPage" >
+                     &laquo;
                     </button>
                     </li>
          
@@ -53,21 +53,32 @@
                 
 
                  <li>
-                 <button @click="onClickNextPage" :disabled="isInLastPage">
-                  next 
+                 <button class="border-1" @click="onClickNextPage" :disabled="isInLastPage">
+                  &raquo;
                  </button>
                  </li>
                  </ul>
             </div>
+
+             <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
     
 </template>
 
 <script>
 import axios from 'axios'
 import '../components/axios.js'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 // import store from 'store'
 export default {
    name:'ListCommandes',
+   components:{
+       Loading,
+   },
    data(){
        return{
            listCommandes:[],
@@ -76,27 +87,28 @@ export default {
         //    totalPages:"",
            maxVisibleButtons:3,
            currentPage:1,
+           isLoading: false,
+           fullPage: true,
         //    totalPages:"Math.ceil(this.total/1)",
        }
    },
    methods:{
        getDetailsCommandes(){ 
+        this.isLoading =true;
         axios.get("api/orders-client")
              .then(rep=>{
                  console.log("ListCommand:",rep.data)
                  this.listCommandes = rep.data
                  this.total = rep.data.length
-                //  this.totalPages="Math.ceil(rep.data.length/5)"
-                //  this.totalPages = Math.ceil(this.total/this.perPage)
                  console.log("TOTAL",this.total);
-                //  console.log("SUM",this.totalPages);
+                  this.isLoading =false;
              })
        },
        onPageChange(page){
            return this.currentPage = page;
        },
        onClickFirstPage(){
-           this.onPageChange(1)
+           this.onPageChange(this.currentPage-1)
         },
          onClickPreviousPage(){
              this.onPageChange(this.currentPage-1)
@@ -134,15 +146,14 @@ export default {
             return range;
         },
         isInFirstPage(){
-            return this.currentPage == 1;
+            return this.currentPage === 1;
         },
         isInLastPage(){
             return this.currentPage === this.totalPages
         },
-        // totalPages(){
-        //     let totalPages = Math.ceil(this.);
-        //     return totalPages;
-        // }, 
+        totalPages(){
+            return Math.ceil(this.getDetailsCommandes().length/3);
+        }, 
         paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -168,10 +179,8 @@ export default {
     text-align:center;
     padding:1em;
 }
-.pagination{
- transform: translateX(-50%);
- margin-left:65%;
- margin-top:2em;
+button{
+
 }
 
 

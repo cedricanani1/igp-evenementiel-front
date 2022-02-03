@@ -310,13 +310,13 @@ computed:{
   
 }
 .one{
-   background-image:url("/assets/images/4023_1.jpg");
+   background-image:linear-gradient(rgba(0, 0, 0, 0.322), rgba(189, 189, 189, 0.5)),url("/assets/images/4023_1.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
 }
 .two{
-        background-image:url("/assets/images/andra-c-taylor-jr-Zts17DjhMjk-unsplash.jpg");
+        background-image:linear-gradient(rgba(0, 0, 0, 0.582), rgba(189, 189, 189, 0.5)),url("/assets/images/andra-c-taylor-jr-Zts17DjhMjk-unsplash.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

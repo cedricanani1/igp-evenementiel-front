@@ -161,7 +161,7 @@ export default {
        return this.currentPage = page ;
         },
         getProducts(){
-          this.isLoading =false;
+          this.isLoading =true;
              axios.get('https://igp-event-backend.lce-ci.com/api/products')
                   .then(resp =>{
                 this.products = resp.data.data
@@ -201,3 +201,14 @@ export default {
  
 }
 </script>
+
+<style>
+.owl-prev span{
+font-size: 2em;
+background: transparent;
+}
+.owl-next span{
+font-size: 2em;
+background: transparent;
+}
+</style>
