@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="title-img">
-            <img  src="/assets/images/HTB19FgtbEKF3KVjSZFE760ExFXaW.png_350x350.jpg" alt="About">
+            <img class="w-25 img-fluid"  src="/assets/images/HTB19FgtbEKF3KVjSZFE760ExFXaW.png_350x350.jpg" alt="About">
             <img src="/assets/images/shape16.png" alt="Shape">
             <img src="/assets/images/shape17.png" alt="Shape">
             <img src="/assets/images/shape18.png" alt="Shape">
@@ -115,7 +115,7 @@
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-free-delivery"></i>
+                      <i class="bi bi-truck"></i>
                         <h3>Livraison gratuite le lendemain</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-call-center"></i>
+                        <i class="bi bi-telephone-inbound"></i>
                         <h3>Assistance en ligne 24h/24 et 7j/7</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
@@ -131,8 +131,8 @@
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-giftbox"></i>
-                        <h3>Chèque-cadeau hebdomadaire</h3>
+                       <i class="bi bi-gift"></i> 
+                        <h3>Délivrons vos produits en toute sécurite</h3>
                         <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>

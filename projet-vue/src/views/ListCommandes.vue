@@ -11,7 +11,7 @@
                                 <router-link to="/">Accueil</router-link>
                             </li>
                             <li>
-                                <span>se connecter</span>
+                                <span>Listes des commandes</span>
                             </li>
                         </ul>
                     </div>
@@ -30,31 +30,23 @@
     <span class="card-title d-block">commande n<sup>o</sup><b>{{command.order_number}}</b> </span>
     <span class="card-text d-block">Article <i>{{command.id}}</i></span>
       <span class="card-text d-block">Status : <b>{{command.payment_status}}</b></span>
-    <span class="d-block">commander le : <b>{{new Date(command.created_at).toISOString().slice(0,10).split('-').reverse().join('/')}}</b> </span>
+    <span class="d-block">commander le : <b>{{new Date(command.created_at).toLocaleDateString()}}</b> </span>
     <router-link :to="{name:'detailcommande', params:{id:command.id}}" class="btn btn-primary float-end">VOIR PLUS</router-link>
     
   </div>
 </div>
       <div>
                 <ul class="pagination justify-content-center mt-3" v-if="this.listCommandes.length > 5 || currentPage > 1">
-                       <li>
-                      <button class="border-1" @click="onClickFirstPage" :disabled="isInFirstPage" >
-                     &laquo;
+                       <li  >
+                      <button class="border-1 fs-5 mx-2"  @click="onClickFirstPage" :disabled="isInFirstPage" >
+                     Précedent
                     </button>
                     </li>
-         
-
-                    <li>
-                <button v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
-                :class="{active:isPageActive(page.number)}"
-                > {{page.number}}  
-                </button>
-                 </li>
-                
-
-                 <li>
-                 <button class="border-1" @click="onClickNextPage" :disabled="isInLastPage">
-                  &raquo;
+                         
+               
+                 <li  >
+                 <button class="border-1 fs-5 mx-2"   @click="onClickNextPage" :disabled="isInLastPage">
+                 Suivant
                  </button>
                  </li>
                  </ul>
@@ -108,7 +100,7 @@ export default {
            return this.currentPage = page;
        },
        onClickFirstPage(){
-           this.onPageChange(this.currentPage-1)
+            if(this.currentPage>1)this.currentPage--;
         },
          onClickPreviousPage(){
              this.onPageChange(this.currentPage-1)
@@ -117,7 +109,7 @@ export default {
                this.onPageChange(page)
         },
          onClickNextPage(){
-             this.onPageChange(this.currentPage+1)
+             if((this.currentPage*this.perPage)<this.listCommandes.length) this.currentPage++;
         },
          onClickLastPage(){
               this.onPageChange(this.totalPages)
@@ -146,14 +138,15 @@ export default {
             return range;
         },
         isInFirstPage(){
+
             return this.currentPage === 1;
         },
         isInLastPage(){
-            return this.currentPage === this.totalPages
+            return this.currentPage === Math.ceil(this.listCommandes.length/5)
         },
-        totalPages(){
-            return Math.ceil(this.getDetailsCommandes().length/3);
-        }, 
+        // totalPages(){
+        //     return Math.ceil(this.getDetailsCommandes().length/3);
+        // }, 
         paginatedData(){
             let start = (this.currentPage * this.perPage) - this.perPage;
             let end = start + this.perPage;
@@ -178,9 +171,6 @@ export default {
     background-color:rgb(235, 233, 233);
     text-align:center;
     padding:1em;
-}
-button{
-
 }
 
 

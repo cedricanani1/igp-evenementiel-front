@@ -72,13 +72,37 @@ export default {
               password:this.password,
           })
           .then(reponse => {
-            //   if(reponse.status === 200){
-                   console.log(reponse.data.access_token)
-                 console.log(reponse.status)
-                    localStorage.setItem('token',reponse.data.access_token);
-                       localStorage.setItem('user', JSON.stringify(reponse.data.user))
-                    window.location.href = '/'
-          this.$store.state.infoCommande
+               localStorage.setItem('user', JSON.stringify(reponse.data.user))
+                  localStorage.setItem('token',reponse.data.access_token);
+            //    let token = localStorage.getItem('token')
+              if(localStorage.getItem('mycart') && localStorage.getItem('token') && localStorage.getItem('user')  ){
+                    window.location.href = '/commander'
+
+                //   if(!localStorage.getItem('token') && !localStorage.getItem('user')){
+                //         window.location.href = '/login'
+                //         console.log(reponse);
+                        //     localStorage.setItem('user', JSON.stringify(reponse.data.user))
+                        //    localStorage.setItem('token',reponse.data.access_token);
+                //         console.log(reponse.data.access_token)
+                //  console.log(reponse.status)
+                
+                //     // localStorage.setItem('token',reponse.data.access_token);
+                //     window.location.href = '/commander'
+                // //    this.$store.state.infoCommande
+                //   }else{  
+                    //   localStorage.setItem('user', JSON.stringify(reponse.data.user))
+                    //   localStorage.setItem('token',reponse.data.access_token);
+                        //   window.location.href = '/commander'
+                        // this.$store.state.infoCommande
+                //   }
+              }
+              
+              if(localStorage.getItem('mycart') == null && localStorage.getItem('token') && localStorage.getItem('user') ){
+                   window.location.href = '/'
+              } 
+              if(localStorage.getItem('mycart') && localStorage.getItem('token') == null && localStorage.getItem('user') == null){
+                window.location.href = '/login'
+              }
           })
           .catch(error => {
               if(error){

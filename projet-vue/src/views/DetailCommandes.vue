@@ -26,6 +26,7 @@
      <div class="card mx-auto px-3 pb-1" style="max-width: 540px;">
      
     <h3 class="text-center"> <b>Commande</b>  n <sup>o</sup>{{detailsCommandes.order_number}}</h3>
+    <p class="text-center" >Commander le : {{new Date(detailsCommandes.created_at).toLocaleDateString()}}</p>
     <hr>
   <div class="row g-0">
     <div class="col-md-12" v-for="item in detailsCommandes.cart" :key="item.id">
@@ -33,7 +34,7 @@
     
       <img  :src="'https://igp-event-backend.lce-ci.com/public/'+ item.product.photo[0].path" class="img-fluid rounded-start " alt="">
       <p class="mt-2">Quantite : {{item.quantity}}</p>
-      <p>Pour le : {{(item.from).slice(0,10).split('-').reverse().join('/')}} au :  {{(item.to).slice(0,10).split('-').reverse().join('/')}}</p>
+      <p>Pour le : {{new Date(item.from).toLocaleDateString()}} au :  {{new Date(item.to).toLocaleDateString()}}</p>
     </div>
     <div class="col-md-12">
       <div class="card-body p-0">
@@ -46,6 +47,11 @@
     </div>
   </div>
 </div>
+<div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
      
     
 </template>
@@ -54,8 +60,13 @@
 <script>
 import '../components/axios.js'
 import axios from 'axios'
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
    name:'DetailsCommandes',
+   components: {
+     Loading,
+   },
    data(){
        return{
            detailsCommandes:{},
@@ -63,10 +74,12 @@ export default {
    },
    methods:{
         getDetails(){ 
+            this.isLoading =true;
         axios.get("api/orders/"+this.$route.params.id)
              .then(rep=>{
                  this.detailsCommandes =rep.data
                  console.log("detail",this.detailsCommandes)
+                  this.isLoading =false;
              })
        }
  

@@ -160,42 +160,14 @@ export default {
 
    computed:{
    itemTotal(){
-        //  let count = localStorage.getItem('total')
-        //  console.log(count);
-        //  return count;
-        //  item_cost(){
          let count =0
          this.items.forEach( item =>{
              count+= item.price * item.quantity
          })
        
          return count;
-          
-    //  }
 
      },
-    //  days(){
-
-    //      let date1 = new Date("20/01/2022");
-    //      let date2 = new Date("28/01/2022")
-
-    //      let time =date2.getTime() - date1.getTime();
-
-    //      let diff = time / (1000*60*60*24);
-    //      return diff.toFixed(0);
-
-    //  },
-    //  getCurrentDate(){
-    //      const browserLocale = navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.languages;
-    //      const initDateTime = new Intl.DateTimeFormat(browserLocale,{
-    //          year:'numeric',
-    //          month:'numeric',
-    //          day: 'numeric',
-    //          hour:'numeric',
-    //          minute:'numeric'
-    //      });
-    //      return initDateTime.format(new Date());
-    //  },
    },
    methods:{
 
@@ -212,8 +184,11 @@ export default {
             this.commandes = commande;
            axios.post('api/orders',this.commandes)
                 .then(reponse => {
-                    console.log(reponse);
-                    Swal.fire({
+                    if(!localStorage.getItem('token')){
+                        window.location = '/login'
+                    }else{
+                       console.log(reponse);
+                        Swal.fire({
                         position: 'center',
                         icon: 'success',
                         title: 'Commande effectuée', 
@@ -222,6 +197,8 @@ export default {
                     })
                     this.$router.push('/')
                     localStorage.removeItem('mycart')
+                    }
+                   
                 })
                 .catch(error =>{
                     if(error){

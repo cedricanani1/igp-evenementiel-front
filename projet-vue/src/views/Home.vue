@@ -189,25 +189,25 @@
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-free-delivery"></i>
-                        <h3>Livraison gratuite le lendemain</h3>
-                        <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
+                        <i class="bi bi-truck"></i>
+                        <h3> vous êtes livrer le lendemain</h3>
+                        <p>Passer votre commande et nous le livrons le jour suivant</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-call-center"></i>
+                        <i class="bi bi-telephone-inbound"></i>
                         <h3>Assistance en ligne 24h/24 et 7j/7</h3>
-                        <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
+                        <p>Nous mettons un service en ligne 24h/24 et 7j/7</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-4">
                     <div class="support-item">
-                        <i class="flaticon-giftbox"></i>
-                        <h3>Chèque-cadeau hebdomadaire</h3>
-                        <p>Lorem ipsum dolor sit amet, cons etetur sadipscing elitr</p>
+                      <i class="bi bi-gift"></i>
+                        <h3>Délivrons vos produits en toute sécurite</h3>
+                        <p>Soigner et bien emballer vos produits sont notre priorité</p>
                         <img src="/assets/images/support-shape1.png" alt="Shape">
                     </div>
                 </div>

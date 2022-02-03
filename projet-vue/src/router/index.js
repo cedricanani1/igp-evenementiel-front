@@ -26,10 +26,10 @@ const routes = [{
     alias: '/singleProduct/:id',
     name: 'SingleProduct',
     component: SingleProduct,
-    beforeEnter: (to, from, next) => {
-      if(store.state.token === null) next({name:'Login'})
-      else next()
-    }
+    // beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
+    //   else next()
+    // }
   },
   {
     path: '/produits',
@@ -39,7 +39,12 @@ const routes = [{
   {
     path: '/commander',
     name: 'Commander',
-    component: Commnander
+    component: Commnander,
+     beforeEnter: (to, from, next) => {
+      if(store.state.token === null) next({name:'Login'})
+      
+      else next()
+    }
   },
   {
     path: '/contacts',
@@ -48,7 +53,11 @@ const routes = [{
   },{
     path:'/login',
     name:'Login',
-    component:Login
+    component:Login,
+    // beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
+    //   else next('/commander')
+    // }
   },
   {
     path:'/register',
@@ -66,8 +75,8 @@ const routes = [{
     component:ListCommandes,
     beforeEnter: (to, from, next) => {
       if(store.state.token === null) next({name:'Login'})
-      else next()
-    }
+      else next('/commander')
+    },
   },
   {
     path:'/detailcommande',

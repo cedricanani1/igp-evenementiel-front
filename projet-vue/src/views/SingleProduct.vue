@@ -123,12 +123,12 @@
 
                             <div class="form-group">
                              <label class="mb-1" for="date-debut">date de debut</label>
-                                <input type="date" name="date"  v-model="items.from" :min="this.items.from" class="form-control" placeholder="date début" required>
+                                <input type="date" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
                             </div>
 
                             <div class="form-group mt-3">
                              <label class="mb-1" for="date-fin">date de fin</label>
-                                <input type="date" v-model="items.to" :min="this.items.from"   class="form-control" name="date" placeholder="date fin" required>
+                                <input type="date" v-model="items.to" :min="items.from"   class="form-control" name="date" placeholder="date fin" required>
                             </div>
                              <div class="form-group mt-3">
                              <label class="mb-1" for="location">Destination</label>
@@ -273,6 +273,7 @@ export default {
             currentPage:1,
             perPage:3,
             color:"orange",
+            date:new Date().toJSON().slice(0,10),
        }
    },
    computed:{
@@ -348,6 +349,7 @@ export default {
    
    mounted() {
   this.getBestSeller();
+  this.date
   
    },
   

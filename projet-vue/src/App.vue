@@ -70,14 +70,14 @@ export default {
      methods:{
 
        addCart(product){
-  if( localStorage.token){
+  if( localStorage.token || !localStorage.token){
     
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
            return item.quantity++;
          } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined && product.quantity !== undefined) {
                   
-                  if(product.to < product.from){
+                  if(product.to < product.from ){
                      Swal.fire({
                     position: 'center',
                       icon: 'error',
@@ -106,7 +106,13 @@ export default {
              showConfirmButton: false,
              timer: 1000
           } )
-          this.$router.push('/commander')
+
+          if(localStorage.getItem("token")){
+              this.$router.push('/commander')
+          }else{
+            window.location='/produits'
+          }
+          
 
                   }
               

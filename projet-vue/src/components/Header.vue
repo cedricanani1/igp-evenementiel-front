@@ -48,14 +48,14 @@
                 <div class="col-lg-5">
                     <div class="right">
                         <ul>
-                            <li v-if="user">
+                            <li class="container-user" v-if="user">
                              <a class="user" href="#" @click.prevent="showCompte"> <i class="bi bi-person-circle mx-2"></i> {{user.nom}} {{user.prenoms}} <i class="bi bi-caret-down-fill mx-1" v-if="!compte"></i> <i class="bi bi-caret-up-fill" v-if="compte"></i></a>
                                  
                                 <div class="compte" v-if="compte">  
-                                  <router-link to="/modify"> Votre compte</router-link>
-                                   <router-link to="/commande" class="nav-link">listes des commandes</router-link>
+                                  <router-link to="/modify"> <i class="bi bi-person-badge"></i> Votre compte</router-link>
+                                   <router-link to="/commande" class="nav-link"> <i class="bi bi-bag-fill"></i> Vos commandes</router-link>
                                   <a href="#" @click.prevent="deconnexion">
-                                    Se deconnecter
+                                    <i class="bi bi-box-arrow-in-left"></i> Se deconnecter
                                 </a>
                                
                                 </div>
@@ -265,7 +265,17 @@ export default {
         }
     },
     showCompte(){
+        let user = document.getElementsByClassName("user")[0]
         this.compte = !this.compte
+        if(this.compte == true){
+        user.style.backgroundColor ="rgba(192,192,192,0.7)"
+        user.style.padding ="10px 5px"
+        user.style.borderRadius="5px"
+        }else{
+            user.style.backgroundColor = "transparent"
+            user.style.padding ="0px"
+        }
+        
     },
    },
  computed:{
@@ -294,6 +304,12 @@ export default {
 </script>
 
 <style scoped>
+.nav-item a:active{
+color:orange !important;
+}
+.nav-item a:hover{
+color:orange !important;
+}
 .selected-categorie{
     background: #434e6e;
     color: white;
@@ -307,18 +323,28 @@ export default {
     margin:0.5em;
     color:black;
 }
+.container-user{
+
+    position:relative;
+}
 .compte{
     width:200px;
-    background-color:rgb(248, 248, 248);
+    background-color:#435d96;
     text-align:center;
     position:absolute;
-    box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.678);
+    top:40px;
+    left:5px;
+
 }
 .compte a{
     display:block;
     margin:1em 0;
-    color:rgb(255, 166, 0);
-    font-size:1.1em
+    color:rgb(250, 250, 250);
+    font-size:1.1em;
+    font-weight:400;
+}
+.compte a:hover{
+    color:orange;
 }
 .all a:hover{
   text-decoration: none !important;

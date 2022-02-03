@@ -516,13 +516,13 @@ button:focus {
 .main-nav nav .navbar-nav .nav-item a:hover,
 .main-nav nav .navbar-nav .nav-item a:focus,
 .main-nav nav .navbar-nav .nav-item a.active {
-    color: #363636
+    color: rgb(82, 82, 82);
 }
 
 .main-nav nav .navbar-nav .nav-item a:hover:before,
 .main-nav nav .navbar-nav .nav-item a:focus:before,
 .main-nav nav .navbar-nav .nav-item a.active:before {
-    width: 40%
+    width: 50%
 }
 
 .main-nav nav .navbar-nav .nav-item .dropdown-menu {
