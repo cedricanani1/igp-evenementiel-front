@@ -187,7 +187,7 @@ export default {
                     if(!localStorage.getItem('token')){
                         window.location = '/login'
                     }else{
-                       console.log(reponse);
+                        console.log(reponse);
                         Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -195,8 +195,8 @@ export default {
                         showConfirmButton: false,
                          timer: 1500
                     })
-                    this.$router.push('/')
                     localStorage.removeItem('mycart')
+                    window.location ='/'
                     }
                    
                 })

@@ -75,7 +75,7 @@ const routes = [{
     component:ListCommandes,
     beforeEnter: (to, from, next) => {
       if(store.state.token === null) next({name:'Login'})
-      else next('/commander')
+      else next()
     },
   },
   {

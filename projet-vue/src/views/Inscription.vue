@@ -87,6 +87,7 @@ export default {
     },
     methods:{
         createAccount(){
+
 if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" && this.prenoms !=="" && this.nom !=="" && this.phone !==""){
      this.isSuccess = false
 
@@ -103,15 +104,29 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
            })
             .then(
              reponse =>{
-                 Swal.fire({
-            position: 'center',
-               icon: 'success',
-               title: 'votre inscription a été validée',
-              showConfirmButton: false,
-              timer: 2000,
+                 if(localStorage.getItem('mycart')){
+                      Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'votre inscription a été validée',
+                  showConfirmButton: false,
+                  timer: 3000,
+                  })
+                   console.log(reponse)
+                     window.location.href='/commander'
+                 }
+                 if(localStorage.getItem('mycart')== null){
+                     Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'votre inscription a été validée',
+                  showConfirmButton: false,
+                  timer: 2000,
                   })
                 console.log(reponse)
-             this.$router.push('/login');
+                this.$router.push('/login');
+                 }
+                 
             })
     }
 
