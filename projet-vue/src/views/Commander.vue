@@ -38,11 +38,11 @@
 
                              <div class="form-group">
                              <label for="date-debut">nom</label>
-                                <input type="text" name="date" v-model="nom" class="form-control"  required>
+                                <input type="text" name="date" v-model="this.user.nom" class="form-control"  required>
                             </div>
                             <div class="form-group">
                              <label for="prenoms">prenoms</label>
-                                <input type="text" name="date" v-model="prenoms" class="form-control" required>
+                                <input type="text" name="date" v-model="this.user.prenoms" class="form-control" required>
                             </div>
                              <div class="form-group">
                              <label for="raison">raison social</label>
@@ -50,12 +50,12 @@
                             </div>
                            <div class="form-group">
                              <label for="email">email</label>
-                                <input type="text" name="email" v-model="email" class="form-control" required>
+                                <input type="text" name="email" v-model="this.user.email" class="form-control" required>
                             </div>
                            
                             <div class="form-group">
                              <label for="phone">phone</label>
-                                <input type="tel" name="phone" v-model="phone" class="form-control" required>
+                                <input type="tel" name="phone" v-model="this.user.phone" class="form-control" required>
                             </div>
                             <div class="form-group">
                              <label for="shipping">expedition</label>
@@ -82,7 +82,7 @@
                                     <h4>{{item.libelle}}</h4>
                                 </li>
                                 <li >
-                                    <span>{{item.price}} * {{item.quantity}} </span>
+                                    <span>{{item.price}} * {{item.quant}} </span>
                                     
                                 </li>
                             </ul>
@@ -136,6 +136,7 @@ margin-left:0;
 <script>
 import '../components/axios.js'
 import axios from 'axios'
+import store from "../store";
 export default {
   name:'Commander',
   props:['cart','add','products','removeItem','removeBySign','increase'],
@@ -152,6 +153,8 @@ export default {
           raison_social:"",
            shipping:"",
            phone:"",
+           user:store.state.user,
+          token:localStorage.getItem("token"),
        }
   },
    created(){
@@ -162,7 +165,7 @@ export default {
    itemTotal(){
          let count =0
          this.items.forEach( item =>{
-             count+= item.price * item.quantity
+             count+= item.price * item.quant
          })
        
          return count;
@@ -173,12 +176,12 @@ export default {
 
        sendCommande(){ 
             let commande = {
-                nom:this.nom,
-                prenoms:this.prenoms,
-                email:this.email,
+                nom:this.user.nom,
+                prenoms:this.user.prenoms,
+                email:this.user.email,
                 raison_social:this.raison_social,
                 shipping:this.shipping,
-                phone:parseInt(this.phone),
+                phone:parseInt(this.user.phone),
                 cart:JSON.parse(this.cart),
            };
             this.commandes = commande;
@@ -239,7 +242,7 @@ export default {
     //    console.log('test', JSON.parse(localStorage.getItem('info')))
     //    console.log('car', JSON.parse(localStorage.getItem('mycart')))
     console.log("cart",this.cart);
-    console.log("items",this.items);
+
    }
 
 }

@@ -74,7 +74,7 @@ export default {
     
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
-           return item.quantity++;
+           return item.quant++;
          } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined && product.quantity !== undefined) {
                   
                   if(product.to < product.from ){
@@ -94,6 +94,7 @@ export default {
             objects: product.objects,
             location:product.location,
             quantity:product.quantity,
+            quant:1,
             photo:'https://igp-event-backend.lce-ci.com/public/'+ product.photo[0].path,
             libelle:product.libelle,
             price:product.price,
@@ -104,7 +105,7 @@ export default {
             icon: 'success',
              text: 'Produit ajouté au panier!',
              showConfirmButton: false,
-             timer: 1000
+             timer: 3000,
           } )
 
           if(localStorage.getItem("token")){
@@ -148,8 +149,8 @@ export default {
         removeFromCart(product){
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
-            if(item.quantity > 1) {
-              item.quantity--;
+            if(item.quant > 1) {
+              item.quant--;
               localStorage.setItem('mycart',JSON.stringify(this.cart))
             }else{
               this.cart = this.cart.filter(value=>value.id !== product.id)
@@ -159,7 +160,7 @@ export default {
           increaseFromCart(product){
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
-            item.quantity++;
+            item.quant++;
             localStorage.setItem('mycart',JSON.stringify(this.cart))
           }
         },
@@ -175,7 +176,7 @@ export default {
                 console.log("libelle",resp.data.data)
                 this.isLoading =false;
                 })
-            return this.products;
+            return this.products
           },
    },
     created(){

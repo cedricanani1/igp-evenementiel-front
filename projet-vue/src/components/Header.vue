@@ -115,7 +115,7 @@
                                 <router-link to="/produits" @click.prevent="showMenu"  class="nav-link dropdown-toggle">Produits</router-link>
                             </li>
                             <li class="nav-item mean-last">
-                                <router-link to="/contacts" class="nav-link">Contact</router-link>
+                                <router-link to="/contacts" @click.prevent="showMenu" class="nav-link">Contact</router-link>
                             </li>
                         </ul>
                     </nav>
@@ -176,7 +176,7 @@
                                         <ul class="number">
                                             <li>
                                                 <span class="minus" @click="$emit('removeBySign',items)">-</span>
-                                                <span class="text-light fw-b">{{items.quantity}}</span>
+                                                <span class="text-light fw-b">{{items.quant}}</span>
                                                 <span class="plus" @click="$emit('increase',items)" >+</span>
                                             </li>
                                         </ul>
@@ -283,7 +283,7 @@ export default {
      item_cost(){
          let count =0
          this.cart.forEach( item =>{
-             count+= item.price * item.quantity
+             count+= item.price * item.quant
          })
        
          return count;
