@@ -26,7 +26,7 @@
      <div class="card mx-auto px-3 pb-1" style="max-width: 540px;">
      
     <h3 class="text-center"> <b>Commande</b>  n <sup>o</sup>{{detailsCommandes.order_number}}</h3>
-    <p class="text-center" >Commander le : {{new Date(detailsCommandes.created_at).toLocaleDateString()}}</p>
+    <p class="text-center" >Commander le : {{new Date(detailsCommandes.created_at).toLocaleDateString("fr")}}</p>
     <hr>
   <div class="row g-0">
     <div class="col-md-12" v-for="item in detailsCommandes.cart" :key="item.id">
@@ -34,7 +34,7 @@
     
       <img  :src="'https://igp-event-backend.lce-ci.com/public/'+ item.product.photo[0].path" class="img-fluid rounded-start " alt="">
       <p class="mt-2">Quantite : {{item.quantity}}</p>
-      <p>Pour le : {{new Date(item.from).toLocaleDateString()}} au :  {{new Date(item.to).toLocaleDateString()}}</p>
+      <p>Pour le : {{new Date(item.from).toLocaleDateString("fr")}} au :  {{new Date(item.to).toLocaleDateString("fr")}}</p>
     </div>
     <div class="col-md-12">
       <div class="card-body p-0">

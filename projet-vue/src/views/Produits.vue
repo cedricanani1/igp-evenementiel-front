@@ -26,7 +26,7 @@
     </div>
 
     <div class="products-area ptb-100">
-        <div class="container-fluid pe-5">
+        <div class="container-fluid ">
         <div class="text-center">
                 <input type="text" id="search" class="w-50 mb-3 p-3" placeholder="RECHERCHE UN PRODUIT(ex:Sono)" v-model="searchString">
           </div>
@@ -87,28 +87,28 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div v-if="listData.length == []">
+                     <div v-if="!listData.length">
                     <h3>désolé </h3>
                     <p>Aucun résultat trouvé</p>
-                    </div> -->
+                    </div>
                     <div>
                     <nav aria-label="Page navigation example">
 
-                     <ul class="pagination justify-content-center" v-if="listData.length > 5 || currentPage > 1">
-                        <li class="fs-5 border-1">
+                     <ul class="pagination justify-content-center " v-if="listData.length > 5 || currentPage > 1">
+                        <li class="fs-5">
                       <button @click="onClickFirstPage" :disabled="isInFirstPage"  >
                       &laquo;
                     </button>
                     </li>
          
 
-                   <li class="fs-5 mx-2">
-         <button class="border-0"  v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
+                   <li class="fs-5">
+         <button  v-for="(page,index) in pages" :key="index" @click="onClickPage(page.number)" 
                 :class="{active:isPageActive(page.number)}"
                 > {{page.number}}  
                 </button>
                  </li>
-                 <li class="fs-5 border-1">
+                 <li class="fs-5">
                  <button  @click="onClickNextPage" :disabled="isInLastPage" >
                   &raquo;
                  </button>
@@ -250,7 +250,7 @@ computed:{
 watch:{
 searchString(value){
     console.log(value);
-  console.log(this.filterList);
+    return value;
 },
 
 
@@ -292,7 +292,7 @@ position: relative;
 padding:0 !important;
 }
 #Container{
-padding:5em;
+padding-top:5em;
 }
 #search{
 border: 0;
@@ -300,8 +300,24 @@ outline: none;
 box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.37);
 }
 .active{
-background: rgb(250, 162, 0) !important;
+background: rgb(0, 137, 201) !important;
+color:white;
+}
+.fs-5 button{
+    border: thin solid black !important;
+}
+@media screen and (max-width:581px) {
+    #search{
+        width:100% !important;
+    }
+    
 }
 
+@media screen and (max-width:295px) {
+  ::placeholder{
+        font-size:.8em;
+    }
+    
+}
 
 </style>

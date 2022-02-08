@@ -83,7 +83,7 @@ export default {
                       icon: 'error',
                       text: 'La date donnée est incorrecte',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000,
              })} else{
                     this.cart.push({
             product_id:product.id,
@@ -105,13 +105,15 @@ export default {
             icon: 'success',
              text: 'Produit ajouté au panier!',
              showConfirmButton: false,
-             timer: 3000,
+             timer: 1500,
           } )
 
           if(localStorage.getItem("token")){
-              this.$router.push('/commander')
+              // this.$router.push('/commander')
+              window.location.href= '/produits'
           }else{
-            window.location='/produits'
+             this.$router.push('/produits')
+            // window.location.href='/produits'
           }
           
 
@@ -123,7 +125,7 @@ export default {
                       icon: 'error',
                       text: 'Veuillez renseigner tous les champs!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
              })
            
          } 
@@ -133,16 +135,17 @@ export default {
   }else{
      Swal.fire({
                     position: 'center',
-                     title: 'Veuillez vous-connectez merci',
+                     title: 'Veuillez-vous connectez merci',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000,
              })
              this.$router.push('/login')
   }
         },
         removeItemsCart(product){
           this.cart.splice(product,1)
-        localStorage.setItem('mycart',JSON.stringify(this.cart))
+        // localStorage.setItem('mycart',JSON.stringify(this.cart))
+        localStorage.removeItem('mycart')
         // window.location.reload(true)
         },
 

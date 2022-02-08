@@ -25,12 +25,13 @@
             <img src="/assets/images/shape18.png" alt="Shape">
         </div>
     </div>
+    <h1 v-if="!listCommandes.length" class="text-center p-5">Pas encore de commandes!</h1>
 <div class="card w-50 mx-auto mt-3" v-for="(command,index) in  paginatedData" :key="index">
   <div class="card-body">
     <span class="card-title d-block">commande n<sup>o</sup><b>{{command.order_number}}</b> </span>
     <span class="card-text d-block">Article <i>{{command.id}}</i></span>
       <span class="card-text d-block">Status : <b>{{command.payment_status}}</b></span>
-    <span class="d-block">commander le : <b>{{new Date(command.created_at).toLocaleDateString()}}</b> </span>
+    <span class="d-block">commander le : <b>{{new Date(command.created_at).toLocaleDateString("fr")}}</b> </span>
     <router-link :to="{name:'detailcommande', params:{id:command.id}}" class="btn btn-primary float-end">VOIR PLUS</router-link>
     
   </div>

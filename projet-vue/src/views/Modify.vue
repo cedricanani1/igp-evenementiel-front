@@ -118,9 +118,10 @@ export default {
                                             icon: 'success',
                                             title: 'modification effectuée',
                                         showConfirmButton: false,
-                                            timer: 1500
+                                            timer: 1500,
                                     })
-                                window.location.reload(true)
+                                    // this.$router.push('/modify')
+                                window.location.href= '/modify'
 
                              }else{
                                  Swal.fire({
@@ -128,7 +129,7 @@ export default {
                                             icon: 'error',
                                             title: 'Modification Echouée',
                                         showConfirmButton: false,
-                                            timer: 1500
+                                            timer: 1500,
                                     })
                              }
                           } );
@@ -140,7 +141,7 @@ export default {
                               icon: 'error',
                               title: 'Mot de passe incorrect',
                          showConfirmButton: false,
-                             timer: 1500
+                             timer: 1500,
                        })
             }    
          },

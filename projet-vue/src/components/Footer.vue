@@ -91,7 +91,7 @@
     <div class="copyright-area">
         <div class="container">
             <div class="copyright-item">
-                <p>Copyright ©2021 Design & Developper par <a href="https:/hibootstrap.com/"
+                <p>Copyright ©2022 Design & Developper par <a href="https:/hibootstrap.com/"
                         target="_blank">LCE(locomotive)</a></p>
             </div>
         </div>

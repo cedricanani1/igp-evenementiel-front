@@ -4,13 +4,13 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>Commandes</h2>
+                        <h2>Commander</h2>
                         <ul>
                             <li>
-                                <route-link to="/">Home</route-link>
+                                <route-link to="/">Accueil</route-link>
                             </li>
                             <li>
-                                <span>Commandes</span>
+                                <span>Commander</span>
                             </li>
                         </ul>
                     </div>
@@ -38,11 +38,11 @@
 
                              <div class="form-group">
                              <label for="date-debut">nom</label>
-                                <input type="text" name="date" v-model="this.user.nom" class="form-control"  required>
+                                <input type="text" v-model="this.user.nom" class="form-control"  required>
                             </div>
                             <div class="form-group">
                              <label for="prenoms">prenoms</label>
-                                <input type="text" name="date" v-model="this.user.prenoms" class="form-control" required>
+                                <input type="text"  v-model="this.user.prenoms" class="form-control" required>
                             </div>
                              <div class="form-group">
                              <label for="raison">raison social</label>
@@ -188,7 +188,8 @@ export default {
            axios.post('api/orders',this.commandes)
                 .then(reponse => {
                     if(!localStorage.getItem('token')){
-                        window.location = '/login'
+                        // this.$router.push('/login')
+                        window.location.href = '/login'
                     }else{
                         console.log(reponse);
                         Swal.fire({
@@ -199,7 +200,8 @@ export default {
                          timer: 1500
                     })
                     localStorage.removeItem('mycart')
-                    window.location ='/'
+                    //  this.$router.push('/')
+                    window.location.href ='/'
                     }
                    
                 })
@@ -210,7 +212,7 @@ export default {
                     icon: 'error',
                      title: 'Désole votre commande n\'a pas été validée',
                     showConfirmButton: false,
-                    timer: 1500})
+                    timer: 1500,})
                     }
                     
 

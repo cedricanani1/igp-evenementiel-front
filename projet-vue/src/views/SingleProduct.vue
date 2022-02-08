@@ -123,12 +123,12 @@
 
                             <div class="form-group">
                              <label class="mb-1" for="date-debut">date de debut</label>
-                                <input type="date" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
+                                <input type="date" id="debut" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
                             </div>
 
                             <div class="form-group mt-3">
                              <label class="mb-1" for="date-fin">date de fin</label>
-                                <input type="date" v-model="items.to" :min="items.from"   class="form-control" name="date" placeholder="date fin" required>
+                                <input type="date"  v-model="items.to" :min="items.from"   class="form-control" name="date" placeholder="date fin" required>
                             </div>
                              <div class="form-group mt-3">
                              <label class="mb-1" for="location">Destination</label>
@@ -273,7 +273,8 @@ export default {
             currentPage:1,
             perPage:3,
             color:"orange",
-            date:new Date().toJSON().slice(0,10),
+            date:new Date().toLocaleDateString("fr"),
+            // date:new Date().toJSON().slice(0,10),
        }
    },
    computed:{
@@ -315,16 +316,37 @@ export default {
             axios.post('https://igp-event-backend.lce-ci.com/api/rating',this.rating)
              .then(
              reponse =>{
-                 Swal.fire({
-            position: 'center',
-               icon: 'success',
-            //    title: 'votre inscription a été validée',
-              showConfirmButton: false,
-              timer: 2000,
+                 if(localStorage.getItem('token') == null){
+                     Swal.fire({
+                         position: 'center',
+                         icon: 'success',
+                        title: 'veuillez-vous inscrire avant de noter',
+                        showConfirmButton: false,
+                        timer: 1000,
+                  })
+                 }
+                 if(localStorage.getItem('token')){
+                     Swal.fire({
+                          position: 'center',
+                           icon: 'success',
+                           title: 'Produit noté',
+                         showConfirmButton: false,
+                         timer: 1500,
                   })
                 console.log(reponse)
+                // this.$router.push("/")
                  window.location.href="/";
-                localStorage.setItem('rate',JSON.stringify(this.rating.rate))
+                 } 
+            })
+            .catch(err =>{
+                console.log(err);
+                 Swal.fire({
+                         position: 'center',
+                         icon: 'error',
+                        title: 'veuillez-vous inscrire avant de noter',
+                        showConfirmButton: false,
+                        timer:1500,
+                  })
             })
             console.log("rating",this.rating)
            
@@ -341,10 +363,6 @@ export default {
                 this.items = resp.data.data
                   this.isLoading =true;
                 });
-     
-    
-
-
    },
    
    mounted() {

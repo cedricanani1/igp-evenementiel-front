@@ -77,6 +77,7 @@ export default {
             //    let token = localStorage.getItem('token')
               if(localStorage.getItem('mycart') && localStorage.getItem('token') && localStorage.getItem('user')  ){
                     window.location.href = '/commander'
+                    // this.$router.push('/commander')
 
                 //   if(!localStorage.getItem('token') && !localStorage.getItem('user')){
                 //         window.location.href = '/login'
@@ -98,10 +99,13 @@ export default {
               }
               
               if(localStorage.getItem('mycart') == null && localStorage.getItem('token') && localStorage.getItem('user') ){
+                // this.$router.push('/')
                    window.location.href = '/'
               } 
               if(localStorage.getItem('mycart') && localStorage.getItem('token') == null && localStorage.getItem('user') == null){
                 window.location.href = '/login'
+                //   this.$router.push('/login')
+
               }
           })
           .catch(error => {
@@ -111,7 +115,7 @@ export default {
                     icon: 'error',
                      title: 'l\'adresse email ou mot de passe est incorrecte!',
                     showConfirmButton: false,
-                    timer: 1500})
+                    timer: 1500,})
                                          }
           })
        },

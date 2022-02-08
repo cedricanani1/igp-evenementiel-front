@@ -8,7 +8,7 @@
                     <div class="d-table-cell">
                         <div class="container">
                             <div class="banner-content text-light">
-                                <h1 class="text-light">Reserver vos <br> chapiteau</h1>
+                                <h1 class="text-light mt-5">Reserver vos <br> chapiteau</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">
@@ -29,7 +29,7 @@
                         <div class="container">
                             <div class="banner-content text-light">
                                 <!-- <h1 class="text-light">plat</h1> -->
-                                <h1 class="text-light">Nous rendons vos ceremonie magnifique</h1>
+                                <h1 class="text-light  mt-5">Nous rendons vos ceremonie magnifique</h1>
                                 <router-link class="common-btn" to="/produits">
                                     Commander Maintenant
                                     <img src="/assets/images/shape1.png" alt="Shape">

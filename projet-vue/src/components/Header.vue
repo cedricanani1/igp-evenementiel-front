@@ -89,11 +89,10 @@
     <div class="navbar-area sticky-top">
 
         <div class="mobile-nav mean-container">
-            <router-link to="/" class="logo">
-                <img src="/assets/images/logo.png" alt="Logo">
-            </router-link>
+            
 
             <div class="mean-bar">
+            
                 <a href="#" class="meanmenu-reveal" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;" @click.prevent="showMenu">
                     <span v-if="barre">
                          <span v-if="barre">
@@ -101,6 +100,9 @@
                         </span>
                     </span>
                 </a>
+                <router-link to="/" class="image position-absolute ms-3" >
+                 <img class="img-fluid"  src="/assets/images/LOGO IGP.jpeg" alt="Logo">
+                 </router-link>
                 <a href="#nav" class="meanmenu-reveal" style="right: 0px; left: auto; text-align: center; text-indent: 0px; font-size: 18px;" v-if="show" @click.prevent="showMenu">X</a>
                 <nav class="mean-nav">
                         <ul class="navbar-nav" v-if="show">
@@ -120,6 +122,9 @@
                         </ul>
                     </nav>
                     </div>
+                  <!--  <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="Logo">
+                     </a> -->
         </div>
 
         <div class="main-nav">
@@ -236,6 +241,13 @@ export default {
         axios.get('https://igp-auth.lce-ci.com/api/auth/logout',
             { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
             .then( function(reponse){
+                 Swal.fire({
+                    position: 'center',
+                    icon:'success',
+                     title: 'Vous êtes deconnecter',
+                    showConfirmButton: false,
+                    timer: 1500,
+             })
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 localStorage.removeItem('info')
@@ -253,13 +265,14 @@ export default {
          console.log(localStorage.getItem('total'))
         //  this.$router.push('/commander')
          localStorage.getItem('total')
+        //  this.$router.push("/commander")
         window.location.href = '/commander'
         }else{
             Swal.fire({
                     position: 'center',
-                     title: 'Veuillez vous-connectez merci',
+                     title: 'Veuillez-vous connecter merci',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
              })
              this.$router.push('/login')
         }
@@ -327,6 +340,7 @@ color:orange !important;
 
     position:relative;
 }
+
 .compte{
     width:200px;
     background-color:#435d96;
@@ -335,6 +349,9 @@ color:orange !important;
     top:40px;
     left:5px;
 
+}
+.image img{
+    width:130px;
 }
 .compte a{
     display:block;

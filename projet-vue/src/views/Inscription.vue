@@ -110,10 +110,11 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                   icon: 'success',
                   title: 'votre inscription a été validée',
                   showConfirmButton: false,
-                  timer: 3000,
+                  timer: 1500,
                   })
                    console.log(reponse)
-                     window.location.href='/commander'
+                   this.$router.push('/commander')
+                    //  window.location.href='/commander'
                  }
                  if(localStorage.getItem('mycart')== null){
                      Swal.fire({
@@ -121,7 +122,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                   icon: 'success',
                   title: 'votre inscription a été validée',
                   showConfirmButton: false,
-                  timer: 2000,
+                  timer: 1500,
                   })
                 console.log(reponse)
                 this.$router.push('/login');
