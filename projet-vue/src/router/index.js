@@ -14,6 +14,8 @@ import ListCommandes from "../views/ListCommandes.vue"
 import Modify from "../views/Modify.vue"
 import DetailCommandes from "../views/DetailCommandes.vue"
 import store from '@/store'
+import Page404 from "@/views/Page404.vue"
+import ResetPassword from "../views/ResetPassword.vue"
 
 
 const routes = [{
@@ -96,11 +98,20 @@ const routes = [{
       else next()
     }
   },
-  // {
-  //   path:'/listcommnade',
-  //   name:'listcommande',
-  //   component:ListCommandes
-  // }
+  {
+    // path: "*",
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: Page404,
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path:'/recovery-password/:email/:token',
+    name:'resetpassword',
+    component:ResetPassword,
+  }
 
 
 

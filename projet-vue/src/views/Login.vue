@@ -30,7 +30,7 @@
     <div class="user-area ptb-100">
         <div class="container">
             <div class="user-item">
-                <form @submit.prevent="handleSubmit">
+                <form @submit.prevent="handleSubmit" v-if="connex">
                     <h2>CONNEXION</h2>
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required v-model="email">
@@ -45,9 +45,24 @@
                         <img src="assets/images/shape2.png" alt="Shape">
                     </button>
 
-                    <a>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></a>
+                    <a>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></a> <br>
+                      <a href="#" @click.prevent="seeForm">Mot de passe oublié</a>
+                      
                       <!-- <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link> -->
                     
+                </form>
+                <form v-if="reset"  @submit.prevent="passwordReset">
+                <h2>Mot de passe oublier</h2>
+                <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required v-model="email">
+                    </div>
+                     <button type="submit" class="btn common-btn">
+                        Envoyer
+                        <img src="assets/images/shape1.png" alt="Shape">
+                        <img src="assets/images/shape2.png" alt="Shape">
+                    </button>
+                    <p>Déja un Compte? <a href="#" @click.prevent="seeForm">Se connecter</a></p>
+
                 </form>
             </div>
         </div>
@@ -56,18 +71,21 @@
 
 <script>
 import axios from 'axios'
+import "@/components/auth.js";
 export default {
    name:'Login',
    data(){
        return{
            email:'',
            password:'',
+           reset:false,
+           connex:true,
        }
    },
    methods:{
        handleSubmit(){
           
-        axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
+        axios.post('/login',{
               email:this.email,
               password:this.password,
           })
@@ -119,13 +137,39 @@ export default {
                                          }
           })
        },
-    //    seePassword(){
-    //           let password = this.password;
+      seeForm(){
+            this.reset = !this.reset
+            this.connex = !this.connex
 
-    //    },
+       },
+       passwordReset(){
+           console.log("URL",this.url);
+            console.log("EMAIL",this.email);
+           axios.post('http://192.168.1.3:8004/api/auth/sendPasswordResetEmail',{
+               email:this.email,
+               url:'http://192.168.1.5:8080/',
+           })
+           .then(res => {
+               console.log("URL",this.url);
+               console.log("EMAILREPONSE",res.data);
+                Swal.fire({
+                       position: 'center',
+                       icon: 'success',
+                       title: 'verifier vos mail',
+                       showConfirmButton: false,
+                       timer: 1500
+                })
+           })
+           .catch(error => {
+               console.log(error);
+
+           })
+       },
+       
    },
    mounted(){
          console.log(localStorage.getItem('token'))
+         
    }
   
 }

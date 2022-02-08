@@ -63,7 +63,7 @@
 
 <script>
 import axios from 'axios'
-import '../components/axios.js'
+// import '../components/axios.js'
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 // import store from 'store'
@@ -88,7 +88,7 @@ export default {
    methods:{
        getDetailsCommandes(){ 
         this.isLoading =true;
-        axios.get("api/orders-client")
+        axios.get("https://igp-event-backend.lce-ci.com/api/orders-client")
              .then(rep=>{
                  console.log("ListCommand:",rep.data)
                  this.listCommandes = rep.data

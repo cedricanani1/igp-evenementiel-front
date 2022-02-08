@@ -123,7 +123,7 @@
 
                             <div class="form-group">
                              <label class="mb-1" for="date-debut">date de debut</label>
-                                <input type="date" id="debut" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
+                                <input type="date" id="debut"  data-date-format="DD MMMM YYYY" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
                             </div>
 
                             <div class="form-group mt-3">
