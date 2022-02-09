@@ -71,7 +71,7 @@
 
 <script>
 import axios from 'axios'
-import "@/components/auth.js";
+// import "@/components/auth.js";
 export default {
    name:'Login',
    data(){
@@ -84,47 +84,35 @@ export default {
    },
    methods:{
        handleSubmit(){
+       
           
-        axios.post('/login',{
+        axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
               email:this.email,
               password:this.password,
           })
           .then(reponse => {
-               localStorage.setItem('user', JSON.stringify(reponse.data.user))
-                  localStorage.setItem('token',reponse.data.access_token);
-            //    let token = localStorage.getItem('token')
-              if(localStorage.getItem('mycart') && localStorage.getItem('token') && localStorage.getItem('user')  ){
-                    window.location.href = '/commander'
-                    // this.$router.push('/commander')
-
-                //   if(!localStorage.getItem('token') && !localStorage.getItem('user')){
-                //         window.location.href = '/login'
-                //         console.log(reponse);
-                        //     localStorage.setItem('user', JSON.stringify(reponse.data.user))
-                        //    localStorage.setItem('token',reponse.data.access_token);
-                //         console.log(reponse.data.access_token)
-                //  console.log(reponse.status)
-                
-                //     // localStorage.setItem('token',reponse.data.access_token);
-                //     window.location.href = '/commander'
-                // //    this.$store.state.infoCommande
-                //   }else{  
-                    //   localStorage.setItem('user', JSON.stringify(reponse.data.user))
-                    //   localStorage.setItem('token',reponse.data.access_token);
-                        //   window.location.href = '/commander'
-                        // this.$store.state.infoCommande
-                //   }
-              }
-              
-              if(localStorage.getItem('mycart') == null && localStorage.getItem('token') && localStorage.getItem('user') ){
-                // this.$router.push('/')
-                   window.location.href = '/'
-              } 
-              if(localStorage.getItem('mycart') && localStorage.getItem('token') == null && localStorage.getItem('user') == null){
-                window.location.href = '/login'
-                //   this.$router.push('/login')
-
-              }
+                  if(reponse.data.access_token){
+                         localStorage.setItem('user', JSON.stringify(reponse.data.user))
+                         localStorage.setItem('token',reponse.data.access_token);
+                             Swal.fire({
+                              position: 'center',
+                             icon: 'success',
+                              title: 'connexion réussie',
+                              showConfirmButton: false,
+                              timer: 1500,
+                                });
+                        // console.log("ROUTE",this.$route.query.redirect);
+                    window.location.href=this.$route.query.redirect || '/'
+                   
+                  }else{
+                      Swal.fire({
+                              position: 'center',
+                             icon: 'error',
+                            //   title: 'code',
+                              showConfirmButton: false,
+                              timer: 1500,
+                                });
+                  }
           })
           .catch(error => {
               if(error){
@@ -145,9 +133,9 @@ export default {
        passwordReset(){
            console.log("URL",this.url);
             console.log("EMAIL",this.email);
-           axios.post('http://192.168.1.3:8004/api/auth/sendPasswordResetEmail',{
+           axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.5:8080/',
+               url:'http://192.168.1.7:8080/',
            })
            .then(res => {
                console.log("URL",this.url);

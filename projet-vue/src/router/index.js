@@ -40,13 +40,14 @@ const routes = [{
   },
   {
     path: '/commander',
-    name: 'Commander',
+    name: 'commander',
     component: Commnander,
-     beforeEnter: (to, from, next) => {
-      if(store.state.token === null) next({name:'Login'})
+    meta:{requiresAuth:true}
+    //  beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
       
-      else next()
-    }
+    //   else next()
+    // }
   },
   {
     path: '/contacts',
@@ -75,28 +76,31 @@ const routes = [{
     path:'/commande',
     name:'commande',
     component:ListCommandes,
-    beforeEnter: (to, from, next) => {
-      if(store.state.token === null) next({name:'Login'})
-      else next()
-    },
+    meta:{requiresAuth:true}
+    // beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
+    //   else next()
+    // },
   },
   {
     path:'/detailcommande',
     name:'detailcommande',
     component:DetailCommandes,
-    beforeEnter: (to, from, next) => {
-      if(store.state.token === null) next({name:'Login'})
-      else next()
-    }
+    meta:{requiresAuth:true}
+    // beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
+    //   else next()
+    // }
   },
   {
     path:'/modify',
     name:'modify',
     component:Modify,
-    beforeEnter: (to, from, next) => {
-      if(store.state.token === null) next({name:'Login'})
-      else next()
-    }
+    meta:{requiresAuth:true}
+    // beforeEnter: (to, from, next) => {
+    //   if(store.state.token === null) next({name:'Login'})
+    //   else next()
+    // }
   },
   {
     // path: "*",
@@ -111,15 +115,37 @@ const routes = [{
     path:'/recovery-password/:email/:token',
     name:'resetpassword',
     component:ResetPassword,
-  }
+  },
+  {
+    path:'/activate-account/:email/:token',
+    name:'activateaccount',
+    component:Home,
+  },
+  
 
 
 
 ]
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+router.beforeEach((to,from,next)=>{
+
+  if(to.matched.some(record=>record.meta.requiresAuth)){
+
+    if(store.state.token === null){
+           next({path:'/login',
+                 query:{redirect:to.fullPath}});
+    }else{
+      next();
+    }
+  }else{
+    next();
+  }
+})
+
 
 export default router

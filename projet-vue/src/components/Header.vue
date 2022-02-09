@@ -252,30 +252,32 @@ export default {
                 localStorage.removeItem('user')
                 localStorage.removeItem('info')
                 localStorage.removeItem('mycart')
+                  window.location.href ='/';
+                  this.user= null;
                 console.log(reponse);
             });
-            this.$router.push("/")
-            //  window.location.href = '/'
-             this.user= null;
+            // this.$router.push("/")
+             
            
         },
     passedCommand(){
-        if( localStorage.token){
-         localStorage.setItem('mycart',JSON.stringify(this.cart))
-         console.log(localStorage.getItem('total'))
-        //  this.$router.push('/commander')
-         localStorage.getItem('total')
-        //  this.$router.push("/commander")
-        window.location.href = '/commander'
-        }else{
-            Swal.fire({
-                    position: 'center',
-                     title: 'Veuillez-vous connecter merci',
-                    showConfirmButton: false,
-                    timer: 1500,
-             })
-             this.$router.push('/login')
-        }
+        this.$router.push("/commander")
+        // if( localStorage.token){
+        //  localStorage.setItem('mycart',JSON.stringify(this.cart))
+        //  console.log(localStorage.getItem('total'))
+        // //  this.$router.push('/commander')
+        //  localStorage.getItem('total')
+        // //  this.$router.push("/commander")
+        // window.location.href = '/commander'
+        // }else{
+        //     Swal.fire({
+        //             position: 'center',
+        //              title: 'Veuillez-vous connecter merci',
+        //             showConfirmButton: false,
+        //             timer: 1500,
+        //      })
+        //      this.$router.push('/login')
+        // }
     },
     showCompte(){
         let user = document.getElementsByClassName("user")[0]

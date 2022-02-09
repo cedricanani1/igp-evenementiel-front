@@ -134,7 +134,7 @@ margin-left:0;
 
 </style>
 <script>
-import '../components/axios.js'
+import '@/components/axios.js'
 import axios from 'axios'
 import store from "../store";
 export default {
@@ -187,23 +187,17 @@ export default {
             this.commandes = commande;
            axios.post('api/orders',this.commandes)
                 .then(reponse => {
-                    if(!localStorage.getItem('token')){
-                        // this.$router.push('/login')
-                        window.location.href = '/login'
-                    }else{
-                        console.log(reponse);
-                        Swal.fire({
+                    if(reponse){
+                      Swal.fire({
                         position: 'center',
                         icon: 'success',
                         title: 'Commande effectuée', 
                         showConfirmButton: false,
                          timer: 1500
-                    })
-                    localStorage.removeItem('mycart')
-                    //  this.$router.push('/')
-                    window.location.href ='/'
-                    }
-                   
+                        })
+                        localStorage.removeItem('mycart')
+                        window.location.href ='/'
+                    }   
                 })
                 .catch(error =>{
                     if(error){
@@ -217,32 +211,10 @@ export default {
                     
 
                 })
-         
-        //    if(localStorage.commandes) {
-        //        let lesCommandes = localStorage.commandes;
-        //        this.commandes = JSON.parse(lesCommandes);   
-        //    }
-          
-            //    Swal.fire({
-            // position: 'center',
-            //    icon: 'success',
-            //    title: 'votre commande à été prise en compte',
-            //   showConfirmButton: false,
-            //   timer: 2000,
-            //       });
-        //    console.log(this.commandes);
-        //    this.commandes.push(commande);
-        //    localStorage.setItem('commandes',JSON.stringify(this.commandes))
-           //localStorage.getItem('date')
-        //    this.$router.push('/commande')
-        //    window.location.href='/commande'
-
        }
 
    },
    mounted(){
-    //    console.log('test', JSON.parse(localStorage.getItem('info')))
-    //    console.log('car', JSON.parse(localStorage.getItem('mycart')))
     console.log("cart",this.cart);
 
    }

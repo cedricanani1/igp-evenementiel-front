@@ -48,6 +48,9 @@
                         <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="phone" >
                     </div>
                     <div class="form-group">
+                        <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="ville" >
+                    </div>
+                    <div class="form-group">
                         <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" >
                     </div>
                       <div class="form-group">
@@ -67,7 +70,7 @@
 </template>
 
 <script>
-import VueSweetalert2 from 'vue-sweetalert2'
+// import VueSweetalert2 from 'vue-sweetalert2'
 import axios from "axios"
 export default {
     name:'Inscrisption',
@@ -81,6 +84,7 @@ export default {
             phone:"",
             email:"",
             password:"",
+            ville:"",
            password_confirmation:"",
            isSuccess:false,
         }
@@ -88,7 +92,7 @@ export default {
     methods:{
         createAccount(){
 
-if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" && this.prenoms !=="" && this.nom !=="" && this.phone !==""){
+if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" && this.prenoms !=="" && this.nom !=="" && this.phone !=="" && this.ville !==""){
      this.isSuccess = false
 
     if(this.password !==  this.password_confirmation){
@@ -99,11 +103,15 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                prenoms:this.prenoms,
                email:this.email,
               phone:this.phone,
+              ville:this.ville,
                password:this.password,
-               password_confirmation:this.password_confirmation
+               password_confirmation:this.password_confirmation,
+               url:'http://192.168.1.7:8080/',
+               module:"Evenementiel"
            })
             .then(
              reponse =>{
+                //  console.log("EMAIL",reponse.data.message.email[0]);
                  if(localStorage.getItem('mycart')){
                       Swal.fire({
                   position: 'center',
@@ -127,11 +135,21 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                 console.log(reponse)
                 this.$router.push('/login');
                  }
+                 if(reponse.data.message.email){
+                     Swal.fire({
+
+                      position: 'center',
+                      icon: 'error',
+                      title: 'Email existe deja',
+                      showConfirmButton: false,
+                      timer: 1500,
+                                  })
+                   this.$router.push('/register');
+
+                 }
                  
             })
     }
-
-  
 
 } else{
     Swal.fire({

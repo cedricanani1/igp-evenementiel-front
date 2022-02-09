@@ -37,7 +37,7 @@
                         <!-- <i class="bi bi-eye"></i> -->
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="confirmation mot de passe" required v-model=" password_confirmation">
+                        <input type="password" class="form-control" placeholder="confirmation mot de passe" required v-model="password_confirmation">
                         <!-- <i class="bi bi-eye"></i> -->
                     </div>
                     <button type="submit" class="btn common-btn">
@@ -67,7 +67,7 @@ export default {
     methods: {
         resetMyPassword(){
             if(this.password == this.password_confirmation){
-                axios.post('http://192.168.1.3:8004/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
+                axios.post('https://igp-auth.lce-ci.com/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
              password:this.password,
              password_confirmation:this.password_confirmation
             })
@@ -95,16 +95,16 @@ export default {
 
         },
         verificationToken(){      
-           axios.get('http://192.168.1.3:8004/api/auth/verifToken/'+this.$route.params.email+'/'+this.$route.params.token)
+           axios.get('https://igp-auth.lce-ci.com/api/auth/verifToken/'+this.$route.params.email+'/'+this.$route.params.token)
              .then(res => {
                  if(res){
                 // console.log("VERIF",res.data.message);
                 Swal.fire({
                        position: 'center',
                        icon: 'error',
-                       title: 'lien expirer',
+                       title: 'lien expiré',
                        showConfirmButton: false,
-                       timer: 1500
+                       timer: 5000,
                  })
                  }
                 
