@@ -106,7 +106,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
               ville:this.ville,
                password:this.password,
                password_confirmation:this.password_confirmation,
-               url:'http://192.168.1.7:8080/',
+               url:'http://192.168.1.6:8080/',
                module:"Evenementiel"
            })
             .then(
@@ -128,7 +128,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                      Swal.fire({
                   position: 'center',
                   icon: 'success',
-                  title: 'votre inscription a été validée',
+                  title: 'verifier vos mail pour activer le compte',
                   showConfirmButton: false,
                   timer: 1500,
                   })

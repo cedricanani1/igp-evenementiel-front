@@ -200,8 +200,8 @@
                         
                     </div>
                 </div>
-                <div class="modal-footer">
-                <button class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand"  >
+                <div class="modal-footer" v-if="cart.length > 0" >
+                <button  class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand"  >
                             FINALISER LA COMMANDE
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
@@ -253,10 +253,11 @@ export default {
                 localStorage.removeItem('info')
                 localStorage.removeItem('mycart')
                   window.location.href ='/';
-                  this.user= null;
+                  
                 console.log(reponse);
-            });
-            // this.$router.push("/")
+            })
+            this.user= null;
+            this.$router.push("/")
              
            
         },

@@ -255,7 +255,10 @@ methods:{
          axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
               .then(resp =>{
                   console.log("ACTIVATE",resp);
-                   this.$router.push('/login')
+                  if(resp.data.state === true){
+                         this.$router.push('/login')
+                  }
+                //    this.$router.push('/login')
               })
     },
 },
@@ -301,6 +304,7 @@ computed:{
     // this.getCategories();
     this.getBestSeller();
     this.getActivateAccount();
+    console.log("USER",localStorage.getItem("user"));
     
   },
 }

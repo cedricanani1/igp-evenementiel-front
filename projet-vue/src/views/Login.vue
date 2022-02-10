@@ -135,7 +135,7 @@ export default {
             console.log("EMAIL",this.email);
            axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.7:8080/',
+               url:'http://192.168.1.6:8080/',
            })
            .then(res => {
                console.log("URL",this.url);

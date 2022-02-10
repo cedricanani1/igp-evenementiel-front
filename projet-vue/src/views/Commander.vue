@@ -171,11 +171,21 @@ export default {
          return count;
 
      },
-   },
+   }, 
    methods:{
 
        sendCommande(){ 
-            let commande = {
+         if(this.user.email_verified_at == null){
+             Swal.fire({
+                              position: 'center',
+                            icon: 'warning',
+                            //  title: 'Oops...',
+                              title: 'votre compte n\'est pas activé <br> veuillez activez votre compte',
+                              showConfirmButton: false,
+                              timer: 2000,
+                                });
+         }else{
+                let commande = {
                 nom:this.user.nom,
                 prenoms:this.user.prenoms,
                 email:this.user.email,
@@ -211,11 +221,13 @@ export default {
                     
 
                 })
+         }
        }
 
    },
    mounted(){
     console.log("cart",this.cart);
+    console.log("USER",this.user.email_verified_at);
 
    }
 
