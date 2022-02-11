@@ -123,12 +123,12 @@
 
                             <div class="form-group">
                              <label class="mb-1" for="date-debut">date de debut</label>
-                                <input type="date" id="debut"  data-date-format="DD MMMM YYYY" name="date"  v-model="items.from" :min="this.date" class="form-control" placeholder="date début" required>
+                                <input type="date" id="debut" name="date"   v-model="items.from"  :min="this.date" class="form-control date-withicon" placeholder="dd-mm-yyyy" required>
                             </div>
 
                             <div class="form-group mt-3">
                              <label class="mb-1" for="date-fin">date de fin</label>
-                                <input type="date"  v-model="items.to" :min="items.from"   class="form-control" name="date" placeholder="date fin" required>
+                                <input type="date"  v-model="items.to" :min="items.from"   class="form-control" name="date" placeholder="dd-mm-yyyy" required>
                             </div>
                              <div class="form-group mt-3">
                              <label class="mb-1" for="location">Destination</label>
@@ -278,6 +278,7 @@ export default {
        }
    },
    computed:{
+      
        days(){
             
              return jours
@@ -290,6 +291,7 @@ export default {
    },
     
    methods:{
+       
        rated(evaluation,star){
            let i 
            if(document.getElementById(star).style.color != 'orange'){
@@ -363,12 +365,12 @@ export default {
                 this.items = resp.data.data
                   this.isLoading =true;
                 });
+        
    },
    
    mounted() {
   this.getBestSeller();
-  this.date
-  
+  this.date;
    },
   
 }

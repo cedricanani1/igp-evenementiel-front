@@ -42,7 +42,7 @@
                         <input v-model="userCompte.prenoms" type="text" class="form-control" placeholder="Prenom" >
                     </div>
                     <div class="form-group">
-                        <input v-model="userCompte.email" type="email" class="form-control" placeholder="votre meilleur addresse email" >
+                        <input v-model="userCompte.email" type="email" class="form-control" placeholder="Entrez votre adresse e-mail" >
                     </div>
                     <div class="form-group">
                         <input v-model="userCompte.phone" type="tel" id="phone"  class="form-control" placeholder="phone" >

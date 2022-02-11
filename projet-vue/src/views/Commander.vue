@@ -62,12 +62,20 @@
                                 <input type="text" name="shipping" v-model="shipping" class="form-control" required>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn common-btn">
+                                <button type="submit" class="btn common-btn fs-5">
                                     Commander
                                     <img src="assets/images/shape1.png" alt="Shape">
                                     <img src="assets/images/shape2.png" alt="Shape">
                                 </button>
                             </div>
+                             <div class="text-center mt-4">
+                                <button class="btn common-btn bg-danger fs-5" @click.prevent="annuler">
+                                    Annuler
+                                    <img src="assets/images/shape1.png" alt="Shape">
+                                    <img src="assets/images/shape2.png" alt="Shape">
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -173,7 +181,9 @@ export default {
      },
    }, 
    methods:{
-
+       annuler(){
+             this.$router.push('/produits')
+       },
        sendCommande(){ 
          if(this.user.email_verified_at == null){
              Swal.fire({

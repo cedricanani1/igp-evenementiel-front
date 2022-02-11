@@ -194,19 +194,35 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="total-amount">
+                        <div class="total-amount" v-if="cart.length > 0" >
                             <h3>Total: <span>{{item_cost.toFixed()}}</span></h3>
+                        </div>
+                        <div class="text-center" v-if="!cart.length" >
+                        <h1><i class="bi bi-cart"></i></h1>
+                        <h5>votre panier est vide</h5>
                         </div>
                         
                     </div>
                 </div>
-                <div class="modal-footer" v-if="cart.length > 0" >
-                <button  class="btn common-btn"   data-bs-dismiss="modal"   @click="passedCommand"  >
+                <div class="modal-footer"  >
+                <button  class="btn common-btn" v-if="cart.length > 0"   data-bs-dismiss="modal"   @click="passedCommand"  >
                             FINALISER LA COMMANDE
                             <img src="/assets/images/shape1.png" alt="Shape">
                             <img src="/assets/images/shape2.png" alt="Shape">
                 </button>
+                <button  class="btn common-btn d-block bg-primary" v-if="cart.length > 0"   data-bs-dismiss="modal"   @click="poursuivreAchat"  >
+                            POURSUIVRE VOS ACHATS
+                            <img src="/assets/images/shape1.png" alt="Shape">
+                            <img src="/assets/images/shape2.png" alt="Shape">
+                </button>
+                 <button  class="btn common-btn d-block bg-primary" v-else   data-bs-dismiss="modal"   @click="poursuivreAchat"  >
+                            COMMENCER VOS ACHATS
+                            <img src="/assets/images/shape1.png" alt="Shape">
+                            <img src="/assets/images/shape2.png" alt="Shape">
+                </button>
+
                 </div>
+                
             </div>
         <!-- cart -->
         </div>
@@ -263,22 +279,9 @@ export default {
         },
     passedCommand(){
         this.$router.push("/commander")
-        // if( localStorage.token){
-        //  localStorage.setItem('mycart',JSON.stringify(this.cart))
-        //  console.log(localStorage.getItem('total'))
-        // //  this.$router.push('/commander')
-        //  localStorage.getItem('total')
-        // //  this.$router.push("/commander")
-        // window.location.href = '/commander'
-        // }else{
-        //     Swal.fire({
-        //             position: 'center',
-        //              title: 'Veuillez-vous connecter merci',
-        //             showConfirmButton: false,
-        //             timer: 1500,
-        //      })
-        //      this.$router.push('/login')
-        // }
+    },
+    poursuivreAchat(){
+        this.$router.push("/produits")
     },
     showCompte(){
         let user = document.getElementsByClassName("user")[0]
@@ -369,6 +372,10 @@ color:orange !important;
 .all a:hover{
   text-decoration: none !important;
   border:none;
+}
+.bg-primary{
+box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.397);
+background:#435d96 !important;
 }
 
 @media only screen and (max-width: 991px){

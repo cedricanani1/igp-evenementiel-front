@@ -39,29 +39,29 @@
                         <input v-model="nom" type="text" class="form-control" placeholder="Nom"  >
                     </div>
                     <div class="form-group">
-                        <input v-model="prenoms" type="text" class="form-control" placeholder="Prenom" >
+                        <input v-model="prenoms" type="text" class="form-control" placeholder="Prénoms" >
                     </div>
                     <div class="form-group">
-                        <input v-model="email" type="email" class="form-control" placeholder="votre meilleur addresse email" >
+                        <input v-model="email" type="email" class="form-control" placeholder="Entrez votre adresse e-mail" >
                     </div>
                     <div class="form-group">
-                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="phone" >
+                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="Téléphone" >
                     </div>
                     <div class="form-group">
-                        <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="ville" >
+                        <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="Ville" >
                     </div>
                     <div class="form-group">
                         <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" >
                     </div>
                       <div class="form-group">
-                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" >
+                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="Confirmation mot de passe" >
                     </div>
                     <button type="submit" class="btn common-btn">
                         Inscription
                         <img src="/assets/images/shape1.png" alt="Shape">
                         <img src="/assets/images/shape2.png" alt="Shape">
                     </button>
-                    <h5>Déja un Compte? <router-link to="/login">Se connecter</router-link></h5>
+                    <h5 >Déja un Compte? <router-link to="/login" class="connect">Se connecter</router-link></h5>
                 </form>
             </div>
         </div>
@@ -106,17 +106,17 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
               ville:this.ville,
                password:this.password,
                password_confirmation:this.password_confirmation,
-               url:'http://192.168.1.6:8080/',
+               url:'http://192.168.1.9:8080/',
                module:"Evenementiel"
            })
             .then(
              reponse =>{
-                //  console.log("EMAIL",reponse.data.message.email[0]);
+                 console.log("EMAIL",reponse.data.status);
                  if(localStorage.getItem('mycart')){
                       Swal.fire({
                   position: 'center',
                   icon: 'success',
-                  title: 'votre inscription a été validée',
+                  title: 'verifier votre boite mail',
                   showConfirmButton: false,
                   timer: 1500,
                   })
@@ -135,7 +135,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                 console.log(reponse)
                 this.$router.push('/login');
                  }
-                 if(reponse.data.message.email){
+                 if(reponse.data.message === false ){
                      Swal.fire({
 
                       position: 'center',
@@ -168,3 +168,10 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
      }
 }
 </script>
+
+<style scoped>
+.connect{
+ color: #435d96 !important;
+ border: none !important;
+}
+</style>

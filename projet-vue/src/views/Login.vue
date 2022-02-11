@@ -33,7 +33,7 @@
                 <form @submit.prevent="handleSubmit" v-if="connex">
                     <h2>CONNEXION</h2>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required v-model="email">
+                        <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
@@ -45,8 +45,8 @@
                         <img src="assets/images/shape2.png" alt="Shape">
                     </button>
 
-                    <a>Avez-vous déja un compte? <router-link to="/register">Inscription</router-link></a> <br>
-                      <a href="#" @click.prevent="seeForm">Mot de passe oublié</a>
+                    <a>Avez-vous déja un compte? <router-link to="/register" class="fw-bold inscription">Inscription</router-link></a> <br>
+                      <a href="#" @click.prevent="seeForm" class="fw-bold text-danger">Mot de passe oublié</a>
                       
                       <!-- <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link> -->
                     
@@ -54,14 +54,14 @@
                 <form v-if="reset"  @submit.prevent="passwordReset">
                 <h2>Mot de passe oublier</h2>
                 <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Votre meilleur addresse email" required v-model="email">
+                        <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
                     </div>
                      <button type="submit" class="btn common-btn">
                         Envoyer
                         <img src="assets/images/shape1.png" alt="Shape">
                         <img src="assets/images/shape2.png" alt="Shape">
                     </button>
-                    <p>Déja un Compte? <a href="#" @click.prevent="seeForm">Se connecter</a></p>
+                    <p>Déja un Compte? <a href="#" @click.prevent="seeForm" class="fw-bold inscription">Se connecter</a></p>
 
                 </form>
             </div>
@@ -135,7 +135,7 @@ export default {
             console.log("EMAIL",this.email);
            axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.6:8080/',
+               url:'http://192.168.1.9:8080/',
            })
            .then(res => {
                console.log("URL",this.url);
@@ -162,3 +162,10 @@ export default {
   
 }
 </script>
+
+<style scoped>
+.inscription{
+
+ color: #435d96 !important;
+ }
+</style>
