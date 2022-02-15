@@ -30,9 +30,9 @@
         <div class="container">
         
             <div class="user-item">
-            <div class="alert alert-danger" v-if="isSuccess">
+            <!-- <div class="alert alert-danger" v-if="isSuccess">
               Mot de passe incorrect
-             </div>
+             </div> -->
                 <form @submit.prevent.stop="createAccount">
                     <h2>Inscription</h2>
                     <div class="form-group">
@@ -50,11 +50,16 @@
                     <div class="form-group">
                         <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="Ville" >
                     </div>
-                    <div class="form-group">
-                        <input v-model="password" type="password" class="form-control" placeholder="Mot de passe" >
+                    <span class="text-danger fw-bold">* Le mot de passe doit comporter au moins 6 caractères </span>
+                    <div class="form-group input_pass mt-2">
+                        <input v-model="password" type="password" id="pass" class="form-control" placeholder="Mot de passe" >
+                        <i class="bi bi-eye" v-show="eye" @click="showPass"></i>
+                        <i class="bi bi-eye-slash" v-show="eyes" @click="showPass"></i>
                     </div>
-                      <div class="form-group">
-                        <input v-model="password_confirmation" type="password" class="form-control" placeholder="Confirmation mot de passe" >
+                      <div class="form-group input_pass">
+                        <input v-model="password_confirmation" type="password" id="cpass" class="form-control" placeholder="Confirmation mot de passe" >
+                        <i class="bi bi-eye" v-show="confirneye" @click="showConfirmationPass"></i>
+                        <i class="bi bi-eye-slash" v-show="confirneyes" @click="showConfirmationPass"></i>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Inscription
@@ -87,16 +92,53 @@ export default {
             ville:"",
            password_confirmation:"",
            isSuccess:false,
+           eye:false,
+           eyes:true,
+           confirneye:false,
+           confirneyes:true,
         }
     },
     methods:{
+          showConfirmationPass(){
+          let pass = document.getElementById("cpass");
+          if(pass.type == "password"){
+              this.confirneyes = !this.confirneyes;
+                this.confirneye= !this.confirneye;
+              pass.type ="text"
+          }else{
+              pass.type="password"
+               this.confirneyes = !this.confirneyes;
+                this.confirneye= !this.confirneye;
+          }
+               
+       },
+          showPass(){
+          let pass = document.getElementById("pass");
+          if(pass.type == "password"){
+              this.eyes = !this.eyes;
+                this.eye = !this.eye;
+              pass.type ="text"
+          }else{
+              pass.type="password"
+              this.eye = !this.eye;
+              this.eyes = !this.eyes;
+          }
+               
+       },
         createAccount(){
 
 if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" && this.prenoms !=="" && this.nom !=="" && this.phone !=="" && this.ville !==""){
-     this.isSuccess = false
+    
 
-    if(this.password !==  this.password_confirmation){
-      this.isSuccess = true
+    if(this.password !== this.password_confirmation){
+    //   this.isSuccess = true
+     Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Mot de passe incorrect',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  })
     } else{
       axios.post('https://igp-auth.lce-ci.com/api/auth/signup',{
                 nom:this.nom,
@@ -106,47 +148,57 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
               ville:this.ville,
                password:this.password,
                password_confirmation:this.password_confirmation,
-               url:'http://192.168.1.9:8080/',
+               url:'http://192.168.1.5:8081/',
                module:"Evenementiel"
            })
             .then(
              reponse =>{
-                 console.log("EMAIL",reponse.data.status);
-                 if(localStorage.getItem('mycart')){
+                //  console.log("EMAIL",(reponse.data.message.email).toString());
+                
+                //  if(localStorage.getItem('mycart')){
+                //       Swal.fire({
+                //   position: 'center',
+                //   icon: 'success',
+                //   title: 'verifier votre boite mail',
+                //   showConfirmButton: false,
+                //   timer: 1500,
+                //   })
+                //    console.log(reponse)
+                //    this.$router.push('/commander')
+                //     //  window.location.href='/commander'
+                //  }
+                //  if(reponse){
+                //      Swal.fire({
+                //   position: 'center',
+                //   icon: 'success',
+                //   title: 'verifier vos mail pour activer le compte',
+                //   showConfirmButton: false,
+                //   timer: 1500,
+                //   })
+                // console.log(reponse)
+                // this.$router.push('/login');
+                //  }
+                //  if((reponse.data.message.email).toString() === 'The email has already been taken.'){
+                //      Swal.fire({
+
+                //       position: 'center',
+                //       icon: 'error',
+                //       title: 'Email existe deja',
+                //       showConfirmButton: false,
+                //       timer: 1500,
+                //                   })
+                //    this.$router.push('/register');
+
+                //  }else{
                       Swal.fire({
                   position: 'center',
                   icon: 'success',
-                  title: 'verifier votre boite mail',
-                  showConfirmButton: false,
-                  timer: 1500,
+                  title: 'Veuillez verifiez votre boite mail!',
+                  showConfirmButton: true,
+                  timer: 3000,
                   })
-                   console.log(reponse)
-                   this.$router.push('/commander')
-                    //  window.location.href='/commander'
-                 }
-                 if(localStorage.getItem('mycart')== null){
-                     Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'verifier vos mail pour activer le compte',
-                  showConfirmButton: false,
-                  timer: 1500,
-                  })
-                console.log(reponse)
-                this.$router.push('/login');
-                 }
-                 if(reponse.data.message === false ){
-                     Swal.fire({
-
-                      position: 'center',
-                      icon: 'error',
-                      title: 'Email existe deja',
-                      showConfirmButton: false,
-                      timer: 1500,
-                                  })
-                   this.$router.push('/register');
-
-                 }
+                  this.$router.push('/login');
+                //  }
                  
             })
     }
@@ -165,13 +217,25 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
     
        },
          
-     }
+     },
 }
 </script>
 
 <style scoped>
+ .input_pass{
+   position:relative;
+ }
+ .bi-eye,.bi-eye-slash{
+ position:absolute;
+ right:0;
+ top:0;
+ font-size: 2em;
+ }
 .connect{
  color: #435d96 !important;
  border: none !important;
+}
+span.text-danger{
+    font-size: .8em;
 }
 </style>

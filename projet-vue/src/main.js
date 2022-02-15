@@ -9,5 +9,5 @@ import "bootstrap"
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
-createApp(App).use(store).use(router).use(jQuery).use(VueSweetalert2).use(VueLoading).use($).mount('#app') 
+createApp(App).use(store).use(router).use(jQuery).use(VueSweetalert2).use(VueLoading).mount('#app') 
 

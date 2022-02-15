@@ -9,11 +9,11 @@
      @localstorage=cartFromLocalStorage
      :itemCost=item_cost
       />
-      <div class="vld-parent">
+      <!-- <div class="vld-parent">
                         <loading :active.sync="isLoading" 
                         :can-cancel="true" 
                         :is-full-page="FullPage" ></loading>
-        </div>
+        </div> -->
     <router-view
     :cart=cart
     @add=addCart

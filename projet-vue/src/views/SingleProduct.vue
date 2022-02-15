@@ -120,7 +120,7 @@
                 </div>
             </div>
         <div class="checkout-billing w-75 mx-auto">
-
+        
                             <div class="form-group">
                              <label class="mb-1" for="date-debut">date de debut</label>
                                 <input type="date" id="debut" name="date"   v-model="items.from"  :min="this.date" class="form-control date-withicon" placeholder="dd-mm-yyyy" required>
@@ -239,6 +239,7 @@ import Header from "@/components/Header.vue"
 import { Notyf } from 'notyf';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
    name:"SingleProduct",
 

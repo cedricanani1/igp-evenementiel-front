@@ -97,7 +97,7 @@ export default {
         verificationToken(){      
            axios.get('https://igp-auth.lce-ci.com/api/auth/verifToken/'+this.$route.params.email+'/'+this.$route.params.token)
              .then(res => {
-                 if(res){
+                 if(res.data.state === false){
                 // console.log("VERIF",res.data.message);
                 Swal.fire({
                        position: 'center',

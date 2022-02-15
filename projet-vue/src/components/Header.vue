@@ -260,7 +260,7 @@ export default {
                  Swal.fire({
                     position: 'center',
                     icon:'success',
-                     title: 'Vous êtes deconnecter',
+                     title: 'Vous êtes deconnectés',
                     showConfirmButton: false,
                     timer: 1500,
              })

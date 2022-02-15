@@ -37,28 +37,28 @@
                         <div class="checkout-billing">
 
                              <div class="form-group">
-                             <label for="date-debut">nom</label>
+                             <label for="date-debut">Nom</label>
                                 <input type="text" v-model="this.user.nom" class="form-control"  required>
                             </div>
                             <div class="form-group">
-                             <label for="prenoms">prenoms</label>
+                             <label for="prenoms">Prenoms</label>
                                 <input type="text"  v-model="this.user.prenoms" class="form-control" required>
                             </div>
                              <div class="form-group">
-                             <label for="raison">raison social</label>
+                             <label for="raison">Raison social</label>
                                 <input type="text" name="raison" v-model="raison_social" class="form-control" required>
                             </div>
                            <div class="form-group">
-                             <label for="email">email</label>
+                             <label for="email">Adresse email</label>
                                 <input type="text" name="email" v-model="this.user.email" class="form-control" required>
                             </div>
                            
                             <div class="form-group">
-                             <label for="phone">phone</label>
+                             <label for="phone">Télephone</label>
                                 <input type="tel" name="phone" v-model="this.user.phone" class="form-control" required>
                             </div>
                             <div class="form-group">
-                             <label for="shipping">expedition</label>
+                             <label for="shipping">Expedition</label>
                                 <input type="text" name="shipping" v-model="shipping" class="form-control" required>
                             </div>
                             <div class="text-center">

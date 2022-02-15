@@ -1,5 +1,5 @@
 <template>
-       
+     
 <!-- voici tous ce quui s' affiche lorsque tu viens sur le site -->
     <div class="banner-area-two">
         <div class="banner-slider owl-theme owl-carousel">
@@ -48,7 +48,7 @@
     </div>
 <!-- voici tous ce quui s' affiche lorsque tu viens sur le site -->
 
-  
+    
      <div class="products-area ptb-100">
 
         <div class="container-fluid px-5">
@@ -70,7 +70,9 @@
                     </div>
                 </div> -->
      <!-- buttons pour filtrer les produits-->
-     
+     <div class="alert alert-success position-absolute text-center fs-5" v-show="alert" role="alert">
+    Le compte à été activée
+      </div>
       
                 <div class="col-lg-12">
                     <div id="Container" class="row justify-content-center">
@@ -237,7 +239,7 @@ export default{
         categories:[],
         bestSeller:[],
         color:"orange",
-         
+        alert:false,
       }
   }, 
   components:{
@@ -245,7 +247,9 @@ export default{
   },
 methods:{
      getBestSeller(){
-           axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
+           axios.post('https://igp-event-backend.lce-ci.com/api/bestproducts',{
+               status:'delivered'
+           })
            .then(resp =>{
                 this.bestSeller = resp.data
                 console.log("bestSeller",resp.data);
@@ -256,6 +260,14 @@ methods:{
               .then(resp =>{
                   console.log("ACTIVATE",resp);
                   if(resp.data.state === true){
+                        //   this.alert = true
+                       Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Votre compte est activée',
+                  showConfirmButton: true,
+                  timer: 3000,
+                  })
                          this.$router.push('/login')
                   }
                 //    this.$router.push('/login')
@@ -335,6 +347,14 @@ computed:{
 }
 .orange{
 color: orange;
+}
+.alert-success{
+    transform: translateX(-50%);
+    margin-left:50%;
+    top:10px;
+    z-index: 999;
+    width:50%;
+    left:0;
 }
 
 </style>

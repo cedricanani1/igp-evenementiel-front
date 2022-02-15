@@ -35,9 +35,10 @@
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
-                        <!-- <i class="bi bi-eye"></i> -->
+                    <div class="form-group input_pass">
+                        <input type="password" class="form-control" id="pass" placeholder="Mot de passe" required v-model="password">
+                        <i class="bi bi-eye" v-show="eye" @click="showPass"></i>
+                         <i class="bi bi-eye-slash" v-show="eyes" @click="showPass"></i>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Se connecter
@@ -80,9 +81,24 @@ export default {
            password:'',
            reset:false,
            connex:true,
+           eye:false,
+           eyes:true,
        }
    },
    methods:{
+      showPass(){
+          let pass = document.getElementById("pass");
+          if(pass.type == "password"){
+              this.eyes = !this.eyes;
+                this.eye = !this.eye;
+              pass.type ="text"
+          }else{
+              pass.type="password"
+              this.eye = !this.eye;
+              this.eyes = !this.eyes;
+          }
+               
+       },
        handleSubmit(){
        
           
@@ -135,7 +151,7 @@ export default {
             console.log("EMAIL",this.email);
            axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.9:8080/',
+               url:'http://192.168.1.5:8081/',
            })
            .then(res => {
                console.log("URL",this.url);
@@ -167,5 +183,14 @@ export default {
 .inscription{
 
  color: #435d96 !important;
+ }
+ .input_pass{
+   position:relative;
+ }
+ .bi-eye,.bi-eye-slash{
+ position:absolute;
+ right:0;
+ top:0;
+ font-size: 2em;
  }
 </style>
