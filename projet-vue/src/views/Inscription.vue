@@ -29,11 +29,8 @@
     <div class="user-area ptb-100">
         <div class="container">
         
-            <div class="user-item">
-            <!-- <div class="alert alert-danger" v-if="isSuccess">
-              Mot de passe incorrect
-             </div> -->
-                <form @submit.prevent.stop="createAccount">
+            <div class="user-item overflow-hidden">
+                <form @submit.prevent.stop="createAccount" v-if="showMsg" class="animate__animated animate__bounceInRight">
                     <h2>Inscription</h2>
                     <div class="form-group">
                         <input v-model="nom" type="text" class="form-control" placeholder="Nom"  >
@@ -50,7 +47,7 @@
                     <div class="form-group">
                         <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="Ville" >
                     </div>
-                    <span class="text-danger fw-bold">* Le mot de passe doit comporter au moins 6 caractères </span>
+                    <span class="text-danger fw-bold" v-show="msgError">* Le mot de passe doit comporter au moins 6 caractères </span>
                     <div class="form-group input_pass mt-2">
                         <input v-model="password" type="password" id="pass" class="form-control" placeholder="Mot de passe" >
                         <i class="bi bi-eye" v-show="eye" @click="showPass"></i>
@@ -68,6 +65,13 @@
                     </button>
                     <h5 >Déja un Compte? <router-link to="/login" class="connect">Se connecter</router-link></h5>
                 </form>
+                 <div v-else class="animate__animated animate__bounceInLeft">
+               <h1>Confirmation de compte</h1>
+               <hr>
+                <p class="h5">
+                Vérifiez si vous avez reçu un e-mail à l adresse suivante : {{this.email}}
+                </p>
+               </div>
             </div>
         </div>
     </div>
@@ -90,15 +94,18 @@ export default {
             email:"",
             password:"",
             ville:"",
+            msgError:false,
            password_confirmation:"",
            isSuccess:false,
            eye:false,
            eyes:true,
            confirneye:false,
            confirneyes:true,
+           showMsg:true,
         }
     },
     methods:{
+
           showConfirmationPass(){
           let pass = document.getElementById("cpass");
           if(pass.type == "password"){
@@ -140,7 +147,10 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
                   timer: 1500,
                   })
     } else{
-      axios.post('https://igp-auth.lce-ci.com/api/auth/signup',{
+
+        if(this.password.length > 5 && this.password_confirmation.length > 5){
+
+            axios.post('https://igp-auth.lce-ci.com/api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,
@@ -148,59 +158,24 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
               ville:this.ville,
                password:this.password,
                password_confirmation:this.password_confirmation,
-               url:'http://192.168.1.5:8081/',
+               url:'http://192.168.1.7:8080/',
                module:"Evenementiel"
            })
-            .then(
-             reponse =>{
-                //  console.log("EMAIL",(reponse.data.message.email).toString());
-                
-                //  if(localStorage.getItem('mycart')){
-                //       Swal.fire({
-                //   position: 'center',
-                //   icon: 'success',
-                //   title: 'verifier votre boite mail',
-                //   showConfirmButton: false,
-                //   timer: 1500,
-                //   })
-                //    console.log(reponse)
-                //    this.$router.push('/commander')
-                //     //  window.location.href='/commander'
-                //  }
-                //  if(reponse){
-                //      Swal.fire({
-                //   position: 'center',
-                //   icon: 'success',
-                //   title: 'verifier vos mail pour activer le compte',
-                //   showConfirmButton: false,
-                //   timer: 1500,
-                //   })
-                // console.log(reponse)
-                // this.$router.push('/login');
-                //  }
-                //  if((reponse.data.message.email).toString() === 'The email has already been taken.'){
-                //      Swal.fire({
-
-                //       position: 'center',
-                //       icon: 'error',
-                //       title: 'Email existe deja',
-                //       showConfirmButton: false,
-                //       timer: 1500,
-                //                   })
-                //    this.$router.push('/register');
-
-                //  }else{
-                      Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Veuillez verifiez votre boite mail!',
-                  showConfirmButton: true,
-                  timer: 3000,
-                  })
-                  this.$router.push('/login');
-                //  }
+            .then((reponse)=>{
+                console.log("INSCRIPTION",reponse);
+            if(reponse.data){
+                 this.showMsg = false;
+                //   this.$router.push('/login');
+            }
+                      
+            
                  
             })
+
+        }else{
+                this.msgError=true;
+        }
+      
     }
 
 } else{

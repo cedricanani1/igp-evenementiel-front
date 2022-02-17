@@ -41,7 +41,7 @@
                                 <input type="text" v-model="this.user.nom" class="form-control"  required>
                             </div>
                             <div class="form-group">
-                             <label for="prenoms">Prenoms</label>
+                             <label for="prenoms">Prénoms</label>
                                 <input type="text"  v-model="this.user.prenoms" class="form-control" required>
                             </div>
                              <div class="form-group">
@@ -58,7 +58,7 @@
                                 <input type="tel" name="phone" v-model="this.user.phone" class="form-control" required>
                             </div>
                             <div class="form-group">
-                             <label for="shipping">Expedition</label>
+                             <label for="shipping">Expédition</label>
                                 <input type="text" name="shipping" v-model="shipping" class="form-control" required>
                             </div>
                             <div class="text-center">

@@ -4,13 +4,13 @@
             <div class="d-table-cell">
                 <div class="container">
                     <div class="title-content">
-                        <h2>reset password</h2>
+                        <h2>Réinitialiser le mot de passe</h2>
                         <ul>
                             <li>
                                 <router-link to="/">Accueil</router-link>
                             </li>
                             <li>
-                                <span>reset password</span>
+                                <span>Réinitialiser le mot de passe</span>
                             </li>
                         </ul>
                     </div>
@@ -30,21 +30,26 @@
         <div class="container">
             <div class="user-item">
                 <form @submit.prevent="resetMyPassword">
-                    <h2>Reset password</h2>
+                    <h2>Réinitialiser le mot de passe</h2>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
+                    <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" required v-model="password">
                         <!-- <i class="bi bi-eye"></i> -->
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="confirmation mot de passe" required v-model="password_confirmation">
+                    <label for="confirmation">Confirmation mot de passe</label>
+                        <input type="password" id="confirmation" class="form-control" required v-model="password_confirmation">
                         <!-- <i class="bi bi-eye"></i> -->
                     </div>
                     <button type="submit" class="btn common-btn">
                         Envoyer
-                        <img src="assets/images/shape1.png" alt="Shape">
-                        <img src="assets/images/shape2.png" alt="Shape">
+                        <img src="/assets/images/shape1.png" alt="Shape">
+                        <img src="/assets/images/shape2.png" alt="Shape">
                     </button>
+                    <div>
+                    <router-link to="/login" class="fw-bold text-danger">Mot de passe oublié</router-link>
+                    </div>
                       
                       <!-- <router-link to="/reset" class="float-end">Mot de passe Oublier?</router-link> -->
                     
@@ -80,6 +85,7 @@ export default {
                        showConfirmButton: false,
                        timer: 1500
                 })
+                this.$router.push('/login')
             })
 
             }else{
@@ -90,6 +96,7 @@ export default {
                        showConfirmButton: false,
                        timer: 1500
                 })
+                this.$router.push('/login')
             }
             
 

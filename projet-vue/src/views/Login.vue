@@ -27,10 +27,10 @@
     </div>
 
 
-    <div class="user-area ptb-100">
+    <div class="user-area ptb-100 ">
         <div class="container">
-            <div class="user-item">
-                <form @submit.prevent="handleSubmit" v-if="connex">
+            <div class="user-item overflow-hidden">
+                <form @submit.prevent="handleSubmit" v-if="connex" class="animate__animated animate__bounceInLeft">
                     <h2>CONNEXION</h2>
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
@@ -53,6 +53,7 @@
                     
                 </form>
                 <form v-if="reset"  @submit.prevent="passwordReset">
+               <div v-if="showMsg" class="animate__animated animate__bounceInRight">
                 <h2>Mot de passe oublier</h2>
                 <div class="form-group">
                         <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
@@ -63,16 +64,29 @@
                         <img src="assets/images/shape2.png" alt="Shape">
                     </button>
                     <p>Déja un Compte? <a href="#" @click.prevent="seeForm" class="fw-bold inscription">Se connecter</a></p>
+               </div>
+               <div v-else class="animate__animated animate__bounceInLeft">
+               <h1>Vérification de mot passe</h1>
+               <hr>
+                <p class="h5">
+                Vérifiez si vous avez reçu un e-mail à l adresse suivante : {{this.email}}
+                </p>
+               </div>
 
                 </form>
             </div>
         </div>
     </div>
+     <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import "@/components/auth.js";
+import store from "../store";
 export default {
    name:'Login',
    data(){
@@ -83,9 +97,42 @@ export default {
            connex:true,
            eye:false,
            eyes:true,
+           showMsg:true,
+           isLoading: false,
+             fullPage: true,
+             user:store.state.user,
        }
    },
    methods:{
+        //    getActivateAccount(){
+        //  axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
+        //       .then(resp =>{
+        //           console.log("ACTIVATE",resp);
+        //           if(resp.data.state === true){
+        //                 if(this.user.email_verified_at !== null){
+        //               Swal.fire({
+        //                       position: 'top-end',
+        //                     icon: 'success',
+        //                      title: 'Le compte à été activée',
+        //                    showConfirmButton: false,
+        //                    timer: 2000
+        //                        })
+        //                 }else{
+        //                     Swal.fire({
+        //                       position: 'top-end',
+        //                     icon: 'success',
+        //                      title: 'Le compte n\' pas à été activée',
+        //                    showConfirmButton: false,
+        //                    timer: 2000
+        //                        })
+        //                 }
+                     
+                      
+        //                 //  this.$router.push('/login')
+        //           }
+        //         //    this.$router.push('/login')
+        //       })
+    // },
       showPass(){
           let pass = document.getElementById("pass");
           if(pass.type == "password"){
@@ -100,13 +147,12 @@ export default {
                
        },
        handleSubmit(){
-       
-          
         axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
               email:this.email,
               password:this.password,
           })
           .then(reponse => {
+              
                   if(reponse.data.access_token){
                          localStorage.setItem('user', JSON.stringify(reponse.data.user))
                          localStorage.setItem('token',reponse.data.access_token);
@@ -147,33 +193,47 @@ export default {
 
        },
        passwordReset(){
-           console.log("URL",this.url);
-            console.log("EMAIL",this.email);
+        //    console.log("URL",this.url);
+        //     console.log("EMAIL",this.email);
            axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.5:8081/',
+               url:'http://192.168.1.7:8080/',
            })
            .then(res => {
-               console.log("URL",this.url);
+            //    console.log("URL",this.url);
+            
                console.log("EMAILREPONSE",res.data);
-                Swal.fire({
+                // Swal.fire({
+                //        position: 'center',
+                //        icon: 'success',
+                //        title: 'verifier vos mail',
+                //        showConfirmButton: false,
+                //        timer: 1500
+                // })
+            if(res.data){
+                 this.showMsg = false;
+            }
+           })
+           .catch(error => {
+            //    console.log(error);
+            if (error) {
+                 Swal.fire({
                        position: 'center',
-                       icon: 'success',
-                       title: 'verifier vos mail',
+                       icon: 'error',
+                       title: 'L\' adresse e-mail n\'existe pas',
                        showConfirmButton: false,
                        timer: 1500
                 })
-           })
-           .catch(error => {
-               console.log(error);
+            }
+              
 
            })
        },
        
    },
-   mounted(){
-         console.log(localStorage.getItem('token'))
-         
+   created(){
+        //  this.getActivateAccount();
+         console.log("USER",this.user);
    }
   
 }

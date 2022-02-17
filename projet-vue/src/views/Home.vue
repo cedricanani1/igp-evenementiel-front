@@ -240,6 +240,7 @@ export default{
         bestSeller:[],
         color:"orange",
         alert:false,
+        
       }
   }, 
   components:{
@@ -257,20 +258,18 @@ methods:{
         },
     getActivateAccount(){
          axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
-              .then(resp =>{
+              .then((resp) =>{
                   console.log("ACTIVATE",resp);
                   if(resp.data.state === true){
-                        //   this.alert = true
-                       Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Votre compte est activée',
-                  showConfirmButton: true,
-                  timer: 3000,
-                  })
+                      Swal.fire({
+                              position: 'top-end',
+                            icon: 'success',
+                             title: 'Le compte à été activé',
+                           showConfirmButton: false,
+                           timer: 3000
+                               })
                          this.$router.push('/login')
                   }
-                //    this.$router.push('/login')
               })
     },
 },
@@ -314,6 +313,7 @@ computed:{
     //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
     // this.chargement
     // this.getCategories();
+    console.log("MYUSER",this.user);
     this.getBestSeller();
     this.getActivateAccount();
     console.log("USER",localStorage.getItem("user"));
