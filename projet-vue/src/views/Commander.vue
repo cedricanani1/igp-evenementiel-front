@@ -236,8 +236,8 @@ export default {
 
    },
    mounted(){
-    console.log("cart",this.cart);
-    console.log("USER",this.user.email_verified_at);
+    // console.log("cart",this.cart);
+    // console.log("USER",this.user.email_verified_at);
 
    }
 

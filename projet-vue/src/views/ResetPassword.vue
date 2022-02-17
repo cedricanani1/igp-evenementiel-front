@@ -33,10 +33,12 @@
                     <h2>Réinitialiser le mot de passe</h2>
 
                     <div class="form-group">
+    
                     <label for="password">Mot de passe</label>
                         <input type="password" class="form-control" id="password" required v-model="password">
                         <!-- <i class="bi bi-eye"></i> -->
                     </div>
+                     <span class="text-danger fw-bold" v-show="msgError">* Le mot de passe doit comporter au moins 6 caractères </span>
                     <div class="form-group">
                     <label for="confirmation">Confirmation mot de passe</label>
                         <input type="password" id="confirmation" class="form-control" required v-model="password_confirmation">
@@ -67,18 +69,22 @@ export default {
         return {
           password:"",
           password_confirmation:"",
+          msgError:false,
         }
     },
     methods: {
         resetMyPassword(){
             if(this.password == this.password_confirmation){
-                axios.post('https://igp-auth.lce-ci.com/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
+
+                if(this.password.length > 5 && this.password_confirmation.length > 5){
+
+                     axios.post('https://igp-auth.lce-ci.com/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
              password:this.password,
              password_confirmation:this.password_confirmation
             })
             .then(res =>{
-                console.log(res.data);
-                Swal.fire({
+                if(res){
+                    Swal.fire({
                        position: 'center',
                        icon: 'success',
                        title: 'Mot de passe changer avec success',
@@ -86,8 +92,15 @@ export default {
                        timer: 1500
                 })
                 this.$router.push('/login')
+                }
+                // console.log(res.data);
+                
             })
 
+                }else{
+                      this.msgError=true;
+                }
+               
             }else{
                    Swal.fire({
                        position: 'center',

@@ -90,10 +90,10 @@ export default {
         this.isLoading =true;
         axios.get("https://igp-event-backend.lce-ci.com/api/orders-client")
              .then(rep=>{
-                 console.log("ListCommand:",rep.data)
+                //  console.log("ListCommand:",rep.data)
                  this.listCommandes = rep.data
                  this.total = rep.data.length
-                 console.log("TOTAL",this.total);
+                //  console.log("TOTAL",this.total);
                   this.isLoading =false;
              })
        },

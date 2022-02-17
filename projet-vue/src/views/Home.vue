@@ -248,18 +248,18 @@ export default{
   },
 methods:{
      getBestSeller(){
-           axios.post('https://igp-event-backend.lce-ci.com/api/bestproducts',{
+           axios.post('https://igp-event-backend.lce-ci.com/api/bestproduct',{
                status:'delivered'
            })
            .then(resp =>{
                 this.bestSeller = resp.data
-                console.log("bestSeller",resp.data);
+                // console.log("bestSeller",resp.data);
                 }) 
         },
     getActivateAccount(){
          axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
               .then((resp) =>{
-                  console.log("ACTIVATE",resp);
+                //   console.log("ACTIVATE",resp);
                   if(resp.data.state === true){
                       Swal.fire({
                               position: 'top-end',
@@ -313,10 +313,10 @@ computed:{
     //   this.isLoading=!this.isLoading    //   this.$store.dispatch("obtenirProduits")
     // this.chargement
     // this.getCategories();
-    console.log("MYUSER",this.user);
+    // console.log("MYUSER",this.user);
     this.getBestSeller();
     this.getActivateAccount();
-    console.log("USER",localStorage.getItem("user"));
+    // console.log("USER",localStorage.getItem("user"));
     
   },
 }

@@ -158,11 +158,11 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
               ville:this.ville,
                password:this.password,
                password_confirmation:this.password_confirmation,
-               url:'http://192.168.1.7:8080/',
+               url:location.protocol+"//"+location.host+'/',
                module:"Evenementiel"
            })
             .then((reponse)=>{
-                console.log("INSCRIPTION",reponse);
+                // console.log("INSCRIPTION",reponse);
             if(reponse.data){
                  this.showMsg = false;
                 //   this.$router.push('/login');

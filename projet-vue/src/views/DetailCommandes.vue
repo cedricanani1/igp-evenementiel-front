@@ -78,7 +78,7 @@ export default {
         axios.get("api/orders/"+this.$route.params.id)
              .then(rep=>{
                  this.detailsCommandes =rep.data
-                 console.log("detail",this.detailsCommandes)
+                //  console.log("detail",this.detailsCommandes)
                   this.isLoading =false;
              })
        }

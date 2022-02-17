@@ -130,7 +130,7 @@ export default {
            
          } 
          localStorage.setItem('mycart',JSON.stringify(this.cart))
-         console.log("cart",localStorage.getItem('mycart'));
+        //  console.log("cart",localStorage.getItem('mycart'));
 
   }else{
      Swal.fire({
@@ -176,7 +176,7 @@ export default {
                   .then(resp =>{
                 this.products = resp.data.data
                 this.categories= resp.data.data
-                console.log("libelle",resp.data.data)
+                // console.log("libelle",resp.data.data)
                 this.isLoading =false;
                 })
             return this.products

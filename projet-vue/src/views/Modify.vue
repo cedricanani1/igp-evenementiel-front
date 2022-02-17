@@ -111,7 +111,7 @@ export default {
                  localStorage.setItem("user",JSON.stringify(this.user))
                    axios.post('https://igp-auth.lce-ci.com/api/auth/modify-account',this.userCompte,config)
                          .then( rep  => {
-                             console.log(rep)
+                            //  console.log(rep)
                              if(rep.data.status){
                                   Swal.fire({
                                         position: 'center',
@@ -155,7 +155,7 @@ export default {
         this.userCompte.email = this.user.email
         // localStorage.getItem('token')
         // console.log(localStorage.getItem('token'))
-        console.log(this.user);
+        // console.log(this.user);
         //   axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
       
     }

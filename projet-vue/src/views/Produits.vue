@@ -198,7 +198,7 @@ export default {
         this.listData = resp.data.data
         this.filter = resp.data.data
          this.isLoading =false;
-        console.log("DATA1",this.listData)
+        // console.log("DATA1",this.listData)
         })
     },
 },
@@ -249,7 +249,7 @@ computed:{
 },
 watch:{
 searchString(value){
-    console.log(value);
+    // console.log(value);
     return value;
 },
 

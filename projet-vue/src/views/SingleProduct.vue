@@ -311,7 +311,7 @@ export default {
            axios.get('https://igp-event-backend.lce-ci.com/api/bestseller')
            .then(resp =>{
                 this.bestSeller = resp.data
-                console.log("bestSeller",resp.data);
+                // console.log("bestSeller",resp.data);
                 this.isLoading =false;
                 }) 
         },
@@ -319,7 +319,8 @@ export default {
             axios.post('https://igp-event-backend.lce-ci.com/api/rating',this.rating)
              .then(
              reponse =>{
-                 if(localStorage.getItem('token') == null){
+
+                 if(localStorage.getItem('token') == null && reponse){
                      Swal.fire({
                          position: 'center',
                          icon: 'success',
@@ -336,7 +337,7 @@ export default {
                          showConfirmButton: false,
                          timer: 1500,
                   })
-                console.log(reponse)
+                // console.log(reponse)
                 // this.$router.push("/")
                  window.location.href="/";
                  } 
@@ -351,7 +352,7 @@ export default {
                         timer:1500,
                   })
             })
-            console.log("rating",this.rating)
+            // console.log("rating",this.rating)
            
         }
 

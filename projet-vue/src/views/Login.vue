@@ -197,12 +197,12 @@ export default {
         //     console.log("EMAIL",this.email);
            axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
-               url:'http://192.168.1.7:8080/',
+               url:location.protocol+"//"+location.host+"/",
            })
            .then(res => {
             //    console.log("URL",this.url);
             
-               console.log("EMAILREPONSE",res.data);
+            //    console.log("EMAILREPONSE",res.data);
                 // Swal.fire({
                 //        position: 'center',
                 //        icon: 'success',
@@ -233,7 +233,7 @@ export default {
    },
    created(){
         //  this.getActivateAccount();
-         console.log("USER",this.user);
+        //  console.log("USER",this.user);
    }
   
 }

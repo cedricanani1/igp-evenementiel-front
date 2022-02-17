@@ -257,20 +257,24 @@ export default {
         axios.get('https://igp-auth.lce-ci.com/api/auth/logout',
             { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
             .then( function(reponse){
-                 Swal.fire({
+                if(reponse){
+                     Swal.fire({
                     position: 'center',
                     icon:'success',
                      title: 'Vous êtes deconnectés',
                     showConfirmButton: false,
                     timer: 1500,
              })
-                localStorage.removeItem('token')
+              localStorage.removeItem('token')
                 localStorage.removeItem('user')
                 localStorage.removeItem('info')
                 localStorage.removeItem('mycart')
                   window.location.href ='/';
+                }
+                
+               
                   
-                console.log(reponse);
+                // console.log(reponse);
             })
             this.user= null;
             this.$router.push("/")
