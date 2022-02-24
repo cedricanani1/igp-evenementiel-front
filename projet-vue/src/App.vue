@@ -74,7 +74,7 @@ export default {
     
          let item = this.cart.find( value =>value.id === product.id);
          if(item) {
-           return item.quant++;
+           return item.quantity++;
          } else if (product.to !== undefined && product.from !== undefined &&  product.details !== undefined && product.participant !== undefined && product.location !== undefined && product.objects !== undefined && product.quantity !== undefined) {
                   
                   if(product.to < product.from ){
@@ -152,8 +152,8 @@ export default {
         removeFromCart(product){
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
-            if(item.quant > 1) {
-              item.quant--;
+            if(item.quantity > 1) {
+              item.quantity--;
               localStorage.setItem('mycart',JSON.stringify(this.cart))
             }else{
               this.cart = this.cart.filter(value=>value.id !== product.id)
@@ -163,7 +163,7 @@ export default {
           increaseFromCart(product){
           let item = this.cart.find(value=>value.id === product.id)
           if(item){
-            item.quant++;
+            item.quantity++;
             localStorage.setItem('mycart',JSON.stringify(this.cart))
           }
         },

@@ -181,7 +181,7 @@
                                         <ul class="number">
                                             <li>
                                                 <span class="minus" @click="$emit('removeBySign',items)">-</span>
-                                                <span class="text-light fw-b">{{items.quant}}</span>
+                                                <span class="text-light fw-b">{{items.quantity}}</span>
                                                 <span class="plus" @click="$emit('increase',items)" >+</span>
                                             </li>
                                         </ul>
@@ -306,7 +306,7 @@ export default {
      item_cost(){
          let count =0
          this.cart.forEach( item =>{
-             count+= item.price * item.quant
+             count+= item.price * item.quantity
          })
        
          return count;

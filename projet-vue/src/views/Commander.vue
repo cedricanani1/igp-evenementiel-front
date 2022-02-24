@@ -90,7 +90,7 @@
                                     <h4>{{item.libelle}}</h4>
                                 </li>
                                 <li >
-                                    <span>{{item.price}} * {{item.quant}} </span>
+                                    <span>{{item.price}} * {{item.quantity}} </span>
                                     
                                 </li>
                             </ul>
@@ -173,7 +173,7 @@ export default {
    itemTotal(){
          let count =0
          this.items.forEach( item =>{
-             count+= item.price * item.quant
+             count+= item.price * item.quantity
          })
        
          return count;
