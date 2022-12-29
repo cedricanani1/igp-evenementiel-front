@@ -1,4 +1,9 @@
 <template>
+   <div class="vld-parent">
+                        <loading :active.sync="isLoading" 
+                        :can-cancel="true" 
+                        :is-full-page="FullPage" ></loading>
+        </div>
     <div class="page-title-area">
         <div class="d-table">
             <div class="d-table-cell">
@@ -55,7 +60,7 @@
                            
                             <div class="form-group">
                              <label for="phone">Télephone</label>
-                                <input type="tel" name="phone" v-model="this.user.phone" class="form-control" required>
+                                <input type="text" name="phone" v-model="this.user.phone" class="form-control" required>
                             </div>
                             <div class="form-group">
                              <label for="shipping">Expédition</label>
@@ -142,11 +147,15 @@ margin-left:0;
 
 </style>
 <script>
+import Loading from 'vue-loading-overlay';
 import '@/components/axios.js'
 import axios from 'axios'
 import store from "../store";
 export default {
   name:'Commander',
+  components:{
+  Loading
+  },
   props:['cart','add','products','removeItem','removeBySign','increase'],
   data(){
        return{
@@ -163,6 +172,7 @@ export default {
            phone:"",
            user:store.state.user,
           token:localStorage.getItem("token"),
+           isLoading: false,
        }
   },
    created(){
@@ -185,6 +195,7 @@ export default {
              this.$router.push('/produits')
        },
        sendCommande(){ 
+          
          if(this.user.email_verified_at == null){
              Swal.fire({
                               position: 'center',
@@ -195,6 +206,7 @@ export default {
                               timer: 2000,
                                 });
          }else{
+              this.isLoading =true;
                 let commande = {
                 nom:this.user.nom,
                 prenoms:this.user.prenoms,
@@ -205,7 +217,7 @@ export default {
                 cart:JSON.parse(this.cart),
            };
             this.commandes = commande;
-           axios.post('api/orders',this.commandes)
+           axios.post('https://logistique-backend.igp-ci.com/api/orders',this.commandes)
                 .then(reponse => {
                     if(reponse){
                       Swal.fire({
@@ -216,8 +228,11 @@ export default {
                          timer: 1500
                         })
                         localStorage.removeItem('mycart')
-                        window.location.href ='/'
+                        setTimeout(()=>{
+                            window.location.href ='/'
+                        },1500)
                     }   
+                     this.isLoading =false;
                 })
                 .catch(error =>{
                     if(error){

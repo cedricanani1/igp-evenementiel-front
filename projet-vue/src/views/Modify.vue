@@ -45,7 +45,10 @@
                         <input v-model="userCompte.email" type="email" class="form-control" placeholder="Entrez votre adresse e-mail" >
                     </div>
                     <div class="form-group">
-                        <input v-model="userCompte.phone" type="tel" id="phone"  class="form-control" placeholder="phone" >
+                        <input v-model="userCompte.phone" type="tel" id="phone"  class="form-control" placeholder="Téléphone" >
+                    </div>
+                     <div class="form-group">
+                        <input v-model="userCompte.ville" type="tel" id="phone"  class="form-control" placeholder="Ville" >
                     </div>
                     <div class="form-group">
                         <input v-model="userCompte.password" type="password" class="form-control" placeholder="Mot de passe" required >
@@ -54,7 +57,7 @@
                         <input v-model="userCompte.password_confirmation" type="password" class="form-control" placeholder="confirmation mot de passe" required>
                     </div>
                      <div class="form-group">
-                        <input v-model="userCompte.newPassword" type="password" class="form-control" placeholder="nouveau mot de passe" required>
+                        <input v-model="userCompte.newPassword" type="password" class="form-control" placeholder="Nouveau mot de passe" required>
                     </div>
                     <button type="submit" class="btn common-btn">
                         Modifier votre compte
@@ -86,6 +89,7 @@ export default {
              password:"",
              password_confirmation:"",
              newPassword:"",
+             ville:"",
             },
           user:store.state.user,
           token:localStorage.getItem("token"),
@@ -108,8 +112,9 @@ export default {
                     this.user.prenoms = this.userCompte.prenoms
                     this.user.phone =  this.userCompte.phone
                  this.user.email = this.userCompte.email 
+                this.user.ville = this.userCompte.ville
                  localStorage.setItem("user",JSON.stringify(this.user))
-                   axios.post('https://igp-auth.lce-ci.com/api/auth/modify-account',this.userCompte,config)
+                   axios.post('https://auth.igp-ci.com/api/auth/modify-account',this.userCompte,config)
                          .then( rep  => {
                             //  console.log(rep)
                              if(rep.data.status){
@@ -121,7 +126,9 @@ export default {
                                             timer: 1500,
                                     })
                                     // this.$router.push('/modify')
-                                window.location.href= '/modify'
+                                setTimeout(() => {
+                                    window.location.href= '/modify'
+                                },1500)
 
                              }else{
                                  Swal.fire({
@@ -153,6 +160,7 @@ export default {
         this.userCompte.prenoms = this.user.prenoms
         this.userCompte.phone = this.user.phone
         this.userCompte.email = this.user.email
+         this.userCompte.ville = this.user.ville
         // localStorage.getItem('token')
         // console.log(localStorage.getItem('token'))
         // console.log(this.user);

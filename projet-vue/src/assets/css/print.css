@@ -1,0 +1,15 @@
+@media print {
+    .viewFichierPrint {
+        width: 80%;
+        background: white;
+        height: 98%;
+        overflow-y: auto;
+        border-radius: 10px;
+        position: relative;
+      }
+          .viewFichierPrint .info_client{
+          position:absolute;
+          right:0;
+      }
+    
+}

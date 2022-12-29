@@ -8,7 +8,8 @@
                             <li>
                                 <i class="bi bi-geo-alt"></i>
                                 <!-- <span>Disponible 24/7</span> -->
-                                 <span class="my-1">Riviera BONOUMIN LAURIER 6 VILLA N 151-Cocody </span>
+                                 <span class="my-1">COCODY RIVIERA
+                                    ATTOBAN LAURIERS 3 VILLA N°05 </span>
                             </li>
                         </ul>
                     </div>
@@ -254,7 +255,7 @@ export default {
             this.barre= !this.barre;
         },
         deconnexion(){
-        axios.get('https://igp-auth.lce-ci.com/api/auth/logout',
+        axios.get('https://auth.igp-ci.com/api/auth/logout',
             { headers:{"Authorization" : 'Bearer ' +  localStorage.getItem('token')}})
             .then( function(reponse){
                 if(reponse){
@@ -269,7 +270,10 @@ export default {
                 localStorage.removeItem('user')
                 localStorage.removeItem('info')
                 localStorage.removeItem('mycart')
-                  window.location.href ='/';
+                setTimeout(function() {
+                 window.location.href ='/';
+                },1500)
+                 
                 }
                 
                
@@ -316,7 +320,7 @@ export default {
 
    },
    created(){
-   this.user =JSON.parse(localStorage.getItem('user')) ;
+   this.user =JSON.parse(localStorage.getItem('user'));
 
   },
   mounted(){
@@ -327,6 +331,7 @@ export default {
 </script>
 
 <style scoped>
+
 .nav-item a:active{
 color:orange !important;
 }

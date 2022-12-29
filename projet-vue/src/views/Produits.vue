@@ -74,7 +74,7 @@
                                 <div class="top">
                           <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
-                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            <img :src="'https://logistique-backend.igp-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
@@ -193,7 +193,7 @@ export default {
     }, 
     getProducts(){
         this.isLoading =true;
-        axios.get('https://igp-event-backend.lce-ci.com/api/products')
+        axios.get('https://logistique-backend.igp-ci.com/api/products')
             .then(resp =>{
         this.listData = resp.data.data
         this.filter = resp.data.data
@@ -241,7 +241,7 @@ computed:{
             return this.currentPage === this.totalPages
         },
         getCategories(){
-            axios.get('https://igp-event-backend.lce-ci.com/api/categories')
+            axios.get('https://logistique-backend.igp-ci.com/api/categories')
                  .then(resp =>{
                 this.categories = resp.data
                 })   

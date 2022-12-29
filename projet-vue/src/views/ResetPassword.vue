@@ -61,7 +61,6 @@
     </div>
 </template>
 <script>
-import store from "../store"
 import axios from "axios"
 export default {
     name:'ResetPassword',
@@ -78,7 +77,7 @@ export default {
 
                 if(this.password.length > 5 && this.password_confirmation.length > 5){
 
-                     axios.post('https://igp-auth.lce-ci.com/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
+                     axios.post('https://auth.igp-ci.com/api/auth/recoveryPassword/'+this.$route.params.email+'/'+this.$route.params.token,{
              password:this.password,
              password_confirmation:this.password_confirmation
             })
@@ -91,7 +90,9 @@ export default {
                        showConfirmButton: false,
                        timer: 1500
                 })
-                this.$router.push('/login')
+                setTimeout(() =>{
+                    this.$router.push('/login')
+                },1500)
                 }
                 // console.log(res.data);
                 
@@ -109,13 +110,15 @@ export default {
                        showConfirmButton: false,
                        timer: 1500
                 })
-                this.$router.push('/login')
+                setTimeout(() =>{
+                    this.$router.push('/login')
+                },1500)
             }
             
 
         },
         verificationToken(){      
-           axios.get('https://igp-auth.lce-ci.com/api/auth/verifToken/'+this.$route.params.email+'/'+this.$route.params.token)
+           axios.get('https://auth.igp-ci.com/api/auth/verifToken/'+this.$route.params.email+'/'+this.$route.params.token)
              .then(res => {
                  if(res.data.state === false){
                 // console.log("VERIF",res.data.message);

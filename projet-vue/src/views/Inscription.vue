@@ -42,7 +42,7 @@
                         <input v-model="email" type="email" class="form-control" placeholder="Entrez votre adresse e-mail" >
                     </div>
                     <div class="form-group">
-                        <input v-model="phone" type="tel" id="phone"  class="form-control" placeholder="Téléphone" >
+                        <input v-model="phone" type="text" id="phone"  class="form-control" placeholder="Téléphone">
                     </div>
                     <div class="form-group">
                         <input v-model="ville" type="text" id="ville"  class="form-control" placeholder="Ville" >
@@ -150,7 +150,7 @@ if(this.email !== "" && this.password !=="" && this.password_confirmation !=="" 
 
         if(this.password.length > 5 && this.password_confirmation.length > 5){
 
-            axios.post('https://igp-auth.lce-ci.com/api/auth/signup',{
+            axios.post('https://auth.igp-ci.com/api/auth/signup',{
                 nom:this.nom,
                prenoms:this.prenoms,
                email:this.email,

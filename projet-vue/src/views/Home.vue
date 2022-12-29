@@ -87,7 +87,7 @@
                                 <div class="top">
                   <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
-                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            <img :src="'https://logistique-backend.igp-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
@@ -167,7 +167,7 @@
                                 <div class="top">
                   <router-link 
                             :to="{name:'SingleProduct', params:{id:items.id}}" v-if="items.photo.length >0">
-                            <img :src="'https://igp-event-backend.lce-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
+                            <img :src="'https://logistique-backend.igp-ci.com/public/'+ items.photo[0].path" :alt="items.libelle">
                             </router-link>
                                     <div class="inner">
                                         <h3>
@@ -248,7 +248,7 @@ export default{
   },
 methods:{
      getBestSeller(){
-           axios.post('https://igp-event-backend.lce-ci.com/api/bestproduct',{
+           axios.post('https://logistique-backend.igp-ci.com/api/bestproduct',{
                status:'delivered'
            })
            .then(resp =>{
@@ -257,9 +257,8 @@ methods:{
                 }) 
         },
     getActivateAccount(){
-         axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
+         axios.get('https://auth.igp-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
               .then((resp) =>{
-                //   console.log("ACTIVATE",resp);
                   if(resp.data.state === true){
                       Swal.fire({
                               position: 'top-end',
@@ -268,7 +267,9 @@ methods:{
                            showConfirmButton: false,
                            timer: 3000
                                })
-                         this.$router.push('/login')
+                        setTimeout(() =>{
+                             this.$router.push('/login')
+                        },3000)
                   }
               })
     },

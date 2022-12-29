@@ -30,7 +30,7 @@
     <div class="user-area ptb-100 ">
         <div class="container">
             <div class="user-item overflow-hidden">
-                <form @submit.prevent="handleSubmit" v-if="connex" class="animate__animated animate__bounceInLeft">
+                <form  @submit.prevent="handleSubmit" v-if="connex" class="animate__animated animate__bounceInLeft">
                     <h2>CONNEXION</h2>
                     <div class="form-group">
                         <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" required v-model="email">
@@ -105,7 +105,7 @@ export default {
    },
    methods:{
         //    getActivateAccount(){
-        //  axios.get('https://igp-auth.lce-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
+        //  axios.get('https://auth.igp-ci.com/api/auth/activateAccount/'+ this.$route.params.email+'/'+this.$route.params.token)
         //       .then(resp =>{
         //           console.log("ACTIVATE",resp);
         //           if(resp.data.state === true){
@@ -147,7 +147,7 @@ export default {
                
        },
        handleSubmit(){
-        axios.post('https://igp-auth.lce-ci.com/api/auth/login',{
+        axios.post('https://auth.igp-ci.com/api/auth/login',{
               email:this.email,
               password:this.password,
           })
@@ -163,8 +163,10 @@ export default {
                               showConfirmButton: false,
                               timer: 1500,
                                 });
-                        // console.log("ROUTE",this.$route.query.redirect);
-                    window.location.href=this.$route.query.redirect || '/'
+                     setTimeout(()=>{
+                            window.location.href=this.$route.query.redirect || '/'
+                     },1500)
+                    
                    
                   }else{
                       Swal.fire({
@@ -195,7 +197,7 @@ export default {
        passwordReset(){
         //    console.log("URL",this.url);
         //     console.log("EMAIL",this.email);
-           axios.post('https://igp-auth.lce-ci.com/api/auth/sendPasswordResetEmail',{
+           axios.post('https://auth.igp-ci.com/api/auth/sendPasswordResetEmail',{
                email:this.email,
                url:location.protocol+"//"+location.host+"/",
            })

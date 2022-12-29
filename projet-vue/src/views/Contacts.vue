@@ -92,7 +92,7 @@
                        <ul class="list-info">
                                 <li>
                                     <!-- <i class="flaticon-pin"></i> -->
-                                    <span class="d-block my-1">Riviera BONOUMIN  <br> LAURIER 6 VILLA N 151-Cocody </span>
+                                    <span class="d-block my-1">COCODY RIVIERA <br> ATTOBAN LAURIERS 3 VILLA N°05 </span>
                                 </li>
                                 <li>
                                     <!-- <i class="flaticon-phone-call"></i> -->

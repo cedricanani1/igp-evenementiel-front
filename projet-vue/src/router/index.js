@@ -28,6 +28,7 @@ const routes = [{
     alias: '/singleProduct/:id',
     name: 'SingleProduct',
     component: SingleProduct,
+    
     // beforeEnter: (to, from, next) => {
     //   if(store.state.token === null) next({name:'Login'})
     //   else next()

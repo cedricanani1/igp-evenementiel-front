@@ -30,7 +30,7 @@
   <div class="card-body">
     <span class="card-title d-block">commande n<sup>o</sup><b>{{command.order_number}}</b> </span>
     <span class="card-text d-block">Article <i>{{command.id}}</i></span>
-      <span class="card-text d-block">Status : <b>{{command.payment_status}}</b></span>
+      <span class="card-text d-block">Status : <b>{{(command.payment_status === 'unpaid') ? 'non payeé': 'payeé'}}</b></span>
     <span class="d-block">commander le : <b>{{new Date(command.created_at).toLocaleDateString("fr")}}</b> </span>
     <router-link :to="{name:'detailcommande', params:{id:command.id}}" class="btn btn-primary float-end">VOIR PLUS</router-link>
     
@@ -88,7 +88,7 @@ export default {
    methods:{
        getDetailsCommandes(){ 
         this.isLoading =true;
-        axios.get("https://igp-event-backend.lce-ci.com/api/orders-client")
+        axios.get("https://logistique-backend.igp-ci.com/api/orders-client")
              .then(rep=>{
                 //  console.log("ListCommand:",rep.data)
                  this.listCommandes = rep.data
