@@ -122,7 +122,7 @@
                     <td>{{ item.quantity }}</td>
                     <td>{{item.price}}</td>
                     <td>{{item.days}}</td>
-                    <td>{{moneyFormat.format(item.quantity * item.price)}} Fcfa</td>
+                    <td>{{moneyFormat.format(item.quantity * item.price * item.days)}} Fcfa</td>
                     </tr>
                     <tr>
                     <td colspan="4" class="text-start"><strong>TOTAL Rubrique</strong> </td>
